@@ -22,7 +22,7 @@ export default class Home extends PureComponent<Props> {
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <StatusBar backgroundColor={colors.background} barStyle="dark-content" />
+        <StatusBar backgroundColor={colors.background} barStyle="light-content" />
         <Text style={styles.logo}>
           <Text style={{color: colors.white}}>food</Text>
           <Text style={{color: colors.green}}>sharing</Text>
