@@ -26,6 +26,11 @@ fastlane ios screenshots
 fastlane ios certificates
 ```
 
+### ios icon
+```
+fastlane ios icon
+```
+
 ### ios test
 ```
 fastlane ios test

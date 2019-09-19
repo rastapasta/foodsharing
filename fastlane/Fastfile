@@ -45,7 +45,7 @@ platform :ios do
     )
   end
 
-  private_lane :icon do
+  lane :icon do
     appicon(
       appicon_devices: [:ipad, :iphone, :ios_marketing],
       appicon_path: "./ios/foodsharing/Images.xcassets",

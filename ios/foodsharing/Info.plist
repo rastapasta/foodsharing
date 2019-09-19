@@ -41,6 +41,7 @@
 	<string></string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>AlfaSlabOne-Regular.ttf</string>
 		<string>MaterialCommunityIcons.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>

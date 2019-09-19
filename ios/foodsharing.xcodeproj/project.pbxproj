@@ -11,6 +11,7 @@
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		95369F622334423B00333850 /* AlfaSlabOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 95369F612334423B00333850 /* AlfaSlabOne-Regular.ttf */; };
 		A0DED2CE079F05E6EAA1C08E /* libPods-foodsharing.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 576CE356E20349C787D7CCBE /* libPods-foodsharing.a */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +32,7 @@
 		576CE356E20349C787D7CCBE /* libPods-foodsharing.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-foodsharing.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		79E7079D20937E16D26576D8 /* Pods-foodsharingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-foodsharingTests.release.xcconfig"; path = "Target Support Files/Pods-foodsharingTests/Pods-foodsharingTests.release.xcconfig"; sourceTree = "<group>"; };
 		9429CCE0ED5824D85A31F3E0 /* Pods-foodsharing-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-foodsharing-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-foodsharing-tvOS/Pods-foodsharing-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		95369F612334423B00333850 /* AlfaSlabOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AlfaSlabOne-Regular.ttf"; sourceTree = "<group>"; };
 		A822B47AC752E3E05459BC79 /* Pods-foodsharing-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-foodsharing-tvOS.release.xcconfig"; path = "Target Support Files/Pods-foodsharing-tvOS/Pods-foodsharing-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		E3FF7F30AFEE5FF18657AD72 /* libPods-foodsharingTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-foodsharingTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7247E84E47C689A2CCEB993 /* libPods-foodsharing-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-foodsharing-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,6 +90,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				95369F602334421E00333850 /* Fonts */,
 				13B07FAE1A68108700A75B9A /* foodsharing */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				83CBBA001A601CBA00E9B192 /* Products */,
@@ -105,6 +108,14 @@
 				13B07F961A680F5B00A75B9A /* foodsharing.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		95369F602334421E00333850 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				95369F612334423B00333850 /* AlfaSlabOne-Regular.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		B66866B709C34A6620FF4ABC /* Pods */ = {
@@ -183,6 +194,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95369F622334423B00333850 /* AlfaSlabOne-Regular.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);

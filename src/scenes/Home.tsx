@@ -11,7 +11,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   logo: {
-    fontSize: 40
+    fontSize: 32,
+    fontFamily: 'AlfaSlabOne-Regular'
   }
 })
 
