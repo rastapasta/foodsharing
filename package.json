@@ -10,8 +10,10 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@types/react-native": "^0.60.15",
     "react": "16.9.0",
-    "react-native": "0.61.0-rc.3"
+    "react-native": "0.61.0-rc.3",
+    "typescript": "^3.6.3"
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",

@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "moduleResolution": "node",
+    "outDir": "./build",
+    "allowSyntheticDefaultImports": true,
+    "noImplicitAny": false,
+    "preserveConstEnums": true,
+    "allowJs": false,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "isolatedModules": false, //?
+    "noImplicitReturns": true,
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    "resolveJsonModule": true,
+    "jsx": "react",
+    "lib": ["esnext"]
+  },
+  "rules": {
+    "react-native/no-unused-styles": 2,
+  },
+  "include": ["./src/", "typings/*.d.ts"],
+  "exclude": ["./src/tests/"],
+  "filesGlob": [
+    "typings/*.d.ts",
+  ],
+}
