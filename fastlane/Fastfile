@@ -1,0 +1,97 @@
+update_fastlane
+
+app = 're.regensburg.foodsharing'
+project = './ios/foodsharing.xcodeproj'
+workspace = './ios/foodsharing.xcworkspace'
+profile_uuid = '37fe734e-5981-4105-a858-8fd836fd77e7'
+scheme = 'foodsharing'
+
+default_platform(:ios)
+
+platform :ios do
+#  before_all do
+#  end
+
+  lane :screenshots do
+    capture_ios_screenshots
+  end
+
+  lane :certificates do
+    match(app_identifier: app, type: 'development', clone_branch_directly: true)
+    match(app_identifier: app, type: 'appstore', clone_branch_directly: true)
+  end
+
+  private_lane :build do
+    certificates
+
+    disable_automatic_code_signing(
+      path: project,
+      profile_uuid: profile_uuid,
+      code_sign_identity: 'iPhone Distribution',
+      targets: [scheme]
+    )
+
+    gym(
+      scheme: scheme,
+      workspace: workspace,
+      suppress_xcode_output: true
+    )
+
+    enable_automatic_code_signing(
+      path: project,
+      profile_uuid: '',
+      code_sign_identity: 'iPhone Developer',
+      targets: [scheme]
+    )
+  end
+
+  private_lane :icon do
+    appicon(
+      appicon_devices: [:ipad, :iphone, :ios_marketing],
+      appicon_path: "./ios/foodsharing/Images.xcassets",
+      appicon_image_file: "./assets/icon/icon.ios.png"
+    )
+  end
+
+  private_lane :beta_badge do
+    buildNumber = get_build_number(xcodeproj: project)
+    version = get_version_number(xcodeproj: project)
+    add_badge(
+      shield: "v#{version}-%23#{buildNumber}-orange",
+      shield_parameters: "color=rgba(235,124,64,0.9)&labelColor=rgba(100,100,100,0.8)",
+      no_badge: true
+    )
+  end
+
+  private_lane :bump do
+    latest = latest_testflight_build_number
+    if latest >= get_build_number(xcodeproj: project).to_i
+      increment_build_number(xcodeproj: project, build_number: latest + 1)
+      commit_version_bump(message: ':construction_worker: iOS build version bump', xcodeproj: project)
+    end
+  end
+
+  lane :test do
+    build
+  end
+
+  lane :release do
+    screenshots
+    deliver
+
+    bump
+    icon
+    build
+
+    pilot(skip_waiting_for_build_processing: true)
+  end
+
+  lane :beta do
+    bump
+    icon
+    beta_badge
+    build
+
+    pilot(skip_waiting_for_build_processing: true)
+  end
+end

@@ -1,0 +1,10 @@
+skip_screenshots(false)
+
+skip_binary_upload(true)
+skip_metadata(true)
+skip_app_version_update(true)
+
+screenshots_path "./fastlane/screenshots/ios"
+metadata_path "./fastlane/metadata/ios"
+
+precheck_include_in_app_purchases(false)

@@ -1,0 +1,22 @@
+# "iPad Pro (12.9-inch) (2nd generation)",
+# "iPad Pro (12.9-inch) (3rd generation)"
+
+devices([
+   "iPhone SE",
+   "iPhone Xs Max",
+   "iPhone 7 Plus",
+])
+
+languages([
+   "en-US",
+   "de-DE"
+])
+
+output_directory('fastlane/screenshots/ios')
+skip_helper_version_check(true)
+number_of_retries(1)
+clear_previous_screenshots(true)
+concurrent_simulators(true)
+workspace("ios/foodsaving.xcworkspace")
+scheme("foodsaving")
+skip_open_summary(false)
