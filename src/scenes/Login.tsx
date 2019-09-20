@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react'
-import { Text, SafeAreaView, StatusBar, StyleSheet, TextInput, Dimensions } from 'react-native'
+import { Text, SafeAreaView, StatusBar, StyleSheet } from 'react-native'
 
 import LoginTextInput from '../components/LoginTextInput'
+import LoginForgotPassword from '../components/LoginForgotPassword'
 
 import colors from '../colors'
 
@@ -14,7 +15,8 @@ const styles = StyleSheet.create({
   },
   logo: {
     fontSize: 32,
-    fontFamily: 'AlfaSlabOne-Regular'
+    fontFamily: 'AlfaSlabOne-Regular',
+    marginBottom: 30
   }
 })
 
@@ -31,8 +33,14 @@ export default class Home extends PureComponent<Props> {
           <Text style={{color: colors.green}}>sharing</Text>
         </Text>
 
-        <LoginTextInput icon="account" />
-        <LoginTextInput icon="key" obfuscate />
+        <LoginTextInput icon="account" placeholder="E-Mail" />
+        <LoginTextInput icon="key" placeholder="Password" obfuscate />
+
+        <LoginForgotPassword />
+
+        {/* <TouchableOpacity style={{width, alignItems: 'flex-end'}}>
+          <Text>Login</Text>
+        </TouchableOpacity> */}
       </SafeAreaView>
     )
   }

@@ -18,7 +18,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     flex: 1,
     borderRadius: 5,
-    paddingLeft: iconSize * 2
+    paddingLeft: iconSize * 2,
+    color: colors.inputText
   },
   icon: {
     position: 'absolute',
@@ -44,6 +45,8 @@ export default class LoginTextInput extends PureComponent<Props> {
           style={styles.input}
           secureTextEntry={!!obfuscate}
           placeholder={placeholder}
+          autoCapitalize="none"
+          placeholderTextColor={colors.inputPlaceholder}
         />
         {icon &&
           <Icon

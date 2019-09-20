@@ -1,6 +1,6 @@
 import React from 'react'
 import { Scene, Router, Stack } from 'react-native-router-flux'
-import Home from './scenes/Home'
+import Login from './scenes/Login'
 import colors from './colors'
 
 export default () =>
@@ -12,8 +12,8 @@ export default () =>
       hideNavBar
     >
       <Scene
-        key='home'
-        component={Home}
+        key='login'
+        component={Login}
         initial
       />
     </Stack>
