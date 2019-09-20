@@ -33,20 +33,23 @@ type Props = {
   obfuscate?: boolean
   icon?: string
   placeholder?: string
+  onChange?: (string) => void
 }
 
 export default class LoginTextInput extends PureComponent<Props> {
   render() {
-    const {obfuscate, placeholder, icon} = this.props
+    const {obfuscate, placeholder, icon, onChange} = this.props
 
     return (
       <View style={styles.container}>
         <TextInput
+          autoCorrect={false}
           style={styles.input}
           secureTextEntry={!!obfuscate}
           placeholder={placeholder}
           autoCapitalize="none"
           placeholderTextColor={colors.inputPlaceholder}
+          onChangeText={onChange}
         />
         {icon &&
           <Icon

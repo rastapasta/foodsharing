@@ -1,5 +1,5 @@
-import React, { PureComponent } from 'react'
-import { SafeAreaView, StatusBar, StyleSheet, Dimensions, View, TouchableOpacity, Text, Linking } from 'react-native'
+import React, {PureComponent} from 'react'
+import {KeyboardAvoidingView, StatusBar, StyleSheet, Dimensions, View, TouchableOpacity, Text, Linking} from 'react-native'
 
 import LoginTextInput from '../components/LoginTextInput'
 import LoginForgotPassword from '../components/LoginForgotPassword'
@@ -55,34 +55,55 @@ const styles = StyleSheet.create({
 type Props = {}
 
 export default class Home extends PureComponent<Props> {
+  state = {
+    user: null,
+    password: null
+  }
+  doLogin = () => {
+    const {user, password} = this.state
+    alert(user + ' ' + password)
+  }
   render() {
     return (
-      <SafeAreaView style={styles.container}>
+      <KeyboardAvoidingView behavior="padding" enabled style={styles.container}>
         <StatusBar backgroundColor={colors.background} barStyle="light-content" />
         <Text style={styles.logo}>
           <Text style={{color: colors.white}}>food</Text>
           <Text style={{color: colors.green}}>sharing</Text>
         </Text>
 
-        <LoginTextInput icon="account" placeholder="E-Mail" />
-        <LoginTextInput icon="key" placeholder="Password" obfuscate />
+        <LoginTextInput
+          icon="account"
+          placeholder="E-Mail"
+          onChange={user => this.setState({user})}
+        />
+
+        <LoginTextInput
+          icon="key"
+          placeholder="Password"
+          obfuscate
+          onChange={password => this.setState({password})}
+        />
 
         <LoginForgotPassword />
 
         <View style={styles.buttons}>
           <TouchableOpacity
-            onPress={() => Linking.openURL(registerURL)}
             style={styles.button}
+            onPress={() => Linking.openURL(registerURL)}
           >
             <Text style={styles.text}>Register</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.button, styles.login]}>
+          <TouchableOpacity
+            style={[styles.button, styles.login]}
+            onPress={this.doLogin}
+          >
             <Text style={[styles.text, styles.loginText]}>Login</Text>
           </TouchableOpacity>
         </View>
 
         <Version />
-      </SafeAreaView>
+      </KeyboardAvoidingView>
     )
   }
 }
