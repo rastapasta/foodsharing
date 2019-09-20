@@ -41,6 +41,7 @@
 	<string></string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>SFMono-Regular.otf</string>
 		<string>AlfaSlabOne-Regular.ttf</string>
 		<string>MaterialCommunityIcons.ttf</string>
 	</array>

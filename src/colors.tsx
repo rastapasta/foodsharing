@@ -6,5 +6,7 @@ export default {
   inputText: '#000',
 
   green: '#64ae25',
-  white: '#fff'
+  white: '#fff',
+
+  version: '#aaa'
 }
