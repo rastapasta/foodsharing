@@ -39,12 +39,12 @@ const styles = StyleSheet.create({
   button: {
     paddingTop: 5,
     paddingBottom: 5,
-    paddingLeft: 10,
-    paddingRight: 10,
-    borderRadius: 5
+    borderRadius: 5,
+    paddingLeft: 15
   },
   login: {
     backgroundColor: colors.white,
+    paddingRight: 15,
   },
   loginText: {
     color: colors.background,
@@ -59,10 +59,11 @@ export default class Home extends PureComponent<Props> {
     user: null,
     password: null
   }
+
   doLogin = () => {
-    const {user, password} = this.state
-    alert(user + ' ' + password)
+    // const {user, password} = this.state
   }
+
   render() {
     return (
       <KeyboardAvoidingView behavior="padding" enabled style={styles.container}>

@@ -43,6 +43,7 @@ export default class LoginTextInput extends PureComponent<Props> {
     return (
       <View style={styles.container}>
         <TextInput
+          keyboardType={obfuscate ? 'default' : 'email-address' }
           autoCorrect={false}
           style={styles.input}
           secureTextEntry={!!obfuscate}
