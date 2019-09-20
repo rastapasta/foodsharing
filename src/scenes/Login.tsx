@@ -67,18 +67,19 @@ export default class Home extends PureComponent<Props> {
   doLogin = () => {
     // const {user, password} = this.state
     Keyboard.dismiss()
-    this.refs.toast.show('Here we go! Needs implementation :)')
+    this.refs.toast.show('Here we go! Needs implementation :)', 1000)
   }
 
   render() {
     return (
       <KeyboardAvoidingView behavior="padding" enabled style={styles.container}>
         <StatusBar backgroundColor={colors.background} barStyle="light-content" />
-        <Text style={styles.logo}>
-          <Text style={{color: colors.white}}>food</Text>
-          <Text style={{color: colors.green}}>sharing</Text>
-        </Text>
-
+        <View>
+          <Text style={styles.logo}>
+            <Text style={{color: colors.white}}>food</Text>
+            <Text style={{color: colors.green}}>sharing</Text>
+          </Text>
+        </View>
         <LoginTextInput
           icon="account"
           placeholder="E-Mail"
