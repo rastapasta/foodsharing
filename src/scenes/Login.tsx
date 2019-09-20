@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react'
-import {KeyboardAvoidingView, StatusBar, StyleSheet, Dimensions, View, TouchableOpacity, Text, Linking, Keyboard} from 'react-native'
+import {SafeAreaView, KeyboardAvoidingView, StatusBar, StyleSheet, Dimensions, View, TouchableOpacity, Text, Linking, Keyboard} from 'react-native'
 import Toast from 'react-native-easy-toast'
 
 import LoginTextInput from '../components/LoginTextInput'
@@ -14,7 +14,10 @@ const {width} = Dimensions.get('window')
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.background,
+    backgroundColor: colors.background
+  },
+  form: {
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -72,47 +75,49 @@ export default class Home extends PureComponent<Props> {
 
   render() {
     return (
-      <KeyboardAvoidingView behavior="padding" enabled style={styles.container}>
-        <StatusBar backgroundColor={colors.background} barStyle="light-content" />
-        <View>
-          <Text style={styles.logo}>
-            <Text style={{color: colors.white}}>food</Text>
-            <Text style={{color: colors.green}}>sharing</Text>
-          </Text>
-        </View>
-        <LoginTextInput
-          icon="account"
-          placeholder="E-Mail"
-          onChange={user => this.setState({user})}
-        />
+      <SafeAreaView style={styles.container}>
+        <KeyboardAvoidingView behavior="padding" enabled style={styles.form}>
+          <StatusBar backgroundColor={colors.background} barStyle="light-content" />
+          <View>
+            <Text style={styles.logo}>
+              <Text style={{color: colors.white}}>food</Text>
+              <Text style={{color: colors.green}}>sharing</Text>
+            </Text>
+          </View>
+          <LoginTextInput
+            icon="account"
+            placeholder="E-Mail"
+            onChange={user => this.setState({user})}
+          />
 
-        <LoginTextInput
-          icon="key"
-          placeholder="Password"
-          obfuscate
-          onChange={password => this.setState({password})}
-        />
+          <LoginTextInput
+            icon="key"
+            placeholder="Password"
+            obfuscate
+            onChange={password => this.setState({password})}
+          />
 
-        <LoginForgotPassword />
+          <LoginForgotPassword />
 
-        <View style={styles.buttons}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => Linking.openURL(registerURL)}
-          >
-            <Text style={styles.text}>Register</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.button, styles.login]}
-            onPress={this.doLogin}
-          >
-            <Text style={[styles.text, styles.loginText]}>Login</Text>
-          </TouchableOpacity>
-        </View>
+          <View style={styles.buttons}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => Linking.openURL(registerURL)}
+            >
+              <Text style={styles.text}>Register</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.button, styles.login]}
+              onPress={this.doLogin}
+            >
+              <Text style={[styles.text, styles.loginText]}>Login</Text>
+            </TouchableOpacity>
+          </View>
 
-        <Version />
-        <Toast ref="toast" />
-      </KeyboardAvoidingView>
+          <Version />
+          <Toast ref="toast" />
+        </KeyboardAvoidingView>
+      </SafeAreaView>
     )
   }
 }
