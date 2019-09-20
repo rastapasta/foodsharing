@@ -7,6 +7,7 @@ import LoginForgotPassword from '../components/LoginForgotPassword'
 import Version from '../components/Version'
 
 import colors from '../colors'
+import { translate } from '../translation'
 
 const {width} = Dimensions.get('window')
     , registerURL = 'https://foodsharing.de/?page=content&sub=joininfo'
@@ -78,21 +79,23 @@ export default class Home extends PureComponent<Props> {
       <SafeAreaView style={styles.container}>
         <KeyboardAvoidingView behavior="padding" enabled style={styles.form}>
           <StatusBar backgroundColor={colors.background} barStyle="light-content" />
+
           <View>
             <Text style={styles.logo}>
               <Text style={{color: colors.white}}>food</Text>
               <Text style={{color: colors.green}}>sharing</Text>
             </Text>
           </View>
+
           <LoginTextInput
             icon="account"
-            placeholder="E-Mail"
+            placeholder={translate('login.email')}
             onChange={user => this.setState({user})}
           />
 
           <LoginTextInput
             icon="key"
-            placeholder="Password"
+            placeholder={translate('login.password')}
             obfuscate
             onChange={password => this.setState({password})}
           />
@@ -104,13 +107,17 @@ export default class Home extends PureComponent<Props> {
               style={styles.button}
               onPress={() => Linking.openURL(registerURL)}
             >
-              <Text style={styles.text}>Register</Text>
+              <Text style={styles.text}>
+                {translate('login.register')}
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={[styles.button, styles.login]}
               onPress={this.doLogin}
             >
-              <Text style={[styles.text, styles.loginText]}>Login</Text>
+              <Text style={[styles.text, styles.loginText]}>
+                {translate('login.login')}
+              </Text>
             </TouchableOpacity>
           </View>
 

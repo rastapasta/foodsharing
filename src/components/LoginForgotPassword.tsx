@@ -2,6 +2,7 @@ import React from 'react'
 import { Text, Linking, StyleSheet, TouchableOpacity, Dimensions } from 'react-native'
 
 import colors from '../colors'
+import { translate } from '../translation'
 
 const {width} = Dimensions.get('window')
     , URL = 'https://foodsharing.de/?page=login&sub=passwordReset'
@@ -23,7 +24,7 @@ export default () => (
     onPress={() => Linking.openURL(URL)}
   >
     <Text style={styles.text}>
-      Forgot password?
+      {translate('login.forgot')}
     </Text>
   </TouchableOpacity>
 )

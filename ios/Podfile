@@ -36,20 +36,9 @@ target 'foodsharing' do
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
-  target 'foodsharingTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
+  # target 'foodsharingTests' do
+  #  inherit! :search_paths
+  # end
 
   use_native_modules!
-end
-
-target 'foodsharing-tvOS' do
-  # Pods for foodsharing-tvOS
-
-  target 'foodsharing-tvOSTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
 end

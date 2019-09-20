@@ -1,0 +1,9 @@
+{
+  "login": {
+    "email": "E-Mail",
+    "password": "Password",
+    "forgot": "Forgot password?",
+    "register": "Register",
+    "login": "Login"
+  }
+}
