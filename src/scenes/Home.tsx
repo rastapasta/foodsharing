@@ -5,8 +5,6 @@ import LoginTextInput from '../components/LoginTextInput'
 
 import colors from '../colors'
 
-const { width } = Dimensions.get('window')
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -33,7 +31,8 @@ export default class Home extends PureComponent<Props> {
           <Text style={{color: colors.green}}>sharing</Text>
         </Text>
 
-        <LoginTextInput />
+        <LoginTextInput icon="account" />
+        <LoginTextInput icon="key" obfuscate />
       </SafeAreaView>
     )
   }

@@ -1,34 +1,58 @@
-import React, { PureComponent } from 'react'
-import { StyleSheet, TextInput, Dimensions } from 'react-native'
+import React, {PureComponent} from 'react'
+import {View, StyleSheet, TextInput, Dimensions} from 'react-native'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import colors from '../colors'
 
 const { width } = Dimensions.get('window')
+    , height = 40
+    , iconSize = height * .5
 
 const styles = StyleSheet.create({
-  field: {
-    backgroundColor: colors.white,
+  container: {
     height: 40,
     width: width - 40,
-    borderRadius: 5
+    marginBottom: 10
+  },
+  input: {
+    backgroundColor: colors.white,
+    flex: 1,
+    borderRadius: 5,
+    paddingLeft: iconSize * 2
+  },
+  icon: {
+    position: 'absolute',
+    left: iconSize * .5,
+    top: height/2 - iconSize/2,
+    color: colors.icon
   }
 })
-
 
 type Props = {
   obfuscate?: boolean
   icon?: string
+  placeholder?: string
 }
 
 export default class LoginTextInput extends PureComponent<Props> {
   render() {
-    const { obfuscate } = this.props
+    const {obfuscate, placeholder, icon} = this.props
 
     return (
-      <TextInput
-        style={styles.field}
-        secureTextEntry={!!obfuscate}
-      />
+      <View style={styles.container}>
+        <TextInput
+          style={styles.input}
+          secureTextEntry={!!obfuscate}
+          placeholder={placeholder}
+        />
+        {icon &&
+          <Icon
+            name={icon}
+            size={iconSize}
+            style={styles.icon}
+          />
+        }
+      </View>
     )
   }
 }
