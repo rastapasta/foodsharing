@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react'
-import {KeyboardAvoidingView, StatusBar, StyleSheet, Dimensions, View, TouchableOpacity, Text, Linking} from 'react-native'
+import {KeyboardAvoidingView, StatusBar, StyleSheet, Dimensions, View, TouchableOpacity, Text, Linking, Keyboard} from 'react-native'
+import Toast from 'react-native-easy-toast'
 
 import LoginTextInput from '../components/LoginTextInput'
 import LoginForgotPassword from '../components/LoginForgotPassword'
@@ -55,6 +56,9 @@ const styles = StyleSheet.create({
 type Props = {}
 
 export default class Home extends PureComponent<Props> {
+  refs: {
+    toast: Toast
+  }
   state = {
     user: null,
     password: null
@@ -62,6 +66,8 @@ export default class Home extends PureComponent<Props> {
 
   doLogin = () => {
     // const {user, password} = this.state
+    Keyboard.dismiss()
+    this.refs.toast.show('Here we go! Needs implementation :)')
   }
 
   render() {
@@ -104,6 +110,7 @@ export default class Home extends PureComponent<Props> {
         </View>
 
         <Version />
+        <Toast ref="toast" />
       </KeyboardAvoidingView>
     )
   }
