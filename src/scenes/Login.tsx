@@ -10,7 +10,7 @@ import Version from '../components/Version'
 
 import colors from '../colors'
 import { translate } from '../translation'
-import { authenticate, results } from '../api'
+import { authenticate, results, getCurrentUser } from '../api'
 
 const {width} = Dimensions.get('window')
     , registerURL = 'https://foodsharing.de/?page=content&sub=joininfo'
@@ -78,6 +78,7 @@ export default class Home extends PureComponent<Props> {
     Keyboard.dismiss()
 
     const result = await authenticate(email, password)
+    await getCurrentUser()
 
     if (result === results.LOGIN_SUCCESSFUL)
       Actions.replace('home')

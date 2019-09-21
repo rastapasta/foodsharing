@@ -19,6 +19,7 @@
     "react-native-localize": "^1.2.1",
     "react-native-router-flux": "^4.0.6",
     "react-native-vector-icons": "^6.6.0",
+    "set-cookie-parser": "^2.4.0",
     "typescript": "^3.6.3"
   },
   "devDependencies": {
