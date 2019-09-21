@@ -1,7 +1,9 @@
 import React from 'react'
 import { Scene, Router, Stack } from 'react-native-router-flux'
-import Login from './scenes/Login'
 import colors from './colors'
+
+import Home from './scenes/Home'
+import Login from './scenes/Login'
 
 export default () =>
   <Router>
@@ -15,6 +17,10 @@ export default () =>
         key='login'
         component={Login}
         initial
+      />
+      <Scene
+        key='home'
+        component={Home}
       />
     </Stack>
   </Router>

@@ -1,5 +1,7 @@
 import React, {PureComponent} from 'react'
 import {SafeAreaView, KeyboardAvoidingView, StatusBar, StyleSheet, Dimensions, View, TouchableOpacity, Text, Linking, Keyboard} from 'react-native'
+import {Actions} from 'react-native-router-flux'
+
 import Toast from 'react-native-easy-toast'
 
 import LoginTextInput from '../components/LoginTextInput'
@@ -8,6 +10,7 @@ import Version from '../components/Version'
 
 import colors from '../colors'
 import { translate } from '../translation'
+import { authenticate, results } from '../api'
 
 const {width} = Dimensions.get('window')
     , registerURL = 'https://foodsharing.de/?page=content&sub=joininfo'
@@ -63,15 +66,24 @@ export default class Home extends PureComponent<Props> {
   refs: {
     toast: Toast
   }
+
   state = {
-    user: null,
+    email: null,
     password: null
   }
 
-  doLogin = () => {
-    // const {user, password} = this.state
+  doLogin = async () => {
+    const {email, password} = this.state
+
     Keyboard.dismiss()
-    this.refs.toast.show('Here we go! Needs implementation :)', 1000)
+
+    const result = await authenticate(email, password)
+
+    if (result === results.LOGIN_SUCCESSFUL)
+      Actions.replace('home')
+    else
+      this.refs.toast.show(translate('login.failed'), 1000)
+
   }
 
   render() {
@@ -90,7 +102,7 @@ export default class Home extends PureComponent<Props> {
           <LoginTextInput
             icon="account"
             placeholder={translate('login.email')}
-            onChange={user => this.setState({user})}
+            onChange={email => this.setState({email})}
           />
 
           <LoginTextInput

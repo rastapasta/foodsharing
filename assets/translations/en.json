@@ -4,6 +4,9 @@
     "password": "Password",
     "forgot": "Forgot password?",
     "register": "Register",
-    "login": "Login"
+    "login": "Login",
+
+    "success": "Login successful!",
+    "failed": "Login failed.."
   }
 }
