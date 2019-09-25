@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
-import { SafeAreaView, StyleSheet, FlatList, View, Text, Dimensions, Image, TouchableOpacity } from 'react-native'
+import { SafeAreaView, StyleSheet, FlatList, View, Text, Dimensions, TouchableOpacity } from 'react-native'
+import Image from 'react-native-fast-image'
 import moment from 'moment'
 
 import colors from '../colors'
