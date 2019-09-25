@@ -8,5 +8,7 @@ export default {
   green: '#64ae25',
   white: '#fff',
 
-  version: '#aaa'
+  version: '#aaa',
+
+  conversationDate: '#aaa'
 }
