@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import { StyleSheet, View, Text, Dimensions, TouchableOpacity } from 'react-native'
+import { Actions } from 'react-native-router-flux'
 import Image from 'react-native-fast-image'
 import moment from 'moment'
 
@@ -41,6 +42,7 @@ const styles = StyleSheet.create({
   },
   lastMessageText: {
     fontSize: 11,
+    flex: 1,
     color: colors.background
   }
 })
@@ -58,13 +60,14 @@ const getOtherParty = (members: ConversationMember[]): ConversationMember =>
 
 export default class ConversationsItem extends PureComponent<Props> {
   render() {
-    const { conversation: { member, last_ts, last_message, last_foodsaver_id }, isLast } = this.props
+    const { conversation, isLast } = this.props
+        , { member, last_ts, last_message, last_foodsaver_id } = conversation
         , other = getOtherParty(member)
         , date = moment(parseInt(last_ts) * 1000)
         , isToday = date.isSame(new Date(), 'day')
 
     return (
-      <TouchableOpacity style={styles.container}>
+      <TouchableOpacity style={styles.container} onPress={() => Actions.jump('conversation', conversation)}>
         <View style={styles.image}>
           {other.photo &&
             <Image
@@ -94,7 +97,7 @@ export default class ConversationsItem extends PureComponent<Props> {
                 />
               </View>
             }
-            <Text style={styles.lastMessageText}>
+            <Text style={styles.lastMessageText} numberOfLines={1} ellipsizeMode="tail">
               {last_message}
             </Text>
           </View>

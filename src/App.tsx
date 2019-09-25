@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import Login from './scenes/Login'
 import Conversations from './scenes/Conversations'
+import Conversation from './scenes/Conversation'
 import Home from './scenes/Home'
 
 const styles = StyleSheet.create({
@@ -17,6 +18,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   }
 })
+
 
 const icon = (name: string) =>
   () => <Icon name={name} size={32} style={{marginTop: 3, color: colors.white}}/>
@@ -39,13 +41,22 @@ export default () =>
         tabBarStyle={styles.tabBarStyle}
         activeTintColor={colors.white}
       >
-        <Scene
-          initial
+        <Stack
           key="conversations"
-          title="Conversations"
-          component={Conversations}
           icon={icon('wechat')}
-        />
+        >
+          <Scene
+            initial
+            key="conversationsList"
+            title="Conversations"
+            component={Conversations}
+          />
+          <Scene
+            key="conversation"
+            title="Conversation"
+            component={Conversation}
+          />
+        </Stack>
         <Scene
           key="basket"
           title="Baskets"

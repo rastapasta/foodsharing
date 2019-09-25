@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import { SafeAreaView, StyleSheet, FlatList } from 'react-native'
 
 import colors from '../colors'
-import { Conversation, ConversationMember } from '../api'
+import { Conversation } from '../api'
 
 import ConversationsItem from '../components/ConversationsItem'
 
@@ -13,6 +13,9 @@ const styles = StyleSheet.create({
 
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  list: {
+    flex: 1
   }
 })
 
@@ -45,7 +48,7 @@ const tmp = {
   "last_message_is_htmlentity_encoded": "1"
 }
 
-const data = [{...tmp, id: "1"}, {...tmp, id: "2"}, {...tmp, id: "3"}, {...tmp, id: "4"}] as Conversation[]
+const data = [{...tmp, id: "1"}, {...tmp, id: "2", "last_message": "ejroeijr eoirj eoirjeoirj eorijeorije orije roijer oeijroerij"}, {...tmp, id: "3"}, {...tmp, id: "4"}] as Conversation[]
 type Props = {}
 
 export default class Conversations extends PureComponent<Props> {
@@ -59,9 +62,14 @@ export default class Conversations extends PureComponent<Props> {
     return (
       <SafeAreaView style={styles.container}>
         <FlatList
-          style={{flex: 1}}
+          style={styles.list}
           data={data}
-          renderItem={({item, index}) => <ConversationsItem conversation={item} isLast={index === data.length - 1} />}
+          renderItem={({item, index}) =>
+            <ConversationsItem
+              conversation={item}
+              isLast={index === data.length - 1}
+            />
+          }
         />
       </SafeAreaView>
     )

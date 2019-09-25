@@ -58,7 +58,6 @@ const styles = StyleSheet.create({
   }
 })
 
-
 type Props = {}
 
 export default class Home extends PureComponent<Props> {
