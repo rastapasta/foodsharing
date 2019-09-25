@@ -58,6 +58,7 @@ type Props = {
 
 const ownUserId = "338605"
     , url = 'https://foodsharing.de/images/'
+    , avatar = 'https://foodsharing.de/img/130_q_avatar.png'
 
 const getOtherParty = (members: ConversationMember[]): ConversationMember =>
   members.length === 1 ? members[0] : members.find(member => member.id !== ownUserId)
@@ -66,6 +67,7 @@ export default class ConversationsItem extends PureComponent<Props> {
   render() {
     const { conversation, isLast } = this.props
         , { member, last_ts, last_message, last_foodsaver_id } = conversation
+        , isSelfMessage = member.length === 1
         , other = getOtherParty(member)
         , date = moment(parseInt(last_ts) * 1000)
         , isToday = date.isSame(new Date(), 'day')
@@ -76,21 +78,19 @@ export default class ConversationsItem extends PureComponent<Props> {
         onPress={() => Actions.jump('conversation', {conversation})}
       >
         <View style={styles.image}>
-          {other.photo &&
-            <Image
-              style={{flex: 1}}
-              resizeMode="contain"
-              source={{uri:  url + other.photo}}
-            />
-          }
+          <Image
+            style={{flex: 1}}
+            resizeMode="contain"
+            source={{uri:  other.photo ? url + other.photo : avatar}}
+          />
         </View>
         <View style={{flex: 1, padding: 10}}>
           <View style={styles.header}>
             <Text>
-              {other.name}
+              {isSelfMessage ? 'Note to self' : other.name}
             </Text>
             <Text style={styles.date}>
-              {date.format(isToday ? 'hh:mm' : 'MMMM Do')}
+              {date.format(isToday ? 'HH:mm' : 'MMMM Do')}
             </Text>
           </View>
 
