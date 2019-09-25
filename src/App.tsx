@@ -28,19 +28,18 @@ export default () =>
     <Stack
       tintColor={colors.white}
       key='root'
-      titleStyle={{ alignSelf: 'center', color: 'white' }}
       navigationBarStyle={{ backgroundColor: colors.background }}
       hideNavBar
     >
       <Tabs
         key="main"
-        backToInitial
         // onTabOnPress={() => {
         //   console.log('Back to initial and also print this');
         // }}
         showLabel={true}
         tabBarStyle={styles.tabBarStyle}
-        activeTintColor={colors.white}
+        activeTintColor="#D7CCC8"
+        inactiveTintColor="#9E837A"
       >
         <Stack
           key="conversations"
@@ -53,11 +52,6 @@ export default () =>
             title="Conversations"
             component={Conversations}
           />
-          <Scene
-            key="conversation"
-            title="Conversation"
-            component={Conversation}
-          />
         </Stack>
         <Scene
           key="basket"
@@ -66,11 +60,15 @@ export default () =>
           icon={icon('basket')}
         />
       </Tabs>
-
+      <Scene
+        key="conversation"
+        title="Conversation"
+        component={Conversation}
+        hideNavBar={false}
+      />
       <Scene
         key='login'
         component={Login}
       />
-
     </Stack>
   </Router>

@@ -5,7 +5,7 @@ import Image from 'react-native-fast-image'
 import moment from 'moment'
 
 import colors from '../colors'
-import { Conversation, ConversationMember } from '../api'
+import { ConversationListing, ConversationMember } from '../api'
 
 const { width } = Dimensions.get('window')
 
@@ -40,6 +40,10 @@ const styles = StyleSheet.create({
     borderColor: '#ddd',
     paddingBottom: 10
   },
+  lastMessageImage: {
+    width: 18,
+    marginRight: 8
+  },
   lastMessageText: {
     fontSize: 11,
     flex: 1,
@@ -48,7 +52,7 @@ const styles = StyleSheet.create({
 })
 
 type Props = {
-  conversation: Conversation,
+  conversation: ConversationListing,
   isLast: boolean
 }
 
@@ -67,7 +71,10 @@ export default class ConversationsItem extends PureComponent<Props> {
         , isToday = date.isSame(new Date(), 'day')
 
     return (
-      <TouchableOpacity style={styles.container} onPress={() => Actions.jump('conversation', conversation)}>
+      <TouchableOpacity
+        style={styles.container}
+        onPress={() => Actions.jump('conversation', {conversation})}
+      >
         <View style={styles.image}>
           {other.photo &&
             <Image
@@ -89,7 +96,7 @@ export default class ConversationsItem extends PureComponent<Props> {
 
           <View style={[styles.lastMessage, !!isLast && {borderBottomWidth: 0}]}>
             {last_foodsaver_id !== ownUserId &&
-              <View style={{width: 18, marginRight: 8}}>
+              <View style={styles.lastMessageImage}>
                 <Image
                   style={{flex: 1}}
                   resizeMode="contain"

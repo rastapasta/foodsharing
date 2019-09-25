@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import { SafeAreaView, StyleSheet, FlatList } from 'react-native'
 
 import colors from '../colors'
-import { Conversation } from '../api'
+import { ConversationListing, login, getConversations } from '../api'
 
 import ConversationsItem from '../components/ConversationsItem'
 
@@ -19,55 +19,32 @@ const styles = StyleSheet.create({
   }
 })
 
-const tmp = {
-  "id": "1357698",
-  "last": "2019-09-25 04:02:27",
-  "last_ts": "1569376947",
-  "member": [
-    {
-      "id": "338605",
-      "name": "Michael",
-      "photo": "",
-      "email": "m.strassburger@gmail.com",
-      "geschlecht": "1",
-      "infomail_message": "1"
-    },
-    {
-      "id": "338241",
-      "name": "Michael",
-      "photo": "131cdf95730f220a538544358e392681.png",
-      "email": "michael@regensburg.re",
-      "geschlecht": "1",
-      "infomail_message": "1"
-    }
-  ],
-  "last_message": "Aloha Testaccount! :)",
-  "last_foodsaver_id": "338241",
-  "unread": "1",
-  "name": "",
-  "last_message_is_htmlentity_encoded": "1"
-}
-
-const data = [{...tmp, id: "1"}, {...tmp, id: "2", "last_message": "ejroeijr eoirj eoirjeoirj eorijeorije orije roijer oeijroerij"}, {...tmp, id: "3"}, {...tmp, id: "4"}] as Conversation[]
 type Props = {}
 
 export default class Conversations extends PureComponent<Props> {
+  state = {
+    conversations: [] as ConversationListing[]
+  }
+
   async componentDidMount() {
-    // console.log(await authenticate('m.strassburger@gmail.com', 'testtest'))
-    // const conversations = await getConversations()
-    // console.log(conversations)
+    console.log(await login('m.strassburger@gmail.com', 'testtest'))
+    const conversations = await getConversations()
+    console.log(conversations)
+
+    this.setState({conversations})
   }
 
   render() {
+    const { conversations } = this.state
     return (
       <SafeAreaView style={styles.container}>
         <FlatList
           style={styles.list}
-          data={data}
+          data={conversations}
           renderItem={({item, index}) =>
             <ConversationsItem
               conversation={item}
-              isLast={index === data.length - 1}
+              isLast={index === conversations.length - 1}
             />
           }
         />

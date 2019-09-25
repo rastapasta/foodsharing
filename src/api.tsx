@@ -8,7 +8,8 @@ const host = 'https://foodsharing.de'
         profile: {uri: '/api/profile/current', method: 'GET'},
         wall: {uri: '/api/wall/{target}/{targetId}', method: 'GET'},
         store: {uri: '/api/stores/{storeId}', method: 'GET'},
-        conversations: {uri: '/api/conversations', method: 'GET'}
+        conversations: {uri: '/api/conversations', method: 'GET'},
+        conversation: {uri: '/api/conversations/{conversationId}', method: 'GET'}
       }
     , cookies = {}
 
@@ -20,8 +21,7 @@ export enum results {
   NOT_FOUND
 }
 
-
-export interface Conversation {
+export interface ConversationListing {
   id: string,
   last: string,
   last_foodsaver_id: string,
@@ -42,6 +42,13 @@ export interface ConversationMember {
   infomail_message: string
 }
 
+export interface Conversation {
+  member: {id: number, name: string, avatar: string, sleepStatus: boolean}[],
+  members: {id: number, name: string, avatar: string, sleepStatus: boolean}[],
+  messages: {body: string, fs_id: number, fs_name: string, fs_photo: string, id: number, is_htmlentity_encoded: number, time: string}[],
+  name: string
+}
+
 interface User {
   id: number,
   name: string
@@ -53,7 +60,7 @@ const handleCookies = cookieString =>
   .forEach(cookie => cookies[cookie.name] = cookie.value)
 
 function request(
-  endpoint: 'login' | 'current' | 'logout' | 'profile' | 'wall' | 'store' | 'conversations',
+  endpoint: 'login' | 'current' | 'logout' | 'profile' | 'wall' | 'store' | 'conversations' | 'conversation',
   data?: any,
   options?: any
 ): Promise<any> {
@@ -71,7 +78,7 @@ function request(
     },
     method,
     credentials: 'same-origin',
-    body: JSON.stringify(data)
+    ...(data ? {body: JSON.stringify(data)} : {})
   }).then(response => {
     if (response.headers.has('set-cookie'))
       handleCookies(response.headers.get('set-cookie'))
@@ -98,11 +105,14 @@ export const logout = (): Promise<void> =>
 export const getCurrentUser = (): Promise<User> =>
   request('current')
 
-export const getConversations = (): Promise<Conversation[]> =>
+export const getConversations = (): Promise<ConversationListing[]> =>
   request('conversations')
 
+export const getConversation = (conversationId: number): Promise<Conversation> =>
+  request('conversation', null, {conversationId})
+
 export const getWall = (target: 'foodsaver', targetId: number): Promise<any> =>
-  request('wall', {target, targetId})
+  request('wall', null, {target, targetId})
 
 
 // TODO: backend returns 500
