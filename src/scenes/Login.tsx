@@ -1,6 +1,5 @@
 import React, {PureComponent} from 'react'
 import {SafeAreaView, KeyboardAvoidingView, StatusBar, StyleSheet, Dimensions, View, TouchableOpacity, Text, Linking, Keyboard} from 'react-native'
-import {Actions} from 'react-native-router-flux'
 
 import Toast from 'react-native-easy-toast'
 
@@ -10,7 +9,7 @@ import Version from '../components/Version'
 
 import colors from '../colors'
 import { translate } from '../translation'
-import { authenticate, results, getCurrentUser, getWall, getConversations } from '../api'
+import { authenticate, getConversations } from '../api'
 
 const {width} = Dimensions.get('window')
     , registerURL = 'https://foodsharing.de/?page=content&sub=joininfo'
@@ -80,12 +79,11 @@ export default class Home extends PureComponent<Props> {
     try {
       const { name } = await authenticate(email, password)
       this.refs.toast.show(`Welcome, ${name}!`, 3000)
-      console.log(await getCurrentUser())
-      console.log(await getWall('foodsaver', 136735))
+      // console.log(await getCurrentUser())
+      // console.log(await getWall('foodsaver', 136735))
     } catch(e) {
       this.refs.toast.show(translate('login.failed'), 1000)
     }
-
   }
 
   render() {

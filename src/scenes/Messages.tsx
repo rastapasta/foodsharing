@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
 
 type Props = {}
 
-export default class Home extends PureComponent<Props> {
+export default class Messages extends PureComponent<Props> {
   render() {
     return (
       <SafeAreaView style={styles.container}>

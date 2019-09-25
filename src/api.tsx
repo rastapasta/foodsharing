@@ -84,77 +84,44 @@ function request(
       handleCookies(response.headers.get('set-cookie'))
 
     console.log(response)
+    switch (response.status) {
+      case 500: throw(results.SERVER_ERROR)
 
-    if (response.status === 500)
-      throw(results.SERVER_ERROR)
+      case 401: throw(results.FORBIDDEN)
+      case 403: throw(results.UNAUTHORIZED)
+      case 404: throw(results.NOT_FOUND)
 
-    if (response.status === 403)
-      throw(results.UNAUTHORIZED)
+      case 200: return response.json()
 
-
-    if (response.status === 403)
-      throw(results.FORBIDDEN)
-
-    if (response.status === 404)
-      throw(results.NOT_FOUND)
-
-    return response.json()
+      default: throw(results.SERVER_ERROR)
+    }
   })
 }
 
-
 export async function getConversations(): Promise<any> {
-  try {
-    return await request('conversations')
-  } catch(e) {
-    return null
-  }
+  return await request('conversations')
 }
 
-export async function getCurrentUser(): Promise<any> {
-  try {
-    return await request('current')
-  } catch(e) {
-    return null
-  }
+export async function getCurrentUser(): Promise<{id: number, name: string}> {
+  return await request('current')
 }
 
 export async function getWall(target: 'foodsaver', targetId: number): Promise<any> {
-  try {
-    return await request('wall', null, {target, targetId})
-  } catch(e) {
-    return null
-  }
+  return await request('wall', null, {target, targetId})
 }
 
 export async function getStore(storeId: number): Promise<any> {
-  try {
-    return await request('store', null, {storeId})
-  } catch(e) {
-    return null
-  }
+  return await request('store', null, {storeId})
 }
 
 export async function getProfile(): Promise<any> {
-  try {
-    return await request('profile')
-  } catch(e) {
-    return null
-  }
+  return await request('profile')
 }
 
 export async function logout(): Promise<any> {
-  try {
-    return await request('logout')
-  } catch(e) {
-    return null
-  }
+  return await request('logout')
 }
 
 export async function authenticate(email, password): Promise<{id: number, name: string}> {
-  try {
-    return await request('login', {email, password})
-  } catch(e) {
-    return e
-  }
+  return await request('login', {email, password})
 }
