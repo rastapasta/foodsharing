@@ -19,6 +19,15 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
+  - libwebp (1.0.3):
+    - libwebp/demux (= 1.0.3)
+    - libwebp/mux (= 1.0.3)
+    - libwebp/webp (= 1.0.3)
+  - libwebp/demux (1.0.3):
+    - libwebp/webp
+  - libwebp/mux (1.0.3):
+    - libwebp/demux
+  - libwebp/webp (1.0.3)
   - RCTRequired (0.61.0-rc.3)
   - RCTTypeSafety (0.61.0-rc.3):
     - FBLazyVector (= 0.61.0-rc.3)
@@ -217,10 +226,20 @@ PODS:
     - React-cxxreact (= 0.61.0-rc.3)
     - React-jsi (= 0.61.0-rc.3)
     - ReactCommon/jscallinvoker (= 0.61.0-rc.3)
+  - RNFastImage (7.0.2):
+    - React
+    - SDWebImage (~> 5.0)
+    - SDWebImageWebPCoder (~> 0.2.3)
   - RNLocalize (1.2.1):
     - React
   - RNVectorIcons (6.6.0):
     - React
+  - SDWebImage (5.1.0):
+    - SDWebImage/Core (= 5.1.0)
+  - SDWebImage/Core (5.1.0)
+  - SDWebImageWebPCoder (0.2.3):
+    - libwebp (~> 1.0)
+    - SDWebImage/Core (~> 5.0)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -251,6 +270,7 @@ DEPENDENCIES:
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - ReactCommon/jscallinvoker (from `../node_modules/react-native/ReactCommon`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - RNFastImage (from `../node_modules/react-native-fast-image`)
   - RNLocalize (from `../node_modules/react-native-localize`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -258,6 +278,9 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - boost-for-react-native
+    - libwebp
+    - SDWebImage
+    - SDWebImageWebPCoder
 
 EXTERNAL SOURCES:
   DoubleConversion:
@@ -308,6 +331,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/Libraries/Vibration"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  RNFastImage:
+    :path: "../node_modules/react-native-fast-image"
   RNLocalize:
     :path: "../node_modules/react-native-localize"
   RNVectorIcons:
@@ -322,6 +347,7 @@ SPEC CHECKSUMS:
   FBReactNativeSpec: 024a0adb24e3c4b3a87eeb98dbbc1ce8fa39a12e
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
+  libwebp: 057912d6d0abfb6357d8bb05c0ea470301f5d61e
   RCTRequired: 4333317ac06bf5ff26eaff1648e283b3e17d8a9e
   RCTTypeSafety: 52cc24ecba0678e7cf8179d7e6ec6f8ec3107766
   React: e83b8ebe673c488c45036a41ddce6b40d4130a8e
@@ -341,8 +367,11 @@ SPEC CHECKSUMS:
   React-RCTText: 9c98f0f4d93b98f0e33063f90559f3464297cf55
   React-RCTVibration: d4c2c7a476191804a325b1fc3b3e3932b2b287b9
   ReactCommon: c1acab50d8469f890bb14808d0283b2b23868eb4
+  RNFastImage: 9b0c22643872bb7494c8d87bbbb66cc4c0d9e7a2
   RNLocalize: f42aea3133d91d7fa3ec01284a6895019af1a83f
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
+  SDWebImage: fb387001955223213dde14bc08c8b73f371f8d8f
+  SDWebImageWebPCoder: 7568737603c50f6237850afedd7e9e28e5917e6b
   Yoga: 3873b42216fd5b09b8a0ffe8fb89721eebd1adbf
 
 PODFILE CHECKSUM: f8ea49102b30d31415959467706d6cad4dec2844
