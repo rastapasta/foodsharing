@@ -26,6 +26,7 @@ const icon = (name: string) =>
 export default () =>
   <Router>
     <Stack
+      tintColor={colors.white}
       key='root'
       titleStyle={{ alignSelf: 'center', color: 'white' }}
       navigationBarStyle={{ backgroundColor: colors.background }}
@@ -43,6 +44,7 @@ export default () =>
       >
         <Stack
           key="conversations"
+          title="Conversations"
           icon={icon('wechat')}
         >
           <Scene
