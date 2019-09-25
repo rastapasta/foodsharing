@@ -1,12 +1,12 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet } from 'react-native'
 import { Scene, Router, Stack, Tabs } from 'react-native-router-flux'
 import colors from './colors'
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import Login from './scenes/Login'
-import Messages from './scenes/Messages'
+import Conversations from './scenes/Conversations'
 import Home from './scenes/Home'
 
 const styles = StyleSheet.create({
@@ -41,9 +41,9 @@ export default () =>
       >
         <Scene
           initial
-          key="messages"
-          title="Messages"
-          component={Messages}
+          key="conversations"
+          title="Conversations"
+          component={Conversations}
           icon={icon('wechat')}
         />
         <Scene

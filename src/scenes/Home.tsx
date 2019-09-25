@@ -1,7 +1,6 @@
-import React, {PureComponent} from 'react'
-import {SafeAreaView, StyleSheet, Text} from 'react-native'
+import React, { PureComponent } from 'react'
+import { SafeAreaView, StyleSheet } from 'react-native'
 import colors from '../colors'
-import { Actions } from 'react-native-router-flux'
 
 const styles = StyleSheet.create({
   container: {
