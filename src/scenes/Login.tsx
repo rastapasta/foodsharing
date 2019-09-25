@@ -10,7 +10,7 @@ import Version from '../components/Version'
 
 import colors from '../colors'
 import { translate } from '../translation'
-import { authenticate, results, getCurrentUser } from '../api'
+import { authenticate, results, getCurrentUser, getWall, getConversations } from '../api'
 
 const {width} = Dimensions.get('window')
     , registerURL = 'https://foodsharing.de/?page=content&sub=joininfo'
@@ -77,13 +77,14 @@ export default class Home extends PureComponent<Props> {
 
     Keyboard.dismiss()
 
-    const result = await authenticate(email, password)
-    await getCurrentUser()
-
-    if (result === results.LOGIN_SUCCESSFUL)
-      Actions.replace('home')
-    else
+    try {
+      const { name } = await authenticate(email, password)
+      this.refs.toast.show(`Welcome, ${name}!`, 3000)
+      console.log(await getCurrentUser())
+      console.log(await getWall('foodsaver', 136735))
+    } catch(e) {
       this.refs.toast.show(translate('login.failed'), 1000)
+    }
 
   }
 
