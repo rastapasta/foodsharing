@@ -13,6 +13,7 @@
     "@types/react-native": "^0.60.15",
     "i18n-js": "^3.3.0",
     "lodash.memoize": "^4.1.2",
+    "moment": "^2.24.0",
     "react": "16.9.0",
     "react-native": "0.61.0-rc.3",
     "react-native-easy-toast": "^1.2.0",
