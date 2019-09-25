@@ -46,7 +46,8 @@ const styles = StyleSheet.create({
 })
 
 type Props = {
-  conversation: Conversation
+  conversation: Conversation,
+  isLast: boolean
 }
 
 const ownUserId = "338605"
@@ -57,8 +58,8 @@ const getOtherParty = (members: ConversationMember[]): ConversationMember =>
 
 export default class ConversationsItem extends PureComponent<Props> {
   render() {
-    const { member, last_ts, last_message, last_foodsaver_id } = this.props.conversation
-    const other = getOtherParty(member)
+    const { conversation: { member, last_ts, last_message, last_foodsaver_id }, isLast } = this.props
+        , other = getOtherParty(member)
         , date = moment(parseInt(last_ts) * 1000)
         , isToday = date.isSame(new Date(), 'day')
 
@@ -83,7 +84,7 @@ export default class ConversationsItem extends PureComponent<Props> {
             </Text>
           </View>
 
-          <View style={styles.lastMessage}>
+          <View style={[styles.lastMessage, !!isLast && {borderBottomWidth: 0}]}>
             {last_foodsaver_id !== ownUserId &&
               <View style={{width: 18, marginRight: 8}}>
                 <Image

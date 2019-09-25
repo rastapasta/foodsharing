@@ -61,7 +61,7 @@ export default class Conversations extends PureComponent<Props> {
         <FlatList
           style={{flex: 1}}
           data={data}
-          renderItem={({item}) => <ConversationsItem conversation={item} />}
+          renderItem={({item, index}) => <ConversationsItem conversation={item} isLast={index === data.length - 1} />}
         />
       </SafeAreaView>
     )
