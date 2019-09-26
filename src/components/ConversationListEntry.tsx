@@ -16,11 +16,17 @@ const styles = StyleSheet.create({
     width,
     flexDirection: 'row'
   },
-  image: {
+  images: {
     width: 70,
+    flexWrap: 'wrap',
+    padding: 5,
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start'
+  },
+  image: {
+    flex: 1,
     borderRadius: 35,
-    paddingTop: 10,
-    paddingBottom: 20,
     overflow: 'hidden'
   },
   header: {
@@ -68,9 +74,10 @@ const getOtherParty = (members: ConversationMember[]): ConversationMember =>
 export default class ConversationsItem extends PureComponent<Props> {
   render() {
     const { conversation, isLast } = this.props
-        , { member, last_ts, last_message, last_foodsaver_id } = conversation
+        , { id, member, name, last_ts, last_message, last_foodsaver_id } = conversation
         , isSelfMessage = member.length === 1
         , other = getOtherParty(member)
+        , party = member.length === 1 ? member : member.filter(member => member.id !== ownUserId)
         , date = moment(parseInt(last_ts) * 1000)
         , isToday = date.isSame(new Date(), 'day')
 
@@ -79,17 +86,25 @@ export default class ConversationsItem extends PureComponent<Props> {
         style={styles.container}
         onPress={() => Actions.jump('conversation', {conversation})}
       >
-        <View style={styles.image}>
-          <Image
-            style={{flex: 1}}
-            resizeMode="contain"
-            source={{uri:  other.photo ? url + other.photo : avatar}}
-          />
+        <View style={styles.images}>
+          {party.map(person =>
+            <View key={`${id}.${person.id}`} style={styles.image}>
+              <Image
+                style={{flex: 1}}
+                resizeMode="contain"
+                source={{uri: person.photo ? url + other.photo : avatar}}
+              />
+            </View>
+          )}
         </View>
+
         <View style={{flex: 1, padding: 10}}>
           <View style={styles.header}>
             <Text style={[conversation.unread !== "0" && {color: colors.messageUnread}]}>
-              {isSelfMessage ? translate('conversations.note_to_self') : other.name}
+              {name ? name :
+                isSelfMessage ? translate('conversations.note_to_self') :
+                party.map(person => person.name).join('|')
+              }
             </Text>
             <Text style={styles.date}>
               {date.format(isToday ? 'HH:mm' : 'MMMM Do')}
