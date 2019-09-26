@@ -425,7 +425,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = de.foodsharing;
+				PRODUCT_BUNDLE_IDENTIFIER = network.foodsharing;
 				PRODUCT_NAME = foodsharing;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -445,7 +445,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = de.foodsharing;
+				PRODUCT_BUNDLE_IDENTIFIER = network.foodsharing;
 				PRODUCT_NAME = foodsharing;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
