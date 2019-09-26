@@ -11,6 +11,7 @@
   },
 
   "conversations": {
-    "note_to_self": "Note to self"
+    "note_to_self": "Note to self",
+    "write_message": "Write a message!"
   }
 }

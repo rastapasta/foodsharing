@@ -12,5 +12,20 @@ export default {
 
   version: '#aaa',
 
-  conversationDate: '#aaa'
+  conversationDate: '#aaa',
+
+  messageSentBubble: '#795548',
+  messageSentText: '#fff',
+  messageReceivedBubble: '#EFEFEF',
+  messageReceivedText: '#000',
+
+  messageSendButton: '#E0E0E0',
+  messageSendIcon: '#7F7F7F',
+
+  messageSendButtonActive: '#795548',
+  messageSendIconActive: '#fff',
+
+  messagePlaceholder: '#8B8B8B'
+
+
 }

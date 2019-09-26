@@ -9,7 +9,8 @@ const host = 'https://foodsharing.de'
         wall: {uri: '/api/wall/{target}/{targetId}', method: 'GET'},
         store: {uri: '/api/stores/{storeId}', method: 'GET'},
         conversations: {uri: '/api/conversations', method: 'GET'},
-        conversation: {uri: '/api/conversations/{conversationId}', method: 'GET'}
+        conversation: {uri: '/api/conversations/{conversationId}', method: 'GET'},
+        message: {uri: '/xhrapp.php?app=msg&m=sendmsg', method: 'POST'}
       }
     , cookies = {}
 
@@ -71,7 +72,7 @@ const handleCookies = cookieString =>
   .forEach(cookie => cookies[cookie.name] = cookie.value)
 
 function request(
-  endpoint: 'login' | 'current' | 'logout' | 'profile' | 'wall' | 'store' | 'conversations' | 'conversation',
+  endpoint: 'login' | 'current' | 'logout' | 'profile' | 'wall' | 'store' | 'conversations' | 'conversation' | 'message',
   data?: any,
   options?: any
 ): Promise<any> {
@@ -94,7 +95,7 @@ function request(
   }).then(response => {
     if (response.headers.has('set-cookie'))
       handleCookies(response.headers.get('set-cookie'))
-
+    console.log(response)
     switch (response.status) {
       case 200: return response.json()
 
@@ -125,6 +126,9 @@ export const getConversation = (conversationId: number): Promise<ConversationDet
 
 export const getWall = (target: 'foodsaver', targetId: number): Promise<any> =>
   request('wall', null, {target, targetId})
+
+export const sendMessage = (userId: number, text: string): Promise<any> =>
+  request('message', {c: userId, b: text})
 
 
 // TODO: backend returns 500

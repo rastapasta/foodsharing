@@ -23,8 +23,6 @@ class Store {
       jsonp: false
     })
 
-    socket.on('connection', () => alert('established'))
-    socket.on('')
     socket.on('connect', () => {
       socket.emit('register')
       console.log('socket open')

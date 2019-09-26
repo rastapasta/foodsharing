@@ -1,9 +1,11 @@
 import React, { PureComponent } from 'react'
-import { SafeAreaView, StyleSheet, Text, View, FlatList, Dimensions } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View, FlatList, Dimensions, KeyboardAvoidingView } from 'react-native'
 import moment from 'moment'
 
+import MessageForm from '../components/MessageForm'
+
 import colors from '../colors'
-import { ConversationListEntry, getConversation, ConversationDetail } from '../api'
+import { ConversationListEntry, getConversation, ConversationDetail, sendMessage } from '../api'
 
 const { width } = Dimensions.get('window')
     , bubbleRadius = 12
@@ -12,7 +14,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.white,
-
+  },
+  form: {
+    flex: 1
   },
   header: {
     height: 30,
@@ -47,7 +51,7 @@ const styles = StyleSheet.create({
     marginTop: 3,
     marginBottom: 7,
     color: colors.white
-  }
+  },
 })
 
 type Props = {
@@ -65,37 +69,40 @@ export default class Conversation extends PureComponent<Props> {
     this.setState({data})
   }
 
+  async sendMessage(text: string) {
+    // sendMessage()
+    return true
+  }
+
   render() {
     const { data } = this.state
 
     return (
-      <SafeAreaView style={styles.container}>
-        <FlatList
-          style={{flex: 1}}
-          inverted
-          data={data.messages}
-          keyExtractor={message => message.id.toString()}
-          // renderSectionHeader={({section}) =>
-          //   <View style={styles.header}>
-          //     <Text style={styles.title}>
-          //       {section.title}
-          //     </Text>
-          //   </View>
-          // }
-          renderItem={({item: message}) =>
-            <View style={{alignItems: 'flex-end'}}>
-              <View style={styles.sentBubble}>
-                <Text style={styles.body}>
-                  {message.body}
-                </Text>
-                <Text style={styles.time}>
-                  {moment(message.time).format('hh:mm')}
-                </Text>
+      <KeyboardAvoidingView behavior="padding" enabled style={styles.form}>
+        <SafeAreaView style={styles.container}>
+          <FlatList
+            inverted
+            data={data.messages}
+            keyExtractor={message => message.id.toString()}
+            style={{flex: 1}}
+
+            renderItem={({item: message}) =>
+              <View style={{alignItems: 'flex-end'}}>
+                <View style={styles.sentBubble}>
+                  <Text style={styles.body}>
+                    {message.body}
+                  </Text>
+                  <Text style={styles.time}>
+                    {moment(message.time).format('hh:mm')}
+                  </Text>
+                </View>
               </View>
-            </View>
-          }
-        />
-      </SafeAreaView>
+            }
+          />
+
+          <MessageForm onSend={this.sendMessage} />
+        </SafeAreaView>
+      </KeyboardAvoidingView>
     )
   }
 }
