@@ -1,6 +1,6 @@
 update_fastlane
 
-app = 'de.foodsharing'
+app = 'network.foodsharing'
 project = './ios/foodsharing.xcodeproj'
 workspace = './ios/foodsharing.xcworkspace'
 profile_uuid = 'd7e83ed2-18d1-4480-b721-3a25c36e6312'
