@@ -10,7 +10,8 @@ const host = 'https://foodsharing.de'
         store: {uri: '/api/stores/{storeId}', method: 'GET'},
         conversations: {uri: '/api/conversations', method: 'GET'},
         conversation: {uri: '/api/conversations/{conversationId}', method: 'GET'},
-        message: {uri: '/xhrapp.php?app=msg&m=sendmsg', method: 'POST'}
+        message: {uri: '/xhrapp.php?app=msg&m=sendmsg', method: 'POST'},
+        user2conv: {uri: '/xhrapp.php?app=msg&m=user2conv&fsid={userId}', method: 'GET'}
       }
     , cookies = {}
 
@@ -72,7 +73,7 @@ const handleCookies = cookieString =>
   .forEach(cookie => cookies[cookie.name] = cookie.value)
 
 function request(
-  endpoint: 'login' | 'current' | 'logout' | 'profile' | 'wall' | 'store' | 'conversations' | 'conversation' | 'message',
+  endpoint: 'login' | 'current' | 'logout' | 'profile' | 'wall' | 'store' | 'conversations' | 'conversation' | 'message' | 'user2conv',
   data?: any,
   options?: any
 ): Promise<any> {
@@ -129,6 +130,9 @@ export const getWall = (target: 'foodsaver', targetId: number): Promise<any> =>
 
 export const sendMessage = (userId: number, text: string): Promise<any> =>
   request('message', {c: userId, b: text})
+
+export const userToConversationId = async (userId: number): Promise<number> =>
+  parseInt((await request('user2conv', null, {userId})).data.cid)
 
 
 // TODO: backend returns 500
