@@ -88,7 +88,7 @@ export default class ConversationsItem extends PureComponent<Props> {
         </View>
         <View style={{flex: 1, padding: 10}}>
           <View style={styles.header}>
-            <Text>
+            <Text style={[conversation.unread !== "0" && {color: colors.messageUnread}]}>
               {isSelfMessage ? translate('conversations.note_to_self') : other.name}
             </Text>
             <Text style={styles.date}>

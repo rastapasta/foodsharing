@@ -23,25 +23,16 @@ class Store {
       jsonp: false
     })
 
-    socket.on('connect', () => {
-      socket.emit('register')
-      console.log('socket open')
-    })
+    socket.on('connect', () => socket.emit('register'))
+    socket.on('error', console.error)
+    socket.on('connect_error', console.error)
 
-    socket.on('error', (message) => {
-      console.log('error', message)
-    })
-    socket.on('conv', data => {
-      console.log(data)
-    })
 
-    socket.on('connect_error', (message) => {
-      console.log('connect_error', message)
-    })
-
-    socket.on('disconnect', () => {
-      console.log('socket closed')
-      // connection closed
+    socket.on('conv', ({m, o}: {m: string, o: string}) => {
+      if (m === 'push') {
+        const data = JSON.parse(o)
+        console.log(data)
+      }
     })
 
     this.socket = socket

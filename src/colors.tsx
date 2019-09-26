@@ -5,7 +5,7 @@ export default {
   inputPlaceholder: '#795548',
   inputText: '#000',
 
-  green: '#64ae25',
+  green: '#64AE25',
   white: '#fff',
   gray: '#aaa',
 
@@ -13,6 +13,8 @@ export default {
   version: '#aaa',
 
   conversationDate: '#aaa',
+
+  messageUnread: '#64AE25',
 
   messageSentBubble: '#795548',
   messageSentText: '#fff',

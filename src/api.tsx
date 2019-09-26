@@ -144,6 +144,6 @@ export const userToConversationId = async (userId: number): Promise<number> =>
 
 // TODO: backend returns 500
 // export const getStore = (storeId: number): Promise<any> =>
-//   request('store', {storeId})
+// //   request('store', {storeId})
 // export const getProfile = (): Promise<any> =>
 //   request('profile')
