@@ -69,9 +69,15 @@ export default class Conversation extends PureComponent<Props> {
     this.setState({data})
   }
 
-  async sendMessage(text: string) {
-    // sendMessage()
-    return true
+  sendMessage = async (text: string): Promise<boolean> => {
+    const { conversation } = this.props
+
+    // TODO: implement message sent failed handler
+    try {
+      return (await sendMessage(parseInt(conversation.id), text)).status === 1
+    } catch(e) {
+      return false
+    }
   }
 
   render() {

@@ -83,19 +83,26 @@ function request(
       , opts = options || {}
       , url = host + Object.keys(opts)
                       .reduce((u, key) => u.replace('{' + key +'}', opts[key]), uri)
+      , sendAsJSON = !url.match(/xhrapp/)
 
+  console.log(url, data, opts)
   return fetch(url, {
     headers: {
       Accept: 'application/json',
-      'Content-Type': 'application/json',
-      ...(cookies['CSRF_TOKEN'] ? {'X-CSRF-Token': cookies['CSRF_TOKEN']} : {})
+      ...(cookies['CSRF_TOKEN'] ? {'X-CSRF-Token': cookies['CSRF_TOKEN']} : {}),
+      ...(data ? {'Content-Type': sendAsJSON ? 'application/json' : 'application/x-www-form-urlencoded'} : {})
     },
     method,
     credentials: 'same-origin',
-    ...(data ? {body: JSON.stringify(data)} : {})
+    ...(data ? {
+      body: sendAsJSON ?
+        JSON.stringify(data) :
+        Object.keys(data).map(k => k + '=' + encodeURIComponent(data[k])).join('&')
+    } : {})
   }).then(response => {
     if (response.headers.has('set-cookie'))
       handleCookies(response.headers.get('set-cookie'))
+
     console.log(response)
     switch (response.status) {
       case 200: return response.json()
@@ -128,8 +135,8 @@ export const getConversation = (conversationId: number): Promise<ConversationDet
 export const getWall = (target: 'foodsaver', targetId: number): Promise<any> =>
   request('wall', null, {target, targetId})
 
-export const sendMessage = (userId: number, text: string): Promise<any> =>
-  request('message', {c: userId, b: text})
+export const sendMessage = (conversationId: number, text: string): Promise<any> =>
+  request('message', {c: conversationId, b: text})
 
 export const userToConversationId = async (userId: number): Promise<number> =>
   parseInt((await request('user2conv', null, {userId})).data.cid)
