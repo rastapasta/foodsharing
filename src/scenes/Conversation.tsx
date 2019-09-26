@@ -1,11 +1,14 @@
 import React, { PureComponent } from 'react'
 import { SafeAreaView, StyleSheet, Text, View, FlatList, Dimensions, KeyboardAvoidingView } from 'react-native'
 import moment from 'moment'
+import { AllHtmlEntities } from 'html-entities'
 
 import MessageForm from '../components/MessageForm'
 
 import colors from '../colors'
 import { ConversationListEntry, getConversation, ConversationDetail, sendMessage } from '../api'
+
+const entities = new AllHtmlEntities()
 
 const { width } = Dimensions.get('window')
     , bubbleRadius = 12
@@ -18,13 +21,6 @@ const styles = StyleSheet.create({
   form: {
     flex: 1
   },
-  header: {
-    height: 30,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 10
-  },
-
   sentBubble: {
     maxWidth: width * 0.7,
     backgroundColor: colors.background,
@@ -36,10 +32,6 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     marginRight: 10,
     marginBottom: 10
-  },
-  title: {
-    color: colors.gray,
-    fontSize: 13
   },
   body: {
     color: colors.white
@@ -96,7 +88,7 @@ export default class Conversation extends PureComponent<Props> {
               <View style={{alignItems: 'flex-end'}}>
                 <View style={styles.sentBubble}>
                   <Text style={styles.body}>
-                    {message.body}
+                    {entities.decode(message.body)}
                   </Text>
                   <Text style={styles.time}>
                     {moment(message.time).format('hh:mm')}
