@@ -2,9 +2,9 @@ import React, { PureComponent } from 'react'
 import { SafeAreaView, StyleSheet, FlatList } from 'react-native'
 
 import colors from '../colors'
-import { ConversationListing, login, getConversations } from '../api'
+import { ConversationListEntry as ListEntry, login, getConversations } from '../api'
 
-import ConversationsItem from '../components/ConversationsItem'
+import ConversationListEntry from '../components/ConversationListEntry'
 
 const styles = StyleSheet.create({
   container: {
@@ -23,7 +23,7 @@ type Props = {}
 
 export default class Conversations extends PureComponent<Props> {
   state = {
-    conversations: [] as ConversationListing[]
+    conversations: [] as ListEntry[]
   }
 
   async componentDidMount() {
@@ -42,7 +42,7 @@ export default class Conversations extends PureComponent<Props> {
           style={styles.list}
           data={conversations}
           renderItem={({item, index}) =>
-            <ConversationsItem
+            <ConversationListEntry
               conversation={item}
               isLast={index === conversations.length - 1}
             />

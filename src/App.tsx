@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet } from 'react-native'
 import { Scene, Router, Stack, Tabs } from 'react-native-router-flux'
 import colors from './colors'
+import Store from './store'
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
@@ -19,6 +20,7 @@ const styles = StyleSheet.create({
   }
 })
 
+console.log(Store)
 
 const icon = (name: string) =>
   () => <Icon name={name} size={32} style={{marginTop: 3, color: colors.white}}/>
@@ -41,18 +43,13 @@ export default () =>
         activeTintColor="#D7CCC8"
         inactiveTintColor="#9E837A"
       >
-        <Stack
+        <Scene
+          initial
+          icon={icon('wechat')}
           key="conversations"
           title="Conversations"
-          icon={icon('wechat')}
-        >
-          <Scene
-            initial
-            key="conversationsList"
-            title="Conversations"
-            component={Conversations}
-          />
-        </Stack>
+          component={Conversations}
+        />
         <Scene
           key="basket"
           title="Baskets"
@@ -70,5 +67,6 @@ export default () =>
         key='login'
         component={Login}
       />
+
     </Stack>
   </Router>

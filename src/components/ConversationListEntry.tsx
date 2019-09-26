@@ -5,7 +5,8 @@ import Image from 'react-native-fast-image'
 import moment from 'moment'
 
 import colors from '../colors'
-import { ConversationListing, ConversationMember } from '../api'
+import { ConversationListEntry, ConversationMember } from '../api'
+import { translate } from '../translation'
 
 const { width } = Dimensions.get('window')
 
@@ -25,7 +26,8 @@ const styles = StyleSheet.create({
   header: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    paddingTop: 3
   },
   date: {
     color: colors.conversationDate,
@@ -52,7 +54,7 @@ const styles = StyleSheet.create({
 })
 
 type Props = {
-  conversation: ConversationListing,
+  conversation: ConversationListEntry,
   isLast: boolean
 }
 
@@ -87,7 +89,7 @@ export default class ConversationsItem extends PureComponent<Props> {
         <View style={{flex: 1, padding: 10}}>
           <View style={styles.header}>
             <Text>
-              {isSelfMessage ? 'Note to self' : other.name}
+              {isSelfMessage ? translate('conversations.note_to_self') : other.name}
             </Text>
             <Text style={styles.date}>
               {date.format(isToday ? 'HH:mm' : 'MMMM Do')}

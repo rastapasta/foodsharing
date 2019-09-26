@@ -22,6 +22,7 @@
     "react-native-router-flux": "^4.0.6",
     "react-native-vector-icons": "^6.6.0",
     "set-cookie-parser": "^2.4.0",
+    "socket.io-client": "2.1.1",
     "typescript": "^3.6.3"
   },
   "devDependencies": {

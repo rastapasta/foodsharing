@@ -21,7 +21,7 @@ export enum results {
   NOT_FOUND
 }
 
-export interface ConversationListing {
+export interface ConversationListEntry {
   id: string,
   last: string,
   last_foodsaver_id: string,
@@ -42,16 +42,27 @@ export interface ConversationMember {
   infomail_message: string
 }
 
-export interface Conversation {
-  member: {id: number, name: string, avatar: string, sleepStatus: boolean}[],
-  members: {id: number, name: string, avatar: string, sleepStatus: boolean}[],
-  messages: {body: string, fs_id: number, fs_name: string, fs_photo: string, id: number, is_htmlentity_encoded: number, time: string}[],
+export interface ConversationDetail {
+  members: User[],
+  messages: Message[],
   name: string
+}
+
+export interface Message {
+  body: string,
+  fs_id: number,
+  fs_name: string,
+  fs_photo: string,
+  id: number,
+  is_htmlentity_encoded: number,
+  time: string
 }
 
 interface User {
   id: number,
-  name: string
+  name: string,
+  avatar: string,
+  sleepStatus: boolean
 }
 
 const handleCookies = cookieString =>
@@ -65,6 +76,7 @@ function request(
   options?: any
 ): Promise<any> {
   console.log('cookies', cookies)
+
   const { method, uri } = endpoints[endpoint]
       , opts = options || {}
       , url = host + Object.keys(opts)
@@ -105,10 +117,10 @@ export const logout = (): Promise<void> =>
 export const getCurrentUser = (): Promise<User> =>
   request('current')
 
-export const getConversations = (): Promise<ConversationListing[]> =>
+export const getConversations = (): Promise<ConversationListEntry[]> =>
   request('conversations')
 
-export const getConversation = (conversationId: number): Promise<Conversation> =>
+export const getConversation = (conversationId: number): Promise<ConversationDetail> =>
   request('conversation', null, {conversationId})
 
 export const getWall = (target: 'foodsaver', targetId: number): Promise<any> =>

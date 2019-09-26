@@ -8,5 +8,9 @@
 
     "success": "Login successful!",
     "failed": "Login failed.."
+  },
+
+  "conversations": {
+    "note_to_self": "Note to self"
   }
 }
