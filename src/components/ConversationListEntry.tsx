@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   lastMessageText: {
     fontSize: 11,
     flex: 1,
-    color: colors.background
+    color: colors.messagePreview
   }
 })
 
@@ -80,6 +80,7 @@ export default class ConversationsItem extends PureComponent<Props> {
         , party = member.length === 1 ? member : member.filter(member => member.id !== ownUserId)
         , date = moment(parseInt(last_ts) * 1000)
         , isToday = date.isSame(new Date(), 'day')
+        , lastMessenger = member.find(member => member.id === last_foodsaver_id)
 
     return (
       <TouchableOpacity
@@ -87,7 +88,7 @@ export default class ConversationsItem extends PureComponent<Props> {
         onPress={() => Actions.jump('conversation', {conversation})}
       >
         <View style={styles.images}>
-          {party.map(person =>
+          {party.slice(0, 4).map(person =>
             <View key={`${id}.${person.id}`} style={styles.image}>
               <Image
                 style={{flex: 1}}
@@ -112,12 +113,12 @@ export default class ConversationsItem extends PureComponent<Props> {
           </View>
 
           <View style={[styles.lastMessage, !!isLast && {borderBottomWidth: 0}]}>
-            {last_foodsaver_id !== ownUserId &&
+            {!!lastMessenger.photo &&
               <View style={styles.lastMessageImage}>
                 <Image
                   style={{flex: 1}}
                   resizeMode="contain"
-                  source={{uri: url + member.find(m => m.id === last_foodsaver_id).photo}}
+                  source={{uri: url + lastMessenger.photo}}
                 />
               </View>
             }

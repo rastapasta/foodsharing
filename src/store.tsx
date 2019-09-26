@@ -1,14 +1,14 @@
 import socketIO from 'socket.io-client'
 
 class Store {
-  socket: any
+  socket: socketIO
 
   constructor() {
-    this.setupWebSocket()
+    this.socket = this.connect()
   }
 
-  setupWebSocket() {
-    const socket = socketIO('https://foodsharing.de', {
+  connect(): socketIO {
+    const socket = socketIO('https://beta.foodsharing.de', {
       transportOptions: {
         polling: {
           extraHeaders: {
@@ -35,7 +35,7 @@ class Store {
       }
     })
 
-    this.socket = socket
+    return socket
   }
 }
 

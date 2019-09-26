@@ -1,6 +1,6 @@
 import setCookie from 'set-cookie-parser'
 
-const host = 'https://foodsharing.de'
+const host = 'https://beta.foodsharing.de'
     , endpoints = {
         login: {uri: '/api/user/login', method: 'POST'},
         logout: {uri: '/api/user/logout', method: 'GET'},

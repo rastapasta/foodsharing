@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { SafeAreaView, StyleSheet, FlatList } from 'react-native'
+import { SafeAreaView, StyleSheet, FlatList, StatusBar } from 'react-native'
 
 import colors from '../colors'
 import { ConversationListEntry as ListEntry, login, getConversations } from '../api'
@@ -38,6 +38,8 @@ export default class Conversations extends PureComponent<Props> {
     const { conversations } = this.state
     return (
       <SafeAreaView style={styles.container}>
+        <StatusBar backgroundColor={colors.background} barStyle="light-content" />
+
         <FlatList
           style={styles.list}
           data={conversations}

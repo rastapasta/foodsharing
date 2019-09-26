@@ -15,6 +15,7 @@ export default {
   conversationDate: '#aaa',
 
   messageUnread: '#64AE25',
+  messagePreview: '#7F7F7F',
 
   messageSentBubble: '#795548',
   messageSentText: '#fff',
