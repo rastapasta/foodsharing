@@ -11,13 +11,20 @@ This thingy runs on iOS and Android - one code, one love!
   * Auth via email and password
   * Links to web based register & password restore
   * Using device's keychain to store credentials in a secure location
+  * Display of current build version
+
+* Drawer
+  * Button for Logout
+  * Display of logo and name of user
+  * Display of current build version
 
 * Conversations
   * Send and receive messages
   * WebSocket for direct push
-  * Conversation list
-  * Group chats (multiple avatars displayed)
+  * Persiting message drafts per conversation
+  * Group chats (incl. multiple avatars displayed)
   * Named chats
+  * Today -> Yesterday -> $Date labeling in list
 
 * Custom fonts
 * Full i18n support (so far: English included)
@@ -32,7 +39,7 @@ This thingy runs on iOS and Android - one code, one love!
 
 ## ToDo
 
-* Drawer
+* Today -> Yesterday -> $Date seperators in conversation
 * Login / Logout
 * Data store and persitence
 * Background pull as Push Notification replacement
