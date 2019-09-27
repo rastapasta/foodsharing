@@ -9,6 +9,7 @@ import { Form } from 'react-redux-form/native'
 
 import Toast from 'react-native-easy-toast'
 
+import Logo from '../components/Logo'
 import LoginTextInput from '../components/LoginTextInput'
 import LoginForgotPassword from '../components/LoginForgotPassword'
 import Version from '../components/Version'
@@ -30,12 +31,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
-  logo: {
-    fontSize: 32,
-    fontFamily: 'AlfaSlabOne-Regular',
-    marginBottom: 30
-  },
-
   buttons: {
     width: width - 40,
     justifyContent: 'space-between',
@@ -96,12 +91,9 @@ class Login extends PureComponent<Props> {
         <KeyboardAvoidingView behavior="padding" enabled style={styles.form}>
           <StatusBar backgroundColor={colors.background} barStyle="light-content" />
 
-          <View>
-            <Text style={styles.logo}>
-              <Text style={{color: colors.white}}>food</Text>
-              <Text style={{color: colors.green}}>sharing</Text>
-            </Text>
-          </View>
+          <Logo size={32} />
+
+          <View style={{height: 50}} />
 
           <Form model="login">
             <LoginTextInput

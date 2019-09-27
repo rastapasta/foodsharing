@@ -9,8 +9,12 @@ export default {
   white: '#fff',
   gray: '#aaa',
 
-
   version: '#aaa',
+
+  drawerBackground: '#5C4038',
+  drawerUser: '#CFC6C3',
+  drawerIcon: '#737373',
+  drawerText: '#000',
 
   conversationDate: '#aaa',
 
