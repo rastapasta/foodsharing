@@ -2,10 +2,11 @@ import { eventChannel } from 'redux-saga'
 import { take, call, put } from 'redux-saga/effects'
 import socketIO from 'socket.io-client'
 
-function initWebsocket() {
-  return eventChannel(emitter => {
-    const session = 'fn4ucs8g5ddnu8mafb3d0eu61l'
-    const socket = socketIO('https://beta.foodsharing.de', {
+let socket
+
+const initWebsocket = session =>
+  eventChannel(emitter => {
+    socket = socketIO('https://beta.foodsharing.de', {
       transportOptions: {
         polling: {
           extraHeaders: {
@@ -22,29 +23,27 @@ function initWebsocket() {
 
     socket.on('connect', () => {
       socket.emit('register')
-      return emitter({type: 'WEBSOCKET_CONNECTED'})
+      return emitter({type: '📡 WEBSOCKET_CONNECTED'})
     })
 
     socket.on('error', (reason) =>
-      emitter({type: reason.match(/not authorized/) ? 'WEBSOCKET_UNAUTHORIZED' : 'WEBSOCKET_ERROR'})
+      emitter({type: reason.match(/not authorized/) ? '⛔️ WEBSOCKET_UNAUTHORIZED' : '❌ WEBSOCKET_ERROR'})
     )
 
     socket.on('connect_error', (reason) => console.error('connection_error: ' + reason))
-
 
     socket.on('conv', ({m, o}: {m: string, o: string}) => {
       if (m === 'push')
         return emitter({type: 'MESSAGE_RECEIVED', payload: JSON.parse(o)})
     })
 
-  return () => {
-    console.log('Socket off')
-  }
-})
-}
+    return () => {
+      console.log('Socket off')
+    }
+  })
 
 export default function* websocketSagas() {
-  const channel = yield call(initWebsocket)
+  const channel = yield call(initWebsocket, '6hvsvhcjqgckradegtq4p26ojt')
   while (true) {
     const action = yield take(channel)
     yield put(action)
