@@ -1,5 +1,11 @@
 import React, {PureComponent} from 'react'
-import { SafeAreaView, KeyboardAvoidingView, StatusBar, StyleSheet, Dimensions, View, TouchableOpacity, Text, Linking, Keyboard } from 'react-native'
+import { SafeAreaView, KeyboardAvoidingView, StatusBar, StyleSheet, Dimensions, View, TouchableOpacity, Text, Linking, TextInput, Keyboard } from 'react-native'
+
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import * as reduxActions from '../actions'
+
+import { Form } from 'react-redux-form/native'
 
 import Toast from 'react-native-easy-toast'
 
@@ -60,7 +66,7 @@ const styles = StyleSheet.create({
 
 type Props = {}
 
-export default class Home extends PureComponent<Props> {
+class Login extends PureComponent<Props> {
   refs: {
     toast: Toast
   }
@@ -78,14 +84,13 @@ export default class Home extends PureComponent<Props> {
     try {
       const { name } = await login(email, password)
       this.refs.toast.show(`Welcome, ${name}!`, 3000)
-      // console.log(await getCurrentUser())
-      // console.log(await getWall('foodsaver', 136735))
     } catch(e) {
       this.refs.toast.show(translate('login.failed'), 1000)
     }
   }
 
   render() {
+    const { actions } = this.props as any
     return (
       <SafeAreaView style={styles.container}>
         <KeyboardAvoidingView behavior="padding" enabled style={styles.form}>
@@ -98,39 +103,41 @@ export default class Home extends PureComponent<Props> {
             </Text>
           </View>
 
-          <LoginTextInput
-            icon="account"
-            placeholder={translate('login.email')}
-            onChange={email => this.setState({email})}
-          />
+          <Form model="login" onSubmit={(data) => alert(JSON.stringify(data))}>
+            <LoginTextInput
+              icon="account"
+              placeholder={translate('login.email')}
+              model=".email"
+            />
 
-          <LoginTextInput
-            icon="key"
-            placeholder={translate('login.password')}
-            obfuscate
-            onChange={password => this.setState({password})}
-          />
+            <LoginTextInput
+              icon="key"
+              placeholder={translate('login.password')}
+              obfuscate
+              model=".password"
+            />
 
-          <LoginForgotPassword />
+            <LoginForgotPassword />
 
-          <View style={styles.buttons}>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => Linking.openURL(registerURL)}
-            >
-              <Text style={styles.text}>
-                {translate('login.register')}
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[styles.button, styles.login]}
-              onPress={this.doLogin}
-            >
-              <Text style={[styles.text, styles.loginText]}>
-                {translate('login.login')}
-              </Text>
-            </TouchableOpacity>
-          </View>
+            <View style={styles.buttons}>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => Linking.openURL(registerURL)}
+              >
+                <Text style={styles.text}>
+                  {translate('login.register')}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.button, styles.login]}
+                onPress={() => actions.login()}
+              >
+                <Text style={[styles.text, styles.loginText]}>
+                  {translate('login.login')}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </Form>
 
           <Version />
           <Toast ref="toast" />
@@ -139,3 +146,14 @@ export default class Home extends PureComponent<Props> {
     )
   }
 }
+
+const mapStateToProps = state => ({})
+
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(reduxActions, dispatch)
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login)

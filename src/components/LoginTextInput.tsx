@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react'
-import {View, StyleSheet, TextInput, Dimensions} from 'react-native'
+import {View, StyleSheet, Dimensions} from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import { Control } from 'react-redux-form/native'
 
 import colors from '../utils/colors'
 
@@ -31,18 +32,19 @@ const styles = StyleSheet.create({
 
 type Props = {
   obfuscate?: boolean
+  model: string
   icon?: string
   placeholder?: string
-  onChange?: (string) => void
 }
 
 export default class LoginTextInput extends PureComponent<Props> {
   render() {
-    const {obfuscate, placeholder, icon, onChange} = this.props
+    const {obfuscate, placeholder, icon, model } = this.props
 
     return (
       <View style={styles.container}>
-        <TextInput
+        <Control.TextInput
+          model={model}
           keyboardType={obfuscate ? 'default' : 'email-address' }
           autoCorrect={false}
           style={styles.input}
@@ -50,7 +52,6 @@ export default class LoginTextInput extends PureComponent<Props> {
           placeholder={placeholder}
           autoCapitalize="none"
           placeholderTextColor={colors.inputPlaceholder}
-          onChangeText={onChange}
         />
         {icon &&
           <Icon

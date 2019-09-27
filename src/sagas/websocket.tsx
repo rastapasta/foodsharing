@@ -14,8 +14,8 @@ function initWebsocket() {
         }
       },
       path: '/chat/socket.io/',
-      reconnectionDelay: 1000,
-      reconnection: true,
+      reconnectionDelay: 5000,
+      reconnection: false,
       reconnectionAttempts: Infinity,
       jsonp: false
     })
@@ -25,8 +25,11 @@ function initWebsocket() {
       return emitter({type: 'WEBSOCKET_CONNECTED'})
     })
 
-    socket.on('error', console.error)
-    socket.on('connect_error', console.error)
+    socket.on('error', (reason) =>
+      emitter({type: reason.match(/not authorized/) ? 'WEBSOCKET_UNAUTHORIZED' : 'WEBSOCKET_ERROR'})
+    )
+
+    socket.on('connect_error', (reason) => console.error('connection_error: ' + reason))
 
 
     socket.on('conv', ({m, o}: {m: string, o: string}) => {

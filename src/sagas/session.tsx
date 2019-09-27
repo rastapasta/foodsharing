@@ -1,7 +1,7 @@
-import { take, fork, cancel, call, put, cancelled } from 'redux-saga/effects'
+import { take, fork, cancel, call, put, cancelled, select } from 'redux-saga/effects'
 import { Actions } from 'react-native-router-flux'
 
-import { LOGOUT, LOGIN_REQUESTING, LOGIN_SUCCESS, LOGIN_ERROR } from '../constants'
+import { LOGOUT, LOGIN_ACTION, LOGIN_SUCCESS, LOGIN_ERROR } from '../constants'
 
 import { login } from '../utils/api'
 
@@ -28,7 +28,6 @@ function* loginFlow (email, password) {
     // set a stringified version of our user to localstorage on our domain
     // localStorage.setItem('user', JSON.stringify(user))
 
-    // redirect them to WIDGETS!
     Actions.replace('main')
 
   } catch (error) {
@@ -45,7 +44,8 @@ function* loginFlow (email, password) {
 function* loginWatcher () {
   while (true) {
     console.log('login watcher startet')
-    const { email, password } = yield take(LOGIN_REQUESTING)
+    yield take(LOGIN_ACTION)
+    const { email, password } = yield select(state => state.login)
 
     const task = yield fork(loginFlow, email, password)
     const action = yield take([LOGOUT, LOGIN_ERROR])
