@@ -60,6 +60,20 @@ export interface Message {
   time: string
 }
 
+export interface Profile {
+  id: number,
+  name: string,
+  lastname: string,
+  address: string,
+  city: string,
+  postcode: string,
+  lat: string,
+  lon: string,
+  email: string,
+  landline: string,
+  mobile: string
+}
+
 interface User {
   id: number,
   name: string,
@@ -141,9 +155,9 @@ export const sendMessage = (conversationId: number, text: string): Promise<any> 
 export const userToConversationId = async (userId: number): Promise<number> =>
   parseInt((await request('user2conv', null, {userId})).data.cid)
 
+export const getProfile = (): Promise<Profile> =>
+  request('profile')
 
 // TODO: backend returns 500
 // export const getStore = (storeId: number): Promise<any> =>
 // //   request('store', {storeId})
-// export const getProfile = (): Promise<any> =>
-//   request('profile')

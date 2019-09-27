@@ -58,6 +58,7 @@ export default class Conversation extends PureComponent<Props> {
   async componentDidMount() {
     const { conversation } = this.props
     const data = await getConversation(parseInt(conversation.id))
+    console.log(data)
     this.setState({data})
   }
 

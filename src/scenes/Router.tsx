@@ -1,15 +1,15 @@
 import React from 'react'
 import { StyleSheet } from 'react-native'
 import { Scene, Router, Stack, Tabs } from 'react-native-router-flux'
-import colors from './colors'
-import Store from './store'
+import colors from '../colors'
+import Store from '../store'
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
-import Login from './scenes/Login'
-import Conversations from './scenes/Conversations'
-import Conversation from './scenes/Conversation'
-import Home from './scenes/Home'
+import Login from './Login'
+import Conversations from './Conversations'
+import Conversation from './Conversation'
+import Home from './Home'
 
 const styles = StyleSheet.create({
   tabBarStyle: {

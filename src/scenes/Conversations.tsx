@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import { SafeAreaView, StyleSheet, FlatList, StatusBar } from 'react-native'
 
 import colors from '../colors'
-import { ConversationListEntry as ListEntry, login, getConversations } from '../api'
+import { ConversationListEntry as ListEntry, login, getConversations, getProfile } from '../api'
 
 import ConversationListEntry from '../components/ConversationListEntry'
 
@@ -28,14 +28,15 @@ export default class Conversations extends PureComponent<Props> {
 
   async componentDidMount() {
     console.log(await login('m.strassburger@gmail.com', 'testtest'))
-    const conversations = await getConversations()
-    console.log(conversations)
 
+    console.log(await getProfile())
+    const conversations = await getConversations()
     this.setState({conversations})
   }
 
   render() {
     const { conversations } = this.state
+    console.log(conversations)
     return (
       <SafeAreaView style={styles.container}>
         <StatusBar backgroundColor={colors.background} barStyle="light-content" />

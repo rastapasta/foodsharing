@@ -12,8 +12,20 @@ This thingy runs on iOS and Android - one code, one love!
 * Fastlane (icon & badge generation, certificates, deploy, ...)
 * Custom fonts
 
+* Conversations
+  * Send and receive messages
+  * WebSocket for direct push
+  * Conversation list
+  * Group chats (multiple avatars displayed)
+  * Named chats
+
+
 ## ToDo
 
+* Drawer
 * Login / Logout
+* Data store and persitence
+* Background pull as Push Notification replacement
+* Notifications after background pull
 * Storing session cookie
-
+* Today / Yesterday / Date seperators in conversations list
