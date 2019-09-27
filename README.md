@@ -7,10 +7,10 @@ This thingy runs on iOS and Android - one code, one love!
 
 ## 🎉 What's implemented?
 
-* Login form (with links to register / forgot)
-* Full i18n support (so far: English included)
-* Fastlane (icon & badge generation, certificates, deploy, ...)
-* Custom fonts
+* Login
+  * Auth via email and password
+  * Links to web based register & password restore
+  * Using device's keychain to store credentials in a secure location
 
 * Conversations
   * Send and receive messages
@@ -19,6 +19,16 @@ This thingy runs on iOS and Android - one code, one love!
   * Group chats (multiple avatars displayed)
   * Named chats
 
+* Custom fonts
+* Full i18n support (so far: English included)
+
+* Deployment and CI
+  * Fastlane (icon & badge generation, certificates, deploy, ...)
+
+* Tech stack
+  * React Native
+  * redux / redux-saga for js generator magic
+  * see [package.json](https://github.com/rastapasta/foodsharing/blob/master/package.json) for complete package list
 
 ## ToDo
 
