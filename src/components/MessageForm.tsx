@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react'
-import { StyleSheet, View, TextInput, TouchableOpacity} from 'react-native'
+import { StyleSheet, View, TouchableOpacity} from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+
+import { Control } from 'react-redux-form/native'
 
 import colors from '../common/colors'
 import { translate } from '../common/translation'
@@ -32,6 +34,7 @@ const styles = StyleSheet.create({
 
 type Props = {
   onSend: (message) => Promise<boolean>
+  model: string
 }
 
 export default class MessageForm extends PureComponent<Props> {
@@ -48,16 +51,16 @@ export default class MessageForm extends PureComponent<Props> {
   }
 
   render() {
-    const { value } = this.state
+    const { model } = this.props
+        , value = 'test'
 
     return (
       <View style={styles.container}>
-        <TextInput
+        <Control.TextInput
+          model={model}
           style={{flex: 1}}
           placeholder={translate('conversations.write_message')}
           placeholderTextColor={colors.messagePlaceholder}
-          onChangeText={(value) => this.setState({value})}
-          value={value}
           multiline
         />
         <TouchableOpacity

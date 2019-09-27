@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import { SafeAreaView, StyleSheet, Text, View, FlatList, Dimensions, KeyboardAvoidingView } from 'react-native'
 import { AllHtmlEntities } from 'html-entities'
+
 import moment from 'moment'
 
 import { bindActionCreators } from 'redux'
@@ -104,7 +105,7 @@ class Conversation extends PureComponent<Props> {
             }
           />
 
-          <MessageForm onSend={this.sendMessage} />
+          <MessageForm onSend={this.sendMessage} model={`drafts.${conversation.id}`} />
         </SafeAreaView>
       </KeyboardAvoidingView>
     )

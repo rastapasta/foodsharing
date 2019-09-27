@@ -17,6 +17,7 @@ export default combineReducers({
     login: __DEV__ ? {
       email: 'm.strassburger@gmail.com',
       password: 'testtest'
-    } : {}
+    } : {},
+    drafts: {}
   })
 })
