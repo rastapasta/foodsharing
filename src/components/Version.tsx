@@ -1,6 +1,6 @@
-import React from 'react'
+import React , { PureComponent } from 'react'
 import { Text, View, StyleSheet } from 'react-native'
-
+import DeviceInfo from 'react-native-device-info'
 import colors from '../common/colors'
 
 const styles = StyleSheet.create({
@@ -14,8 +14,25 @@ const styles = StyleSheet.create({
   }
 })
 
-export default () => (
-  <View style={styles.container}>
-    <Text style={styles.text}>Version 0.0.1-ProofOfConcept</Text>
-  </View>
-)
+export default class Version extends PureComponent {
+  state = {
+    version: '',
+    build: ''
+  }
+
+  async componentDidMount() {
+    this.setState({
+      version: await DeviceInfo.getVersion(),
+      build: await DeviceInfo.getBuildNumber()
+    })
+  }
+
+  render() {
+    const { version, build } = this.state
+    return (
+      <View style={styles.container}>
+        <Text style={styles.text}>Version {version} (build #{build})</Text>
+      </View>
+    )
+  }
+}

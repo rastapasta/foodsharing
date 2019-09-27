@@ -31,6 +31,11 @@ export default () =>
       navigationBarStyle={{ backgroundColor: colors.background }}
       hideNavBar
     >
+      <Scene
+        initial
+        key="login"
+        component={Login}
+      />
       <RouterDrawer
         hideNavBar
         key="drawer"
@@ -44,11 +49,6 @@ export default () =>
         // drawerImage={() => <Icon name=}
         drawerWidth={240}
       >
-        <Scene
-          initial
-          key='login'
-          component={Login}
-        />
         <Tabs
           key="main"
           // onTabOnPress={() => {

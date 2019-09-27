@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import { View, StyleSheet, Text } from 'react-native'
 import colors from '../common/colors'
 
+import Version from './Version'
 import Logo from './Logo'
 
 const styles = StyleSheet.create({
@@ -18,6 +19,16 @@ const styles = StyleSheet.create({
   },
   username: {
     color: colors.drawerUser
+  },
+  content: {
+    flex: 1,
+    backgroundColor: colors.white
+  },
+  footer: {
+    backgroundColor: colors.white,
+    height: 20,
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 })
 
@@ -33,7 +44,10 @@ export default class Drawer extends PureComponent<Props> {
             Username
           </Text>
         </View>
-        <View style={{flex: 1, backgroundColor: colors.white}} />
+        <View style={styles.content} />
+        <View style={styles.footer}>
+          <Version />
+        </View>
       </View>
     )
   }
