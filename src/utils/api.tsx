@@ -1,8 +1,5 @@
 import setCookie from 'set-cookie-parser'
 
-import * as reduxActions from '../actions'
-import { store } from '../store'
-
 const host = 'https://beta.foodsharing.de'
     , endpoints = {
         login: {uri: '/api/user/login', method: 'POST'},
@@ -89,7 +86,7 @@ const handleCookies = cookieString =>
   .parse(cookieString.split(/, /))
   .forEach(cookie => {
     cookies[cookie.name] = cookie.value
-    store.dispatch(reduxActions.cookie(cookie.name, cookie.value))
+    // store.dispatch(reduxActions.cookie(cookie.name, cookie.value))
   })
 
 function request(

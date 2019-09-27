@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import { SafeAreaView, StyleSheet, FlatList, StatusBar } from 'react-native'
 
 import colors from '../utils/colors'
-import { ConversationListEntry as ListEntry, login, getConversations, getProfile } from '../utils/api'
+import { ConversationListEntry as ListEntry, getConversations } from '../utils/api'
 
 import ConversationListEntry from '../components/ConversationListEntry'
 
@@ -27,9 +27,6 @@ export default class Conversations extends PureComponent<Props> {
   }
 
   async componentDidMount() {
-    console.log(await login('m.strassburger@gmail.com', 'testtest'))
-
-    console.log(await getProfile())
     const conversations = await getConversations()
     this.setState({conversations})
   }

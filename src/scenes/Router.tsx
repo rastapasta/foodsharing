@@ -30,6 +30,12 @@ export default () =>
       navigationBarStyle={{ backgroundColor: colors.background }}
       hideNavBar
     >
+      <Scene
+        initial
+        key='login'
+        component={Login}
+      />
+
       <Tabs
         key="main"
         // onTabOnPress={() => {
@@ -41,7 +47,6 @@ export default () =>
         inactiveTintColor="#9E837A"
       >
         <Scene
-          initial
           icon={icon('wechat')}
           key="conversations"
           title="Conversations"
@@ -60,10 +65,5 @@ export default () =>
         component={Conversation}
         hideNavBar={false}
       />
-      <Scene
-        key='login'
-        component={Login}
-      />
-
     </Stack>
   </Router>

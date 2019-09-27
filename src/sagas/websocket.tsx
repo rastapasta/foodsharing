@@ -20,7 +20,11 @@ function initWebsocket() {
       jsonp: false
     })
 
-    socket.on('connect', () => socket.emit('register'))
+    socket.on('connect', () => {
+      socket.emit('register')
+      return emitter({type: 'WEBSOCKET_CONNECTED'})
+    })
+
     socket.on('error', console.error)
     socket.on('connect_error', console.error)
 
