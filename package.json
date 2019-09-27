@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@types/react-native": "^0.60.15",
+    "@types/react-redux": "^7.1.4",
     "html-entities": "^1.2.1",
     "i18n-js": "^3.3.0",
     "lodash.memoize": "^4.1.2",
@@ -22,6 +23,11 @@
     "react-native-localize": "^1.2.1",
     "react-native-router-flux": "^4.0.6",
     "react-native-vector-icons": "^6.6.0",
+    "react-redux": "^7.1.1",
+    "redux": "^4.0.4",
+    "redux-actions": "^2.6.5",
+    "redux-middleware-oneshot": "^0.1.1",
+    "redux-thunk": "^2.3.0",
     "set-cookie-parser": "^2.4.0",
     "socket.io-client": "2.1.1",
     "typescript": "^3.6.3"
