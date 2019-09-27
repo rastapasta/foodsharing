@@ -1,1 +1,9 @@
 export const INIT = 'INIT'
+export const COOKIE = 'COOKIE'
+
+export const FETCH_CONVERSATIONS = 'FETCH_CONVERSATIONS'
+export const GOT_CONVERSATIONS = 'GOT_CONVERSATIONS'
+
+export const LOGIN_REQUESTING = 'LOGIN_REQUESTING'
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
+export const LOGIN_ERROR = 'LOGIN_ERROR'

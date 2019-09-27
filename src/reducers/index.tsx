@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
 
 import routes from './routes'
-import permissions from './permissions'
+import app from './app'
 
 export default combineReducers({
   routes,
-  permissions,
+  app,
 })

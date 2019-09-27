@@ -1,5 +1,8 @@
 import setCookie from 'set-cookie-parser'
 
+import * as reduxActions from './actions'
+import { store } from './store'
+
 const host = 'https://beta.foodsharing.de'
     , endpoints = {
         login: {uri: '/api/user/login', method: 'POST'},
@@ -84,7 +87,10 @@ interface User {
 const handleCookies = cookieString =>
   setCookie
   .parse(cookieString.split(/, /))
-  .forEach(cookie => cookies[cookie.name] = cookie.value)
+  .forEach(cookie => {
+    cookies[cookie.name] = cookie.value
+    store.dispatch(reduxActions.cookie(cookie.name, cookie.value))
+  })
 
 function request(
   endpoint: 'login' | 'current' | 'logout' | 'profile' | 'wall' | 'store' | 'conversations' | 'conversation' | 'message' | 'user2conv',

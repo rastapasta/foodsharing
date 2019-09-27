@@ -2,7 +2,6 @@ import React from 'react'
 import { StyleSheet } from 'react-native'
 import { Scene, Router, Stack, Tabs } from 'react-native-router-flux'
 import colors from '../colors'
-import Store from '../store'
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
@@ -19,8 +18,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   }
 })
-
-console.log(Store)
 
 const icon = (name: string) =>
   () => <Icon name={name} size={32} style={{marginTop: 3, color: colors.white}}/>

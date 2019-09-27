@@ -1,9 +1,12 @@
-import { AsyncStorage } from 'react-native'
+import AsyncStorage from '@react-native-community/async-storage'
 import {createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
+import createSagaMiddleware from 'redux-saga'
+
 import { persistStore, persistReducer } from 'redux-persist'
 
 import reducers from '../reducers'
+import sagas from '../sagas'
 
 import {middleware as appState} from '../middlewares/AppState'
 
@@ -17,15 +20,14 @@ const persistConfig = {
 }
 
 const persistedReducer = persistReducer(persistConfig, reducers)
+    , sagaMiddleware = createSagaMiddleware()
+    , composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+    , middleware = [appState, thunk, sagaMiddleware]
+    , enhancer = composeEnhancers(
+      applyMiddleware(...middleware)
+    )
 
-export default function configureStore() {
-  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-      , middleware = [appState, thunk]
-      , enhancer = composeEnhancers(
-        applyMiddleware(...middleware)
-      )
-      , store = createStore(persistedReducer, enhancer)
-      , persistor = persistStore(store)
+export const store = createStore(persistedReducer, enhancer)
+export const persistor = persistStore(store)
 
-  return {store, persistor}
-}
+sagaMiddleware.run(sagas)

@@ -226,6 +226,8 @@ PODS:
     - React-cxxreact (= 0.61.0-rc.3)
     - React-jsi (= 0.61.0-rc.3)
     - ReactCommon/jscallinvoker (= 0.61.0-rc.3)
+  - RNCAsyncStorage (1.6.2):
+    - React
   - RNFastImage (7.0.2):
     - React
     - SDWebImage (~> 5.0)
@@ -270,6 +272,7 @@ DEPENDENCIES:
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - ReactCommon/jscallinvoker (from `../node_modules/react-native/ReactCommon`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
   - RNFastImage (from `../node_modules/react-native-fast-image`)
   - RNLocalize (from `../node_modules/react-native-localize`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
@@ -331,6 +334,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/Libraries/Vibration"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  RNCAsyncStorage:
+    :path: "../node_modules/@react-native-community/async-storage"
   RNFastImage:
     :path: "../node_modules/react-native-fast-image"
   RNLocalize:
@@ -367,6 +372,7 @@ SPEC CHECKSUMS:
   React-RCTText: 9c98f0f4d93b98f0e33063f90559f3464297cf55
   React-RCTVibration: d4c2c7a476191804a325b1fc3b3e3932b2b287b9
   ReactCommon: c1acab50d8469f890bb14808d0283b2b23868eb4
+  RNCAsyncStorage: 60a80e72d95bf02a01cace55d3697d9724f0d77f
   RNFastImage: 9b0c22643872bb7494c8d87bbbb66cc4c0d9e7a2
   RNLocalize: f42aea3133d91d7fa3ec01284a6895019af1a83f
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4

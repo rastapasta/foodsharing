@@ -10,6 +10,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.6.2",
     "@types/react-native": "^0.60.15",
     "html-entities": "^1.2.1",
     "i18n-js": "^3.3.0",
@@ -27,6 +28,7 @@
     "redux-actions": "^2.6.5",
     "redux-middleware-oneshot": "^0.1.1",
     "redux-persist": "^6.0.0",
+    "redux-saga": "^1.1.1",
     "redux-thunk": "^2.3.0",
     "set-cookie-parser": "^2.4.0",
     "socket.io-client": "2.1.1",
