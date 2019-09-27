@@ -6,6 +6,7 @@ import colors from '../common/colors'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import Login from './Login'
+import Map from './Map'
 import Conversations from './Conversations'
 import Conversation from './Conversation'
 import Home from './Home'
@@ -71,6 +72,12 @@ export default () =>
             component={Home}
             icon={icon('basket')}
           />
+          <Scene
+              key="map"
+              title="Map"
+              component={Map}
+              icon={icon('basket')}
+            />
         </Tabs>
       </RouterDrawer>
       <Scene
