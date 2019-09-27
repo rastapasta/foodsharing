@@ -76,7 +76,7 @@ export default () =>
               key="map"
               title="Map"
               component={Map}
-              icon={icon('basket')}
+              icon={icon('map-marker')}
             />
         </Tabs>
       </RouterDrawer>

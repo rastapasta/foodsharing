@@ -38,7 +38,7 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>Your location will be used to center the map around you.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>SFMono-Regular.otf</string>
