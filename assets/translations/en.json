@@ -12,6 +12,9 @@
 
   "conversations": {
     "note_to_self": "Note to self",
-    "write_message": "Write a message!"
+    "write_message": "Write a message!",
+
+    "today": "Today",
+    "yesterday": "Yesterday"
   }
 }

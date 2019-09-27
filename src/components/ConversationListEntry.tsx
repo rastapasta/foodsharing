@@ -80,6 +80,7 @@ export default class ConversationsItem extends PureComponent<Props> {
         , party = member.length === 1 ? member : member.filter(member => member.id !== ownUserId)
         , date = moment(parseInt(last_ts) * 1000)
         , isToday = date.isSame(new Date(), 'day')
+        , isYesterday = date.isSame(new Date(Date.now() - 24*60*60*1000), 'day')
         , lastMessenger = member.find(member => member.id === last_foodsaver_id)
 
     return (
@@ -109,7 +110,7 @@ export default class ConversationsItem extends PureComponent<Props> {
               }
             </Text>
             <Text style={styles.date}>
-              {date.format(isToday ? 'HH:mm' : 'MMMM Do')}
+              {isYesterday ? translate('conversations.yesterday') : date.format(isToday ? 'HH:mm' : 'MMMM Do')}
             </Text>
           </View>
 
