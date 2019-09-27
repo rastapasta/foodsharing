@@ -1,11 +1,11 @@
 import { take, put } from 'redux-saga/effects'
 
 import { getConversations } from '../utils/api'
-import { CONVERSATIONS_REQUESTING, CONVERSATIONS_SUCCESS } from '../constants'
+import { CONVERSATIONS_REQUEST, CONVERSATIONS_SUCCESS } from '../constants'
 
 function* conversationsSaga() {
   while (true) {
-    yield take(CONVERSATIONS_REQUESTING)
+    yield take(CONVERSATIONS_REQUEST)
 
     const conversations = yield getConversations()
 

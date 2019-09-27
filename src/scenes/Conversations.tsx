@@ -6,7 +6,8 @@ import { connect } from 'react-redux'
 import * as reduxActions from '../actions'
 
 import colors from '../utils/colors'
-import { ConversationListEntry as ListEntry, getConversations } from '../utils/api'
+
+import { ConversationListEntry as ListEntry } from '../utils/api'
 
 import ConversationListEntry from '../components/ConversationListEntry'
 
@@ -23,23 +24,18 @@ const styles = StyleSheet.create({
   }
 })
 
-type Props = {}
+type Props = {
+  conversations: ListEntry[]
+}
 
 class Conversations extends PureComponent<Props> {
-  state = {
-    conversations: [] as ListEntry[]
-  }
-
   async componentDidMount() {
     const { actions } = this.props as any
     actions.fetchConversations()
-    const conversations = await getConversations()
-    this.setState({conversations})
   }
 
   render() {
-    const { conversations } = this.state
-    console.log(conversations)
+    const { conversations } = this.props
     return (
       <SafeAreaView style={styles.container}>
         <StatusBar backgroundColor={colors.background} barStyle="light-content" />
@@ -59,7 +55,9 @@ class Conversations extends PureComponent<Props> {
   }
 }
 
-const mapStateToProps = state => ({})
+const mapStateToProps = state => ({
+  conversations: state.conversations
+})
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(reduxActions, dispatch)

@@ -2,7 +2,7 @@ import { take, fork, call, put, cancelled, select } from 'redux-saga/effects'
 import { Actions } from 'react-native-router-flux'
 import * as Keychain from 'react-native-keychain'
 
-import { LOGOUT, LOGIN_ACTION, LOGIN_SUCCESS, LOGIN_ERROR, KEYCHAIN } from '../constants'
+import { LOGOUT, LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR, KEYCHAIN } from '../constants'
 
 import { login } from '../utils/api'
 
@@ -51,7 +51,7 @@ function* loadCredentials() {
 function* loginWatcher() {
   yield call(loadCredentials)
   while (true) {
-    yield take(LOGIN_ACTION)
+    yield take(LOGIN_REQUEST)
 
     const { email, password } = yield select(state => state.login)
 
