@@ -2,9 +2,9 @@ import { take, fork, call, put, cancelled, select } from 'redux-saga/effects'
 import { Actions } from 'react-native-router-flux'
 import * as Keychain from 'react-native-keychain'
 
-import { LOGOUT, LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR, KEYCHAIN } from '../constants'
+import { LOGOUT, LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR, KEYCHAIN } from '../common/constants'
 
-import { login } from '../utils/api'
+import { login } from '../common/api'
 
 function* logout() {
   // dispatches the CLIENT_UNSET action

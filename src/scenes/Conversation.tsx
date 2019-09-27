@@ -1,12 +1,16 @@
 import React, { PureComponent } from 'react'
 import { SafeAreaView, StyleSheet, Text, View, FlatList, Dimensions, KeyboardAvoidingView } from 'react-native'
-import moment from 'moment'
 import { AllHtmlEntities } from 'html-entities'
+import moment from 'moment'
+
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import * as reduxActions from '../common/actions'
 
 import MessageForm from '../components/MessageForm'
 
-import colors from '../utils/colors'
-import { ConversationListEntry, getConversation, ConversationDetail, sendMessage } from '../utils/api'
+import colors from '../common/colors'
+import { ConversationListEntry, ConversationDetail, sendMessage, Message } from '../common/api'
 
 const entities = new AllHtmlEntities()
 
@@ -48,18 +52,18 @@ const styles = StyleSheet.create({
 
 type Props = {
   conversation: ConversationListEntry
+  messages?: any
+  actions?: any
 }
 
-export default class Conversation extends PureComponent<Props> {
+class Conversation extends PureComponent<Props> {
   state = {
     data: {} as ConversationDetail
   }
 
   async componentDidMount() {
-    const { conversation } = this.props
-    const data = await getConversation(parseInt(conversation.id))
-    console.log(data)
-    this.setState({data})
+    const { conversation, actions } = this.props
+    actions.fetchConversation(conversation.id)
   }
 
   sendMessage = async (text: string): Promise<boolean> => {
@@ -74,14 +78,15 @@ export default class Conversation extends PureComponent<Props> {
   }
 
   render() {
-    const { data } = this.state
+    const { conversation, messages } = this.props
+        , data = (messages[conversation.id] || []) as Message[]
 
     return (
       <KeyboardAvoidingView behavior="padding" enabled style={styles.form}>
         <SafeAreaView style={styles.container}>
           <FlatList
             inverted
-            data={data.messages}
+            data={data}
             keyExtractor={message => message.id.toString()}
             style={{flex: 1}}
 
@@ -105,3 +110,16 @@ export default class Conversation extends PureComponent<Props> {
     )
   }
 }
+
+const mapStateToProps = state => ({
+  messages: state.messages
+})
+
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(reduxActions, dispatch)
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Conversation)

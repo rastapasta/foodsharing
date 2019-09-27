@@ -1,7 +1,7 @@
 import { take, put } from 'redux-saga/effects'
 
-import { getConversations } from '../utils/api'
-import { CONVERSATIONS_REQUEST, CONVERSATIONS_SUCCESS } from '../constants'
+import { getConversations } from '../common/api'
+import { CONVERSATIONS_REQUEST, CONVERSATIONS_SUCCESS } from '../common/constants'
 
 function* conversationsSaga() {
   while (true) {

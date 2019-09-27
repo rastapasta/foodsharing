@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react'
 import { StyleSheet, View, TextInput, TouchableOpacity} from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
-import colors from '../utils/colors'
-import { translate } from '../utils/translation'
+import colors from '../common/colors'
+import { translate } from '../common/translation'
 
 const styles = StyleSheet.create({
   container: {

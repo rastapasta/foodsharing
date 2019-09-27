@@ -1,5 +1,5 @@
 import { TYPE as appState } from '../middlewares/AppState'
-import { COOKIE } from '../constants'
+import { COOKIE } from '../common/constants'
 
 const initialState = {
   state: null,

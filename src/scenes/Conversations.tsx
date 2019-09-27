@@ -3,11 +3,11 @@ import { SafeAreaView, StyleSheet, FlatList, StatusBar } from 'react-native'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as reduxActions from '../actions'
+import * as reduxActions from '../common/actions'
 
-import colors from '../utils/colors'
+import colors from '../common/colors'
 
-import { ConversationListEntry as ListEntry } from '../utils/api'
+import { ConversationListEntry as ListEntry } from '../common/api'
 
 import ConversationListEntry from '../components/ConversationListEntry'
 

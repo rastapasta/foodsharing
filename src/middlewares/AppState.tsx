@@ -1,7 +1,7 @@
 import { createAction } from 'redux-actions'
 import createOneShotMiddleware from 'redux-middleware-oneshot'
 import { AppState } from 'react-native'
-import { APPSTATE } from '../constants'
+import { APPSTATE } from '../common/constants'
 
 export const TYPE = APPSTATE
 export const action = createAction(TYPE)

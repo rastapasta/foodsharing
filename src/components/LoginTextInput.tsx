@@ -3,7 +3,7 @@ import {View, StyleSheet, Dimensions} from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { Control } from 'react-redux-form/native'
 
-import colors from '../utils/colors'
+import colors from '../common/colors'
 
 const { width } = Dimensions.get('window')
     , height = 40

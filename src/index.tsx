@@ -5,7 +5,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 
 import Router from './scenes/Router'
 
-import { store, persistor } from './store/index'
+import { store, persistor } from './common/store'
 
 export default class Foodsharing extends React.Component {
   render() {

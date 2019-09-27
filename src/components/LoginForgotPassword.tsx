@@ -1,8 +1,8 @@
 import React from 'react'
 import { Text, Linking, StyleSheet, TouchableOpacity, Dimensions } from 'react-native'
 
-import colors from '../utils/colors'
-import { translate } from '../utils/translation'
+import colors from '../common/colors'
+import { translate } from '../common/translation'
 
 const {width} = Dimensions.get('window')
     , URL = 'https://foodsharing.de/?page=login&sub=passwordReset'

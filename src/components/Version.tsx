@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, View, StyleSheet } from 'react-native'
 
-import colors from '../utils/colors'
+import colors from '../common/colors'
 
 const styles = StyleSheet.create({
   container: {

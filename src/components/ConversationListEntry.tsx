@@ -4,9 +4,9 @@ import { Actions } from 'react-native-router-flux'
 import Image from 'react-native-fast-image'
 import moment from 'moment'
 
-import colors from '../utils/colors'
-import { ConversationListEntry, ConversationMember } from '../utils/api'
-import { translate } from '../utils/translation'
+import colors from '../common/colors'
+import { ConversationListEntry, ConversationMember } from '../common/api'
+import { translate } from '../common/translation'
 
 const { width } = Dimensions.get('window')
 

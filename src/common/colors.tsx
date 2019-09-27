@@ -29,6 +29,4 @@ export default {
   messageSendIconActive: '#fff',
 
   messagePlaceholder: '#8B8B8B'
-
-
 }

@@ -1,4 +1,4 @@
-import * as types from '../constants'
+import * as types from './constants'
 
 export const init = (isSimulator: boolean) => ({type: types.INIT, isSimulator})
 
@@ -9,3 +9,4 @@ export const cookie = (name: string, value: string) => ({type: types.COOKIE, nam
 export const fetchConversations = () => ({type: types.CONVERSATIONS_REQUEST})
 export const gotConversations = () => ({type: types.CONVERSATIONS_SUCCESS})
 
+export const fetchConversation = (id: number) => ({type: types.CONVERSATION_REQUEST, id})

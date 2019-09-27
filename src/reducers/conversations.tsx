@@ -1,4 +1,4 @@
-import { CONVERSATIONS_SUCCESS } from '../constants'
+import { CONVERSATIONS_SUCCESS } from '../common/constants'
 
 const initialState = []
 

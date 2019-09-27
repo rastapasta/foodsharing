@@ -1,6 +1,6 @@
 import { eventChannel } from 'redux-saga'
 import { take, call, put } from 'redux-saga/effects'
-import { WEBSOCKET_CONNECTED, WEBSOCKET_UNAUTHORIZED, WEBSOCKET_ERROR, WEBSOCKET_MESSAGE } from '../constants'
+import { WEBSOCKET_CONNECTED, WEBSOCKET_UNAUTHORIZED, WEBSOCKET_ERROR, WEBSOCKET_MESSAGE } from '../common/constants'
 import socketIO from 'socket.io-client'
 
 let socket

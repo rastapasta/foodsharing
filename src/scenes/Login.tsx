@@ -3,7 +3,7 @@ import { SafeAreaView, KeyboardAvoidingView, StatusBar, StyleSheet, Dimensions, 
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as reduxActions from '../actions'
+import * as reduxActions from '../common/actions'
 
 import { Form } from 'react-redux-form/native'
 
@@ -13,9 +13,9 @@ import LoginTextInput from '../components/LoginTextInput'
 import LoginForgotPassword from '../components/LoginForgotPassword'
 import Version from '../components/Version'
 
-import colors from '../utils/colors'
-import { translate } from '../utils/translation'
-import { login } from '../utils/api'
+import colors from '../common/colors'
+import { translate } from '../common/translation'
+import { login } from '../common/api'
 
 const {width} = Dimensions.get('window')
     , registerURL = 'https://foodsharing.de/?page=content&sub=joininfo'
