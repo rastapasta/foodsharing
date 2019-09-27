@@ -1,6 +1,10 @@
 import React, { PureComponent } from 'react'
 import { SafeAreaView, StyleSheet, FlatList, StatusBar } from 'react-native'
 
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import * as reduxActions from '../actions'
+
 import colors from '../utils/colors'
 import { ConversationListEntry as ListEntry, getConversations } from '../utils/api'
 
@@ -21,12 +25,14 @@ const styles = StyleSheet.create({
 
 type Props = {}
 
-export default class Conversations extends PureComponent<Props> {
+class Conversations extends PureComponent<Props> {
   state = {
     conversations: [] as ListEntry[]
   }
 
   async componentDidMount() {
+    const { actions } = this.props as any
+    actions.fetchConversations()
     const conversations = await getConversations()
     this.setState({conversations})
   }
@@ -52,3 +58,14 @@ export default class Conversations extends PureComponent<Props> {
     )
   }
 }
+
+const mapStateToProps = state => ({})
+
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(reduxActions, dispatch)
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Conversations)
