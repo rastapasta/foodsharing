@@ -1,6 +1,6 @@
 import { eventChannel } from 'redux-saga'
 import { take, call, put } from 'redux-saga/effects'
-import { WEBSOCKET_CONNECTED, WEBSOCKET_UNAUTHORIZED, WEBSOCKET_ERROR, MESSAGE_RECEIVED } from '../constants'
+import { WEBSOCKET_CONNECTED, WEBSOCKET_UNAUTHORIZED, WEBSOCKET_ERROR, WEBSOCKET_MESSAGE } from '../constants'
 import socketIO from 'socket.io-client'
 
 let socket
@@ -17,7 +17,7 @@ const initWebsocket = session =>
       },
       path: '/chat/socket.io/',
       reconnectionDelay: 5000,
-      reconnection: false,
+      reconnection: true,
       reconnectionAttempts: Infinity,
       jsonp: false
     })
@@ -27,15 +27,17 @@ const initWebsocket = session =>
       return emitter({type: WEBSOCKET_CONNECTED})
     })
 
-    socket.on('error', (reason) =>
-      emitter({type: reason.match(/not authorized/) ? WEBSOCKET_UNAUTHORIZED : WEBSOCKET_ERROR})
+    socket.on('error', error =>
+      emitter({type: error.match(/not authorized/) ? WEBSOCKET_UNAUTHORIZED : WEBSOCKET_ERROR, error})
     )
 
-    socket.on('connect_error', (reason) => console.error('connection_error: ' + reason))
+    socket.on('connect_error', error =>
+      emitter({type: WEBSOCKET_ERROR, error})
+    )
 
     socket.on('conv', ({m, o}: {m: string, o: string}) => {
       if (m === 'push')
-        return emitter({type: MESSAGE_RECEIVED, payload: JSON.parse(o)})
+        return emitter({type: WEBSOCKET_MESSAGE, payload: JSON.parse(o)})
     })
 
     return () => {

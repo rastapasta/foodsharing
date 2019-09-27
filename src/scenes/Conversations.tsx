@@ -25,22 +25,34 @@ const styles = StyleSheet.create({
 })
 
 type Props = {
-  conversations: ListEntry[]
+  conversations: ListEntry[],
+  actions?: any
 }
 
 class Conversations extends PureComponent<Props> {
+  state = {
+    refreshing: false
+  }
   async componentDidMount() {
-    const { actions } = this.props as any
+    const { actions } = this.props
     actions.fetchConversations()
   }
 
   render() {
-    const { conversations } = this.props
+    const { conversations, actions } = this.props
+        , { refreshing } = this.state
     return (
       <SafeAreaView style={styles.container}>
         <StatusBar backgroundColor={colors.background} barStyle="light-content" />
 
         <FlatList
+          onRefresh={() => {
+            actions.fetchConversations()
+
+            // TODO: hook this into redux
+            setTimeout(() => this.setState({refreshing: false}), 1000)
+          }}
+          refreshing={refreshing}
           style={styles.list}
           data={conversations}
           renderItem={({item, index}) =>

@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react'
-import { SafeAreaView, KeyboardAvoidingView, StatusBar, StyleSheet, Dimensions, View, TouchableOpacity, Text, Linking, TextInput, Keyboard } from 'react-native'
+import { SafeAreaView, KeyboardAvoidingView, StatusBar, StyleSheet, Dimensions, View, TouchableOpacity, Text, Linking, Keyboard } from 'react-native'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -103,7 +103,7 @@ class Login extends PureComponent<Props> {
             </Text>
           </View>
 
-          <Form model="login" onSubmit={(data) => alert(JSON.stringify(data))}>
+          <Form model="login">
             <LoginTextInput
               icon="account"
               placeholder={translate('login.email')}
@@ -147,7 +147,7 @@ class Login extends PureComponent<Props> {
   }
 }
 
-const mapStateToProps = state => ({})
+const mapStateToProps = () => ({})
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(reduxActions, dispatch)

@@ -102,6 +102,7 @@ export default class ConversationsItem extends PureComponent<Props> {
         <View style={{flex: 1, padding: 10}}>
           <View style={styles.header}>
             <Text style={[conversation.unread !== "0" && {color: colors.messageUnread}]}>
+              {/* TODO: handle too long strings */}
               {name ? name :
                 isSelfMessage ? translate('conversations.note_to_self') :
                 party.map(person => person.name).join('|')
