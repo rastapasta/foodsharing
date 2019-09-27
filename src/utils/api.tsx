@@ -1,7 +1,7 @@
 import setCookie from 'set-cookie-parser'
 
-import * as reduxActions from './actions'
-import { store } from './store'
+import * as reduxActions from '../actions'
+import { store } from '../store'
 
 const host = 'https://beta.foodsharing.de'
     , endpoints = {

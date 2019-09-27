@@ -7,9 +7,9 @@ import LoginTextInput from '../components/LoginTextInput'
 import LoginForgotPassword from '../components/LoginForgotPassword'
 import Version from '../components/Version'
 
-import colors from '../colors'
-import { translate } from '../translation'
-import { login } from '../api'
+import colors from '../utils/colors'
+import { translate } from '../utils/translation'
+import { login } from '../utils/api'
 
 const {width} = Dimensions.get('window')
     , registerURL = 'https://foodsharing.de/?page=content&sub=joininfo'

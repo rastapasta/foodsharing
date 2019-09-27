@@ -7,7 +7,7 @@ import moment from 'moment'
 import 'moment/min/moment-with-locales'
 
 const translationGetters = {
-  en: () => require("../assets/translations/en.json"),
+  en: () => require("../../assets/translations/en.json"),
 }
 
 export const translate = memoize(

@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet } from 'react-native'
 import { Scene, Router, Stack, Tabs } from 'react-native-router-flux'
-import colors from '../colors'
+import colors from '../utils/colors'
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 

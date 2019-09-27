@@ -5,8 +5,8 @@ import { AllHtmlEntities } from 'html-entities'
 
 import MessageForm from '../components/MessageForm'
 
-import colors from '../colors'
-import { ConversationListEntry, getConversation, ConversationDetail, sendMessage } from '../api'
+import colors from '../utils/colors'
+import { ConversationListEntry, getConversation, ConversationDetail, sendMessage } from '../utils/api'
 
 const entities = new AllHtmlEntities()
 

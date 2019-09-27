@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react'
 import { SafeAreaView, StyleSheet, FlatList, StatusBar } from 'react-native'
 
-import colors from '../colors'
-import { ConversationListEntry as ListEntry, login, getConversations, getProfile } from '../api'
+import colors from '../utils/colors'
+import { ConversationListEntry as ListEntry, login, getConversations, getProfile } from '../utils/api'
 
 import ConversationListEntry from '../components/ConversationListEntry'
 

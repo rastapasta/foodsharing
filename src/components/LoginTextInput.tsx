@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react'
 import {View, StyleSheet, TextInput, Dimensions} from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
-import colors from '../colors'
+import colors from '../utils/colors'
 
 const { width } = Dimensions.get('window')
     , height = 40

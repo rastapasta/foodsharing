@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import { SafeAreaView, StyleSheet } from 'react-native'
-import colors from '../colors'
+import colors from '../utils/colors'
 
 const styles = StyleSheet.create({
   container: {
