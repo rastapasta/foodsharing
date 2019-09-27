@@ -1,17 +1,21 @@
-export const INIT = 'INIT'
-export const COOKIE = 'COOKIE'
+export const INIT = '🎉 INIT'
+export const COOKIE = '🍪 COOKIE'
 
-export const FETCH_CONVERSATIONS = 'FETCH_CONVERSATIONS'
-export const GOT_CONVERSATIONS = 'GOT_CONVERSATIONS'
+export const FETCH_CONVERSATIONS = '📡 FETCH_CONVERSATIONS'
+export const GOT_CONVERSATIONS = '✅ GOT_CONVERSATIONS'
 
-export const LOGIN_ACTION = 'LOGIN_ACTION'
-export const LOGIN_REQUESTING = 'LOGIN_REQUESTING'
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
+export const LOGIN_ACTION = '📡 LOGIN_ACTION'
+export const LOGIN_REQUESTING = '📡 LOGIN_REQUESTING'
+export const LOGIN_SUCCESS = '✅ LOGIN_SUCCESS'
 export const LOGIN_ERROR = '❌ LOGIN_ERROR'
 
-export const LOGOUT = 'LOGOUT'
+export const APPSTATE = '📱 APPSTATE'
+
+export const LOGOUT = '👋 LOGOUT'
 
 export const KEYCHAIN = '🔑 KEYCHAIN'
+
+export const MESSAGE_RECEIVED = '✉️ MESSAGE_RECEIVED'
 
 export const WEBSOCKET_CONNECTED = '📡 WEBSOCKET_CONNECTED'
 export const WEBSOCKET_UNAUTHORIZED = '⛔️ WEBSOCKET_UNAUTHORIZED'

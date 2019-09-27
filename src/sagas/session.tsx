@@ -23,7 +23,7 @@ function* loginFlow(email, password) {
 
     // inform Redux to set our client user, this is non blocking so...
     // yield put(setClient(user))
-    yield put({ type: LOGIN_SUCCESS })
+    yield put({type: LOGIN_SUCCESS})
 
     Keychain.setGenericPassword(email, password).then(() => true)
 

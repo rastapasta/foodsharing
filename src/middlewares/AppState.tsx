@@ -1,8 +1,9 @@
 import { createAction } from 'redux-actions'
 import createOneShotMiddleware from 'redux-middleware-oneshot'
 import { AppState } from 'react-native'
+import { APPSTATE } from '../constants'
 
-export const TYPE = 'APPSTATE'
+export const TYPE = APPSTATE
 export const action = createAction(TYPE)
 
 export const middleware = createOneShotMiddleware((dispatch) => {

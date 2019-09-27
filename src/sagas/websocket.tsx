@@ -1,5 +1,6 @@
 import { eventChannel } from 'redux-saga'
 import { take, call, put } from 'redux-saga/effects'
+import { WEBSOCKET_CONNECTED, WEBSOCKET_UNAUTHORIZED, WEBSOCKET_ERROR, MESSAGE_RECEIVED } from '../constants'
 import socketIO from 'socket.io-client'
 
 let socket
@@ -23,18 +24,18 @@ const initWebsocket = session =>
 
     socket.on('connect', () => {
       socket.emit('register')
-      return emitter({type: '📡 WEBSOCKET_CONNECTED'})
+      return emitter({type: WEBSOCKET_CONNECTED})
     })
 
     socket.on('error', (reason) =>
-      emitter({type: reason.match(/not authorized/) ? '⛔️ WEBSOCKET_UNAUTHORIZED' : '❌ WEBSOCKET_ERROR'})
+      emitter({type: reason.match(/not authorized/) ? WEBSOCKET_UNAUTHORIZED : WEBSOCKET_ERROR})
     )
 
     socket.on('connect_error', (reason) => console.error('connection_error: ' + reason))
 
     socket.on('conv', ({m, o}: {m: string, o: string}) => {
       if (m === 'push')
-        return emitter({type: 'MESSAGE_RECEIVED', payload: JSON.parse(o)})
+        return emitter({type: MESSAGE_RECEIVED, payload: JSON.parse(o)})
     })
 
     return () => {
