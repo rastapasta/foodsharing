@@ -193,6 +193,8 @@ PODS:
   - React-jsinspector (0.61.0-rc.3)
   - react-native-maps (0.25.0):
     - React
+  - react-native-notifications (2.1.3):
+    - React
   - React-RCTActionSheet (0.61.0-rc.3):
     - React-Core/RCTActionSheetHeaders (= 0.61.0-rc.3)
   - React-RCTAnimation (0.61.0-rc.3):
@@ -268,6 +270,7 @@ DEPENDENCIES:
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - react-native-maps (from `../node_modules/react-native-maps`)
+  - react-native-notifications (from `../node_modules/react-native-notifications`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
   - React-RCTBlob (from `../node_modules/react-native/Libraries/Blob`)
@@ -325,6 +328,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   react-native-maps:
     :path: "../node_modules/react-native-maps"
+  react-native-notifications:
+    :path: "../node_modules/react-native-notifications"
   React-RCTActionSheet:
     :path: "../node_modules/react-native/Libraries/ActionSheetIOS"
   React-RCTAnimation:
@@ -378,6 +383,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 4dc9a4e01e41475443d7d4a485012adb5d98feb9
   React-jsinspector: 692c0b768cd50a0a43b427730ff01501379fd856
   react-native-maps: 190c02ca533fddac5bb49cf17bdece3644612107
+  react-native-notifications: 30b0e93f0a48cc5057440fe1920745830a7f24ef
   React-RCTActionSheet: 3b94ec0c925fe690133c45f81398a01db093c4f5
   React-RCTAnimation: bda4ff18243cd62f4eee76631becb6cb78cb70fe
   React-RCTBlob: 6bd95c982091c5dc7a69332781e34ca014ec2b27
