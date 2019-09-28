@@ -1,9 +1,13 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent, Profiler } from 'react'
 import { View, StyleSheet, Text } from 'react-native'
 import colors from '../common/colors'
 
 import Version from './Version'
 import Logo from './Logo'
+
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import * as reduxActions from '../common/actions'
 
 const styles = StyleSheet.create({
   container: {
@@ -32,16 +36,20 @@ const styles = StyleSheet.create({
   }
 })
 
-type Props = {}
+type Props = {
+  profile: any
+}
 
-export default class Drawer extends PureComponent<Props> {
+class Drawer extends PureComponent<Props> {
   render() {
+    const {profile: {name}} = this.props
+
     return (
       <View style={styles.container}>
         <View style={styles.header}>
           <Logo size={28} />
           <Text style={styles.username}>
-            Username
+            {name}
           </Text>
         </View>
         <View style={styles.content} />
@@ -52,3 +60,16 @@ export default class Drawer extends PureComponent<Props> {
     )
   }
 }
+
+const mapStateToProps = state => ({
+  profile: state.profile
+})
+
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(reduxActions, dispatch)
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Drawer)
