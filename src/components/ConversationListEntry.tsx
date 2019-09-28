@@ -9,7 +9,7 @@ import { connect } from 'react-redux'
 import * as reduxActions from '../common/actions'
 
 import colors from '../common/colors'
-import { ConversationListEntry, User } from '../common/api'
+import { ConversationListEntry, User, Profile } from '../common/api'
 import { translate } from '../common/translation'
 
 const { width } = Dimensions.get('window')
@@ -23,15 +23,16 @@ const styles = StyleSheet.create({
   images: {
     width: 70,
     flexWrap: 'wrap',
-    padding: 5,
+    padding: 10,
     flexDirection: 'row',
     alignItems: 'flex-start',
     justifyContent: 'flex-start'
   },
   image: {
     flex: 1,
-    borderRadius: 35,
-    overflow: 'hidden'
+    borderRadius: 30,
+    overflow: 'hidden',
+    aspectRatio: 1
   },
   header: {
     flex: 1,
@@ -66,20 +67,20 @@ const styles = StyleSheet.create({
 type Props = {
   conversation: {member: string[]} & ConversationListEntry,
   isLast: boolean,
-  foodsharers: {string: User}
+  foodsharers: {string: User},
+  profile: Profile
 }
 
-const ownUserId = "338605"
-    , url = 'https://foodsharing.de/images/'
+const url = 'https://foodsharing.de/images/'
     , avatar = 'https://foodsharing.de/img/130_q_avatar.png'
 
 class ConversationsItem extends PureComponent<Props> {
   render() {
-    const { conversation, isLast, foodsharers } = this.props
+    const { conversation, isLast, foodsharers, profile } = this.props
         , { id, member, name, last_ts, last_message, last_foodsaver_id } = conversation
 
         , isSelfMessage = member.length === 1
-        , party = member.length === 1 ? member : member.filter(member => member !== ownUserId)
+        , party = member.length === 1 ? member : member.filter(member => member !== profile.id.toString())
         , date = moment(parseInt(last_ts) * 1000)
         , isToday = date.isSame(new Date(), 'day')
         , isYesterday = date.isSame(new Date(Date.now() - 24*60*60*1000), 'day')
@@ -137,7 +138,8 @@ class ConversationsItem extends PureComponent<Props> {
 }
 
 const mapStateToProps = state => ({
-  foodsharers: state.foodsharers
+  foodsharers: state.foodsharers,
+  profile: state.profile
 })
 
 const mapDispatchToProps = dispatch => ({

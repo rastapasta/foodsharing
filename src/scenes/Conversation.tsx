@@ -11,7 +11,7 @@ import MessageForm from '../components/MessageForm'
 import MessageBubble from '../components/MessageBubble'
 
 import colors from '../common/colors'
-import { ConversationListEntry, ConversationDetail, Message } from '../common/api'
+import { ConversationListEntry, ConversationDetail, Message, Profile } from '../common/api'
 import { translate } from '../common/translation'
 
 const styles = StyleSheet.create({
@@ -43,6 +43,12 @@ type Props = {
   profile: any
 }
 
+interface Item {
+  type: 'seperator' | 'received' | 'sent'
+  label?: string
+  message: Message
+}
+
 class Conversation extends PureComponent<Props> {
   state = {
     data: {} as ConversationDetail,
@@ -59,16 +65,12 @@ class Conversation extends PureComponent<Props> {
   //   return true
   // }
 
-  render() {
-    const { conversation, messages, actions, drafts, profile } = this.props
-        , { refreshing } = this.state
-        , data = (messages[conversation.id] || []) as Message[]
-
-        , items = []
-
+  prepareItems(messages: Message[], profile: Profile): Item[] {
+    const data = []
     let lastLabel = null
-    data.forEach(item => {
-      const { time } = item
+
+    messages.forEach(message => {
+      const { time } = message
         , date = moment(time)
         , isToday = date.isSame(new Date(), 'day')
         , isYesterday = date.isSame(new Date(Date.now() - 24*60*60*1000), 'day')
@@ -76,16 +78,27 @@ class Conversation extends PureComponent<Props> {
                   isYesterday ? translate('conversations.yesterday') :
                   date.format('MMMM Do')
 
-      if (!lastLabel || lastLabel !== label) {
-        if (lastLabel)
-          items.push({type: 'seperator', label: lastLabel})
-        lastLabel = label
-      }
+      if (lastLabel !== label && lastLabel)
+        data.push({type: 'seperator', label: lastLabel})
+      lastLabel = label
 
-      items.push({type: `${item.fs_id}` === `${profile.id}` ? 'sent' : 'received', message: item})
+      data.push({
+        type: `${message.fs_id}` === `${profile.id}` ? 'sent' : 'received',
+        message
+      })
     })
+
     if (lastLabel)
-      items.push({type: 'seperator', label: lastLabel})
+      data.push({type: 'seperator', label: lastLabel})
+
+    return data
+  }
+
+  render() {
+    const { conversation, messages, actions, drafts, profile } = this.props
+        , { refreshing } = this.state
+        , data = (messages[conversation.id] || []) as Message[]
+        , items = this.prepareItems(data, profile)
 
     return (
       <KeyboardAvoidingView
