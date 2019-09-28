@@ -55,8 +55,8 @@ export default function* loginWatcher() {
     const { email, password } = yield select(state => state.login)
 
     yield fork(loginFlow, email, password)
-    yield take([LOGOUT, LOGIN_ERROR])
 
+    yield take([LOGOUT, LOGIN_ERROR])
     yield call(logout)
   }
 }
