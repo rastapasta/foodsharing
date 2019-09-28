@@ -10,6 +10,8 @@ export const LOGOUT = '👋 LOGOUT'
 export const KEYCHAIN = '🔑 KEYCHAIN'
 export const APPSTATE = '📱 APPSTATE'
 
+export const PROFILE = '👤 PROFILE'
+
 export const CONVERSATION_REQUEST = '📡 CONVERSATION_REQUEST'
 export const CONVERSATION_SUCCESS = '✅ CONVERSATION_SUCCESS'
 export const CONVERSATIONS_REQUEST = '📡 CONVERSATIONS_REQUEST'

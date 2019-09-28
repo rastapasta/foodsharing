@@ -2,9 +2,9 @@ import { take, fork, call, put, select } from 'redux-saga/effects'
 import { Actions } from 'react-native-router-flux'
 import * as Keychain from 'react-native-keychain'
 
-import { LOGOUT, LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR, KEYCHAIN } from '../common/constants'
+import { LOGOUT, LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR, KEYCHAIN, PROFILE } from '../common/constants'
 
-import { login, getSession } from '../common/api'
+import { login, getSession, getProfile } from '../common/api'
 
 function* logout() {
   // Throw the user back to the login screen
@@ -27,6 +27,8 @@ function* loginFlow(email: string, password: string) {
     // All good, let's proceed to main
     Actions.reset('drawer')
 
+    // Request and broadcast the profile information of our fresh user
+    yield put({type: PROFILE, payload: yield call(getProfile)})
   } catch (error) {
     // Signal that something went wrong..
     yield put({ type: LOGIN_ERROR, error })

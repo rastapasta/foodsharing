@@ -16,7 +16,7 @@ declare var window: { __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: any }
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['conversations', 'messages', 'drafts', 'foodsharers']
+  whitelist: ['conversations', 'messages', 'drafts', 'foodsharers', 'profile']
 }
 
 const persistedReducer = persistReducer(persistConfig, reducers)
