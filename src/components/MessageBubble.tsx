@@ -4,6 +4,8 @@ import { AllHtmlEntities } from 'html-entities'
 
 import Image from 'react-native-fast-image'
 
+import Linkify from './Linkify'
+
 import colors from '../common/colors'
 import { Message } from '../common/api'
 
@@ -15,6 +17,10 @@ const { width } = Dimensions.get('window')
     , bubbleRadius = 12
 
 const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    alignItems: 'flex-end'
+  },
   bubble: {
     maxWidth: width * 0.7,
     borderTopLeftRadius: bubbleRadius,
@@ -65,22 +71,25 @@ const avatar = 'https://foodsharing.de/img/130_q_avatar.png'
     , url = 'https://foodsharing.de/images/'
 
 export default ({type, message}: Props) =>
-  <View style={{justifyContent: type === 'sent' ? 'flex-end' : 'flex-start', flexDirection: 'row', alignItems: 'flex-end'}}>
+  <View style={[styles.container, {justifyContent: type === 'sent' ? 'flex-end' : 'flex-start'}]}>
     {type === 'received' &&
       <Image
-        source={{uri: message.fs_photo ? url + message.fs_photo : avatar}}
+        source={{uri: message.fs_photo ? url + '130_q_' + message.fs_photo : avatar}}
         style={{
           width: 40,
           height: 40,
-          margin: 6
+          marginLeft: 6,
+          marginRight: 6,
+          marginBottom: 10
         }}
         resizeMode="contain"
       />
     }
     <View style={[styles.bubble, styles[type+'Bubble']]}>
-      <Text style={[styles.message, styles[type+'Message']]}>
-        {entities.decode(message.body)}
-      </Text>
+      <Linkify
+        style={[styles.message, styles[type+'Message']]}
+        text={entities.decode(message.body)}
+      />
       <Text style={[styles.time, styles[type+'Time']]}>
         {moment(message.time).format('HH:mm')}
       </Text>

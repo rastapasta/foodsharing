@@ -96,7 +96,7 @@ class ConversationsItem extends PureComponent<Props> {
               <Image
                 style={{flex: 1}}
                 resizeMode="contain"
-                source={{uri: foodsharers[person].photo ? url + foodsharers[person].photo : avatar}}
+                source={{uri: foodsharers[person].photo ? url + '130_q_' + foodsharers[person].photo : avatar}}
               />
             </View>
           )}
@@ -122,7 +122,7 @@ class ConversationsItem extends PureComponent<Props> {
                 <Image
                   style={{flex: 1}}
                   resizeMode="contain"
-                  source={{uri: url + foodsharers[lastMessenger].photo}}
+                  source={{uri: url + '130_q_' + foodsharers[lastMessenger].photo}}
                 />
               </View>
             }

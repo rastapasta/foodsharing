@@ -34,8 +34,9 @@ This thingy runs on iOS and Android - one code, one love!
   * Tracking/centering of the user's current location on demand
   * Prompt for location permission on demand
 
-* Central redux data store
+* Central redux/data store
   * Persistence of conversations, messages and user data
+  * Caching of downloaded images
   * Full reset on logout
   * Full offline read-only capability
 
@@ -57,3 +58,4 @@ This thingy runs on iOS and Android - one code, one love!
 * Settings screen to setup background pull / notifications?
 * Background pull as Push Notification replacement
 * Notifications after background pull
+* Hanlde websocket disconnect and reconnect after logout / login
