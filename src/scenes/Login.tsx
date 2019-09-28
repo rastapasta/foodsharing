@@ -16,7 +16,6 @@ import Version from '../components/Version'
 
 import colors from '../common/colors'
 import { translate } from '../common/translation'
-import { login } from '../common/api'
 
 const {width} = Dimensions.get('window')
     , registerURL = 'https://foodsharing.de/?page=content&sub=joininfo'
@@ -71,18 +70,18 @@ class Login extends PureComponent<Props> {
     password: null
   }
 
-  doLogin = async () => {
-    const {email, password} = this.state
+  // doLogin = async () => {
+  //   const {email, password} = this.state
 
-    Keyboard.dismiss()
+  //   Keyboard.dismiss()
 
-    try {
-      const { name } = await login(email, password)
-      this.refs.toast.show(`Welcome, ${name}!`, 3000)
-    } catch(e) {
-      this.refs.toast.show(translate('login.failed'), 1000)
-    }
-  }
+  //   try {
+  //     const { name } = await login(email, password)
+  //     this.refs.toast.show(`Welcome, ${name}!`, 3000)
+  //   } catch(e) {
+  //     this.refs.toast.show(translate('login.failed'), 1000)
+  //   }
+  // }
 
   render() {
     const { actions } = this.props as any
@@ -122,7 +121,10 @@ class Login extends PureComponent<Props> {
               </TouchableOpacity>
               <TouchableOpacity
                 style={[styles.button, styles.login]}
-                onPress={() => actions.login()}
+                onPress={() => {
+                  Keyboard.dismiss()
+                  actions.login()
+                }}
               >
                 <Text style={[styles.text, styles.loginText]}>
                   {translate('login.login')}
