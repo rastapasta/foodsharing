@@ -1,6 +1,6 @@
 # 🍴foodsharing app
 
-This is a Proof of Concept to show how [React Native](https://github.com/facebook/react-native) could rock the [foodsharing](https://foodsharing.de) world :smile:
+This is a Proof of Concept to show how [React Native](https://github.com/facebook/react-native) could rock the [foodsharing](https://foodsharing.network) world :smile:
 
 This thingy runs on iOS and Android - one code, one love!
 
@@ -20,7 +20,7 @@ This thingy runs on iOS and Android - one code, one love!
 * Conversations
   * Send and receive messages
   * WebSocket for direct push
-  * Push Notifications while app runs in the background
+  * Push Notifications while app runs in the background (on iOS only for now)
   * Persiting message drafts per conversation
   * Group chats (incl. multiple avatars displayed)
   * Named chats
