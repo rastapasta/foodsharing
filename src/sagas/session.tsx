@@ -4,7 +4,7 @@ import * as Keychain from 'react-native-keychain'
 
 import { LOGOUT, LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR, KEYCHAIN } from '../common/constants'
 
-import { login } from '../common/api'
+import { login, getSession } from '../common/api'
 
 function* logout() {
   // dispatches the CLIENT_UNSET action
@@ -23,8 +23,7 @@ function* loginFlow(email, password) {
 
     // inform Redux to set our client user, this is non blocking so...
     // yield put(setClient(user))
-    yield put({type: LOGIN_SUCCESS})
-
+    yield put({type: LOGIN_SUCCESS, payload: getSession()})
     Keychain.setGenericPassword(email, password).then(() => true)
 
     Actions.replace('main')
@@ -48,7 +47,7 @@ function* loadCredentials() {
   }
 }
 
-function* loginWatcher() {
+export default function* loginWatcher() {
   yield call(loadCredentials)
   while (true) {
     yield take(LOGIN_REQUEST)
@@ -61,5 +60,3 @@ function* loginWatcher() {
     yield call(logout)
   }
 }
-
-export default loginWatcher

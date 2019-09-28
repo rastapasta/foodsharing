@@ -11,7 +11,7 @@ import * as reduxActions from '../common/actions'
 import MessageForm from '../components/MessageForm'
 
 import colors from '../common/colors'
-import { ConversationListEntry, ConversationDetail, sendMessage, Message } from '../common/api'
+import { ConversationListEntry, ConversationDetail, Message } from '../common/api'
 
 const entities = new AllHtmlEntities()
 
@@ -67,19 +67,13 @@ class Conversation extends PureComponent<Props> {
     actions.fetchConversation(conversation.id)
   }
 
-  sendMessage = async (text: string): Promise<boolean> => {
-    const { conversation } = this.props
-
-    // TODO: implement message sent failed handler
-    try {
-      return (await sendMessage(parseInt(conversation.id), text)).status === 1
-    } catch(e) {
-      return false
-    }
-  }
+  // TODO: make sure to only rerender if conversation is affected @redux state
+  // shouldComponentUpdate() {
+  //   return true
+  // }
 
   render() {
-    const { conversation, messages } = this.props
+    const { conversation, messages, actions } = this.props
         , data = (messages[conversation.id] || []) as Message[]
 
     return (
@@ -105,7 +99,10 @@ class Conversation extends PureComponent<Props> {
             }
           />
 
-          <MessageForm onSend={this.sendMessage} model={`drafts.${conversation.id}`} />
+          <MessageForm
+            onSend={() => actions.sendMessage(conversation.id)}
+            model={`drafts.${conversation.id}`}
+          />
         </SafeAreaView>
       </KeyboardAvoidingView>
     )
@@ -113,7 +110,8 @@ class Conversation extends PureComponent<Props> {
 }
 
 const mapStateToProps = state => ({
-  messages: state.messages
+  messages: state.messages,
+  drafts: state.drafts
 })
 
 const mapDispatchToProps = dispatch => ({

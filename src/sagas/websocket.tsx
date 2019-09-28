@@ -1,11 +1,11 @@
 import { eventChannel } from 'redux-saga'
 import { take, call, put } from 'redux-saga/effects'
-import { WEBSOCKET_CONNECTED, WEBSOCKET_UNAUTHORIZED, WEBSOCKET_ERROR, WEBSOCKET_MESSAGE } from '../common/constants'
+import { WEBSOCKET_CONNECTED, WEBSOCKET_UNAUTHORIZED, WEBSOCKET_ERROR, WEBSOCKET_MESSAGE, LOGIN_SUCCESS } from '../common/constants'
 import socketIO from 'socket.io-client'
 
 let socket
 
-const initWebsocket = session =>
+const initWebsocket = (session: string) =>
   eventChannel(emitter => {
     socket = socketIO('https://beta.foodsharing.de', {
       transportOptions: {
@@ -46,7 +46,9 @@ const initWebsocket = session =>
   })
 
 export default function* websocketSagas() {
-  const channel = yield call(initWebsocket, '6hvsvhcjqgckradegtq4p26ojt')
+  const { payload: { session } } = yield take(LOGIN_SUCCESS)
+  console.log('-----', session)
+  const channel = yield call(initWebsocket, session)
   while (true) {
     const action = yield take(channel)
     yield put(action)

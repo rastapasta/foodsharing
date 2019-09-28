@@ -94,15 +94,12 @@ function request(
   data?: any,
   options?: any
 ): Promise<any> {
-  console.log('cookies', cookies)
-
   const { method, uri } = endpoints[endpoint]
       , opts = options || {}
       , url = host + Object.keys(opts)
                       .reduce((u, key) => u.replace('{' + key +'}', opts[key]), uri)
       , sendAsJSON = !url.match(/xhrapp/)
 
-  console.log(url, data, opts)
   return fetch(url, {
     headers: {
       Accept: 'application/json',
@@ -120,10 +117,11 @@ function request(
     if (response.headers.has('set-cookie'))
       handleCookies(response.headers.get('set-cookie'))
 
-    console.log(response)
-    switch (response.status) {
-      case 200: return response.json()
+    if (response.status === 200)
+      return response.json()
 
+    console.warn('request error', endpoint, data, options, response)
+    switch (response.status) {
       case 401: throw results.FORBIDDEN
       case 403: throw results.UNAUTHORIZED
       case 404: throw results.NOT_FOUND
@@ -152,14 +150,19 @@ export const getConversation = (conversationId: number): Promise<ConversationDet
 export const getWall = (target: 'foodsaver', targetId: number): Promise<any> =>
   request('wall', null, {target, targetId})
 
-export const sendMessage = (conversationId: number, text: string): Promise<any> =>
-  request('message', {c: conversationId, b: text})
+export const sendMessage = async (conversationId: number, text: string): Promise<Message> =>
+  (await request('message', {c: conversationId, b: text})).data.msg
 
 export const userToConversationId = async (userId: number): Promise<number> =>
   parseInt((await request('user2conv', null, {userId})).data.cid)
 
 export const getProfile = (): Promise<Profile> =>
   request('profile')
+
+export const getSession = (): {session: string, token: string} => ({
+  session: cookies['PHPSESSID'],
+  token: cookies['CSRF_TOKEN']
+})
 
 // TODO: backend returns 500
 // export const getStore = (storeId: number): Promise<any> =>
