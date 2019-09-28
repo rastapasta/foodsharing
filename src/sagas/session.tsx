@@ -44,13 +44,16 @@ function* loginFlow(email: string, password: string) {
 function* logoutFlow() {
   // Reset all forms
   yield put(formActions.reset('drafts'))
-  yield put(formActions.reset('login'))
-
-  // Log the user out from foodsharing.network
-  yield call(logout)
+  yield put(formActions.change('login.password', ''))
 
   // Throw the user back to the login screen
   Actions.reset('login')
+
+  // Delete the previously stored password from the secure location
+  Keychain.resetGenericPassword().then(() => true)
+
+  // Log the user out from foodsharing.network
+  yield call(logout)
 }
 
 function* loadCredentials() {
