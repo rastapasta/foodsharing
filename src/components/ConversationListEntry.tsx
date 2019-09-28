@@ -9,7 +9,7 @@ import { connect } from 'react-redux'
 import * as reduxActions from '../common/actions'
 
 import colors from '../common/colors'
-import { ConversationListEntry, ConversationMember, User } from '../common/api'
+import { ConversationListEntry, User } from '../common/api'
 import { translate } from '../common/translation'
 
 const { width } = Dimensions.get('window')

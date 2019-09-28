@@ -1,6 +1,8 @@
-import React, { PureComponent, Profiler } from 'react'
+import React, { PureComponent } from 'react'
 import { View, StyleSheet, Text } from 'react-native'
 import colors from '../common/colors'
+
+import DrawerButton from './DrawerButton'
 
 import Version from './Version'
 import Logo from './Logo'
@@ -26,6 +28,7 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
+    paddingTop: 10,
     backgroundColor: colors.white
   },
   footer: {
@@ -52,7 +55,13 @@ class Drawer extends PureComponent<Props> {
             {name}
           </Text>
         </View>
-        <View style={styles.content} />
+        <View style={styles.content}>
+          <DrawerButton
+            onPress={() => true}
+            icon="exit-to-app"
+            label="Logout"
+          />
+        </View>
         <View style={styles.footer}>
           <Version />
         </View>
