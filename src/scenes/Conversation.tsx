@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { SafeAreaView, StyleSheet, Text, View, FlatList, Dimensions, KeyboardAvoidingView } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View, FlatList, Dimensions, KeyboardAvoidingView, Platform } from 'react-native'
 import { AllHtmlEntities } from 'html-entities'
 
 import moment from 'moment'
@@ -78,7 +78,11 @@ class Conversation extends PureComponent<Props> {
         , data = (messages[conversation.id] || []) as Message[]
 
     return (
-      <KeyboardAvoidingView behavior="padding" enabled style={styles.form}>
+      <KeyboardAvoidingView
+        {...(Platform.OS === 'ios' ? {behavior: 'padding'} : {})}
+        enabled
+        style={styles.form}
+      >
         <SafeAreaView style={styles.container}>
           <FlatList
             inverted

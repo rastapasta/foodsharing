@@ -7,7 +7,8 @@ import {
   Dimensions,
   View,
   Linking,
-  Keyboard
+  Keyboard,
+  Platform
 } from 'react-native'
 
 import { bindActionCreators } from 'redux'
@@ -76,9 +77,12 @@ class Login extends PureComponent<Props> {
     const { actions } = this.props as any
     return (
       <SafeAreaView style={styles.container}>
-        <KeyboardAvoidingView behavior="padding" enabled style={styles.form}>
-          <StatusBar backgroundColor={colors.background} barStyle="light-content" />
-
+        <StatusBar backgroundColor={colors.background} barStyle="light-content" />
+        <KeyboardAvoidingView
+          enabled
+          style={styles.form}
+          {...(Platform.OS === 'ios' ? {behavior: 'padding'} : {})}
+        >
           <Logo size={32} />
 
           <View style={{height: 50}} />
