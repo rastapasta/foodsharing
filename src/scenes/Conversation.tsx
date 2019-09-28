@@ -73,7 +73,8 @@ type Props = {
 
 class Conversation extends PureComponent<Props> {
   state = {
-    data: {} as ConversationDetail
+    data: {} as ConversationDetail,
+    refreshing: false
   }
 
   async componentDidMount() {
@@ -88,6 +89,7 @@ class Conversation extends PureComponent<Props> {
 
   render() {
     const { conversation, messages, actions, drafts, profile } = this.props
+        , { refreshing } = this.state
         , data = (messages[conversation.id] || []) as Message[]
 
         , items = []
@@ -121,6 +123,14 @@ class Conversation extends PureComponent<Props> {
       >
         <SafeAreaView style={styles.container}>
           <FlatList
+            onRefresh={() => {
+              actions.fetchConversation(conversation.id)
+
+              // TODO: hook this into redux
+              setTimeout(() => this.setState({refreshing: false}), 1000)
+            }}
+            refreshing={refreshing}
+
             inverted
             data={items}
             keyExtractor={item => item.label ? item.label : item.message.id.toString()}
