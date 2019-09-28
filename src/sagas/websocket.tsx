@@ -1,13 +1,20 @@
+import socketIO from 'socket.io-client'
 import { eventChannel } from 'redux-saga'
 import { take, call, put } from 'redux-saga/effects'
-import { WEBSOCKET_CONNECTED, WEBSOCKET_UNAUTHORIZED, WEBSOCKET_ERROR, WEBSOCKET_MESSAGE, LOGIN_SUCCESS } from '../common/constants'
-import socketIO from 'socket.io-client'
 
-let socket
+import {
+  WEBSOCKET_CONNECTED,
+  WEBSOCKET_DISCONNECT,
+  WEBSOCKET_UNAUTHORIZED,
+  WEBSOCKET_ERROR,
+  WEBSOCKET_MESSAGE,
+  LOGIN_SUCCESS,
+  LOGOUT
+} from '../common/constants'
 
-const initWebsocket = (session: string) =>
-  eventChannel(emitter => {
-    socket = socketIO('https://beta.foodsharing.de', {
+function initWebsocket(session: string) {
+  return eventChannel(emitter => {
+    const socket = socketIO('https://foodsharing.de', {
       transportOptions: {
         polling: {
           extraHeaders: {
@@ -24,7 +31,7 @@ const initWebsocket = (session: string) =>
 
     socket.on('connect', () => {
       socket.emit('register')
-      return emitter({type: WEBSOCKET_CONNECTED})
+      emitter({type: WEBSOCKET_CONNECTED, payload: socket})
     })
 
     socket.on('error', error =>
@@ -40,17 +47,28 @@ const initWebsocket = (session: string) =>
         return emitter({type: WEBSOCKET_MESSAGE, payload: JSON.parse(o)})
     })
 
-    return () => {
-      console.log('Socket off')
-    }
+    socket.on('disconnect', () =>
+      emitter({type: WEBSOCKET_DISCONNECT})
+    )
+
+    return () =>
+      socket.close()
+
   })
+}
 
 export default function* websocketSagas() {
   const { payload: { session } } = yield take(LOGIN_SUCCESS)
-  console.log('-----', session)
+
   const channel = yield call(initWebsocket, session)
   while (true) {
+    // TODO: implement take from channel OR LOGOUT
     const action = yield take(channel)
+        , { type } = action
+
+    if (type === LOGOUT)
+      channel.close()
+
     yield put(action)
   }
 }
