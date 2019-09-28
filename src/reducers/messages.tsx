@@ -1,6 +1,9 @@
-import { CONVERSATION_SUCCESS, WEBSOCKET_MESSAGE } from '../common/constants'
+import { CONVERSATION_SUCCESS, MESSAGE_SUCCESS, WEBSOCKET_MESSAGE } from '../common/constants'
 
 const initialState = {}
+
+const replaceOrUnshift = (arr: any[], message: any) =>
+  [message, ...(arr || []).filter(msg => msg.id !== message.id)]
 
 export default function reducer(state = initialState, action: any = {}) {
   const { type, payload } = action
@@ -13,23 +16,14 @@ export default function reducer(state = initialState, action: any = {}) {
       convState[`${id}`] = messages
       return convState
 
-    // TODO: Could either store message locally or wait for it via websocket - maybe both :)
-    // case MESSAGE_SUCCESS:
-    //   const msgState = {...state}
-    //       , { conversationId } = action
-
-    //   msgState[`${conversationId}`].unshift(payload)
-    //   return msgState
-
+    case MESSAGE_SUCCESS:
     case WEBSOCKET_MESSAGE:
-      const socketState = {...state}
-          , { cid } = payload
+      const msgState = {...state}
+          , conversationId = type === MESSAGE_SUCCESS ? action.conversationId : payload.cid
+          , idx = `${conversationId}`
 
-      if (!socketState[`${cid}`])
-        socketState[`${cid}`] = []
-
-      socketState[`${cid}`].unshift(payload)
-      return socketState
+      msgState[idx] = replaceOrUnshift(msgState[idx], payload)
+      return msgState
 
     default:
       return state
