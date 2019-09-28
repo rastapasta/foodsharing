@@ -58,17 +58,27 @@ function initWebsocket(session: string) {
 }
 
 export default function* websocketSagas() {
-  const { payload: { session } } = yield take(LOGIN_SUCCESS)
-
-  const channel = yield call(initWebsocket, session)
   while (true) {
-    // TODO: implement take from channel OR LOGOUT
-    const action = yield take(channel)
-        , { type } = action
+    // Wait until we got a successful login
+    const { payload: { session } } = yield take(LOGIN_SUCCESS)
 
-    if (type === LOGOUT)
-      channel.close()
+    // Start up the websocket event channel
+    const channel = yield call(initWebsocket, session)
 
-    yield put(action)
+    while (true) {
+      // Wait for an action emitted by the websocket channel
+      // TODO: implement take from channel OR LOGOUT
+      const action = yield take(channel)
+          , { type } = action
+
+      // Close the channel/socket in case the user logged out
+      if (type === LOGOUT) {
+        channel.close()
+        break
+      }
+
+      // Pass through the received actions
+      yield put(action)
+    }
   }
 }

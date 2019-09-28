@@ -48,15 +48,23 @@ function* loadCredentials() {
 }
 
 export default function* loginWatcher() {
+  // Water our store with previously stored credentials
   yield call(loadCredentials)
+
   while (true) {
+    // Wait until we get a login request
     yield take(LOGIN_REQUEST)
 
+    // Pull credentials from store
     const { email, password } = yield select(state => state.login)
 
+    // Start the login flow
     yield fork(loginFlow, email, password)
 
+    // Wait until we either logout or get logged out
     yield take([LOGOUT, LOGIN_ERROR])
+
+    // Start the logout flow
     yield call(logout)
   }
 }

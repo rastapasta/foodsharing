@@ -6,19 +6,25 @@ import { actions as formActions } from 'react-redux-form'
 
 export default function* conversationSaga() {
   while (true) {
+    // Wait until we get either a message or conversation request
     const { type, id, payload } = yield take([MESSAGE_REQUEST, CONVERSATION_REQUEST])
 
     switch (type) {
+      // Request the corresponding conversation from the backend
       case CONVERSATION_REQUEST:
         yield put({type: CONVERSATION_SUCCESS, id, payload: yield getConversation(id)})
         break
 
+      // Send out a message to a given conversation
       case MESSAGE_REQUEST:
         const { conversationId } = payload
             , body = yield select(state => state.drafts[conversationId])
             , message = yield call(sendMessage, conversationId, body)
 
+        // Reset the drafted message
         yield put(formActions.change(`drafts.${conversationId}`, ''))
+
+        // Notifiy about the successful send over the bus
         yield put({type: MESSAGE_SUCCESS, conversationId, payload: message})
         break
     }

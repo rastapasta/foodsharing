@@ -1,7 +1,6 @@
+import PushNotificationIOS from "@react-native-community/push-notification-ios"
+
 import { take } from 'redux-saga/effects'
-
-import PushNotificationIOS from "@react-native-community/push-notification-ios";
-
 import { APPSTATE, WEBSOCKET_MESSAGE } from '../common/constants'
 
 export default function* notificationWatcher() {
