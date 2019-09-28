@@ -5,12 +5,13 @@ import routes from './routes'
 import app from './app'
 import conversations from './conversations'
 import messages from './messages'
-
+import foodsharers from './foodsharers'
 
 export default combineReducers({
   routes,
   app,
   conversations,
+  foodsharers,
   messages,
 
   ...createForms({
