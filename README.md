@@ -14,13 +14,13 @@ This thingy runs on iOS and Android - one code, one love!
   * Display of current build version
 
 * Drawer
-  * Button for Logout
   * Display of logo and name of user
   * Display of current build version
 
 * Conversations
   * Send and receive messages
   * WebSocket for direct push
+  * Push Notifications while app runs in the background
   * Persiting message drafts per conversation
   * Group chats (incl. multiple avatars displayed)
   * Named chats
@@ -34,15 +34,13 @@ This thingy runs on iOS and Android - one code, one love!
 
 * Tech stack
   * React Native
-  * redux / redux-saga for js generator magic
+  * redux / redux-saga for js generator magic :heart:
   * see [package.json](https://github.com/rastapasta/foodsharing/blob/master/package.json) for complete package list
 
 ## ToDo
 
 * Today -> Yesterday -> $Date seperators in conversation
-* Login / Logout
-* Data store and persitence
+* Button for Logout
+* Logout logic, deleting data from store
 * Background pull as Push Notification replacement
 * Notifications after background pull
-* Storing session cookie
-* Today / Yesterday / Date seperators in conversations list
