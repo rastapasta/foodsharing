@@ -17,7 +17,10 @@ export default combineReducers({
   profile,
 
   ...createForms({
-    login: {},
+    login: {
+      email: 'm.strassburger@gmail.com',
+      password: 'testtest'
+    },
     drafts: {}
   })
 })

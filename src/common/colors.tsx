@@ -24,8 +24,12 @@ export default {
 
   messageSentBubble: '#795548',
   messageSentText: '#fff',
+  messageSentTime: '#CDBFBB',
+
   messageReceivedBubble: '#EFEFEF',
   messageReceivedText: '#000',
+  messageRecievedTime: '#8B8B8B',
+
 
   messageSendButton: '#E0E0E0',
   messageSendIcon: '#7F7F7F',

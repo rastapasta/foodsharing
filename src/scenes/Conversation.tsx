@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
-import { SafeAreaView, StyleSheet, Text, View, FlatList, Dimensions, KeyboardAvoidingView, Platform } from 'react-native'
-import { AllHtmlEntities } from 'html-entities'
+import { SafeAreaView, StyleSheet, Text, View, FlatList, KeyboardAvoidingView, Platform } from 'react-native'
 
 import moment from 'moment'
 
@@ -9,15 +8,11 @@ import { connect } from 'react-redux'
 import * as reduxActions from '../common/actions'
 
 import MessageForm from '../components/MessageForm'
+import MessageBubble from '../components/MessageBubble'
 
 import colors from '../common/colors'
 import { ConversationListEntry, ConversationDetail, Message } from '../common/api'
 import { translate } from '../common/translation'
-
-const entities = new AllHtmlEntities()
-
-const { width } = Dimensions.get('window')
-    , bubbleRadius = 12
 
 const styles = StyleSheet.create({
   container: {
@@ -26,29 +21,6 @@ const styles = StyleSheet.create({
   },
   form: {
     flex: 1
-  },
-  sentBubble: {
-    maxWidth: width * 0.7,
-    backgroundColor: colors.background,
-    borderTopLeftRadius: bubbleRadius,
-    borderBottomLeftRadius: bubbleRadius,
-    borderTopRightRadius: bubbleRadius,
-    paddingLeft: 12,
-    paddingRight: 12,
-    paddingTop: 10,
-    marginRight: 10,
-    marginBottom: 10
-  },
-  body: {
-    color: colors.white
-  },
-  time: {
-    textAlign: 'right',
-    right: 0,
-    fontSize: 11,
-    marginTop: 3,
-    marginBottom: 7,
-    color: colors.white
   },
 
   seperator: {
@@ -139,28 +111,17 @@ class Conversation extends PureComponent<Props> {
             renderItem={({item: {type, label, message}}) => {
               switch(type) {
                 case 'sent':
-                case 'recieved':
-                  return (
-                    <View style={{alignItems: 'flex-end'}}>
-                      <View style={styles.sentBubble}>
-                        <Text style={styles.body}>
-                          {entities.decode(message.body)}
-                        </Text>
-                        <Text style={styles.time}>
-                          {moment(message.time).format('HH:mm')}
-                        </Text>
-                      </View>
-                    </View>
-                  )
+                case 'received':
+                  return <MessageBubble type={type} message={message} />
 
                 case 'seperator':
-                    return (
-                      <View style={styles.seperator}>
-                        <Text style={styles.seperatorText}>
-                          {label}
-                        </Text>
-                      </View>
-                    )
+                  return (
+                    <View style={styles.seperator}>
+                      <Text style={styles.seperatorText}>
+                        {label}
+                      </Text>
+                    </View>
+                  )
 
                 default:
                   return <View />
