@@ -93,7 +93,7 @@ class Conversation extends PureComponent<Props> {
                     {entities.decode(message.body)}
                   </Text>
                   <Text style={styles.time}>
-                    {moment(message.time).format('hh:mm')}
+                    {moment(message.time).format('HH:mm')}
                   </Text>
                 </View>
               </View>

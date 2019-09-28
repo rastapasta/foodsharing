@@ -20,11 +20,12 @@ This thingy runs on iOS and Android - one code, one love!
 * Conversations
   * Send and receive messages
   * WebSocket for direct push
-  * Push Notifications while app runs in the background (on iOS only for now)
+  * Push Notifications while app runs in the background (iOS only for now)
   * Persiting message drafts per conversation
   * Group chats (incl. multiple avatars displayed)
   * Named chats
   * Today -> Yesterday -> $Date labeling in list
+  * Display number of unread conversations as icon badge on home screen (iOS only for now)
 
 * Map
   * Embedded map based on system (iOS: Apple Maps, Android: Google Maps)
