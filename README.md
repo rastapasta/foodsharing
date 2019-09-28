@@ -49,7 +49,8 @@ This thingy runs on iOS and Android - one code, one love!
   * see [package.json](https://github.com/rastapasta/foodsharing/blob/master/package.json) for complete package list
 
 ## ToDo
-
+* Ask notification persmission after login
+* Settings screen to setup background pull / notifications?
 * Today -> Yesterday -> $Date seperators in conversation
 * Button for Logout
 * Logout logic, deleting data from store

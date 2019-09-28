@@ -27,10 +27,10 @@ export default function* notificationWatcher() {
 
       // Message received in background -> notify user
       if (type === WEBSOCKET_MESSAGE) {
-        const { body, sender } = payload
+        const { body, fs_name } = payload
 
         PushNotificationIOS.presentLocalNotification({
-          alertTitle: sender,
+          alertTitle: fs_name,
           alertBody: body
         })
       }

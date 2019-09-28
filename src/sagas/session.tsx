@@ -25,7 +25,7 @@ function* loginFlow(email: string, password: string) {
     Keychain.setGenericPassword(email, password).then(() => true)
 
     // All good, let's proceed to main
-    Actions.replace('main')
+    Actions.reset('drawer')
 
   } catch (error) {
     // Signal that something went wrong..
@@ -36,9 +36,12 @@ function* loginFlow(email: string, password: string) {
 }
 
 function* loadCredentials() {
+  // Try to pull previously stored credentials from secure store
   const result = yield Keychain.getGenericPassword()
   if (result) {
     const { username: email, password } = result
+
+    // Blast them through the pipe to get 'em into the store
     yield put({type: KEYCHAIN, payload: {email, password}})
   }
 }
