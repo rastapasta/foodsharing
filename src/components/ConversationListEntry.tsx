@@ -4,8 +4,12 @@ import { Actions } from 'react-native-router-flux'
 import Image from 'react-native-fast-image'
 import moment from 'moment'
 
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import * as reduxActions from '../common/actions'
+
 import colors from '../common/colors'
-import { ConversationListEntry, ConversationMember } from '../common/api'
+import { ConversationListEntry, ConversationMember, User } from '../common/api'
 import { translate } from '../common/translation'
 
 const { width } = Dimensions.get('window')
@@ -60,28 +64,26 @@ const styles = StyleSheet.create({
 })
 
 type Props = {
-  conversation: ConversationListEntry,
-  isLast: boolean
+  conversation: {member: string[]} & ConversationListEntry,
+  isLast: boolean,
+  foodsharers: {string: User}
 }
 
 const ownUserId = "338605"
     , url = 'https://foodsharing.de/images/'
     , avatar = 'https://foodsharing.de/img/130_q_avatar.png'
 
-const getOtherParty = (members: ConversationMember[]): ConversationMember =>
-  members.length === 1 ? members[0] : members.find(member => member.id !== ownUserId)
-
-export default class ConversationsItem extends PureComponent<Props> {
+class ConversationsItem extends PureComponent<Props> {
   render() {
-    const { conversation, isLast } = this.props
+    const { conversation, isLast, foodsharers } = this.props
         , { id, member, name, last_ts, last_message, last_foodsaver_id } = conversation
+
         , isSelfMessage = member.length === 1
-        , other = getOtherParty(member)
-        , party = member.length === 1 ? member : member.filter(member => member.id !== ownUserId)
+        , party = member.length === 1 ? member : member.filter(member => member !== ownUserId)
         , date = moment(parseInt(last_ts) * 1000)
         , isToday = date.isSame(new Date(), 'day')
         , isYesterday = date.isSame(new Date(Date.now() - 24*60*60*1000), 'day')
-        , lastMessenger = member.find(member => member.id === last_foodsaver_id)
+        , lastMessenger = member.find(member => member === last_foodsaver_id)
 
     return (
       <TouchableOpacity
@@ -90,11 +92,11 @@ export default class ConversationsItem extends PureComponent<Props> {
       >
         <View style={styles.images}>
           {party.slice(0, 4).map(person =>
-            <View key={`${id}.${person.id}`} style={styles.image}>
+            <View key={`${id}.${person}`} style={styles.image}>
               <Image
                 style={{flex: 1}}
                 resizeMode="contain"
-                source={{uri: person.photo ? url + other.photo : avatar}}
+                source={{uri: foodsharers[person].photo ? url + foodsharers[person].photo : avatar}}
               />
             </View>
           )}
@@ -106,7 +108,7 @@ export default class ConversationsItem extends PureComponent<Props> {
               {/* TODO: handle too long strings */}
               {name ? name :
                 isSelfMessage ? translate('conversations.note_to_self') :
-                party.map(person => person.name).join('|')
+                party.map(person => foodsharers[person].name).join('|')
               }
             </Text>
             <Text style={styles.date}>
@@ -115,12 +117,12 @@ export default class ConversationsItem extends PureComponent<Props> {
           </View>
 
           <View style={[styles.lastMessage, !!isLast && {borderBottomWidth: 0}]}>
-            {!!lastMessenger.photo &&
+            {!!foodsharers[lastMessenger].photo &&
               <View style={styles.lastMessageImage}>
                 <Image
                   style={{flex: 1}}
                   resizeMode="contain"
-                  source={{uri: url + lastMessenger.photo}}
+                  source={{uri: url + foodsharers[lastMessenger].photo}}
                 />
               </View>
             }
@@ -133,3 +135,16 @@ export default class ConversationsItem extends PureComponent<Props> {
     )
   }
 }
+
+const mapStateToProps = state => ({
+  foodsharers: state.foodsharers
+})
+
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(reduxActions, dispatch)
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ConversationsItem)

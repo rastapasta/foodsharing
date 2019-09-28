@@ -74,7 +74,7 @@ export interface Profile {
   mobile: string
 }
 
-interface User {
+export interface User {
   id: number,
   name: string,
   avatar: string,
