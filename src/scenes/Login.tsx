@@ -1,5 +1,14 @@
 import React, {PureComponent} from 'react'
-import { SafeAreaView, KeyboardAvoidingView, StatusBar, StyleSheet, Dimensions, View, TouchableOpacity, Text, Linking, Keyboard } from 'react-native'
+import {
+  SafeAreaView,
+  KeyboardAvoidingView,
+  StatusBar,
+  StyleSheet,
+  Dimensions,
+  View,
+  Linking,
+  Keyboard
+} from 'react-native'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -11,11 +20,11 @@ import Toast from 'react-native-easy-toast'
 
 import Logo from '../components/Logo'
 import LoginTextInput from '../components/LoginTextInput'
+import LoginButton from '../components/LoginButton'
 import LoginForgotPassword from '../components/LoginForgotPassword'
 import Version from '../components/Version'
 
 import colors from '../common/colors'
-import { translate } from '../common/translation'
 
 const {width} = Dimensions.get('window')
     , registerURL = 'https://foodsharing.de/?page=content&sub=joininfo'
@@ -35,26 +44,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     marginTop: 30
-  },
-
-  text: {
-    fontFamily: 'SFMono-Regular',
-    textTransform: 'uppercase',
-    color: colors.white,
-    fontSize: 14
-  },
-  button: {
-    paddingTop: 5,
-    paddingBottom: 5,
-    borderRadius: 5,
-    paddingLeft: 15
-  },
-  login: {
-    backgroundColor: colors.white,
-    paddingRight: 15,
-  },
-  loginText: {
-    color: colors.background,
   }
 })
 
@@ -97,13 +86,13 @@ class Login extends PureComponent<Props> {
           <Form model="login">
             <LoginTextInput
               icon="account"
-              placeholder={translate('login.email')}
+              placeholder="login.email"
               model=".email"
             />
 
             <LoginTextInput
               icon="key"
-              placeholder={translate('login.password')}
+              placeholder="login.password"
               obfuscate
               model=".password"
             />
@@ -111,25 +100,18 @@ class Login extends PureComponent<Props> {
             <LoginForgotPassword />
 
             <View style={styles.buttons}>
-              <TouchableOpacity
-                style={styles.button}
+              <LoginButton
+                label="login.register"
                 onPress={() => Linking.openURL(registerURL)}
-              >
-                <Text style={styles.text}>
-                  {translate('login.register')}
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={[styles.button, styles.login]}
+              />
+              <LoginButton
+                label="login.login"
+                raised
                 onPress={() => {
                   Keyboard.dismiss()
                   actions.login()
                 }}
-              >
-                <Text style={[styles.text, styles.loginText]}>
-                  {translate('login.login')}
-                </Text>
-              </TouchableOpacity>
+              />
             </View>
           </Form>
 

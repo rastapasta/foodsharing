@@ -2,6 +2,7 @@ import React, {PureComponent} from 'react'
 import {View, StyleSheet, Dimensions} from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { Control } from 'react-redux-form/native'
+import { translate } from '../common/translation'
 
 import colors from '../common/colors'
 
@@ -49,7 +50,7 @@ export default class LoginTextInput extends PureComponent<Props> {
           autoCorrect={false}
           style={styles.input}
           secureTextEntry={!!obfuscate}
-          placeholder={placeholder}
+          placeholder={translate(placeholder)}
           autoCapitalize="none"
           placeholderTextColor={colors.inputPlaceholder}
         />
