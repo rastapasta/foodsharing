@@ -26,8 +26,18 @@ This thingy runs on iOS and Android - one code, one love!
   * Named chats
   * Today -> Yesterday -> $Date labeling in list
 
-* Custom fonts
-* Full i18n support (so far: English included)
+* Map
+  * Embedded map based on system (iOS: Apple Maps, Android: Google Maps)
+  * Tracking/centering of the user's current location on demand
+  * Prompt for location permission on demand
+
+* Central redux data store
+  * Persistence of conversations, messages and user data
+  * Full offline read-only capability
+
+* UI / UX
+  * Custom fonts / coporate identity respected
+  * Full i18n support (so far: English included, namings planned to be equal to current Android's implementation)
 
 * Deployment and CI
   * Fastlane (icon & badge generation, certificates, deploy, ...)
