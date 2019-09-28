@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
 type Props = {
   onSend: (message) => Promise<boolean>
   model: string
+  active: boolean
 }
 
 export default class MessageForm extends PureComponent<Props> {
@@ -51,8 +52,7 @@ export default class MessageForm extends PureComponent<Props> {
   }
 
   render() {
-    const { model } = this.props
-        , value = 'test'
+    const { model, active } = this.props
 
     return (
       <View style={styles.container}>
@@ -65,13 +65,13 @@ export default class MessageForm extends PureComponent<Props> {
         />
         <TouchableOpacity
           hitSlop={{top: 10, right: 10, left: 10, bottom: 10}}
-          style={[styles.button, !!value && {backgroundColor: colors.messageSendButtonActive}]}
+          style={[styles.button, !!active && {backgroundColor: colors.messageSendButtonActive}]}
           onPress={this.sendMessage}
-          disabled={!value}
+          disabled={!active}
         >
           <Icon
             name="send"
-            color={value ? colors.messageSendIconActive : colors.messageSendIcon}
+            color={active ? colors.messageSendIconActive : colors.messageSendIcon}
             size={20}
             style={styles.icon}
           />

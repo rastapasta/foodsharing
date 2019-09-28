@@ -55,6 +55,7 @@ type Props = {
   conversation: ConversationListEntry
   messages?: any
   actions?: any
+  drafts?: any
 }
 
 class Conversation extends PureComponent<Props> {
@@ -73,7 +74,7 @@ class Conversation extends PureComponent<Props> {
   // }
 
   render() {
-    const { conversation, messages, actions } = this.props
+    const { conversation, messages, actions, drafts } = this.props
         , data = (messages[conversation.id] || []) as Message[]
 
     return (
@@ -102,6 +103,7 @@ class Conversation extends PureComponent<Props> {
           <MessageForm
             onSend={() => actions.sendMessage(conversation.id)}
             model={`drafts.${conversation.id}`}
+            active={!!drafts[conversation.id]}
           />
         </SafeAreaView>
       </KeyboardAvoidingView>

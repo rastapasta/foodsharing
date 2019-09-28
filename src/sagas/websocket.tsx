@@ -63,7 +63,6 @@ function initWebsocket(session: string) {
     // Tell the event channel reactor how to disconnect
     return () =>
       socket.close()
-
   })
 }
 
