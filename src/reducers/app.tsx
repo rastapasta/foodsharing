@@ -1,5 +1,5 @@
 import { TYPE as appState } from '../middlewares/AppState'
-import { COOKIE } from '../common/constants'
+import { LOGIN_SUCCESS } from '../common/constants'
 
 const initialState = {
   state: null,
@@ -8,24 +8,20 @@ const initialState = {
 }
 
 export default function reducer(state = initialState, action: any = {}) {
-  switch (action.type) {
+  const { type, payload } = action
+  switch (type) {
     case appState:
       return {
         ...state,
-        state: action.payload
+        state: payload
       }
 
-    case COOKIE:
-      const mixin: any = {}
-
-      if (action.name === 'PHPSESSID')
-        mixin.session = action.value
-      if (action.name === 'CSRF_TOKEN')
-        mixin.token = action.value
-
+    case LOGIN_SUCCESS:
+      const { session, token } = payload
       return {
         ...state,
-        ...mixin
+        session,
+        token
       }
 
     default:

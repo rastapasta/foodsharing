@@ -19,7 +19,7 @@ export default function* conversationSaga() {
             , message = yield call(sendMessage, conversationId, body)
 
         yield put(formActions.change(`drafts.${conversationId}`, ''))
-        yield put({type: MESSAGE_SUCCESS, id, payload: message})
+        yield put({type: MESSAGE_SUCCESS, conversationId, payload: message})
         break
     }
   }
