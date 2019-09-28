@@ -1,4 +1,7 @@
-import { CONVERSATIONS_SUCCESS } from '../common/constants'
+import {
+  CONVERSATIONS_SUCCESS,
+  LOGOUT
+} from '../common/constants'
 
 const initialState = []
 
@@ -9,6 +12,9 @@ export default function reducer(state = initialState, action: any = {}) {
         ...conversation,
         member: conversation.member.map(member => member.id)
       }))
+
+    case LOGOUT:
+      return [...initialState]
 
     default:
       return state

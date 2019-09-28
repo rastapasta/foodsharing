@@ -3,7 +3,7 @@ import setCookie from 'set-cookie-parser'
 const host = 'https://beta.foodsharing.de'
     , endpoints = {
         login: {uri: '/api/user/login', method: 'POST'},
-        logout: {uri: '/api/user/logout', method: 'GET'},
+        logout: {uri: '/api/user/logout', method: 'POST'},
         current: {uri: '/api/user/current', method: 'GET'},
         profile: {uri: '/api/profile/current', method: 'GET'},
         wall: {uri: '/api/wall/{target}/{targetId}', method: 'GET'},

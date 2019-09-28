@@ -1,4 +1,7 @@
-import { PROFILE } from '../common/constants'
+import {
+  PROFILE,
+  LOGOUT
+} from '../common/constants'
 
 const initialState = {}
 
@@ -7,6 +10,9 @@ export default function reducer(state = initialState, action: any = {}) {
   switch (type) {
     case PROFILE:
       return {...payload}
+
+    case LOGOUT:
+      return {...initialState}
 
     default:
       return state

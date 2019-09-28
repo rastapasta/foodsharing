@@ -1,4 +1,8 @@
-import { CONVERSATION_SUCCESS, CONVERSATIONS_SUCCESS } from '../common/constants'
+import {
+  CONVERSATION_SUCCESS,
+  CONVERSATIONS_SUCCESS,
+  LOGOUT
+} from '../common/constants'
 
 const initialState = {}
 
@@ -31,6 +35,9 @@ export default function reducer(state = initialState, action: any = {}) {
         }
       })
       return convState
+
+    case LOGOUT:
+      return {...initialState}
 
     default:
       return state

@@ -1,5 +1,8 @@
 import { TYPE as appState } from '../middlewares/AppState'
-import { LOGIN_SUCCESS } from '../common/constants'
+import {
+  LOGIN_SUCCESS,
+  LOGOUT
+} from '../common/constants'
 
 const initialState = {
   state: null,
@@ -22,6 +25,13 @@ export default function reducer(state = initialState, action: any = {}) {
         ...state,
         session,
         token
+      }
+
+    case LOGOUT:
+      return {
+        ...state,
+        session: null,
+        token: null
       }
 
     default:

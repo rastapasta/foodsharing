@@ -1,4 +1,9 @@
-import { CONVERSATION_SUCCESS, MESSAGE_SUCCESS, WEBSOCKET_MESSAGE } from '../common/constants'
+import {
+  CONVERSATION_SUCCESS,
+  MESSAGE_SUCCESS,
+  WEBSOCKET_MESSAGE,
+  LOGOUT
+} from '../common/constants'
 
 const initialState = {}
 
@@ -24,6 +29,9 @@ export default function reducer(state = initialState, action: any = {}) {
 
       msgState[idx] = replaceOrUnshift(msgState[idx], payload)
       return msgState
+
+    case LOGOUT:
+      return {...initialState}
 
     default:
       return state

@@ -41,11 +41,12 @@ const styles = StyleSheet.create({
 
 type Props = {
   profile: any
+  actions: any
 }
 
 class Drawer extends PureComponent<Props> {
   render() {
-    const {profile: {name}} = this.props
+    const {profile: {name}, actions: { logout }} = this.props
 
     return (
       <View style={styles.container}>
@@ -57,7 +58,7 @@ class Drawer extends PureComponent<Props> {
         </View>
         <View style={styles.content}>
           <DrawerButton
-            onPress={() => true}
+            onPress={logout}
             icon="exit-to-app"
             label="Logout"
           />

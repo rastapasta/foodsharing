@@ -3,6 +3,7 @@ import * as types from './constants'
 export const init = (isSimulator: boolean) => ({type: types.INIT, isSimulator})
 
 export const login = () => ({type: types.LOGIN_REQUEST})
+export const logout = () => ({type: types.LOGOUT})
 
 export const cookie = (name: string, value: string) => ({type: types.COOKIE, name, value})
 

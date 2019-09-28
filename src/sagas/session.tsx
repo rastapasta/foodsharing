@@ -1,15 +1,18 @@
 import { take, fork, call, put, select } from 'redux-saga/effects'
 import { Actions } from 'react-native-router-flux'
 import * as Keychain from 'react-native-keychain'
+import { actions as formActions } from 'react-redux-form'
 
-import { LOGOUT, LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR, KEYCHAIN, PROFILE } from '../common/constants'
+import {
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGIN_ERROR,
+  LOGOUT,
+  KEYCHAIN,
+  PROFILE
+} from '../common/constants'
 
-import { login, getSession, getProfile } from '../common/api'
-
-function* logout() {
-  // Throw the user back to the login screen
-  Actions.reset('login')
-}
+import { login, logout, getSession, getProfile } from '../common/api'
 
 function* loginFlow(email: string, password: string) {
   let user
@@ -29,12 +32,25 @@ function* loginFlow(email: string, password: string) {
 
     // Request and broadcast the profile information of our fresh user
     yield put({type: PROFILE, payload: yield call(getProfile)})
+
   } catch (error) {
     // Signal that something went wrong..
     yield put({ type: LOGIN_ERROR, error })
   }
 
   return user
+}
+
+function* logoutFlow() {
+  // Reset all forms
+  yield put(formActions.reset('drafts'))
+  yield put(formActions.reset('login'))
+
+  // Log the user out from foodsharing.network
+  yield call(logout)
+
+  // Throw the user back to the login screen
+  Actions.reset('login')
 }
 
 function* loadCredentials() {
@@ -66,6 +82,6 @@ export default function* loginWatcher() {
     yield take([LOGOUT, LOGIN_ERROR])
 
     // Start the logout flow
-    yield call(logout)
+    yield call(logoutFlow)
   }
 }
