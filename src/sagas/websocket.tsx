@@ -14,6 +14,7 @@ import {
 
 function initWebsocket(session: string) {
   return eventChannel(emitter => {
+    // Connect to the live's system's socket server - handles messages for beta as well
     const socket = socketIO('https://foodsharing.de', {
       transportOptions: {
         polling: {
@@ -29,28 +30,37 @@ function initWebsocket(session: string) {
       jsonp: false
     })
 
+    // Here we go, got a connection
     socket.on('connect', () => {
+      // .. register our client
       socket.emit('register')
+
+      // .. and let everyone know
       emitter({type: WEBSOCKET_CONNECTED, payload: socket})
     })
 
+    // Error handling on library level
     socket.on('error', error =>
       emitter({type: error.match(/not authorized/) ? WEBSOCKET_UNAUTHORIZED : WEBSOCKET_ERROR, error})
     )
 
+    // Error handling on connection level
     socket.on('connect_error', error =>
       emitter({type: WEBSOCKET_ERROR, error})
     )
 
+    // Handle incoming websocket messages
     socket.on('conv', ({m, o}: {m: string, o: string}) => {
       if (m === 'push')
         return emitter({type: WEBSOCKET_MESSAGE, payload: JSON.parse(o)})
     })
 
+    // Notify redux any time the connection drops
     socket.on('disconnect', () =>
       emitter({type: WEBSOCKET_DISCONNECT})
     )
 
+    // Tell the event channel reactor how to disconnect
     return () =>
       socket.close()
 

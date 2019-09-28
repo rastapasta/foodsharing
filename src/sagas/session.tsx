@@ -1,4 +1,4 @@
-import { take, fork, call, put, cancelled, select } from 'redux-saga/effects'
+import { take, fork, call, put, select } from 'redux-saga/effects'
 import { Actions } from 'react-native-router-flux'
 import * as Keychain from 'react-native-keychain'
 
@@ -7,35 +7,31 @@ import { LOGOUT, LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR, KEYCHAIN } from '../
 import { login, getSession } from '../common/api'
 
 function* logout() {
-  // dispatches the CLIENT_UNSET action
-  // yield put(unsetClient())
-
-  // remove our token
-  // localStorage.removeItem('token')
-
+  // Throw the user back to the login screen
   Actions.reset('login')
 }
 
-function* loginFlow(email, password) {
+function* loginFlow(email: string, password: string) {
   let user
+
   try {
+    // Here we go, login the user
     user = yield call(login, email, password)
 
-    // inform Redux to set our client user, this is non blocking so...
-    // yield put(setClient(user))
+    // Signal our succesful login and broadcast our fresh token and session
     yield put({type: LOGIN_SUCCESS, payload: getSession()})
+
+    // Save the validated email and password in the device's safe store
     Keychain.setGenericPassword(email, password).then(() => true)
 
+    // All good, let's proceed to main
     Actions.replace('main')
 
   } catch (error) {
+    // Signal that something went wrong..
     yield put({ type: LOGIN_ERROR, error })
-  } finally {
-    if (yield cancelled())
-      Actions.replace('login')
   }
 
-  // return the user for health and wealth
   return user
 }
 
