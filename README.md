@@ -15,6 +15,7 @@ This thingy runs on iOS and Android - one code, one love!
 
 * Drawer
   * Display of logo and name of user
+  * Button for Logout
   * Display of current build version
 
 * Conversations
@@ -24,7 +25,9 @@ This thingy runs on iOS and Android - one code, one love!
   * Persiting message drafts per conversation
   * Group chats (incl. multiple avatars displayed)
   * Named chats
-  * Today -> Yesterday -> $Date labeling in list
+  * Today -> Yesterday -> $Date labeling in conversation list
+  * Today -> Yesterday -> $Date seperators in conversation
+
   * Display number of unread conversations as icon badge on home screen (iOS only for now)
 
 * Map
@@ -34,6 +37,7 @@ This thingy runs on iOS and Android - one code, one love!
 
 * Central redux data store
   * Persistence of conversations, messages and user data
+  * Full reset on logout
   * Full offline read-only capability
 
 * UI / UX
@@ -51,8 +55,5 @@ This thingy runs on iOS and Android - one code, one love!
 ## ToDo
 * Ask notification persmission after login
 * Settings screen to setup background pull / notifications?
-* Today -> Yesterday -> $Date seperators in conversation
-* Button for Logout
-* Logout logic, deleting data from store
 * Background pull as Push Notification replacement
 * Notifications after background pull

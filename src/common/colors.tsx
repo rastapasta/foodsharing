@@ -17,6 +17,7 @@ export default {
   drawerText: '#000',
 
   conversationDate: '#aaa',
+  seperatorText: '#aaa',
 
   messageUnread: '#64AE25',
   messagePreview: '#7F7F7F',
