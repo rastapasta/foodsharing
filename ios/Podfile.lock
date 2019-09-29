@@ -232,6 +232,8 @@ PODS:
     - React-cxxreact (= 0.61.0-rc.3)
     - React-jsi (= 0.61.0-rc.3)
     - ReactCommon/jscallinvoker (= 0.61.0-rc.3)
+  - RNBackgroundFetch (2.7.0):
+    - React
   - RNCAsyncStorage (1.6.2):
     - React
   - RNCPushNotificationIOS (1.0.2):
@@ -287,6 +289,7 @@ DEPENDENCIES:
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - ReactCommon/jscallinvoker (from `../node_modules/react-native/ReactCommon`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - RNBackgroundFetch (from `../node_modules/react-native-background-fetch`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
   - "RNCPushNotificationIOS (from `../node_modules/@react-native-community/push-notification-ios`)"
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
@@ -358,6 +361,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/Libraries/Vibration"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  RNBackgroundFetch:
+    :path: "../node_modules/react-native-background-fetch"
   RNCAsyncStorage:
     :path: "../node_modules/@react-native-community/async-storage"
   RNCPushNotificationIOS:
@@ -405,6 +410,7 @@ SPEC CHECKSUMS:
   React-RCTText: 9c98f0f4d93b98f0e33063f90559f3464297cf55
   React-RCTVibration: d4c2c7a476191804a325b1fc3b3e3932b2b287b9
   ReactCommon: c1acab50d8469f890bb14808d0283b2b23868eb4
+  RNBackgroundFetch: c6dd741d7f86ad981f1f03279415c5151397559a
   RNCAsyncStorage: 60a80e72d95bf02a01cace55d3697d9724f0d77f
   RNCPushNotificationIOS: 0b8d06ff190d84627dd17501bfb96652375970e4
   RNDeviceInfo: 88099e84466f053bae3f34c307b506738b2b6946

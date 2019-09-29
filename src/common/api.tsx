@@ -86,6 +86,16 @@ function request(
   })
 }
 
+export const getSession = (): {session: string, token: string} => ({
+  session: cookies['PHPSESSID'],
+  token: cookies['CSRF_TOKEN']
+})
+
+export const setSession = ({session, token}) => {
+  cookies.PHPSESSID = session
+  cookies.CSRF_TOKEN = token
+}
+
 export const login = (email: string, password: string): Promise<Foodsharing.User> =>
   request('login', {email, password, remember_me: true})
 
@@ -118,16 +128,6 @@ export const userToConversationId = async (userId: number): Promise<number> =>
 
 export const getProfile = (): Promise<Foodsharing.Profile> =>
   request('profile')
-
-export const getSession = (): {session: string, token: string} => ({
-  session: cookies['PHPSESSID'],
-  token: cookies['CSRF_TOKEN']
-})
-
-export const setSession = ({session, token}) => {
-  cookies.PHPSESSID = session
-  cookies.CSRF_TOKEN = token
-}
 
 
 // TODO: backend returns 500

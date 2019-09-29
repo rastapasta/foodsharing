@@ -8,6 +8,7 @@ import Notifications from './notifications'
 import Markers from './markers'
 import Fairteiler from './fairteiler'
 import Wall from './wall'
+import Background from './background'
 
 // Start all our sagas in parallel
 export default function* rootSaga () {
@@ -19,6 +20,7 @@ export default function* rootSaga () {
     Notifications(),
     Markers(),
     Fairteiler(),
-    Wall()
+    Wall(),
+    Background()
   ])
 }

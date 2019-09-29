@@ -71,7 +71,7 @@ function* logoutFlow() {
   }
 }
 
-function* reauthenticate() {
+function* reauthenticateFlow() {
   // Notificate all listeners that we got a valid session running
   const { session, token } = yield select(state => state.app)
 
@@ -86,8 +86,8 @@ function* reauthenticate() {
     yield getCurrentUser()
 
     // Yes, so instantly forward the user to the internal area and hide the splashscreen
-    yield Actions.reset('drawer')
     yield SplashScreen.hide()
+    yield Actions.reset('drawer')
 
     // Notificate all listeners that we got a valid session running
     yield put({type: LOGIN_SUCCESS, payload: {session, token}})
@@ -114,10 +114,11 @@ function* reauthenticate() {
 }
 
 export default function* loginWatcher() {
+  // Wait until our store got rehydrated
   yield take('persist/REHYDRATE')
 
-  // Water our store with previously stored credentials
-  yield fork(reauthenticate)
+  // Water our store with previously stored session and credentials
+  yield fork(reauthenticateFlow)
 
   while (true) {
     // Wait until we get a login request

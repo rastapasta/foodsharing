@@ -18,6 +18,7 @@
 		6A82E51303654EDCBBDF3F72 /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 23F9E6EE36C14DB586CD0FE5 /* FontAwesome5_Solid.ttf */; };
 		95369F652334674D00333850 /* AlfaSlabOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 95369F632334674D00333850 /* AlfaSlabOne-Regular.ttf */; };
 		95369F662334674D00333850 /* SFMono-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 95369F642334674D00333850 /* SFMono-Regular.otf */; };
+		958525432340F94500DAB9A0 /* RNBackgroundFetch+AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 958525422340F94500DAB9A0 /* RNBackgroundFetch+AppDelegate.m */; };
 		A0B84AD6488941D68B93BE26 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 34995535507A44209BB21A82 /* MaterialCommunityIcons.ttf */; };
 		A0DED2CE079F05E6EAA1C08E /* libPods-foodsharing.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 576CE356E20349C787D7CCBE /* libPods-foodsharing.a */; };
 		A4EDB42F256247DFB729FE03 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F37750D72CE44A2AF6BAA03 /* Ionicons.ttf */; };
@@ -61,6 +62,7 @@
 		9429CCE0ED5824D85A31F3E0 /* Pods-foodsharing-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-foodsharing-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-foodsharing-tvOS/Pods-foodsharing-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		95369F632334674D00333850 /* AlfaSlabOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "AlfaSlabOne-Regular.ttf"; path = "../../assets/fonts/AlfaSlabOne-Regular.ttf"; sourceTree = "<group>"; };
 		95369F642334674D00333850 /* SFMono-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SFMono-Regular.otf"; path = "../../assets/fonts/SFMono-Regular.otf"; sourceTree = "<group>"; };
+		958525422340F94500DAB9A0 /* RNBackgroundFetch+AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "RNBackgroundFetch+AppDelegate.m"; path = "../node_modules/react-native-background-fetch/ios/RNBackgroundFetch/RNBackgroundFetch+AppDelegate.m"; sourceTree = "<group>"; };
 		A7EF16D663E340FB853EB72F /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		A822B47AC752E3E05459BC79 /* Pods-foodsharing-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-foodsharing-tvOS.release.xcconfig"; path = "Target Support Files/Pods-foodsharing-tvOS/Pods-foodsharing-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		DC0093720ADF44178559789E /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 		13B07FAE1A68108700A75B9A /* foodsharing */ = {
 			isa = PBXGroup;
 			children = (
+				958525422340F94500DAB9A0 /* RNBackgroundFetch+AppDelegate.m */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -395,6 +398,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				958525432340F94500DAB9A0 /* RNBackgroundFetch+AppDelegate.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
