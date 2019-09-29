@@ -7,15 +7,13 @@ import { getFairteiler } from '../common/api'
 
 import ClusteredMapView from 'react-native-maps-super-cluster'
 import { Marker } from 'react-native-maps'
-import { isNodesEquivalent } from '@babel/types'
 
 const INIT_REGION = {
-  latitude: 41.8962667,
-  longitude: 11.3340056,
-  latitudeDelta: 12,
-  longitudeDelta: 12
+  longitude: 10.60117067,
+  latitude: 50.34470266,
+  longitudeDelta: 13.894483079,
+  latitudeDelta: 12.61906546
 }
-
 const icons = {
   cluster: require('../../assets/marker/marker_cluster.png'),
   fairteiler: require('../../assets/marker/marker_fairteiler.png')
@@ -45,8 +43,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.5,
     shadowRadius: 3.84,
-
-    elevation: 5,
+    elevation: 5
   },
 
   cluster: {
@@ -63,7 +60,9 @@ const styles = StyleSheet.create({
   },
   clusterText: {
     color: colors.white,
-    fontSize: 10
+    fontSize: 10,
+    fontWeight: 'bold',
+    paddingLeft: 1
   }
 })
 
@@ -135,6 +134,7 @@ export default class Map extends PureComponent<Props> {
         <TouchableOpacity
           style={styles.gps}
           onPress={() => this.setState({trackPosition: !trackPosition})}
+          hitSlop={{left: 5, right: 5, top: 5, bottom: 5}}
         >
           <Icon
             name="crosshairs-gps"
