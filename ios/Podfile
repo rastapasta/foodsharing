@@ -34,11 +34,11 @@ target 'foodsharing' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
-
-  # target 'foodsharingTests' do
+  #target 'foodsharingTests' do
   #  inherit! :search_paths
-  # end
+  #  # Pods for testing
+  #end
 
   use_native_modules!
 end
+

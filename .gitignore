@@ -1,6 +1,3 @@
-# Typescript
-/build
-
 # OSX
 #
 .DS_Store
@@ -23,7 +20,7 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
-xcshareddata
+project.xcworkspace
 
 # Android/IntelliJ
 #

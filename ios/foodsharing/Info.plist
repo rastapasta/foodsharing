@@ -2,8 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>AlfaSlabOne-Regular.ttf</string>
+		<string>SFMono-Regular.otf</string>
+		<string>MaterialCommunityIcons.ttf</string>
+	</array>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>de_DE</string>
+	<string>en</string>
 	<key>CFBundleDisplayName</key>
 	<string>Foodsharing</string>
 	<key>CFBundleExecutable</key>
@@ -22,6 +28,8 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -38,19 +46,11 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Your location will be used to center the map around you.</string>
-	<key>UIAppFonts</key>
-	<array>
-		<string>SFMono-Regular.otf</string>
-		<string>AlfaSlabOne-Regular.ttf</string>
-		<string>MaterialCommunityIcons.ttf</string>
-	</array>
+	<string>Find Basekts and Fairteilers around you - to make it easier, allow access to your current location.</string>
 	<key>UIBackgroundModes</key>
 	<array>
-		<string>fetch</string>
+		<string>From time to time the app checks for new messages - and notify you when you get one!</string>
 	</array>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
