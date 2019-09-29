@@ -13,6 +13,7 @@ export const APPSTATE = '📱 APPSTATE'
 export const PROFILE = '👤 PROFILE'
 
 export const BACKGROUND = '⏰ BACKGROUND'
+export const BACKGROUND_DONE = '✅ BACKGROUND_DONE'
 export const BACKGROUND_ERROR = '❌ BACKGROUND_ERROR'
 
 export const CONVERSATION_REQUEST = '💬 CONVERSATION_REQUEST'

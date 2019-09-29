@@ -21,7 +21,8 @@ This thingy runs on iOS and Android - one code, one love!
 * Conversations
   * Send and receive messages
   * Connect to and handle WebSocket chat interface
-  * Push Notifications while app runs in the background (iOS only for now)
+  * Local Notifications while app runs in the background (iOS only for now)
+  * Background conversations list pull every 15 minutes with Local Notification (iOS only for)
   * Display number of unread conversations as icon badge on home screen (iOS only for now)
   * Persist message drafts (per conversation)
   * Group chats (incl. multiple avatars displayed)
@@ -57,11 +58,11 @@ This thingy runs on iOS and Android - one code, one love!
   * see [package.json](https://github.com/rastapasta/foodsharing/blob/master/package.json) for complete package list
 
 ## ToDo
+
+* Fix double set-cookie in login to allow sessions on Android - blocking issue!
+* Hanlde websocket disconnect and reconnect after logout / login (iosocket manager?)
+* Notifications after background pull
 * Rounded avatars in conversation messages
 * Handle more than the last 20 messages, logic to fill the gap
 * Ask notification persmission after login
 * Settings screen to setup background pull / notifications?
-* Background pull as Push Notification replacement
-* Notifications after background pull
-* Hanlde websocket disconnect and reconnect after logout / login
-* Fix double set-cookie in login to allow sessions on Android - blocking issue!

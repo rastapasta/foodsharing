@@ -1,4 +1,5 @@
 import { take, call, race, put, delay } from 'redux-saga/effects'
+import { Platform } from 'react-native'
 import { eventChannel } from 'redux-saga'
 import BackgroundFetch from 'react-native-background-fetch'
 
@@ -6,9 +7,9 @@ import {
   LOGIN_SUCCESS,
   LOGOUT,
   BACKGROUND,
+  BACKGROUND_DONE,
   BACKGROUND_ERROR,
-  CONVERSATIONS_REQUEST,
-  CONVERSATIONS_SUCCESS
+  CONVERSATIONS_REQUEST
 } from '../common/constants'
 
 const configuration = {
@@ -34,6 +35,10 @@ function finish() {
 }
 
 export default function* backgroundSagas() {
+  // Only active on iOS for now
+  if (Platform.OS !== 'ios')
+    return
+
   while (true) {
     // Wait for a first successful login
     yield take(LOGIN_SUCCESS)
@@ -61,10 +66,14 @@ export default function* backgroundSagas() {
       yield put({type: CONVERSATIONS_REQUEST})
 
       // Make sure to keep its request time much below the 30s max that would kill our process
-      yield race({
-        success: take(CONVERSATIONS_SUCCESS),
-        delay: delay(10000)
+      const { error } = yield race({
+        success: take(BACKGROUND_DONE),
+        error: delay(10000)
       })
+
+      // Report and error in case our task didn't finish in time
+      if (error)
+        yield put({type: BACKGROUND_ERROR, error: 'background task timeout got triggered'})
 
       yield call(finish)
     }
