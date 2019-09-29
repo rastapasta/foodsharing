@@ -16,7 +16,7 @@ YellowBox.ignoreWarnings([
 ])
 
 
-export default class Foodsharing extends React.Component {
+export default class App extends React.Component {
   render() {
     return <Provider store={store}>
       <PersistGate persistor={persistor}>
@@ -26,4 +26,4 @@ export default class Foodsharing extends React.Component {
   }
 }
 
-AppRegistry.registerComponent('foodsharing', () => Foodsharing)
+AppRegistry.registerComponent('foodsharing', () => App)

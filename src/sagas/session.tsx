@@ -40,7 +40,7 @@ function* loginFlow(email: string, password: string) {
 
   } catch (error) {
     // In case we receive a malformed-error, clear all cookies and try again
-    if (error === Foodsharing.results.MALFORMED) {
+    if (error === 0) {
       yield CookieManager.clearAll()
       return yield call(loginFlow, email, password)
     }

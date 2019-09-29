@@ -22,10 +22,10 @@
   },
   "include": [
     "./src/",
-    "typings/*.d.ts"
+    "srx/typings/*.d.ts"
   ],
   "exclude": ["./src/tests/"],
   "filesGlob": [
-    "typings/*.d.ts",
+    "src/typings/*.d.ts"
   ],
 }

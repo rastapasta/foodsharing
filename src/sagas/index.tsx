@@ -14,7 +14,7 @@ import Background from './background'
 export default function* rootSaga () {
   yield all([
     Session(),
-    // WebsocketSaga(),
+    WebsocketSaga(),
     Conversations(),
     Conversation(),
     Notifications(),

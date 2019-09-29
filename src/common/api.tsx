@@ -75,13 +75,13 @@ function request(
 
     // console.warn('request error', endpoint, data, options, response)
     switch (response.status) {
-      case 400: throw Foodsharing.results.MALFORMED
-      case 401: throw Foodsharing.results.FORBIDDEN
-      case 403: throw Foodsharing.results.UNAUTHORIZED
-      case 404: throw Foodsharing.results.NOT_FOUND
-      case 500: throw Foodsharing.results.SERVER_ERROR
+      case 400: throw Foodsharing.Results.MALFORMED
+      case 401: throw Foodsharing.Results.FORBIDDEN
+      case 403: throw Foodsharing.Results.UNAUTHORIZED
+      case 404: throw Foodsharing.Results.NOT_FOUND
+      case 500: throw Foodsharing.Results.SERVER_ERROR
 
-      default: throw Foodsharing.results.SERVER_ERROR
+      default: throw Foodsharing.Results.SERVER_ERROR
     }
   })
 }

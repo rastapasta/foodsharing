@@ -1,6 +1,6 @@
 declare namespace Foodsharing {
 
-  enum results {
+  enum Results {
     MALFORMED,
     UNAUTHORIZED,
     FORBIDDEN,
