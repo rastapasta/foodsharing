@@ -59,6 +59,13 @@ const styles = StyleSheet.create({
   },
   sentTime: {
     color: colors.messageSentTime
+  },
+  image: {
+    width: 40,
+    height: 40,
+    marginLeft: 6,
+    marginRight: 6,
+    marginBottom: 10
   }
 })
 
@@ -75,13 +82,7 @@ export default ({type, message}: Props) =>
     {type === 'received' &&
       <Image
         source={{uri: message.fs_photo ? url + '130_q_' + message.fs_photo : avatar}}
-        style={{
-          width: 40,
-          height: 40,
-          marginLeft: 6,
-          marginRight: 6,
-          marginBottom: 10
-        }}
+        style={styles.image}
         resizeMode="contain"
       />
     }

@@ -11,7 +11,12 @@ const host = 'https://beta.foodsharing.de'
         conversations: {uri: '/api/conversations', method: 'GET'},
         conversation: {uri: '/api/conversations/{conversationId}', method: 'GET'},
         message: {uri: '/xhrapp.php?app=msg&m=sendmsg', method: 'POST'},
-        user2conv: {uri: '/xhrapp.php?app=msg&m=user2conv&fsid={userId}', method: 'GET'}
+        user2conv: {uri: '/xhrapp.php?app=msg&m=user2conv&fsid={userId}', method: 'GET'},
+        fairteiler: {uri: '/xhr.php?f=loadMarker&types[]=fairteiler', method: 'GET'},
+
+        // TODO:
+        baskets: {uri: '/xhr.php?f=loadMarker&types[]=baskets', method: 'GET'},
+        shops: {uri: '/xhr.php?f=loadMarker&types[]=betriebe&options[]=needhelp&options[]=needhelpinstant', method: 'GET'}
       }
     , cookies = {}
 
@@ -74,6 +79,13 @@ export interface Profile {
   mobile: string
 }
 
+export interface Fairteiler {
+  id: string,
+  lat: string,
+  lon: string,
+  bid: string
+}
+
 export interface User {
   id: number,
   name: string,
@@ -90,7 +102,7 @@ const handleCookies = cookieString =>
   })
 
 function request(
-  endpoint: 'login' | 'current' | 'logout' | 'profile' | 'wall' | 'store' | 'conversations' | 'conversation' | 'message' | 'user2conv',
+  endpoint: 'login' | 'current' | 'logout' | 'profile' | 'wall' | 'store' | 'conversations' | 'conversation' | 'message' | 'user2conv' | 'fairteiler',
   data?: any,
   options?: any
 ): Promise<any> {
@@ -140,6 +152,9 @@ export const logout = (): Promise<void> =>
 
 export const getCurrentUser = (): Promise<User> =>
   request('current')
+
+export const getFairteiler = async (): Promise<Fairteiler[]> =>
+  (await request('fairteiler')).fairteiler
 
 export const getConversations = (): Promise<ConversationListEntry[]> =>
   request('conversations')

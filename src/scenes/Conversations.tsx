@@ -33,7 +33,8 @@ class Conversations extends PureComponent<Props> {
   state = {
     refreshing: false
   }
-  async componentDidMount() {
+
+  componentDidMount() {
     const { actions } = this.props
     actions.fetchConversations()
   }

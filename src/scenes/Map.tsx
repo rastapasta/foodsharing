@@ -1,8 +1,19 @@
 import React, { PureComponent } from 'react'
-import { StyleSheet, TouchableOpacity } from 'react-native'
+import { StyleSheet, TouchableOpacity, View, Text, Image } from 'react-native'
 import colors from '../common/colors'
-import MapView from 'react-native-maps'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+
+import { getFairteiler } from '../common/api'
+
+import ClusteredMapView from 'react-native-maps-super-cluster'
+import { Marker } from 'react-native-maps'
+
+const INIT_REGION = {
+  latitude: 41.8962667,
+  longitude: 11.3340056,
+  latitudeDelta: 12,
+  longitudeDelta: 12
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -35,21 +46,54 @@ type Props = {}
 
 export default class Map extends PureComponent<Props> {
   refs: {
-    map: MapView
-  }
-  state = {
-    trackPosition: false
+    map: ClusteredMapView
   }
 
-  render() {
-    const { trackPosition } = this.state
+  state = {
+    trackPosition: false,
+    fairteiler: [{lon: "33", lat: "12"}]
+  }
+
+  async componentDidMount() {
+    this.setState({fairteiler: await getFairteiler()})
+  }
+
+  renderCluster = (cluster, onPress) => {
+    const { pointCount, coordinate, clusterId } = cluster
+        , size = 50
+
     return (
-      <TouchableOpacity style={styles.container}>
-        <MapView
+      <Marker coordinate={coordinate} onPress={onPress}>
+        <View style={{aspectRatio: 1, width: 50, height: 50, alignItems: 'center', justifyContent: 'center'}}>
+          <Image source={require('../../assets/marker/marker_cluster.png')} style={{width: 50, height: 50, position: 'absolute'}} />
+          <Text style={{color: 'white', fontSize: 10}}>
+            {pointCount}
+          </Text>
+        </View>
+      </Marker>
+    )
+  }
+
+  renderMarker = (data) =>
+    <Marker key={data.id || Math.random()} coordinate={data.location} />
+
+  render() {
+    const { trackPosition, fairteiler } = this.state
+        , data = fairteiler.map(teiler => ({location: {latitude: parseFloat(teiler.lat), longitude: parseFloat(teiler.lon)}}))
+    console.log(data)
+    return (
+      <View style={styles.container}>
+        <ClusteredMapView
           ref="map"
+          data={data}
           showsUserLocation={trackPosition}
           followsUserLocation
           style={styles.map}
+          renderMarker={this.renderMarker}
+          renderCluster={this.renderCluster}
+          initialRegion={INIT_REGION}
+          radius={40}
+          edgePadding={{left: 20, top: 20, right: 20, bottom: 20}}
         />
 
         <TouchableOpacity
@@ -62,7 +106,7 @@ export default class Map extends PureComponent<Props> {
             color={colors[trackPosition ? 'green' : 'black']}
           />
         </TouchableOpacity>
-      </TouchableOpacity>
+      </View>
     )
   }
 }

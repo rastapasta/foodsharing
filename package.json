@@ -26,6 +26,7 @@
     "react-native-keychain": "^4.0.0",
     "react-native-localize": "^1.2.1",
     "react-native-maps": "^0.25.0",
+    "react-native-maps-super-cluster": "^1.6.0",
     "react-native-router-flux": "^4.0.6",
     "react-native-vector-icons": "^6.6.0",
     "react-redux": "^7.1.1",

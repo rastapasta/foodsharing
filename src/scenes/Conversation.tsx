@@ -55,7 +55,7 @@ class Conversation extends PureComponent<Props> {
     refreshing: false
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     const { conversation, actions } = this.props
     actions.fetchConversation(conversation.id)
   }
