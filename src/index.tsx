@@ -1,11 +1,19 @@
 import * as React from 'react'
-import { AppRegistry } from 'react-native'
+import { AppRegistry, YellowBox } from 'react-native'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 
 import Router from './scenes/Router'
 
 import { store, persistor } from './common/store'
+
+YellowBox.ignoreWarnings([
+  'Warning: componentWillReceiveProps',
+  'Warning: componentWillMount',
+  'Calling bridge.imageLoader',
+  'Warning: componentWillUpdate',
+])
+
 
 export default class Foodsharing extends React.Component {
   render() {

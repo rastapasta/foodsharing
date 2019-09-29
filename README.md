@@ -30,11 +30,12 @@ This thingy runs on iOS and Android - one code, one love!
   * Today -> Yesterday -> $Date seperators in conversation
   * Detect URLs to foodsharing* in messages and make them clickable
 
-
 * Map
   * Embedded map based on system (iOS: Apple Maps, Android: Google Maps)
+  * Clustering of markers
   * Tracking/centering of the user's current location on demand
   * Prompt for location permission on demand
+  * Reusing marker icons from Android version
 
 * Central redux/data store
   * Persistence of conversations, messages and user data
