@@ -12,3 +12,5 @@ export const gotConversations = () => ({type: types.CONVERSATIONS_SUCCESS})
 
 export const fetchConversation = (id: number) => ({type: types.CONVERSATION_REQUEST, id})
 export const sendMessage = (conversationId: number) => ({type: types.MESSAGE_REQUEST, payload: {conversationId}})
+
+export const fetchMarkers = () => ({type: types.MARKERS_REQUEST})

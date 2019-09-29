@@ -3,6 +3,10 @@ import { StyleSheet, TouchableOpacity, View, Text, Image } from 'react-native'
 import colors from '../common/colors'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import * as reduxActions from '../common/actions'
+
 import { getFairteilerMarker, getFairteiler } from '../common/api'
 
 import ClusteredMapView from 'react-native-maps-super-cluster'
@@ -74,9 +78,12 @@ const styles = StyleSheet.create({
   }
 })
 
-type Props = {}
+type Props = {
+  actions: any,
+  markers: any
+}
 
-export default class Map extends PureComponent<Props> {
+class Map extends PureComponent<Props> {
   refs: {
     map: ClusteredMapView
   }
@@ -87,7 +94,8 @@ export default class Map extends PureComponent<Props> {
   }
 
   async componentDidMount() {
-    this.setState({fairteiler: await getFairteilerMarker()})
+    const { actions } = this.props
+    actions.fetchMarkers()
   }
 
   renderCluster = (cluster, onPress) => {
@@ -115,8 +123,9 @@ export default class Map extends PureComponent<Props> {
     />
 
   render() {
-    const { trackPosition, fairteiler } = this.state
-        , data = fairteiler.map(teiler => ({
+    const { trackPosition } = this.state
+        , { markers } = this.props
+        , data = markers.map(teiler => ({
           type: 'fairteiler',
           id: teiler.id,
           location: {
@@ -167,3 +176,16 @@ export default class Map extends PureComponent<Props> {
     )
   }
 }
+
+const mapStateToProps = state => ({
+  markers: state.markers
+})
+
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(reduxActions, dispatch)
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Map)

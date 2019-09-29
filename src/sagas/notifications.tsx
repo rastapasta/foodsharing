@@ -1,9 +1,9 @@
-import PushNotificationIOS from "@react-native-community/push-notification-ios"
+import PushNotificationIOS from '@react-native-community/push-notification-ios'
 import { Platform } from 'react-native'
 import { take } from 'redux-saga/effects'
 import { APPSTATE, WEBSOCKET_MESSAGE } from '../common/constants'
 
-export default function* notificationWatcher() {
+export default function* notificationSaga() {
   // Only activate background notifications on iOS for now
   if (Platform.OS !== 'ios')
     return
