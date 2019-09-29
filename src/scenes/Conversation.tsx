@@ -11,7 +11,6 @@ import MessageForm from '../components/MessageForm'
 import MessageBubble from '../components/MessageBubble'
 
 import colors from '../common/colors'
-import { ConversationListEntry, ConversationDetail, Message, Profile } from '../common/api'
 import { translate } from '../common/translation'
 
 const styles = StyleSheet.create({
@@ -35,7 +34,7 @@ const styles = StyleSheet.create({
 })
 
 type Props = {
-  conversation: ConversationListEntry
+  conversation: Foodsharing.ConversationListEntry
 
   messages: any
   actions: any
@@ -46,12 +45,12 @@ type Props = {
 interface Item {
   type: 'seperator' | 'received' | 'sent'
   label?: string
-  message: Message
+  message: Foodsharing.Message
 }
 
 class Conversation extends PureComponent<Props> {
   state = {
-    data: {} as ConversationDetail,
+    data: {} as Foodsharing.ConversationDetail,
     refreshing: false
   }
 
@@ -65,7 +64,7 @@ class Conversation extends PureComponent<Props> {
   //   return true
   // }
 
-  prepareItems(messages: Message[], profile: Profile): Item[] {
+  prepareItems(messages: Foodsharing.Message[], profile: Foodsharing.Profile): Item[] {
     const data = []
     let lastLabel = null
 
@@ -97,7 +96,7 @@ class Conversation extends PureComponent<Props> {
   render() {
     const { conversation, messages, actions, drafts, profile } = this.props
         , { refreshing } = this.state
-        , data = (messages[conversation.id] || []) as Message[]
+        , data = (messages[conversation.id] || []) as Foodsharing.Message[]
         , items = this.prepareItems(data, profile)
 
     return (

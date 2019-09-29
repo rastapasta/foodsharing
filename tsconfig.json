@@ -22,7 +22,6 @@
   },
   "include": [
     "./src/",
-    "src/common/global.d.ts",
     "typings/*.d.ts"
   ],
   "exclude": ["./src/tests/"],

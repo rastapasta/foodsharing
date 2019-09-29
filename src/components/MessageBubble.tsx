@@ -7,7 +7,6 @@ import Image from 'react-native-fast-image'
 import Linkify from './Linkify'
 
 import colors from '../common/colors'
-import { Message } from '../common/api'
 
 import moment from 'moment'
 
@@ -71,7 +70,7 @@ const styles = StyleSheet.create({
 
 type Props = {
   type: string
-  message: Message
+  message: Foodsharing.Message
 }
 
 const avatar = 'https://foodsharing.de/img/130_q_avatar.png'

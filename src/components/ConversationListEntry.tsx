@@ -9,7 +9,6 @@ import { connect } from 'react-redux'
 import * as reduxActions from '../common/actions'
 
 import colors from '../common/colors'
-import { ConversationListEntry, User, Profile } from '../common/api'
 import { translate } from '../common/translation'
 
 const { width } = Dimensions.get('window')
@@ -65,10 +64,10 @@ const styles = StyleSheet.create({
 })
 
 type Props = {
-  conversation: {member: string[]} & ConversationListEntry,
+  conversation: {member: string[]} & Foodsharing.ConversationListEntry,
   isLast: boolean,
-  foodsharers: {string: User},
-  profile: Profile
+  foodsharers: {string: Foodsharing.User},
+  profile: Foodsharing.Profile
 }
 
 const url = 'https://foodsharing.de/images/'

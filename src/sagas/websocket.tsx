@@ -1,12 +1,13 @@
 import socketIO from 'socket.io-client'
 import { eventChannel } from 'redux-saga'
-import { take, call, put } from 'redux-saga/effects'
+import { take, call, put, race } from 'redux-saga/effects'
 
 import {
   WEBSOCKET_CONNECTED,
   WEBSOCKET_DISCONNECT,
   WEBSOCKET_UNAUTHORIZED,
   WEBSOCKET_ERROR,
+  WEBSOCKET_RECONNECT,
   WEBSOCKET_MESSAGE,
   LOGIN_SUCCESS,
   LOGOUT
@@ -15,7 +16,7 @@ import {
 function initWebsocket(session: string) {
   return eventChannel(emitter => {
     // Connect to the live's system's socket server - handles messages for beta as well
-    const socket = socketIO('https://foodsharing.de', {
+    const socket = new socketIO('https://foodsharing.de', {
       transportOptions: {
         polling: {
           extraHeaders: {
@@ -41,7 +42,7 @@ function initWebsocket(session: string) {
 
     // Error handling on library level
     socket.on('error', error =>
-      emitter({type: error.match(/not authorized/) ? WEBSOCKET_UNAUTHORIZED : WEBSOCKET_ERROR, error})
+      emitter({type: error.match(/not authorized/) ? WEBSOCKET_UNAUTHORIZED : WEBSOCKET_ERROR, session})
     )
 
     // Error handling on connection level
@@ -60,9 +61,15 @@ function initWebsocket(session: string) {
       emitter({type: WEBSOCKET_DISCONNECT})
     )
 
+    // Notify redux any time the connection drops
+    socket.on('reconnect', () =>
+      emitter({type: WEBSOCKET_RECONNECT})
+    )
+
     // Tell the event channel reactor how to disconnect
-    return () =>
-      socket.close()
+    return () => {
+      socket.disconnect()
+    }
   })
 }
 
@@ -77,17 +84,19 @@ export default function* websocketSagas() {
     while (true) {
       // Wait for an action emitted by the websocket channel
       // TODO: implement take from channel OR LOGOUT
-      const action = yield take(channel)
-          , { type } = action
+      const { message, logout } = yield race({
+          message: take(channel),
+          logout: take(LOGOUT)
+        })
 
       // Close the channel/socket in case the user logged out
-      if (type === LOGOUT) {
+      if (logout) {
         channel.close()
         break
       }
 
       // Pass through the received actions
-      yield put(action)
+      yield put(message)
     }
   }
 }

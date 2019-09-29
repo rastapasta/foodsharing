@@ -14,7 +14,7 @@ import {
   PROFILE
 } from '../common/constants'
 
-import { login, logout, getCurrentUser, getSession, getProfile, setSession, results } from '../common/api'
+import { login, logout, getCurrentUser, getSession, getProfile, setSession } from '../common/api'
 
 function* loginFlow(email: string, password: string) {
   let user
@@ -40,7 +40,7 @@ function* loginFlow(email: string, password: string) {
 
   } catch (error) {
     // In case we receive a malformed-error, clear all cookies and try again
-    if (error === results.MALFORMED) {
+    if (error === Foodsharing.results.MALFORMED) {
       yield CookieManager.clearAll()
       return yield call(loginFlow, email, password)
     }

@@ -5,7 +5,6 @@ import ActivityIndicator from '../components/ActivityIndicator'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as reduxActions from '../common/actions'
-import { Fairteiler as FairteilerType } from '../common/api'
 
 import colors from '../common/colors'
 
@@ -18,7 +17,7 @@ const styles = StyleSheet.create({
 
 type Props = {
   id: number
-  fairteiler: {string: FairteilerType}
+  fairteiler: {string: Foodsharing.Fairteiler}
   actions: any
   walls: any
 }

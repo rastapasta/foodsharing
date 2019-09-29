@@ -7,8 +7,6 @@ import * as reduxActions from '../common/actions'
 
 import colors from '../common/colors'
 
-import { ConversationListEntry as ListEntry } from '../common/api'
-
 import ConversationListEntry from '../components/ConversationListEntry'
 
 const styles = StyleSheet.create({
@@ -25,7 +23,7 @@ const styles = StyleSheet.create({
 })
 
 type Props = {
-  conversations: ListEntry[],
+  conversations: Foodsharing.ConversationListEntry[],
   actions?: any
 }
 
