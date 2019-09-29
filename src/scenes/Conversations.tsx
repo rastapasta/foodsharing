@@ -6,8 +6,9 @@ import { connect } from 'react-redux'
 import * as reduxActions from '../common/actions'
 
 import colors from '../common/colors'
-
 import ConversationListEntry from '../components/ConversationListEntry'
+
+import { ConversationListEntry as ConversationListEntryType } from '../typings/foodsharing'
 
 const styles = StyleSheet.create({
   container: {
@@ -23,7 +24,7 @@ const styles = StyleSheet.create({
 })
 
 type Props = {
-  conversations: Foodsharing.ConversationListEntry[],
+  conversations: ConversationListEntryType[],
   actions?: any
 }
 
@@ -39,7 +40,7 @@ class Conversations extends PureComponent<Props> {
 
   render() {
     const { conversations, actions } = this.props
-        , data = conversations.sort((a, b) => b.last_ts - a.last_ts)
+        , data = conversations.sort((a, b) => parseInt(b.last_ts) - parseInt(a.last_ts))
         , { refreshing } = this.state
     return (
       <SafeAreaView style={styles.container}>

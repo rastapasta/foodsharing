@@ -8,6 +8,8 @@ import * as reduxActions from '../common/actions'
 
 import colors from '../common/colors'
 
+import { Fairteiler as FairteilerType } from '../typings/foodsharing'
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -17,7 +19,7 @@ const styles = StyleSheet.create({
 
 type Props = {
   id: number
-  fairteiler: {string: Foodsharing.Fairteiler}
+  fairteiler: {string: FairteilerType}
   actions: any
   walls: any
 }

@@ -32,6 +32,7 @@ export default function* notificationSaga() {
 
       // Successful conversations pull after waking up
       if (type === CONVERSATIONS_SUCCESS) {
+        // TODO: move that to background process
         console.log(type)
 
         const messages = yield select(state => state.messages)

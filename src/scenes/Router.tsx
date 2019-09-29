@@ -15,7 +15,6 @@ import Home from './Home'
 import Fairteiler from './Fairteiler'
 import Loading from './Loading'
 
-
 const styles = StyleSheet.create({
   tabBarStyle: {
     backgroundColor: colors.background,
@@ -48,21 +47,11 @@ export default () =>
       <RouterDrawer
         hideNavBar
         key="drawer"
-        onExit={() => {
-          console.log('Drawer closed');
-        }}
-        onEnter={() => {
-          console.log('Drawer opened');
-        }}
         contentComponent={Drawer}
-        // drawerImage={() => <Icon name=}
         drawerWidth={240}
       >
         <Tabs
           key="main"
-          // onTabOnPress={() => {
-          //   console.log('Back to initial and also print this');
-          // }}
           showLabel={true}
           tabBarStyle={styles.tabBarStyle}
           activeTintColor="#D7CCC8"

@@ -1,4 +1,5 @@
 import setCookie from 'set-cookie-parser'
+import { User, Results, Fairteiler, Marker, ConversationDetail, ConversationListEntry, WallPosts, Message, Profile } from '../typings/foodsharing'
 
 const host = 'https://beta.foodsharing.de'
     , endpoints = {
@@ -75,13 +76,13 @@ function request(
 
     // console.warn('request error', endpoint, data, options, response)
     switch (response.status) {
-      case 400: throw Foodsharing.Results.MALFORMED
-      case 401: throw Foodsharing.Results.FORBIDDEN
-      case 403: throw Foodsharing.Results.UNAUTHORIZED
-      case 404: throw Foodsharing.Results.NOT_FOUND
-      case 500: throw Foodsharing.Results.SERVER_ERROR
+      case 400: throw Results.MALFORMED
+      case 401: throw Results.FORBIDDEN
+      case 403: throw Results.UNAUTHORIZED
+      case 404: throw Results.NOT_FOUND
+      case 500: throw Results.SERVER_ERROR
 
-      default: throw Foodsharing.Results.SERVER_ERROR
+      default: throw Results.SERVER_ERROR
     }
   })
 }
@@ -96,37 +97,37 @@ export const setSession = ({session, token}) => {
   cookies.CSRF_TOKEN = token
 }
 
-export const login = (email: string, password: string): Promise<Foodsharing.User> =>
+export const login = (email: string, password: string): Promise<User> =>
   request('login', {email, password, remember_me: true})
 
 export const logout = (): Promise<void> =>
   request('logout')
 
-export const getCurrentUser = (): Promise<Foodsharing.User> =>
+export const getCurrentUser = (): Promise<User> =>
   request('current')
 
-export const getFairteiler = (id: number): Promise<Foodsharing.Fairteiler> =>
+export const getFairteiler = (id: number): Promise<Fairteiler> =>
   request('fairteiler', null, {id})
 
-export const getFairteilerMarker = async (): Promise<Foodsharing.Marker[]> =>
+export const getFairteilerMarker = async (): Promise<Marker[]> =>
   (await request('fairteilerMarker')).fairteiler
 
-export const getConversations = (): Promise<Foodsharing.ConversationListEntry[]> =>
+export const getConversations = (): Promise<ConversationListEntry[]> =>
   request('conversations')
 
-export const getConversation = (conversationId: number): Promise<Foodsharing.ConversationDetail> =>
+export const getConversation = (conversationId: number): Promise<ConversationDetail> =>
   request('conversation', null, {conversationId})
 
-export const getWall = (target: 'foodsaver' | 'fairteiler', targetId: number): Promise<Foodsharing.WallPosts> =>
+export const getWall = (target: 'foodsaver' | 'fairteiler', targetId: number): Promise<WallPosts> =>
   request('wall', null, {target, targetId})
 
-export const sendMessage = async (conversationId: number, text: string): Promise<Foodsharing.Message> =>
+export const sendMessage = async (conversationId: number, text: string): Promise<Message> =>
   (await request('message', {c: conversationId, b: text})).data.msg
 
 export const userToConversationId = async (userId: number): Promise<number> =>
   parseInt((await request('user2conv', null, {userId})).data.cid)
 
-export const getProfile = (): Promise<Foodsharing.Profile> =>
+export const getProfile = (): Promise<Profile> =>
   request('profile')
 
 

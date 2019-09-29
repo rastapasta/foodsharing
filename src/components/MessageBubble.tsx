@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, View, Dimensions, Text } from 'react-native'
 import { AllHtmlEntities } from 'html-entities'
+import { Message } from '../typings/foodsharing'
 
 import Image from 'react-native-fast-image'
 
@@ -70,7 +71,7 @@ const styles = StyleSheet.create({
 
 type Props = {
   type: string
-  message: Foodsharing.Message
+  message: Message
 }
 
 const avatar = 'https://foodsharing.de/img/130_q_avatar.png'

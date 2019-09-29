@@ -9,6 +9,7 @@ import * as reduxActions from '../common/actions'
 
 import MessageForm from '../components/MessageForm'
 import MessageBubble from '../components/MessageBubble'
+import { ConversationDetail, ConversationListEntry, Message, Profile } from '../typings/foodsharing'
 
 import colors from '../common/colors'
 import { translate } from '../common/translation'
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
 })
 
 type Props = {
-  conversation: Foodsharing.ConversationListEntry
+  conversation: ConversationListEntry
 
   messages: any
   actions: any
@@ -45,12 +46,12 @@ type Props = {
 interface Item {
   type: 'seperator' | 'received' | 'sent'
   label?: string
-  message: Foodsharing.Message
+  message: Message
 }
 
 class Conversation extends PureComponent<Props> {
   state = {
-    data: {} as Foodsharing.ConversationDetail,
+    data: {} as ConversationDetail,
     refreshing: false
   }
 
@@ -64,7 +65,7 @@ class Conversation extends PureComponent<Props> {
   //   return true
   // }
 
-  prepareItems(messages: Foodsharing.Message[], profile: Foodsharing.Profile): Item[] {
+  prepareItems(messages: Message[], profile: Profile): Item[] {
     const data = []
     let lastLabel = null
 
@@ -96,7 +97,7 @@ class Conversation extends PureComponent<Props> {
   render() {
     const { conversation, messages, actions, drafts, profile } = this.props
         , { refreshing } = this.state
-        , data = (messages[conversation.id] || []) as Foodsharing.Message[]
+        , data = (messages[conversation.id] || []) as Message[]
         , items = this.prepareItems(data, profile)
 
     return (

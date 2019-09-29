@@ -59,9 +59,12 @@ export default function* backgroundSagas() {
         break
       }
 
-      // ... otherwise proceed with our background task!
+      // From here on we *are* the background task!
+
+      // ... let's announce it!
       yield put(background)
 
+      // const conversations = yield select(state => state.conversations)
       // Initiate a conversations list refresh
       yield put({type: CONVERSATIONS_REQUEST})
 
