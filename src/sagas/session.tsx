@@ -2,6 +2,7 @@ import { take, fork, call, put, select } from 'redux-saga/effects'
 import { Actions } from 'react-native-router-flux'
 import * as Keychain from 'react-native-keychain'
 import { actions as formActions } from 'react-redux-form'
+import SplashScreen from 'react-native-splash-screen'
 
 import {
   LOGIN_REQUEST,
@@ -12,7 +13,7 @@ import {
   PROFILE
 } from '../common/constants'
 
-import { login, logout, getSession, getProfile } from '../common/api'
+import { login, getCurrentUser, getSession, getProfile } from '../common/api'
 
 function* loginFlow(email: string, password: string) {
   let user
@@ -21,14 +22,17 @@ function* loginFlow(email: string, password: string) {
     // Here we go, login the user
     user = yield call(login, email, password)
 
+    // All good, let's proceed to main
+    Actions.reset('drawer')
+
+    // If we came that far, unhide the splash screen
+    yield SplashScreen.hide()
+
     // Signal our succesful login and broadcast our fresh token and session
     yield put({type: LOGIN_SUCCESS, payload: getSession()})
 
     // Save the validated email and password in the device's safe store
     Keychain.setGenericPassword(email, password).then(() => true)
-
-    // All good, let's proceed to main
-    Actions.reset('drawer')
 
     // Request and broadcast the profile information of our fresh user
     yield put({type: PROFILE, payload: yield call(getProfile)})
@@ -50,30 +54,26 @@ function* logoutFlow() {
   Actions.reset('login')
 
   // Delete the previously stored password from the secure location
-
   Keychain.resetGenericPassword().then(() => true)
 
   // Log the user out from foodsharing.network
-  yield call(logout)
+  // yield call(logout)
 }
 
 function* reauthenticate() {
   // Notificate all listeners that we got a valid session running
   const { session, token } = yield select(state => state.app)
 
-  // Instantly drop the user to the main area for now until we figure out the authentication
-  if (session)
-    yield Actions.reset('drawer')
-
   try {
     if (!session)
       throw false
 
     // Check if we still have a valid session at hand
-    const profile = yield getProfile()
+    yield getCurrentUser()
 
-    // Yep, update it
-    yield put({type: PROFILE, payload: profile})
+    // Yes, so instantly forward the user to the internal area and hide the splashscreen
+    yield Actions.reset('drawer')
+    yield SplashScreen.hide()
 
     // Notificate all listeners that we got a valid session running
     yield put({type: LOGIN_SUCCESS, payload: {session, token}})
@@ -100,6 +100,8 @@ function* reauthenticate() {
 }
 
 export default function* loginWatcher() {
+  yield take('persist/REHYDRATE')
+
   // Water our store with previously stored credentials
   yield fork(reauthenticate)
 

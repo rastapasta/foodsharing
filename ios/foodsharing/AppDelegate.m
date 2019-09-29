@@ -11,6 +11,7 @@
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 #import <RNCPushNotificationIOS.h>
+#import "RNSplashScreen.h"
 
 @implementation AppDelegate
 
@@ -21,7 +22,7 @@
                                                    moduleName:@"foodsharing"
                                             initialProperties:nil];
 
-  rootView.backgroundColor = [[UIColor alloc] initWithRed:0.325f green:0.227f blue:0.125f alpha:1];
+  rootView.backgroundColor = [[UIColor alloc] initWithRed:0.47f green:0.33f blue:0.29f alpha:1];
 
   if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)])
     [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
@@ -31,6 +32,8 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+
+  [RNSplashScreen show];
   return YES;
 }
 

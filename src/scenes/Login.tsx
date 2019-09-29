@@ -18,6 +18,7 @@ import * as reduxActions from '../common/actions'
 import { Form } from 'react-redux-form/native'
 
 import Toast from 'react-native-easy-toast'
+import SplashScreen from 'react-native-splash-screen'
 
 import Logo from '../components/Logo'
 import LoginTextInput from '../components/LoginTextInput'
@@ -60,6 +61,9 @@ class Login extends PureComponent<Props> {
     password: null
   }
 
+  componentDidMount() {
+    SplashScreen.hide()
+  }
   // doLogin = async () => {
   //   const {email, password} = this.state
 
@@ -77,7 +81,6 @@ class Login extends PureComponent<Props> {
     const { actions } = this.props as any
     return (
       <SafeAreaView style={styles.container}>
-        <StatusBar backgroundColor={colors.background} barStyle="light-content" />
         <KeyboardAvoidingView
           enabled
           style={styles.form}

@@ -23,6 +23,7 @@ const host = 'https://beta.foodsharing.de'
     , cookies = {}
 
 export enum results {
+  AUTHORIZED,
   UNAUTHORIZED,
   FORBIDDEN,
   CONNECTION_ERROR,
@@ -160,8 +161,9 @@ function request(
     if (response.status === 200)
       return response.json()
 
-    // console.warn('request error', endpoint, data, options, response)
+    console.warn('request error', endpoint, data, options, response)
     switch (response.status) {
+      case 400: throw results.AUTHORIZED
       case 401: throw results.FORBIDDEN
       case 403: throw results.UNAUTHORIZED
       case 404: throw results.NOT_FOUND
@@ -173,7 +175,7 @@ function request(
 }
 
 export const login = (email: string, password: string): Promise<User> =>
-  request('login', {email, password})
+  request('login', {email, password, remember_me: "1"})
 
 export const logout = (): Promise<void> =>
   request('logout')
