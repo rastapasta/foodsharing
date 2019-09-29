@@ -6,6 +6,8 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as reduxActions from '../common/actions'
 
+import { Actions } from 'react-native-router-flux'
+
 import MapButton from '../components/MapButton'
 import MapCluster from '../components/MapCluster'
 
@@ -89,7 +91,7 @@ class Map extends PureComponent<Props> {
           showsUserLocation={trackPosition}
           followsUserLocation
 
-          renderMarker={marker => <MapMarker key={'marker.'+marker.id} marker={marker} onPress={() => actions.fetchFairteiler(marker.id)} />}
+          renderMarker={marker => <MapMarker key={'marker.'+marker.id} marker={marker} onPress={() => Actions.fairteiler({id: marker.id})} />}
           renderCluster={(cluster, onPress) => <MapCluster key={'cluster.'+cluster.id} cluster={cluster} onPress={onPress} />}
         />
         <MapButton

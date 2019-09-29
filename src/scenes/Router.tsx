@@ -5,12 +5,15 @@ import colors from '../common/colors'
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
+import Drawer from '../components/Drawer'
+
 import Login from './Login'
 import Map from './Map'
 import Conversations from './Conversations'
 import Conversation from './Conversation'
 import Home from './Home'
-import Drawer from '../components/Drawer'
+import Fairteiler from './Fairteiler'
+
 
 const styles = StyleSheet.create({
   tabBarStyle: {
@@ -84,6 +87,12 @@ export default () =>
         key="conversation"
         title="Conversation"
         component={Conversation}
+        hideNavBar={false}
+      />
+      <Scene
+        key="fairteiler"
+        title="Fairteiler"
+        component={Fairteiler}
         hideNavBar={false}
       />
     </Stack>
