@@ -7,7 +7,8 @@ import {
   View,
   Linking,
   Keyboard,
-  Platform
+  Platform,
+  StatusBar
 } from 'react-native'
 
 import { bindActionCreators } from 'redux'
@@ -80,6 +81,7 @@ class Login extends PureComponent<Props> {
     const { actions } = this.props as any
     return (
       <SafeAreaView style={styles.container}>
+        <StatusBar backgroundColor={colors.background} barStyle="light-content" />
         <KeyboardAvoidingView
           enabled
           style={styles.form}

@@ -215,7 +215,7 @@ export const getConversations = (): Promise<ConversationListEntry[]> =>
 export const getConversation = (conversationId: number): Promise<ConversationDetail> =>
   request('conversation', null, {conversationId})
 
-export const getWall = (target: 'foodsharer' | 'fairteiler', targetId: number): Promise<WallPosts> =>
+export const getWall = (target: 'foodsaver' | 'fairteiler', targetId: number): Promise<WallPosts> =>
   request('wall', null, {target, targetId})
 
 export const sendMessage = async (conversationId: number, text: string): Promise<Message> =>

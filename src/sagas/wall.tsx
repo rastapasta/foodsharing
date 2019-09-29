@@ -3,9 +3,11 @@ import { take, put, fork } from 'redux-saga/effects'
 import { getWall } from '../common/api'
 import { WALL_REQUEST, WALL_SUCCESS } from '../common/constants'
 
-function* fetch(target: 'foodsharer' | 'fairteiler', id: number) {
+function* fetch(target: 'foodsaver' | 'fairteiler', id: number) {
   yield put({
     type: WALL_SUCCESS,
+    target,
+    id,
     payload: yield getWall(target, id)
   })
 }

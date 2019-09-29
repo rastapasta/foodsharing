@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { SafeAreaView, StyleSheet, FlatList } from 'react-native'
+import { SafeAreaView, StyleSheet, FlatList, StatusBar } from 'react-native'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -44,6 +44,8 @@ class Conversations extends PureComponent<Props> {
         , { refreshing } = this.state
     return (
       <SafeAreaView style={styles.container}>
+        <StatusBar backgroundColor={colors.background} barStyle="light-content" />
+
         <FlatList
           onRefresh={() => {
             actions.fetchConversations()

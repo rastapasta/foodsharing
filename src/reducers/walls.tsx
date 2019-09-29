@@ -4,16 +4,16 @@ import {
 
 const initialState = {
   fairteiler: {},
-  foodsharer: {}
+  foodsaver: {}
 }
 
 export default function reducer(state = initialState, action: any = {}) {
   switch (action.type) {
     case WALL_SUCCESS:
       const newState = {...state}
-      //     , { payload } = action
+        , { payload, target, id } = action
 
-      // newState[payload.id] = {...payload}
+      newState[target][`${id}`] = payload
       return newState
 
     default:

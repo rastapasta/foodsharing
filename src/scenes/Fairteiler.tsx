@@ -9,7 +9,6 @@ import { Fairteiler as FairteilerType } from '../common/api'
 
 import colors from '../common/colors'
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -21,16 +20,19 @@ type Props = {
   id: number
   fairteiler: {string: FairteilerType}
   actions: any
+  walls: any
 }
 
 class Fairteiler extends PureComponent<Props> {
   componentDidMount() {
     const { actions, id } = this.props
     actions.fetchFairteiler(id)
+    actions.fetchWall('fairteiler', id)
   }
 
   render() {
-    const {id, fairteiler} = this.props
+    const { id, fairteiler, walls } = this.props
+        , wall = walls.fairteiler[`${id}`] || null
         , data = fairteiler[id] || null
 
     if (!data)
@@ -40,7 +42,7 @@ class Fairteiler extends PureComponent<Props> {
       <SafeAreaView style={styles.container}>
         <View>
           <Text>
-            {data.name}
+            {data.name} - {wall ? wall.results.length + ' comments' : '0 comments'}
           </Text>
         </View>
       </SafeAreaView>
@@ -49,7 +51,8 @@ class Fairteiler extends PureComponent<Props> {
 }
 
 const mapStateToProps = state => ({
-  fairteiler: state.fairteiler
+  fairteiler: state.fairteiler,
+  walls: state.walls
 })
 
 const mapDispatchToProps = dispatch => ({
