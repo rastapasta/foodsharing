@@ -7,14 +7,14 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.white
   }
 })
 
-export default () =>
-  <View style={styles.container}>
+export default ({backgroundColor, color}) =>
+  <View style={[styles.container, !!backgroundColor && {backgroundColor}]}>
     <ActivityIndicator
       animating
+      color={color}
       size="large"
     />
   </View>

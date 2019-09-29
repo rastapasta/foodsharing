@@ -50,26 +50,58 @@ function* logoutFlow() {
   Actions.reset('login')
 
   // Delete the previously stored password from the secure location
+
   Keychain.resetGenericPassword().then(() => true)
 
   // Log the user out from foodsharing.network
   yield call(logout)
 }
 
-function* loadCredentials() {
-  // Try to pull previously stored credentials from secure store
-  const result = yield Keychain.getGenericPassword()
-  if (result) {
-    const { username: email, password } = result
+function* reauthenticate() {
+  // Notificate all listeners that we got a valid session running
+  const { session, token } = yield select(state => state.app)
+
+  // Instantly drop the user to the main area for now until we figure out the authentication
+  if (session)
+    yield Actions.reset('drawer')
+
+  try {
+    if (!session)
+      throw false
+
+    // Check if we still have a valid session at hand
+    const profile = yield getProfile()
+
+    // Yep, update it
+    yield put({type: PROFILE, payload: profile})
+
+    // Notificate all listeners that we got a valid session running
+    yield put({type: LOGIN_SUCCESS, payload: {session, token}})
+
+  } catch(e) {
+    // Try to pull previously stored credentials from secure store
+    const result = yield Keychain.getGenericPassword()
+
+    // If we don't find what we need, directly proceed to login
+    if (!result || !result.username || !result.password)
+      return Actions.reset('login')
 
     // Blast them through the pipe to get 'em into the store
+    const { username: email, password } = result
     yield put({type: KEYCHAIN, payload: {email, password}})
+
+    // Populate our login state/form
+    yield put(formActions.change('login.email', email))
+    yield put(formActions.change('login.password', password))
+
+    // ... to finally trigger the login procedure
+    yield put({type: LOGIN_REQUEST})
   }
 }
 
 export default function* loginWatcher() {
   // Water our store with previously stored credentials
-  yield call(loadCredentials)
+  yield fork(reauthenticate)
 
   while (true) {
     // Wait until we get a login request

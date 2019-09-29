@@ -34,7 +34,7 @@ class Fairteiler extends PureComponent<Props> {
         , data = fairteiler[id] || null
 
     if (!data)
-      return <ActivityIndicator />
+      return <ActivityIndicator backgroundColor={colors.white} color={colors.background} />
 
     return (
       <SafeAreaView style={styles.container}>

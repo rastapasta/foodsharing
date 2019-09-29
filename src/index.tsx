@@ -12,6 +12,7 @@ YellowBox.ignoreWarnings([
   'Warning: componentWillMount',
   'Calling bridge.imageLoader',
   'Warning: componentWillUpdate',
+  'Setting DrawerLayoutAndroid'
 ])
 
 

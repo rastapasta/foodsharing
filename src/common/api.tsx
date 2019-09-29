@@ -160,7 +160,7 @@ function request(
     if (response.status === 200)
       return response.json()
 
-    console.warn('request error', endpoint, data, options, response)
+    // console.warn('request error', endpoint, data, options, response)
     switch (response.status) {
       case 401: throw results.FORBIDDEN
       case 403: throw results.UNAUTHORIZED

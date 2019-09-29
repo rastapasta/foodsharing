@@ -13,6 +13,7 @@ import Conversations from './Conversations'
 import Conversation from './Conversation'
 import Home from './Home'
 import Fairteiler from './Fairteiler'
+import Loading from './Loading'
 
 
 const styles = StyleSheet.create({
@@ -37,6 +38,10 @@ export default () =>
     >
       <Scene
         initial
+        key="loading"
+        component={Loading}
+      />
+      <Scene
         key="login"
         component={Login}
       />
