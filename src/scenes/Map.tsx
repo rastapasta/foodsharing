@@ -21,8 +21,7 @@ const INIT_REGION = {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: colors.white,
+    flex: 1
   },
   map: {
     flex: 1
@@ -71,6 +70,7 @@ class Map extends PureComponent<Props> {
 
   render() {
     const { trackPosition } = this.state
+        , { actions } = this.props
         , data = this.transformMarkers()
 
     return (
@@ -89,8 +89,8 @@ class Map extends PureComponent<Props> {
           showsUserLocation={trackPosition}
           followsUserLocation
 
-          renderMarker={marker => <MapMarker marker={marker} />}
-          renderCluster={(cluster, onPress) => <MapCluster cluster={cluster} onPress={onPress} />}
+          renderMarker={marker => <MapMarker key={'marker.'+marker.id} marker={marker} onPress={() => actions.fetchFairteiler(marker.id)} />}
+          renderCluster={(cluster, onPress) => <MapCluster key={'cluster.'+cluster.id} cluster={cluster} onPress={onPress} />}
         />
         <MapButton
           onPress={() => this.setState({trackPosition: !trackPosition})}

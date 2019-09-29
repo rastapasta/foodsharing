@@ -14,3 +14,4 @@ export const fetchConversation = (id: number) => ({type: types.CONVERSATION_REQU
 export const sendMessage = (conversationId: number) => ({type: types.MESSAGE_REQUEST, payload: {conversationId}})
 
 export const fetchMarkers = () => ({type: types.MARKERS_REQUEST})
+export const fetchFairteiler = (payload: number) => ({type: types.FAIRTEILER_REQUEST, payload})

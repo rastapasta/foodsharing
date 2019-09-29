@@ -5,10 +5,7 @@ import { Marker } from 'react-native-maps'
 import colors from '../common/colors'
 
 const clusterImageSize = 50
-    , icons = {
-        cluster: require('../../assets/marker/marker_cluster.png'),
-        fairteiler: require('../../assets/marker/marker_fairteiler.png')
-      }
+    , image = require('../../assets/marker/marker_cluster.png')
 
 const styles = StyleSheet.create({
   container: {
@@ -34,10 +31,21 @@ const styles = StyleSheet.create({
 })
 
 export default  ({cluster, onPress}) =>
-  <Marker coordinate={cluster.coordinate} onPress={onPress}>
+  <Marker
+    coordinate={cluster.coordinate}
+    onPress={onPress}
+  >
     <View style={styles.container}>
-      <Image source={icons.cluster} style={styles.clusterImage} />
-      <Text style={styles.clusterText} adjustsFontSizeToFit numberOfLines={1}>
+      <Image
+        source={image}
+        style={styles.clusterImage}
+      />
+
+      <Text
+        style={styles.clusterText}
+        adjustsFontSizeToFit
+        numberOfLines={1}
+      >
         {cluster.pointCount}
       </Text>
     </View>

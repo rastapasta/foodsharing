@@ -5,11 +5,10 @@ const icons = {
         fairteiler: require('../../assets/marker/marker_fairteiler.png')
       }
 
-export default ({marker}) =>
+export default ({marker, onPress}) =>
   <Marker
-    key={marker.id}
     image={icons[marker.type]}
     coordinate={marker.location}
     anchor={{x: 0.5, y: 1}}
-    // onPress={async () => console.log(await getFairteiler(data.id))}
+    onPress={onPress}
   />

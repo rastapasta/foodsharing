@@ -6,6 +6,7 @@ import Conversations from './conversations'
 import Conversation from './conversation'
 import Notifications from './notifications'
 import Markers from './markers'
+import Fairteiler from './fairteiler'
 
 // Start all our sagas in parallel
 export default function* rootSaga () {
@@ -15,6 +16,7 @@ export default function* rootSaga () {
     Conversations(),
     Conversation(),
     Notifications(),
-    Markers()
+    Markers(),
+    Fairteiler()
   ])
 }
