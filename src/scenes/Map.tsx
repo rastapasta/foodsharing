@@ -66,9 +66,11 @@ const styles = StyleSheet.create({
   },
   clusterText: {
     color: colors.white,
-    fontSize: 10,
+    fontSize: 11,
     fontWeight: 'bold',
-    paddingLeft: 1
+    textAlignVertical: 'center',
+    width: 17,
+    textAlign: 'center'
   }
 })
 
@@ -95,7 +97,7 @@ export default class Map extends PureComponent<Props> {
       <Marker coordinate={coordinate} onPress={onPress}>
         <View style={styles.cluster}>
           <Image source={icons.cluster} style={styles.clusterImage} />
-          <Text style={styles.clusterText}>
+          <Text style={styles.clusterText} adjustsFontSizeToFit numberOfLines={1}>
             {pointCount}
           </Text>
         </View>
