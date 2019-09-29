@@ -1,4 +1,4 @@
-package com.foodsharing;
+package network.foodsharing;
 
 import android.app.Application;
 import android.content.Context;

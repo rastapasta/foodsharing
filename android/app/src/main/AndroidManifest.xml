@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.foodsharing">
+  package="network.foodsharing">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -12,6 +12,7 @@
       android:theme="@style/AppTheme">
       <activity
         android:name=".MainActivity"
+        android:screenOrientation="portrait"
         android:label="@string/app_name"
         android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
         android:windowSoftInputMode="adjustResize">

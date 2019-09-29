@@ -1,4 +1,4 @@
-package com.foodsharing;
+package network.foodsharing;
 
 import com.facebook.react.ReactActivity;
 
