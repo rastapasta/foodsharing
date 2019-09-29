@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, View, Dimensions, Text } from 'react-native'
 import { AllHtmlEntities } from 'html-entities'
-import { Message } from '../typings/foodsharing'
+import { Message } from '../common/typings'
 
 import Image from 'react-native-fast-image'
 

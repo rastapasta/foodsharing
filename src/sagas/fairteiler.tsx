@@ -16,10 +16,9 @@ export default function* fairteilerSaga() {
   while (true) {
     // Wait until we get a fairteiler request
     const { type, payload: id } = yield take([FAIRTEILER_REQUEST, FAIRTEILER_PREFETCH])
-        , current = yield select(state => state.fairteiler[`${id}`])
 
     // Only request if its a usual request or if the fairtailer isn't prefetched yet
-    if (type === FAIRTEILER_REQUEST || !current)
+    if (type === FAIRTEILER_REQUEST || !(yield select(state => state.fairteiler[`${id}`])))
       yield fork(fetch, id)
   }
 }

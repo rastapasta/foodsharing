@@ -15,6 +15,7 @@ import {
 } from '../common/constants'
 
 import { login, logout, getCurrentUser, getSession, getProfile, setSession } from '../common/api'
+import { Results } from '../common/typings'
 
 function* loginFlow(email: string, password: string) {
   let user
@@ -40,7 +41,7 @@ function* loginFlow(email: string, password: string) {
 
   } catch (error) {
     // In case we receive a malformed-error, clear all cookies and try again
-    if (error === 0) {
+    if (error === Results.MALFORMED) {
       yield CookieManager.clearAll()
       return yield call(loginFlow, email, password)
     }
@@ -67,8 +68,11 @@ function* logoutFlow() {
   try {
     yield call(logout)
   } catch(e) {
-    console.log('logout failed', e)
+    console.log('online logout failed', e)
   }
+
+  // Hard reset all system cookies
+  yield CookieManager.clearAll()
 }
 
 function* reauthenticateFlow() {

@@ -9,7 +9,7 @@ import * as reduxActions from '../common/actions'
 
 import MessageForm from '../components/MessageForm'
 import MessageBubble from '../components/MessageBubble'
-import { ConversationDetail, ConversationListEntry, Message, Profile } from '../typings/foodsharing'
+import { ConversationDetail, ConversationListEntry, Message, Profile } from '../common/typings'
 
 import colors from '../common/colors'
 import { translate } from '../common/translation'

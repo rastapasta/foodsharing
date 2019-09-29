@@ -1,9 +1,7 @@
 import AsyncStorage from '@react-native-community/async-storage'
-import {createStore, applyMiddleware, compose } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import createSagaMiddleware from 'redux-saga'
-
-import { createReactNavigationReduxMiddleware } from 'react-navigation-redux-helpers'
 
 import { persistStore, persistReducer } from 'redux-persist'
 
@@ -24,7 +22,7 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, reducers)
     , sagaMiddleware = createSagaMiddleware()
     , composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-    , middleware = [appState, thunk, createReactNavigationReduxMiddleware((state: any) => state.nav), sagaMiddleware]
+    , middleware = [appState, thunk, sagaMiddleware]
     , enhancer = composeEnhancers(
       applyMiddleware(...middleware)
     )

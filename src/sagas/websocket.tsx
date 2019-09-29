@@ -16,7 +16,7 @@ import {
 function initWebsocket(session: string) {
   return eventChannel(emitter => {
     // Connect to the live's system's socket server - handles messages for beta as well
-    const socket = new socketIO('https://foodsharing.de', {
+    const socket = socketIO('https://foodsharing.de', {
       transportOptions: {
         polling: {
           extraHeaders: {
@@ -24,6 +24,7 @@ function initWebsocket(session: string) {
           }
         }
       },
+      forceNew: true,
       path: '/chat/socket.io/',
       reconnectionDelay: 5000,
       reconnection: true,

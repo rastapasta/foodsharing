@@ -8,7 +8,7 @@ import * as reduxActions from '../common/actions'
 import colors from '../common/colors'
 import ConversationListEntry from '../components/ConversationListEntry'
 
-import { ConversationListEntry as ConversationListEntryType } from '../typings/foodsharing'
+import { ConversationListEntry as ConversationListEntryType } from '../common/typings'
 
 const styles = StyleSheet.create({
   container: {

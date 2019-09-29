@@ -8,7 +8,7 @@ import * as reduxActions from '../common/actions'
 
 import colors from '../common/colors'
 
-import { Fairteiler as FairteilerType } from '../typings/foodsharing'
+import { Fairteiler as FairteilerType } from '../common/typings'
 
 const styles = StyleSheet.create({
   container: {

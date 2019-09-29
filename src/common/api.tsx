@@ -1,5 +1,5 @@
 import setCookie from 'set-cookie-parser'
-import { User, Results, Fairteiler, Marker, ConversationDetail, ConversationListEntry, WallPosts, Message, Profile } from '../typings/foodsharing'
+import { User, Results, Fairteiler, Marker, ConversationDetail, ConversationListEntry, WallPosts, Message, Profile } from './typings'
 
 const host = 'https://beta.foodsharing.de'
     , endpoints = {

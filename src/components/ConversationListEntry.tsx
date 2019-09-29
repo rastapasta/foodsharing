@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, Dimensions, TouchableOpacity } from 'react-nati
 import { Actions } from 'react-native-router-flux'
 import Image from 'react-native-fast-image'
 import moment from 'moment'
-import { User, ConversationListEntry, Profile } from '../typings/foodsharing'
+import { User, ConversationListEntry, Profile } from '../common/typings'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'

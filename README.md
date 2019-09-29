@@ -60,7 +60,6 @@ This thingy runs on iOS and Android - one code, one love!
 ## ToDo
 
 * Fix double set-cookie in login to allow sessions on Android - blocking issue!
-* Hanlde websocket disconnect and reconnect after logout / login (iosocket manager?)
 * Notifications after background pull
 * Rounded avatars in conversation messages
 * Handle more than the last 20 messages, logic to fill the gap
