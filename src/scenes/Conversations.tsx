@@ -39,6 +39,7 @@ class Conversations extends PureComponent<Props> {
 
   render() {
     const { conversations, actions } = this.props
+        , data = conversations.sort((a, b) => b.last_ts - a.last_ts)
         , { refreshing } = this.state
     return (
       <SafeAreaView style={styles.container}>
@@ -53,7 +54,7 @@ class Conversations extends PureComponent<Props> {
           }}
           refreshing={refreshing}
           style={styles.list}
-          data={conversations}
+          data={data}
           renderItem={({item, index}) =>
             <ConversationListEntry
               conversation={item}
