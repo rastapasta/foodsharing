@@ -13,7 +13,7 @@ import {
   PROFILE
 } from '../common/constants'
 
-import { login, getCurrentUser, getSession, getProfile } from '../common/api'
+import { login, getCurrentUser, getSession, getProfile, setSession } from '../common/api'
 
 function* loginFlow(email: string, password: string) {
   let user
@@ -38,6 +38,7 @@ function* loginFlow(email: string, password: string) {
     yield put({type: PROFILE, payload: yield call(getProfile)})
 
   } catch (error) {
+
     // Signal that something went wrong..
     yield put({ type: LOGIN_ERROR, error })
   }
@@ -67,6 +68,9 @@ function* reauthenticate() {
   try {
     if (!session)
       throw false
+
+    // Configure our API adapter to use the stored session & token
+    setSession({session, token})
 
     // Check if we still have a valid session at hand
     yield getCurrentUser()
@@ -107,13 +111,17 @@ export default function* loginWatcher() {
 
   while (true) {
     // Wait until we get a login request
-    yield take(LOGIN_REQUEST)
+    const { type } = yield take([LOGIN_REQUEST, LOGIN_SUCCESS])
 
-    // Pull credentials from store
-    const { email, password } = yield select(state => state.login)
+    // Skip authentication in case we got a rehydrated LOGIN_SUCCESS
+    if (type === LOGIN_REQUEST) {
 
-    // Start the login flow
-    yield fork(loginFlow, email, password)
+      // Pull the login form from
+      const { email, password } = yield select(state => state.login)
+
+        // Start the login flow
+        yield fork(loginFlow, email, password)
+    }
 
     // Wait until we either logout or get logged out
     yield take([LOGOUT, LOGIN_ERROR])

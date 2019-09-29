@@ -1,6 +1,5 @@
 import React from 'react'
 import { StyleSheet, View, ActivityIndicator } from 'react-native'
-import colors from '../common/colors'
 
 const styles = StyleSheet.create({
   container: {

@@ -20,7 +20,7 @@ const host = 'https://beta.foodsharing.de'
         baskets: {uri: '/xhr.php?f=loadMarker&types[]=baskets', method: 'GET'},
         shops: {uri: '/xhr.php?f=loadMarker&types[]=betriebe&options[]=needhelp&options[]=needhelpinstant', method: 'GET'}
       }
-    , cookies = {}
+    , cookies = {} as any
 
 export enum results {
   AUTHORIZED,
@@ -141,6 +141,7 @@ function request(
                       .reduce((u, key) => u.replace('{' + key +'}', opts[key]), uri)
       , sendAsJSON = !url.match(/xhrapp/)
 
+  console.log(cookies)
   return fetch(url, {
     headers: {
       Accept: 'application/json',
@@ -161,7 +162,7 @@ function request(
     if (response.status === 200)
       return response.json()
 
-    console.warn('request error', endpoint, data, options, response)
+    // console.warn('request error', endpoint, data, options, response)
     switch (response.status) {
       case 400: throw results.AUTHORIZED
       case 401: throw results.FORBIDDEN
@@ -175,7 +176,7 @@ function request(
 }
 
 export const login = (email: string, password: string): Promise<User> =>
-  request('login', {email, password, remember_me: "1"})
+  request('login', {email, password, remember_me: true})
 
 export const logout = (): Promise<void> =>
   request('logout')
@@ -207,10 +208,17 @@ export const userToConversationId = async (userId: number): Promise<number> =>
 export const getProfile = (): Promise<Profile> =>
   request('profile')
 
+
 export const getSession = (): {session: string, token: string} => ({
   session: cookies['PHPSESSID'],
   token: cookies['CSRF_TOKEN']
 })
+
+export const setSession = ({session, token}) => {
+  cookies.PHPSESSID = session
+  cookies.CSRF_TOKEN = token
+}
+
 
 // TODO: backend returns 500
 // export const getStore = (storeId: number): Promise<any> =>

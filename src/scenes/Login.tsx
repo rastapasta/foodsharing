@@ -2,7 +2,6 @@ import React, {PureComponent} from 'react'
 import {
   SafeAreaView,
   KeyboardAvoidingView,
-  StatusBar,
   StyleSheet,
   Dimensions,
   View,
