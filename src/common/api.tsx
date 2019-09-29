@@ -23,7 +23,7 @@ const host = 'https://beta.foodsharing.de'
     , cookies = {} as any
 
 export enum results {
-  AUTHORIZED,
+  MALFORMED,
   UNAUTHORIZED,
   FORBIDDEN,
   CONNECTION_ERROR,
@@ -164,7 +164,7 @@ function request(
 
     // console.warn('request error', endpoint, data, options, response)
     switch (response.status) {
-      case 400: throw results.AUTHORIZED
+      case 400: throw results.MALFORMED
       case 401: throw results.FORBIDDEN
       case 403: throw results.UNAUTHORIZED
       case 404: throw results.NOT_FOUND

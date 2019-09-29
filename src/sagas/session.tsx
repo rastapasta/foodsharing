@@ -2,6 +2,7 @@ import { take, fork, call, put, select } from 'redux-saga/effects'
 import { Actions } from 'react-native-router-flux'
 import * as Keychain from 'react-native-keychain'
 import { actions as formActions } from 'react-redux-form'
+import CookieManager from 'react-native-cookies'
 import SplashScreen from 'react-native-splash-screen'
 
 import {
@@ -13,7 +14,7 @@ import {
   PROFILE
 } from '../common/constants'
 
-import { login, getCurrentUser, getSession, getProfile, setSession } from '../common/api'
+import { login, getCurrentUser, getSession, getProfile, setSession, results } from '../common/api'
 
 function* loginFlow(email: string, password: string) {
   let user
@@ -38,6 +39,11 @@ function* loginFlow(email: string, password: string) {
     yield put({type: PROFILE, payload: yield call(getProfile)})
 
   } catch (error) {
+    // In case we receive a malformed-error, clear all cookies and try again
+    if (error === results.MALFORMED) {
+      yield CookieManager.clearAll()
+      return yield call(loginFlow, email, password)
+    }
 
     // Signal that something went wrong..
     yield put({ type: LOGIN_ERROR, error })
