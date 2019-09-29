@@ -1,8 +1,12 @@
-import { take, put, select, call } from 'redux-saga/effects'
+import { take, put, select, call, fork } from 'redux-saga/effects'
 
 import { getConversation, sendMessage } from '../common/api'
 import { CONVERSATION_REQUEST, CONVERSATION_SUCCESS, MESSAGE_REQUEST, MESSAGE_SUCCESS } from '../common/constants'
 import { actions as formActions } from 'react-redux-form'
+
+function* fetch(id: number) {
+  yield put({type: CONVERSATION_SUCCESS, id, payload: yield getConversation(id)})
+}
 
 export default function* conversationSaga() {
   while (true) {
@@ -12,7 +16,7 @@ export default function* conversationSaga() {
     switch (type) {
       // Request the corresponding conversation from the backend
       case CONVERSATION_REQUEST:
-        yield put({type: CONVERSATION_SUCCESS, id, payload: yield getConversation(id)})
+        yield fork(fetch, id)
         break
 
       // Send out a message to a given conversation

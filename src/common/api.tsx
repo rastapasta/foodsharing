@@ -141,7 +141,6 @@ function request(
                       .reduce((u, key) => u.replace('{' + key +'}', opts[key]), uri)
       , sendAsJSON = !url.match(/xhrapp/)
 
-  console.log(cookies)
   return fetch(url, {
     headers: {
       Accept: 'application/json',

@@ -14,7 +14,7 @@ import {
   PROFILE
 } from '../common/constants'
 
-import { login, getCurrentUser, getSession, getProfile, setSession, results } from '../common/api'
+import { login, logout, getCurrentUser, getSession, getProfile, setSession, results } from '../common/api'
 
 function* loginFlow(email: string, password: string) {
   let user
@@ -63,8 +63,12 @@ function* logoutFlow() {
   // Delete the previously stored password from the secure location
   Keychain.resetGenericPassword().then(() => true)
 
-  // Log the user out from foodsharing.network
-  // yield call(logout)
+  // Try to logout the user out from foodsharing.network
+  try {
+    yield call(logout)
+  } catch(e) {
+    console.log('logout failed', e)
+  }
 }
 
 function* reauthenticate() {
@@ -130,9 +134,10 @@ export default function* loginWatcher() {
     }
 
     // Wait until we either logout or get logged out
-    yield take([LOGOUT, LOGIN_ERROR])
+    const { type: logoutReason } = yield take([LOGOUT, LOGIN_ERROR])
 
     // Start the logout flow
-    yield call(logoutFlow)
+    if (logoutReason === LOGOUT)
+      yield call(logoutFlow)
   }
 }
