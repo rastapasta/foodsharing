@@ -72,7 +72,6 @@ class Map extends PureComponent<Props> {
 
   render() {
     const { trackPosition } = this.state
-        , { actions } = this.props
         , data = this.transformMarkers()
 
     return (

@@ -2,7 +2,6 @@
 
 import React, { PureComponent } from 'react'
 import { SafeAreaView, StyleSheet } from 'react-native'
-import colors from '../common/colors'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'

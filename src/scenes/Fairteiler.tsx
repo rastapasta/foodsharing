@@ -1,12 +1,14 @@
 import React, { PureComponent } from 'react'
 import { SafeAreaView, StyleSheet, View, Text } from 'react-native'
+import ActivityIndicator from '../components/ActivityIndicator'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as reduxActions from '../common/actions'
-
 import { Fairteiler as FairteilerType } from '../common/api'
+
 import colors from '../common/colors'
+
 
 const styles = StyleSheet.create({
   container: {
@@ -26,19 +28,21 @@ class Fairteiler extends PureComponent<Props> {
     const { actions, id } = this.props
     actions.fetchFairteiler(id)
   }
+
   render() {
     const {id, fairteiler} = this.props
         , data = fairteiler[id] || null
 
+    if (!data)
+      return <ActivityIndicator />
+
     return (
       <SafeAreaView style={styles.container}>
-        {data &&
-          <View>
-            <Text>
-              {data.name}
-            </Text>
-          </View>
-        }
+        <View>
+          <Text>
+            {data.name}
+          </Text>
+        </View>
       </SafeAreaView>
     )
   }
