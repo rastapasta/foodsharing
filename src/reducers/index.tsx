@@ -9,6 +9,7 @@ import foodsharers from './foodsharers'
 import profile from './profile'
 import markers from './markers'
 import fairteiler from './fairteiler'
+import walls from './walls'
 
 export default combineReducers({
   routes,
@@ -19,6 +20,7 @@ export default combineReducers({
   profile,
   markers,
   fairteiler,
+  walls,
 
   ...createForms({
     login: {

@@ -15,3 +15,5 @@ export const sendMessage = (conversationId: number) => ({type: types.MESSAGE_REQ
 
 export const fetchMarkers = () => ({type: types.MARKERS_REQUEST})
 export const fetchFairteiler = (payload: number) => ({type: types.FAIRTEILER_REQUEST, payload})
+
+export const fetchWall = (target: 'foodsharer' | 'fairteiler', id: number) => ({type: types.WALL_REQUEST, payload: {target, id}})

@@ -110,6 +110,26 @@ export interface Fairteiler {
   picture: string
 }
 
+export interface WallPosts {
+  mayPost: boolean,
+  mayDelete: boolean,
+  results: WallPost[]
+}
+
+export interface WallPost {
+  id: number,
+  body: string,
+  createdAt: string,
+  pictures: WallPicture[],
+  author: User
+}
+
+export interface WallPicture {
+  image: string,
+  medium: string,
+  thumb: string
+}
+
 const handleCookies = cookieString =>
   setCookie
   .parse(cookieString.split(/, /))
@@ -195,7 +215,7 @@ export const getConversations = (): Promise<ConversationListEntry[]> =>
 export const getConversation = (conversationId: number): Promise<ConversationDetail> =>
   request('conversation', null, {conversationId})
 
-export const getWall = (target: 'foodsaver', targetId: number): Promise<any> =>
+export const getWall = (target: 'foodsharer' | 'fairteiler', targetId: number): Promise<WallPosts> =>
   request('wall', null, {target, targetId})
 
 export const sendMessage = async (conversationId: number, text: string): Promise<Message> =>
@@ -206,7 +226,6 @@ export const userToConversationId = async (userId: number): Promise<number> =>
 
 export const getProfile = (): Promise<Profile> =>
   request('profile')
-
 
 export const getSession = (): {session: string, token: string} => ({
   session: cookies['PHPSESSID'],

@@ -20,7 +20,11 @@
   "rules": {
     "react-native/no-unused-styles": 2,
   },
-  "include": ["./src/", "typings/*.d.ts"],
+  "include": [
+    "./src/",
+    "src/common/global.d.ts",
+    "typings/*.d.ts"
+  ],
   "exclude": ["./src/tests/"],
   "filesGlob": [
     "typings/*.d.ts",

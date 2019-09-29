@@ -7,6 +7,7 @@ import Conversation from './conversation'
 import Notifications from './notifications'
 import Markers from './markers'
 import Fairteiler from './fairteiler'
+import Wall from './wall'
 
 // Start all our sagas in parallel
 export default function* rootSaga () {
@@ -17,6 +18,7 @@ export default function* rootSaga () {
     Conversation(),
     Notifications(),
     Markers(),
-    Fairteiler()
+    Fairteiler(),
+    Wall()
   ])
 }
