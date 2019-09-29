@@ -14,7 +14,7 @@ export interface Props {
 }
 
 const links = [[
-  new RegExp(/(https{0,1}:\/\/){0,1}(www\.){0,1}foodsharing[^\.]*\.(de|network|ch)\S+/, 'g'),
+  new RegExp(/(https{0,1}:\/\/){0,1}(www\.){0,1}foodsharing[^\.]*\.(de|network|ch)\S*/i, 'g'),
   'url'
 ]]
 

@@ -3,7 +3,7 @@ import { StyleSheet, TouchableOpacity, View, Text, Image } from 'react-native'
 import colors from '../common/colors'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
-import { getFairteiler } from '../common/api'
+import { getFairteilerMarker, getFairteiler } from '../common/api'
 
 import ClusteredMapView from 'react-native-maps-super-cluster'
 import { Marker } from 'react-native-maps'
@@ -29,10 +29,8 @@ const styles = StyleSheet.create({
   map: {
     flex: 1
   },
-  gps: {
+  touchableIcon: {
     position: 'absolute',
-    bottom: 10,
-    right: 10,
     backgroundColor: colors.white,
     padding: 6,
     borderRadius: 20,
@@ -44,6 +42,14 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 3.84,
     elevation: 5
+  },
+  gps: {
+    bottom: 10,
+    right: 10,
+  },
+  zoomOut: {
+    bottom: 10,
+    right: 50
   },
 
   cluster: {
@@ -79,7 +85,7 @@ export default class Map extends PureComponent<Props> {
   }
 
   async componentDidMount() {
-    this.setState({fairteiler: await getFairteiler()})
+    this.setState({fairteiler: await getFairteilerMarker()})
   }
 
   renderCluster = (cluster, onPress) => {
@@ -103,6 +109,7 @@ export default class Map extends PureComponent<Props> {
       image={icons[data.type]}
       coordinate={data.location}
       anchor={{x: 0.5, y: 1}}
+      onPress={async () => console.log(await getFairteiler(data.id))}
     />
 
   render() {
@@ -115,6 +122,19 @@ export default class Map extends PureComponent<Props> {
             longitude: parseFloat(teiler.lon)
           }
         }))
+
+    const TouchableIcon = ({style, onPress, icon, color = 'black'}) =>
+      <TouchableOpacity
+        style={[styles.touchableIcon, style]}
+        onPress={onPress}
+        hitSlop={{left: 5, right: 5, top: 5, bottom: 5}}
+      >
+        <Icon
+          name={icon}
+          size={20}
+          color={color}
+        />
+      </TouchableOpacity>
 
     return (
       <View style={styles.container}>
@@ -130,18 +150,17 @@ export default class Map extends PureComponent<Props> {
           radius={40}
           edgePadding={{left: 40, top: 40, right: 40, bottom: 40}}
         />
-
-        <TouchableOpacity
-          style={styles.gps}
+        <TouchableIcon
           onPress={() => this.setState({trackPosition: !trackPosition})}
-          hitSlop={{left: 5, right: 5, top: 5, bottom: 5}}
-        >
-          <Icon
-            name="crosshairs-gps"
-            size={20}
-            color={colors[trackPosition ? 'green' : 'black']}
-          />
-        </TouchableOpacity>
+          style={styles.gps}
+          icon="crosshairs-gps"
+          color={colors[trackPosition ? 'green' : 'black']}
+        />
+        <TouchableIcon
+          onPress={() => this.refs.map.mapview.animateToRegion(INIT_REGION)}
+          style={styles.zoomOut}
+          icon="arrow-decision-outline"
+        />
       </View>
     )
   }

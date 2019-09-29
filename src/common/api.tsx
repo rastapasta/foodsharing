@@ -12,7 +12,9 @@ const host = 'https://beta.foodsharing.de'
         conversation: {uri: '/api/conversations/{conversationId}', method: 'GET'},
         message: {uri: '/xhrapp.php?app=msg&m=sendmsg', method: 'POST'},
         user2conv: {uri: '/xhrapp.php?app=msg&m=user2conv&fsid={userId}', method: 'GET'},
-        fairteiler: {uri: '/xhr.php?f=loadMarker&types[]=fairteiler', method: 'GET'},
+
+        fairteiler: {uri: '/api/fairSharePoints/{id}', method: 'GET'},
+        fairteilerMarker: {uri: '/xhr.php?f=loadMarker&types[]=fairteiler', method: 'GET'},
 
         // TODO:
         baskets: {uri: '/xhr.php?f=loadMarker&types[]=baskets', method: 'GET'},
@@ -79,7 +81,7 @@ export interface Profile {
   mobile: string
 }
 
-export interface Fairteiler {
+export interface Marker {
   id: string,
   lat: string,
   lon: string,
@@ -93,6 +95,20 @@ export interface User {
   sleepStatus: boolean
 }
 
+export interface Fairteiler {
+  id: number,
+  regionId: number,
+  name: string,
+  description: string,
+  address: string,
+  city: string,
+  postcode: string,
+  lat: number,
+  lon: number,
+  createdAt: string,
+  picture: string
+}
+
 const handleCookies = cookieString =>
   setCookie
   .parse(cookieString.split(/, /))
@@ -102,7 +118,19 @@ const handleCookies = cookieString =>
   })
 
 function request(
-  endpoint: 'login' | 'current' | 'logout' | 'profile' | 'wall' | 'store' | 'conversations' | 'conversation' | 'message' | 'user2conv' | 'fairteiler',
+  endpoint:
+    'login' |
+    'current' |
+    'logout' |
+    'profile' |
+    'wall' |
+    'store' |
+    'conversations' |
+    'conversation' |
+    'message' |
+    'user2conv' |
+    'fairteiler' |
+    'fairteilerMarker',
   data?: any,
   options?: any
 ): Promise<any> {
@@ -153,8 +181,11 @@ export const logout = (): Promise<void> =>
 export const getCurrentUser = (): Promise<User> =>
   request('current')
 
-export const getFairteiler = async (): Promise<Fairteiler[]> =>
-  (await request('fairteiler')).fairteiler
+export const getFairteiler = (id: number): Promise<Fairteiler> =>
+  request('fairteiler', null, {id})
+
+export const getFairteilerMarker = async (): Promise<Marker[]> =>
+  (await request('fairteilerMarker')).fairteiler
 
 export const getConversations = (): Promise<ConversationListEntry[]> =>
   request('conversations')

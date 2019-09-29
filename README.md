@@ -34,6 +34,7 @@ This thingy runs on iOS and Android - one code, one love!
   * Embedded map based on system (iOS: Apple Maps, Android: Google Maps)
   * Clustering of markers
   * Tracking/centering of the user's current location on demand
+  * Button to zoom back to initial region
   * Prompt for location permission on demand
   * Reusing marker icons from Android version
 
