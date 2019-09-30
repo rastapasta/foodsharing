@@ -31,7 +31,9 @@ function start() {
 }
 
 function finish() {
-  BackgroundFetch.finish(BackgroundFetch.FETCH_RESULT_NEW_DATA)
+  // Send an ackknowledge when we are done - required only by iOS
+  if (Platform.OS === 'ios')
+    BackgroundFetch.finish(BackgroundFetch.FETCH_RESULT_NEW_DATA)
 }
 
 export default function* backgroundSagas() {
@@ -59,7 +61,7 @@ export default function* backgroundSagas() {
         break
       }
 
-      // From here on we *are* the background task!
+      // From here on we can be sure to *are the actual background task*!
 
       // ... let's announce it!
       yield put(background)

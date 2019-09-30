@@ -1,4 +1,4 @@
-import { take, fork, call, put, select } from 'redux-saga/effects'
+import { take, fork, call, put, select, delay } from 'redux-saga/effects'
 import { Actions } from 'react-native-router-flux'
 import * as Keychain from 'react-native-keychain'
 import { actions as formActions } from 'react-redux-form'
@@ -76,14 +76,15 @@ function* logoutFlow() {
 function* reauthenticateFlow() {
   // Notificate all listeners that we got a valid session running
   const { session, token } = yield select(state => state.app)
-
   try {
     if (!session)
-      throw false
+      throw 'no stored session'
 
     // Let's assume we got a working session!
-    yield SplashScreen.hide()
-    yield Actions.reset('drawer')
+    setTimeout(() => {
+      Actions.reset('drawer')
+      SplashScreen.hide()
+    }, 100)
 
     // Configure our API adapter to use the stored session & token
     setSession({session, token})
@@ -97,7 +98,10 @@ function* reauthenticateFlow() {
     // Notificate all listeners that we got a valid session running
     yield put({type: LOGIN_SUCCESS, payload: {session, token}})
 
-  } catch(e) {
+  } catch(error) {
+    // Report why we failed
+    console.log('reauthentication failed', error)
+
     // Try to pull previously stored credentials from secure store
     const result = yield Keychain.getGenericPassword()
 

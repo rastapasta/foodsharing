@@ -88,10 +88,11 @@ function request(
     if (response.headers.has('set-cookie'))
       syncCookies()
 
+    // console.log('request logging', endpoint, data, options, response)
+
     if (response.status === 200)
       return response.json()
 
-    // console.warn('request error', endpoint, data, options, response)
     switch (response.status) {
       case 400: throw Results.MALFORMED
       case 401: throw Results.FORBIDDEN
