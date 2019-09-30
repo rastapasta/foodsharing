@@ -15,10 +15,13 @@ export default function reducer(state = initialState, action: any = {}) {
       const { payload: {time, fs_id, body, cid} } = action
           , conversationId = action.type === MESSAGE_SUCCESS ? action.conversationId : cid
 
-      return state.map(conversation => {
+      let found = false
+
+      const newState = state.map(conversation => {
         if (conversation.id != conversationId)
           return conversation
 
+        found = true
         return {
           ...conversation,
           unread: "1",
@@ -28,6 +31,20 @@ export default function reducer(state = initialState, action: any = {}) {
           last_ts: Math.floor(Date.parse(time)/1000)
         }
       })
+
+      // In case this is an fresh conversation that we don't have yet, create it!
+      if (!found)
+        newState.push({
+          id: conversationId,
+          unread: "1",
+          last_foodsaver_id: `${fs_id}`,
+          last_message: body,
+          last: time,
+          last_ts: Math.floor(Date.parse(time)/1000),
+          member: [`${fs_id}`]
+        })
+
+      return newState
 
     case CONVERSATIONS_SUCCESS:
       return action.payload.map(conversation => ({
