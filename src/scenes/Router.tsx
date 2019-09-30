@@ -11,6 +11,21 @@ import Login from './Login'
 import Map from './Map'
 import Conversations from './Conversations'
 import Conversation from './Conversation'
+
+import ConversationTitle from '../components/ConversationTitle'
+
+/* given in scene:
+component: {$$typeof: Symbol(react.memo), type: ƒ, compare: null, WrappedComponent: ƒ, displayName: "Connect(withNavigation(withNavigationFocus(Conversation)))", …}
+conversationId: "1357698"
+hideNavBar: false
+init: false
+navigation: {pop: ƒ, popToTop: ƒ, push: ƒ, replace: ƒ, reset: ƒ, …}
+navigationBarStyle: {backgroundColor: "#513A22"}
+renderTitle: ƒ renderTitle(options)
+tintColor: "#fff"
+title: "Conversation"
+*/
+
 import Home from './Home'
 import Fairteiler from './Fairteiler'
 import Loading from './Loading'
@@ -80,6 +95,8 @@ export default () =>
       <Scene
         key="conversation"
         title="Conversation"
+        renderTitle={({conversationId}) => <ConversationTitle conversationId={conversationId} />}
+
         component={Conversation}
         hideNavBar={false}
       />

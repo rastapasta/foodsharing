@@ -22,7 +22,7 @@ const persistConfig = {
     'messages',
     'conversations',
     'drafts',
-    'foodsharers',
+    'foodsavers',
     'profile',
     'markers',
     'fairteiler'

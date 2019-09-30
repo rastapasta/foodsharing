@@ -5,7 +5,7 @@ import routes from './routes'
 import app from './app'
 import conversations from './conversations'
 import messages from './messages'
-import foodsharers from './foodsharers'
+import foodsavers from './foodsavers'
 import profile from './profile'
 import markers from './markers'
 import fairteiler from './fairteiler'
@@ -15,7 +15,7 @@ export default combineReducers({
   routes,
   app,
   conversations,
-  foodsharers,
+  foodsavers,
   messages,
   profile,
   markers,

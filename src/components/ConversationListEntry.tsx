@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
 type Props = {
   conversation: {member: string[]} & ConversationListEntry,
   isLast: boolean,
-  foodsharers: {string: User},
+  foodsavers: {string: User},
   profile: Profile
 }
 
@@ -77,7 +77,7 @@ const url = 'https://foodsharing.de/images/'
 
 class ConversationsItem extends PureComponent<Props> {
   render() {
-    const { conversation, isLast, foodsharers, profile } = this.props
+    const { conversation, isLast, foodsavers, profile } = this.props
         , { id, member, name, last_ts, last_message, last_foodsaver_id } = conversation
 
         , isSelfMessage = member.length === 1
@@ -98,7 +98,7 @@ class ConversationsItem extends PureComponent<Props> {
               <Image
                 style={{flex: 1}}
                 resizeMode="contain"
-                source={{uri: foodsaver(foodsharers[person]).photo ? url + '130_q_' + foodsaver(foodsharers[person]).photo : avatar}}
+                source={{uri: foodsaver(foodsavers[person]).photo ? url + '130_q_' + foodsaver(foodsavers[person]).photo : avatar}}
               />
             </View>
           )}
@@ -110,7 +110,7 @@ class ConversationsItem extends PureComponent<Props> {
               {/* TODO: handle too long strings */}
               {name ? name :
                 isSelfMessage ? translate('conversations.note_to_self') :
-                party.map(person => foodsaver(foodsharers[person]).name).join('|')
+                party.map(person => foodsaver(foodsavers[person]).name).join('|')
               }
             </Text>
             <Text style={styles.date}>
@@ -119,12 +119,12 @@ class ConversationsItem extends PureComponent<Props> {
           </View>
 
           <View style={[styles.lastMessage, !!isLast && {borderBottomWidth: 0}]}>
-            {!!foodsaver(foodsharers[lastMessenger]).photo &&
+            {!!foodsaver(foodsavers[lastMessenger]).photo &&
               <View style={styles.lastMessageImage}>
                 <Image
                   style={{flex: 1}}
                   resizeMode="contain"
-                  source={{uri: url + '130_q_' + foodsharers[lastMessenger].photo}}
+                  source={{uri: url + '130_q_' + foodsavers[lastMessenger].photo}}
                 />
               </View>
             }
@@ -139,7 +139,7 @@ class ConversationsItem extends PureComponent<Props> {
 }
 
 const mapStateToProps = state => ({
-  foodsharers: state.foodsharers,
+  foodsavers: state.foodsavers,
   profile: state.profile
 })
 

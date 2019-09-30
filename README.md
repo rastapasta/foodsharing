@@ -47,7 +47,7 @@ This thingy runs on iOS and Android - one code, one love!
   * Full offline read-only capability
 
 * UI / UX
-  * Custom fonts / coporate identity respected
+  * Custom fonts / 'foodsharing identity'
   * Full i18n support (so far: English included, namings planned to be equal to current Android's implementation)
 
 * Deployment and CI
