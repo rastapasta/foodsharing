@@ -22,6 +22,7 @@
     "react-dom": "^16.10.1",
     "react-native": "0.61.1",
     "react-native-background-fetch": "^2.7.0",
+    "react-native-android-badge": "git+https://github.com/rastapasta/react-native-android-badge",
     "react-native-cookies": "^3.3.0",
     "react-native-device-info": "^3.1.4",
     "react-native-easy-toast": "^1.2.0",

@@ -2,6 +2,7 @@ import { take, put, call, fork, select } from 'redux-saga/effects'
 
 import { Platform } from 'react-native'
 import PushNotificationIOS from '@react-native-community/push-notification-ios'
+import AndroidBadge from 'react-native-android-badge'
 
 import { getConversations } from '../common/api'
 
@@ -21,16 +22,22 @@ const countUnread = (conversations: any[]) =>
 
 // In case we are on iOS, update the unread messages counter of our homescreen icon
 function* unreadWatcher() {
-  if (Platform.OS !== 'ios')
-    return
-
   while (true) {
     // Wait for all actions that could potentially alter the conversation
     yield take([CONVERSATIONS_SUCCESS, CONVERSATION_SUCCESS, MESSAGE_SUCCESS, WEBSOCKET_MESSAGE])
 
     // Get and count the number of unread conversations
     const conversations = yield select(state => state.conversations)
-    yield call(PushNotificationIOS.setApplicationIconBadgeNumber, countUnread(conversations))
+        , count = countUnread(conversations)
+
+    console.log('setting badge count to ' + count)
+    yield call(
+      Platform.OS === 'ios' ?
+        PushNotificationIOS.setApplicationIconBadgeNumber :
+        AndroidBadge.setBadge
+      ,
+      count
+    )
   }
 }
 
