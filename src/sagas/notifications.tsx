@@ -93,6 +93,7 @@ export default function* notificationSaga() {
             continue
         }
 
+        // Push a notification over the bridge
         PushNotification.localNotification({
           title: fs_name,
           message: body,
