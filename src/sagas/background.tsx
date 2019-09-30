@@ -14,8 +14,9 @@ import {
 
 const configuration = {
   minimumFetchInterval: 15,
+  startOnBoot: true,
   stopOnTerminate: false,
-  startOnBoot: true
+  requiredNetworkType: BackgroundFetch.NETWORK_TYPE_ANY
 }
 
 // Build an event channel around the background task notifier

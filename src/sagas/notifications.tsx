@@ -1,3 +1,5 @@
+import { take, select, put } from 'redux-saga/effects'
+
 import PushNotification from 'react-native-push-notification'
 import PushNotificationIOS from '@react-native-community/push-notification-ios'
 import { Platform } from 'react-native'
@@ -8,7 +10,6 @@ const config = {
   NOTIFICATIONS_ONLY_IN_BACKGROUND: true
 }
 
-import { take, select, put } from 'redux-saga/effects'
 import {
   BACKGROUND_STATE,
   WEBSOCKET_MESSAGE,

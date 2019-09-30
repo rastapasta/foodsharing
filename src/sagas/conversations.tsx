@@ -20,6 +20,17 @@ const countUnread = (conversations: any[]) =>
     0
   )
 
+export default function* conversationsSaga() {
+  // Wait for actions altering the conversations undread counter
+  yield fork(unreadWatcher)
+
+  while (true) {
+    // Wait until we get a conversation request
+    yield take(CONVERSATIONS_REQUEST)
+    yield fork(fetch)
+  }
+}
+
 // In case we are on iOS, update the unread messages counter of our homescreen icon
 function* unreadWatcher() {
   while (true) {
@@ -30,12 +41,11 @@ function* unreadWatcher() {
     const conversations = yield select(state => state.conversations)
         , count = countUnread(conversations)
 
-    console.log('setting badge count to ' + count)
+    // Set the badge count depending on the relevant bridge
     yield call(
       Platform.OS === 'ios' ?
         PushNotificationIOS.setApplicationIconBadgeNumber :
-        AndroidBadge.setBadge
-      ,
+        AndroidBadge.setBadge,
       count
     )
   }
@@ -47,15 +57,4 @@ function* fetch() {
 
   // ... and publish it on the bus
   yield put({type: CONVERSATIONS_SUCCESS, payload: conversations})
-}
-
-export default function* conversationsSaga() {
-  // Wait for actions altering the conversations undread counter
-  yield fork(unreadWatcher)
-
-  while (true) {
-    // Wait until we get a conversation request
-    yield take(CONVERSATIONS_REQUEST)
-    yield fork(fetch)
-  }
 }

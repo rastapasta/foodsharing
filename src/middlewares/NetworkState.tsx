@@ -1,22 +1,19 @@
-import { createAction } from 'redux-actions'
 import createOneShotMiddleware from 'redux-middleware-oneshot'
 import NetInfo from '@react-native-community/netinfo'
 import { CONNECTION_STATUS } from '../common/constants'
-
-export const TYPE = CONNECTION_STATUS
-export const action = createAction(TYPE)
 
 let last = null
 
 export default createOneShotMiddleware((dispatch) => {
   NetInfo.addEventListener(state => {
-    const { isInternetReachable } = state
+    const { isInternetReachable: online } = state
 
-    if (last === isInternetReachable)
+    if (last === online)
       return
-    last = isInternetReachable
 
-    if (isInternetReachable !== null)
-      dispatch(action(isInternetReachable))
+    last = online
+
+    if (online !== null)
+      dispatch({type: CONNECTION_STATUS, payload: online})
   })
 })

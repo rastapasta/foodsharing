@@ -47,7 +47,6 @@ export const syncCookies = async () => {
   )
 }
 
-
 function request(
   endpoint:
     'login' |

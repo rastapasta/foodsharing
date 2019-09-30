@@ -24,7 +24,7 @@ This thingy runs on iOS and Android - one code, one love!
   * Local Notifications while app runs in the background
   * Touch on Notification directly brings you to corresponding conversation (iOS only for now)
   * Background conversations list pull every 15 minutes (iOS only for now)
-  * Display number of unread conversations as icon badge on home screen (iOS only)
+  * Display number of unread conversations as icon badge on home screen (iOS and some Android)
   * Persist message drafts (per conversation)
   * Group chats (incl. multiple avatars displayed)
   * Named chats

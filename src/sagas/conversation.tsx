@@ -1,11 +1,20 @@
 import { take, put, select, call, fork } from 'redux-saga/effects'
 
-import { getConversation, sendMessage } from '../common/api'
-import { CONVERSATION_REQUEST, CONVERSATION_SUCCESS, MESSAGE_REQUEST, MESSAGE_SUCCESS } from '../common/constants'
 import { actions as formActions } from 'react-redux-form'
+import { getConversation, sendMessage } from '../common/api'
+import {
+  CONVERSATION_REQUEST,
+  CONVERSATION_SUCCESS,
+  MESSAGE_REQUEST,
+  MESSAGE_SUCCESS
+} from '../common/constants'
 
 function* fetch(id: number) {
-  yield put({type: CONVERSATION_SUCCESS, id, payload: yield getConversation(id)})
+  yield put({
+    type: CONVERSATION_SUCCESS,
+    id,
+    payload: yield getConversation(id)
+  })
 }
 
 export default function* conversationSaga() {

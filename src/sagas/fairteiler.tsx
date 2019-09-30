@@ -2,7 +2,11 @@ import { take, put, fork, select } from 'redux-saga/effects'
 
 import { getFairteiler } from '../common/api'
 
-import { FAIRTEILER_PREFETCH, FAIRTEILER_REQUEST, FAIRTEILER_SUCCESS } from '../common/constants'
+import {
+  FAIRTEILER_PREFETCH,
+  FAIRTEILER_REQUEST,
+  FAIRTEILER_SUCCESS
+} from '../common/constants'
 
 function* fetch(id: number) {
   // Pull the markers from the API
