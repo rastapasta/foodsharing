@@ -6,6 +6,7 @@ import moment from 'moment'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as reduxActions from '../common/actions'
+import { withNavigationFocus } from 'react-navigation'
 
 import MessageForm from '../components/MessageForm'
 import MessageBubble from '../components/MessageBubble'
@@ -37,6 +38,7 @@ const styles = StyleSheet.create({
 type Props = {
   conversationId: number
 
+  isFocused: boolean
   messages: any
   actions: any
   drafts: any
@@ -55,8 +57,15 @@ class Conversation extends PureComponent<Props> {
     refreshing: false
   }
 
+  componentDidUpdate(prevProps: Props) {
+    const { actions, conversationId } = this.props
+    if (prevProps.isFocused === false && this.props.isFocused === true)
+      actions.navigation('conversation', conversationId)
+  }
+
   componentDidMount() {
     const { conversationId, actions } = this.props
+    actions.navigation('conversation', conversationId)
     actions.fetchConversation(conversationId)
   }
 
@@ -166,4 +175,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Conversation)
+)(withNavigationFocus(Conversation))

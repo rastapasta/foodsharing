@@ -11,6 +11,8 @@ import {
   StatusBar
 } from 'react-native'
 
+import { withNavigationFocus } from 'react-navigation'
+
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as reduxActions from '../common/actions'
@@ -49,7 +51,10 @@ const styles = StyleSheet.create({
   }
 })
 
-type Props = {}
+type Props = {
+  actions: any
+  isFocused: boolean
+}
 
 class Login extends PureComponent<Props> {
   refs: {
@@ -61,7 +66,15 @@ class Login extends PureComponent<Props> {
     password: null
   }
 
+  componentDidUpdate(prevProps: Props) {
+    const { actions } = this.props
+    if (prevProps.isFocused === false && this.props.isFocused === true)
+      actions.navigation('login')
+  }
+
   componentDidMount() {
+    const { actions } = this.props
+    actions.navigation('login')
     SplashScreen.hide()
   }
   // doLogin = async () => {
@@ -140,4 +153,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Login)
+)(withNavigationFocus(Login))

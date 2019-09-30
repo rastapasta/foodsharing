@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import { SafeAreaView, StyleSheet, View, Text } from 'react-native'
 import ActivityIndicator from '../components/ActivityIndicator'
+import { withNavigationFocus } from 'react-navigation'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -22,12 +23,22 @@ type Props = {
   fairteiler: {string: FairteilerType}
   actions: any
   walls: any
+
+  isFocused: boolean
 }
 
 class Fairteiler extends PureComponent<Props> {
+  componentDidUpdate(prevProps: Props) {
+    const { actions, id } = this.props
+    if (prevProps.isFocused === false && this.props.isFocused === true)
+      actions.navigation('fairteiler', id)
+  }
+
   componentDidMount() {
     const { actions, id } = this.props
+    actions.navigation('fairteiler', id)
     actions.fetchFairteiler(id)
+
     actions.fetchWall('fairteiler', id)
   }
 
@@ -63,4 +74,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Fairteiler)
+)(withNavigationFocus(Fairteiler))

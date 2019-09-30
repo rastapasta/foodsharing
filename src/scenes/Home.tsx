@@ -1,4 +1,5 @@
 // TODO:  template - clean up afterwards
+import { withNavigationFocus } from 'react-navigation'
 
 import React, { PureComponent } from 'react'
 import { SafeAreaView, StyleSheet } from 'react-native'
@@ -14,11 +15,22 @@ const styles = StyleSheet.create({
 })
 
 type Props = {
-  fairteiler: any
-  fairteilers: any
+  actions: any
+  isFocused: boolean
 }
 
 class Home extends PureComponent<Props> {
+  componentDidUpdate(prevProps: Props) {
+    const { actions } = this.props
+    if (prevProps.isFocused === false && this.props.isFocused === true)
+      actions.navigation('home')
+  }
+
+  componentDidMount() {
+    const { actions } = this.props
+    actions.navigation('home')
+  }
+
   render() {
     return (
       <SafeAreaView style={styles.container}>
@@ -38,4 +50,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Home)
+)(withNavigationFocus(Home))

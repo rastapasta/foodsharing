@@ -40,7 +40,8 @@ const styles = StyleSheet.create({
 
 type Props = {
   actions: any,
-  markers: any
+  markers: any,
+  isFocused: boolean
 }
 
 class Map extends PureComponent<Props> {
@@ -53,9 +54,16 @@ class Map extends PureComponent<Props> {
     fairteiler: []
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     const { actions } = this.props
+    actions.navigation('map')
     actions.fetchMarkers()
+  }
+
+  componentDidUpdate(prevProps: Props) {
+    const { actions } = this.props
+    if (prevProps.isFocused === false && this.props.isFocused === true)
+      actions.navigation('map')
   }
 
   transformMarkers() {

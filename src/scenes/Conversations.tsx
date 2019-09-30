@@ -7,6 +7,7 @@ import * as reduxActions from '../common/actions'
 
 import colors from '../common/colors'
 import ConversationListEntry from '../components/ConversationListEntry'
+import { withNavigationFocus } from 'react-navigation'
 
 import { ConversationListEntry as ConversationListEntryType } from '../common/typings'
 
@@ -26,6 +27,7 @@ const styles = StyleSheet.create({
 type Props = {
   conversations: ConversationListEntryType[],
   actions?: any
+  isFocused: boolean
 }
 
 class Conversations extends PureComponent<Props> {
@@ -33,8 +35,15 @@ class Conversations extends PureComponent<Props> {
     refreshing: false
   }
 
+  componentDidUpdate(prevProps: Props) {
+    const { actions } = this.props
+    if (prevProps.isFocused === false && this.props.isFocused === true)
+      actions.navigation('conversations')
+  }
+
   componentDidMount() {
     const { actions } = this.props
+    actions.navigation('conversations')
     actions.fetchConversations()
   }
 
@@ -79,4 +88,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Conversations)
+)(withNavigationFocus(Conversations))

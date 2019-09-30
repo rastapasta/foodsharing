@@ -14,7 +14,7 @@ export default function reducer(state = initialState, action: any = {}) {
   const { type, payload } = action
   switch (type) {
     case CONVERSATION_SUCCESS:
-      const convState = {...state}
+      const convState = state
           , {id } = action
           , { messages } = payload
 
@@ -23,7 +23,7 @@ export default function reducer(state = initialState, action: any = {}) {
 
     case MESSAGE_SUCCESS:
     case WEBSOCKET_MESSAGE:
-      const msgState = {...state}
+      const msgState = state
           , conversationId = type === MESSAGE_SUCCESS ? action.conversationId : payload.cid
           , idx = `${conversationId}`
 

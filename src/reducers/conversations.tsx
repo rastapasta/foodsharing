@@ -1,6 +1,7 @@
 import {
   MESSAGE_SUCCESS,
   WEBSOCKET_MESSAGE,
+  CONVERSATION_SUCCESS,
   CONVERSATIONS_SUCCESS,
   LOGOUT
 } from '../common/constants'
@@ -16,10 +17,11 @@ export default function reducer(state = initialState, action: any = {}) {
 
       return state.map(conversation => {
         if (conversation.id != conversationId)
-          return {...conversation}
+          return conversation
 
         return {
           ...conversation,
+          unread: "1",
           last_foodsaver_id: `${fs_id}`,
           last_message: body,
           last: time,
@@ -32,6 +34,18 @@ export default function reducer(state = initialState, action: any = {}) {
         ...conversation,
         member: conversation.member.map(member => member.id)
       }))
+
+    case CONVERSATION_SUCCESS:
+      const { id } = action
+      return state.map(conversation => {
+        if (conversation.id != id)
+          return conversation
+
+        return {
+          ...conversation,
+          unread: "0"
+        }
+      })
 
     case LOGOUT:
       return [...initialState]
