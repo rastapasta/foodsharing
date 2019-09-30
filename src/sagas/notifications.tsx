@@ -5,7 +5,7 @@ import { Actions } from 'react-native-router-flux'
 import { store } from '../common/store'
 
 const config = {
-  NOTIFICATIONS_ONLY_IN_BACKGROUND: false
+  NOTIFICATIONS_ONLY_IN_BACKGROUND: true
 }
 
 import { take, select, put } from 'redux-saga/effects'
@@ -57,7 +57,7 @@ export default function* notificationSaga() {
         continue
       }
 
-      const inBackground = yield select(state => state.app.state !== 'active')
+      const inBackground = (yield select(state => state.app)) === 'background'
 
       // Only send a notification if either in background or user configured foreground notifications
       if (!inBackground && config.NOTIFICATIONS_ONLY_IN_BACKGROUND)

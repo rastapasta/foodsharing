@@ -11,6 +11,7 @@ import * as reduxActions from '../common/actions'
 
 import colors from '../common/colors'
 import { translate } from '../common/translation'
+import { foodsaver } from '../common/placeholder'
 
 const { width } = Dimensions.get('window')
 
@@ -97,7 +98,7 @@ class ConversationsItem extends PureComponent<Props> {
               <Image
                 style={{flex: 1}}
                 resizeMode="contain"
-                source={{uri: foodsharers[person].photo ? url + '130_q_' + foodsharers[person].photo : avatar}}
+                source={{uri: foodsaver(foodsharers[person]).photo ? url + '130_q_' + foodsaver(foodsharers[person]).photo : avatar}}
               />
             </View>
           )}
@@ -109,7 +110,7 @@ class ConversationsItem extends PureComponent<Props> {
               {/* TODO: handle too long strings */}
               {name ? name :
                 isSelfMessage ? translate('conversations.note_to_self') :
-                party.map(person => foodsharers[person].name).join('|')
+                party.map(person => foodsaver(foodsharers[person]).name).join('|')
               }
             </Text>
             <Text style={styles.date}>
@@ -118,7 +119,7 @@ class ConversationsItem extends PureComponent<Props> {
           </View>
 
           <View style={[styles.lastMessage, !!isLast && {borderBottomWidth: 0}]}>
-            {!!foodsharers[lastMessenger].photo &&
+            {!!foodsaver(foodsharers[lastMessenger]).photo &&
               <View style={styles.lastMessageImage}>
                 <Image
                   style={{flex: 1}}
