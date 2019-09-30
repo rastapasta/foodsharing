@@ -21,9 +21,9 @@ This thingy runs on iOS and Android - one code, one love!
 * Conversations
   * Send and receive messages
   * Connect to and handle WebSocket chat interface
-  * Local Notifications while app runs in the background (iOS only for now)
-  * Background conversations list pull every 15 minutes with Local Notification (iOS only for)
-  * Display number of unread conversations as icon badge on home screen (iOS only for now)
+  * Local Notifications while app runs in the background
+  * Background conversations list pull every 15 minutes (iOS only for now)
+  * Display number of unread conversations as icon badge on home screen (iOS only)
   * Persist message drafts (per conversation)
   * Group chats (incl. multiple avatars displayed)
   * Named chats
@@ -59,9 +59,7 @@ This thingy runs on iOS and Android - one code, one love!
 
 ## ToDo
 
-* Fix double set-cookie in login to allow sessions on Android - blocking issue!
 * Notifications after background pull
 * Rounded avatars in conversation messages
 * Handle more than the last 20 messages, logic to fill the gap
-* Ask notification persmission after login
 * Settings screen to setup background pull / notifications?

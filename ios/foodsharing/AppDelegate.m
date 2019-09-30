@@ -24,8 +24,8 @@
 
   rootView.backgroundColor = [[UIColor alloc] initWithRed:0.47f green:0.33f blue:0.29f alpha:1];
 
-  if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)])
-    [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
+  // if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)])
+  //   [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
 
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [UIViewController new];

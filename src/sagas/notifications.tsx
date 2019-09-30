@@ -1,20 +1,29 @@
+import PushNotification from 'react-native-push-notification'
 import PushNotificationIOS from '@react-native-community/push-notification-ios'
 import { Platform } from 'react-native'
+
 import { take, select, put } from 'redux-saga/effects'
 import {
   APPSTATE,
   WEBSOCKET_MESSAGE,
   CONVERSATIONS_SUCCESS,
-  BACKGROUND_DONE
+  BACKGROUND_DONE,
+  LOGIN_SUCCESS
 } from '../common/constants'
 
 export default function* notificationSaga() {
-  // Only activate background notifications on iOS for now
-  if (Platform.OS !== 'ios')
-    return
+  yield take(LOGIN_SUCCESS)
+
+  yield PushNotification.configure({
+    onNotification: async (notification) => {
+      console.log('notification!!! ', notification)
+
+      if (Platform.OS === 'ios')
+        notification.finish(PushNotificationIOS.FetchResult.NoData)
+    }
+  })
 
   while (true) {
-
     // Wait until the app switches into background mode
     while (true) {
       const { payload } = yield take(APPSTATE)
@@ -38,16 +47,16 @@ export default function* notificationSaga() {
         const messages = yield select(state => state.messages)
         console.log(type, messages)
         // Check if any new message is still unread and not yet in our storage
-        for (const conversation of payload) {
-          if (conversation.unread !== '0' || messages[conversation.id][0].time !== conversation.last) {
+        // for (const conversation of payload) {
+        //   if (conversation.unread !== '0' || messages[conversation.id][0].time !== conversation.last) {
 
-            // We found an updated conversation - let the user know!
-            yield PushNotificationIOS.presentLocalNotification({
-              alertTitle: conversation.name || conversation.member.find(member => member.id === conversation.last_foodsaver_id).name,
-              alertBody: conversation.last_message
-            })
-          }
-        }
+        //     // We found an updated conversation - let the user know!
+        //     yield PushNotificationIOS.presentLocalNotification({
+        //       alertTitle: conversation.name || conversation.member.find(member => member.id === conversation.last_foodsaver_id).name,
+        //       alertBody: conversation.last_message
+        //     })
+        //   }
+        // }
 
         yield put({type: BACKGROUND_DONE})
       }
@@ -55,10 +64,10 @@ export default function* notificationSaga() {
       // Websocket Message received in background -> notify user
       if (type === WEBSOCKET_MESSAGE) {
         const { body, fs_name } = payload
-
-        PushNotificationIOS.presentLocalNotification({
-          alertTitle: fs_name,
-          alertBody: body
+        console.log('notifying', fs_name, body)
+        PushNotification.localNotification({
+          title: fs_name,
+          message: body
         })
       }
     }

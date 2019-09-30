@@ -36,7 +36,7 @@ function initWebsocket() {
 
     // Error handling on library level
     socket.on('error', error =>
-      emitter({type: (error || '').match(/not authorized/) ? WEBSOCKET_UNAUTHORIZED : WEBSOCKET_ERROR})
+      emitter({type: (typeof error === 'string' && error.match(/not authorized/)) ? WEBSOCKET_UNAUTHORIZED : WEBSOCKET_ERROR})
     )
 
     // Error handling on connection level
