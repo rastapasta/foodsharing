@@ -22,6 +22,7 @@ This thingy runs on iOS and Android - one code, one love!
   * Send and receive messages
   * Connect to and handle WebSocket chat interface
   * Local Notifications while app runs in the background
+  * Touch on Notification directly brings you to corresponding conversation (iOS only for now)
   * Background conversations list pull every 15 minutes (iOS only for now)
   * Display number of unread conversations as icon badge on home screen (iOS only)
   * Persist message drafts (per conversation)
