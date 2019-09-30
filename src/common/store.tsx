@@ -9,6 +9,7 @@ import reducers from '../reducers'
 import sagas from '../sagas'
 
 import {middleware as appState} from '../middlewares/AppState'
+import {middleware as networkState} from '../middlewares/NetworkState'
 
 declare var window: { __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: any }
 
@@ -22,7 +23,7 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, reducers)
     , sagaMiddleware = createSagaMiddleware()
     , composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-    , middleware = [appState, thunk, sagaMiddleware]
+    , middleware = [appState, networkState, thunk, sagaMiddleware]
     , enhancer = composeEnhancers(
       applyMiddleware(...middleware)
     )

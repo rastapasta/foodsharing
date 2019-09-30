@@ -2,16 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIAppFonts</key>
-	<array>
-		<string>AlfaSlabOne-Regular.ttf</string>
-		<string>SFMono-Regular.otf</string>
-		<string>MaterialCommunityIcons.ttf</string>
-	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Foodsharing</string>
+	<string>foodsharing</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -47,6 +41,12 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Find Basekts and Fairteilers around you - to make it easier, allow access to your current location.</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>AlfaSlabOne-Regular.ttf</string>
+		<string>SFMono-Regular.otf</string>
+		<string>MaterialCommunityIcons.ttf</string>
+	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>From time to time the app checks for new messages - and notify you when you get one!</string>

@@ -26,9 +26,9 @@ export default function* notificationSaga() {
       store.dispatch({type: NOTIFICATION_CLICKED})
       console.log(notification)
 
-      const { conversationId } = notification.data
-      if (conversationId)
-        Actions.conversation({conversationId})
+      const { data } = notification
+      if (data && data.conversationId)
+        Actions.conversation({conversationId: data.conversationId})
       else
         Actions.conversations()
 

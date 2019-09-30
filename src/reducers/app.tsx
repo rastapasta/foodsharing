@@ -2,11 +2,13 @@ import { TYPE as appState } from '../middlewares/AppState'
 import {
   LOGIN_SUCCESS,
   LOGOUT,
-  NAVIGATION
+  NAVIGATION,
+  CONNECTION_STATUS
 } from '../common/constants'
 
 const initialState = {
   state: null,
+  online: false,
   session: null,
   token: null,
   scene: null,
@@ -41,6 +43,12 @@ export default function reducer(state = initialState, action: any = {}) {
         ...state,
         session: null,
         token: null
+      }
+
+    case CONNECTION_STATUS:
+      return {
+        ...state,
+        online: payload
       }
 
     default:

@@ -59,8 +59,8 @@ This thingy runs on iOS and Android - one code, one love!
   * see [package.json](https://github.com/rastapasta/foodsharing/blob/master/package.json) for complete package list
 
 ## ToDo
-
-* Notifications after background pull
+* Handle offline mode correctly
+* Notifications after background pull / detect new conversations - even pull pull conversations?
 * Rounded avatars in conversation messages
 * Handle more than the last 20 messages, logic to fill the gap
 * Settings screen to setup background pull / notifications?

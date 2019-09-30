@@ -10,6 +10,7 @@ export const LOGOUT = '👋 LOGOUT'
 export const NOTIFICATION_CLICKED = '📬 NOTIFICATION_CLICKED'
 
 export const NAVIGATION = '🌐 NAVIGATION'
+export const CONNECTION_STATUS = '📶 CONNECTION_STATUS'
 
 export const KEYCHAIN = '🔑 KEYCHAIN'
 export const APPSTATE = '📱 APPSTATE'

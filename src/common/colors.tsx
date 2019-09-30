@@ -1,5 +1,6 @@
 export default {
-  background: '#795548',
+  background: '#513A22',
+
   icon: '#795548',
 
   inputPlaceholder: '#795548',
