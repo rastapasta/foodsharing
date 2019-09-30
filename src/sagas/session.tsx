@@ -81,6 +81,10 @@ function* reauthenticateFlow() {
     if (!session)
       throw false
 
+    // Let's assume we got a working session!
+    yield SplashScreen.hide()
+    yield Actions.reset('drawer')
+
     // Configure our API adapter to use the stored session & token
     setSession({session, token})
 
@@ -88,8 +92,6 @@ function* reauthenticateFlow() {
     yield getCurrentUser()
 
     // Yes, so instantly forward the user to the internal area and hide the splashscreen
-    yield SplashScreen.hide()
-    yield Actions.reset('drawer')
     yield syncCookies()
 
     // Notificate all listeners that we got a valid session running
@@ -113,6 +115,14 @@ function* reauthenticateFlow() {
 
     // ... to finally trigger the login procedure
     yield put({type: LOGIN_REQUEST})
+  }
+
+  // Wait for our reauthentication either fail or succeed
+  // TODO: Handle NO_INTERNET reason
+  const { type } = yield take([LOGIN_SUCCESS, LOGIN_ERROR])
+  if (type === LOGIN_ERROR) {
+    yield SplashScreen.hide()
+    yield Actions.reset('login')
   }
 }
 

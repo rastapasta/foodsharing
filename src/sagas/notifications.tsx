@@ -2,6 +2,11 @@ import PushNotification from 'react-native-push-notification'
 import PushNotificationIOS from '@react-native-community/push-notification-ios'
 import { Platform } from 'react-native'
 import { Actions } from 'react-native-router-flux'
+import { store } from '../common/store'
+
+const config = {
+  NOTIFICATIONS_ONLY_IN_BACKGROUND: false
+}
 
 import { take, select, put } from 'redux-saga/effects'
 import {
@@ -9,7 +14,8 @@ import {
   WEBSOCKET_MESSAGE,
   CONVERSATIONS_SUCCESS,
   BACKGROUND_DONE,
-  LOGIN_SUCCESS
+  LOGIN_SUCCESS,
+  NOTIFICATION_CLICKED
 } from '../common/constants'
 
 export default function* notificationSaga() {
@@ -17,7 +23,8 @@ export default function* notificationSaga() {
 
   yield PushNotification.configure({
     onNotification: notification => {
-      put({type: 'NOTIFICATION_CLICKED'})
+      store.dispatch({type: NOTIFICATION_CLICKED})
+      console.log(notification)
 
       const { conversationId } = notification.data
       if (conversationId)
@@ -31,28 +38,35 @@ export default function* notificationSaga() {
   })
 
   while (true) {
-    // Wait until the app switches into background mode
-    while (true) {
-      const { payload } = yield take(APPSTATE)
-      if (payload === 'background' || payload === 'inactive')
-        break
-    }
+    // Wait until the app switches into background mode when requested
+    if (config.NOTIFICATIONS_ONLY_IN_BACKGROUND)
+      while (true) {
+        const { payload } = yield take(APPSTATE)
+        if (payload === 'background' || payload === 'inactive')
+          break
+      }
 
     // Wait until the app either receives a message or wakes up
     while (true) {
       const { type, payload } = yield take([APPSTATE, WEBSOCKET_MESSAGE, CONVERSATIONS_SUCCESS])
 
-      // Woke up? Start over!
-      if (type === APPSTATE && payload === 'active')
-        break
+      // Woke up and only enabled in background? Start over!
+      if (type === APPSTATE) {
+        if (config.NOTIFICATIONS_ONLY_IN_BACKGROUND && payload === 'active')
+          break
+        continue
+      }
+
+      const inBackground = yield select(state => state.app.state !== 'active')
+
+      // Only send a notification if either in background or user configured foreground notifications
+      if (!inBackground && config.NOTIFICATIONS_ONLY_IN_BACKGROUND)
+        continue
 
       // Successful conversations pull after waking up
       if (type === CONVERSATIONS_SUCCESS) {
-        // TODO: move that to background process
-        console.log(type)
-
-        const messages = yield select(state => state.messages)
-        console.log(type, messages)
+        // const messages = yield select(state => state.messages)
+        // console.log(type, messages)
         // Check if any new message is still unread and not yet in our storage
         // for (const conversation of payload) {
         //   if (conversation.unread !== '0' || messages[conversation.id][0].time !== conversation.last) {
@@ -64,13 +78,21 @@ export default function* notificationSaga() {
         //     })
         //   }
         // }
-
-        yield put({type: BACKGROUND_DONE})
+        if (inBackground)
+          yield put({type: BACKGROUND_DONE})
       }
 
       // Websocket Message received in background -> notify user
       if (type === WEBSOCKET_MESSAGE) {
         const { body, fs_name, cid: conversationId } = payload
+
+        // When in foreground, only notificate if user isn't watching the conversation
+        if (!inBackground) {
+          const { scene, sceneId } = yield select(state => state.app)
+          if (scene !== 'conversation' || sceneId !== conversationId)
+            continue
+        }
+
         PushNotification.localNotification({
           title: fs_name,
           message: body,
