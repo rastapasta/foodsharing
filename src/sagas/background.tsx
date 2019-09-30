@@ -6,7 +6,7 @@ import BackgroundFetch from 'react-native-background-fetch'
 import {
   LOGIN_SUCCESS,
   LOGOUT,
-  BACKGROUND,
+  BACKGROUND_WAKEUP,
   BACKGROUND_DONE,
   BACKGROUND_ERROR,
   CONVERSATIONS_REQUEST
@@ -22,7 +22,7 @@ const configuration = {
 function start() {
   return eventChannel(emitter => {
     BackgroundFetch.configure(configuration,
-      () => emitter({type: BACKGROUND}),
+      () => emitter({type: BACKGROUND_WAKEUP}),
       (error) => emitter({type: BACKGROUND_ERROR, error})
     )
 
