@@ -1,3 +1,4 @@
+import { Platform } from 'react-native'
 import { User, Results, Fairteiler, Marker, ConversationDetail, ConversationListEntry, WallPosts, Message, Profile } from './typings'
 import CookieManager from 'react-native-cookies'
 
@@ -29,11 +30,23 @@ export const syncCookies = async () => {
   cookies = await CookieManager.get(host)
 
   // Sync session cookie between beta and production endpoints
-  await CookieManager.setFromResponse(
-    'https://foodsharing.de/',
-    `PHPSESSID=${cookies.PHPSESSID}; path=/; Thu, 1 Jan 2030 00:00:00 -0000; secure`
+  await (Platform.OS === 'android' ?
+    CookieManager.setFromResponse(
+      'https://foodsharing.de/',
+      `PHPSESSID=${cookies.PHPSESSID}; path=/; Thu, 1 Jan 2030 00:00:00 -0000; secure`
+    ) :
+    CookieManager.set({
+      name: 'PHPSESSID',
+      value: cookies['PHPSESSID'] || '',
+      domain: 'foodsharing.de',
+      origin: 'foodsharing.de',
+      path: '/',
+      version: '1',
+      expiration: '2030-01-01T00:00:00.00-00:00'
+    })
   )
 }
+
 
 function request(
   endpoint:
