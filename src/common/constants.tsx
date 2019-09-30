@@ -13,7 +13,7 @@ export const NAVIGATION = '🌐 NAVIGATION'
 export const CONNECTION_STATUS = '📶 CONNECTION_STATUS'
 
 export const KEYCHAIN = '🔑 KEYCHAIN'
-export const APPSTATE = '📱 APPSTATE'
+export const BACKGROUND_STATE = '📱 BACKGROUND_STATE'
 
 export const PROFILE = '👤 PROFILE'
 

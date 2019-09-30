@@ -10,7 +10,7 @@ const config = {
 
 import { take, select, put } from 'redux-saga/effects'
 import {
-  APPSTATE,
+  BACKGROUND_STATE,
   WEBSOCKET_MESSAGE,
   CONVERSATIONS_SUCCESS,
   BACKGROUND_DONE,
@@ -41,23 +41,23 @@ export default function* notificationSaga() {
     // Wait until the app switches into background mode when requested
     if (config.NOTIFICATIONS_ONLY_IN_BACKGROUND)
       while (true) {
-        const { payload } = yield take(APPSTATE)
-        if (payload === 'background' || payload === 'inactive')
+        const { payload } = yield take(BACKGROUND_STATE)
+        if (payload === true)
           break
       }
 
     // Wait until the app either receives a message or wakes up
     while (true) {
-      const { type, payload } = yield take([APPSTATE, WEBSOCKET_MESSAGE, CONVERSATIONS_SUCCESS])
+      const { type, payload } = yield take([BACKGROUND_STATE, WEBSOCKET_MESSAGE, CONVERSATIONS_SUCCESS])
 
       // Woke up and only enabled in background? Start over!
-      if (type === APPSTATE) {
-        if (config.NOTIFICATIONS_ONLY_IN_BACKGROUND && payload === 'active')
+      if (type === BACKGROUND_STATE) {
+        if (config.NOTIFICATIONS_ONLY_IN_BACKGROUND && payload === false)
           break
         continue
       }
 
-      const inBackground = (yield select(state => state.app.state)) === 'background'
+      const inBackground = (yield select(state => state.app.state)) === true
 
       // Only send a notification if either in background or user configured foreground notifications
       if (!inBackground && config.NOTIFICATIONS_ONLY_IN_BACKGROUND)

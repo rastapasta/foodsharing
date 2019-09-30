@@ -8,8 +8,8 @@ import { persistStore, persistReducer } from 'redux-persist'
 import reducers from '../reducers'
 import sagas from '../sagas'
 
-import {middleware as appState} from '../middlewares/AppState'
-import {middleware as networkState} from '../middlewares/NetworkState'
+import backgroundState from '../middlewares/BackgroundState'
+import networkState from '../middlewares/NetworkState'
 
 declare var window: { __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: any }
 
@@ -17,13 +17,22 @@ declare var window: { __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: any }
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['conversations', 'messages', 'drafts', 'foodsharers', 'profile', 'markers', 'fairteiler', 'app' ]
+  whitelist: [
+    'app',
+    'messages',
+    'conversations',
+    'drafts',
+    'foodsharers',
+    'profile',
+    'markers',
+    'fairteiler'
+  ]
 }
 
 const persistedReducer = persistReducer(persistConfig, reducers)
     , sagaMiddleware = createSagaMiddleware()
     , composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-    , middleware = [appState, networkState, thunk, sagaMiddleware]
+    , middleware = [backgroundState, networkState, thunk, sagaMiddleware]
     , enhancer = composeEnhancers(
       applyMiddleware(...middleware)
     )

@@ -1,4 +1,4 @@
-import { take, fork, call, put, select, delay } from 'redux-saga/effects'
+import { take, fork, call, put, select } from 'redux-saga/effects'
 import { Actions } from 'react-native-router-flux'
 import * as Keychain from 'react-native-keychain'
 import { actions as formActions } from 'react-redux-form'

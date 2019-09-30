@@ -1,6 +1,6 @@
 import socketIO from 'socket.io-client'
 import { eventChannel } from 'redux-saga'
-import { take, call, put, race, delay } from 'redux-saga/effects'
+import { take, call, put, race } from 'redux-saga/effects'
 
 import {
   WEBSOCKET_CONNECTED,

@@ -8,7 +8,7 @@ export const action = createAction(TYPE)
 
 let last = null
 
-export const middleware = createOneShotMiddleware((dispatch) => {
+export default createOneShotMiddleware((dispatch) => {
   NetInfo.addEventListener(state => {
     const { isInternetReachable } = state
 

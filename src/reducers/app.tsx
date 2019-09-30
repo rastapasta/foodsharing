@@ -1,5 +1,5 @@
-import { TYPE as appState } from '../middlewares/AppState'
 import {
+  BACKGROUND_STATE,
   LOGIN_SUCCESS,
   LOGOUT,
   NAVIGATION,
@@ -7,7 +7,7 @@ import {
 } from '../common/constants'
 
 const initialState = {
-  state: null,
+  background: false,
   online: false,
   session: null,
   token: null,
@@ -18,10 +18,10 @@ const initialState = {
 export default function reducer(state = initialState, action: any = {}) {
   const { type, payload } = action
   switch (type) {
-    case appState:
+    case BACKGROUND_STATE:
       return {
         ...state,
-        state: payload
+        background: payload
       }
 
     case NAVIGATION:
