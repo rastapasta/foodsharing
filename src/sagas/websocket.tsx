@@ -1,6 +1,6 @@
 import socketIO from 'socket.io-client'
 import { eventChannel } from 'redux-saga'
-import { take, call, put, race } from 'redux-saga/effects'
+import { take, call, put, race, delay } from 'redux-saga/effects'
 
 import {
   WEBSOCKET_CONNECTED,
@@ -13,20 +13,13 @@ import {
   LOGOUT
 } from '../common/constants'
 
-function initWebsocket(session: string) {
+function initWebsocket() {
   return eventChannel(emitter => {
     // Connect to the live's system's socket server - handles messages for beta as well
     const socket = socketIO('https://foodsharing.de', {
-      transportOptions: {
-        polling: {
-          extraHeaders: {
-            Cookie: 'PHPSESSID=' + session
-          }
-        }
-      },
       forceNew: true,
       path: '/chat/socket.io/',
-      reconnectionDelay: 5000,
+      reconnectionDelay: 3000,
       reconnection: true,
       reconnectionAttempts: Infinity,
       jsonp: false
@@ -43,7 +36,7 @@ function initWebsocket(session: string) {
 
     // Error handling on library level
     socket.on('error', error =>
-      emitter({type: error.match(/not authorized/) ? WEBSOCKET_UNAUTHORIZED : WEBSOCKET_ERROR, session})
+      emitter({type: (error || '').match(/not authorized/) ? WEBSOCKET_UNAUTHORIZED : WEBSOCKET_ERROR})
     )
 
     // Error handling on connection level
@@ -77,18 +70,17 @@ function initWebsocket(session: string) {
 export default function* websocketSagas() {
   while (true) {
     // Wait until we got a successful login
-    const { payload: { session } } = yield take(LOGIN_SUCCESS)
+    yield take(LOGIN_SUCCESS)
 
     // Start up the websocket event channel
-    const channel = yield call(initWebsocket, session)
+    const channel = yield call(initWebsocket)
 
     while (true) {
-      // Wait for an action emitted by the websocket channel
-      // TODO: implement take from channel OR LOGOUT
+      // Wait for a logout or an action emitted by the websocket channel
       const { message, logout } = yield race({
-          message: take(channel),
-          logout: take(LOGOUT)
-        })
+        message: take(channel),
+        logout: take(LOGOUT)
+      })
 
       // Close the channel/socket in case the user logged out
       if (logout) {

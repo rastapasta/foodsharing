@@ -14,13 +14,15 @@ import {
   PROFILE
 } from '../common/constants'
 
-import { login, logout, getCurrentUser, getSession, getProfile, setSession } from '../common/api'
-import { Results } from '../common/typings'
+import { login, logout, getCurrentUser, getSession, getProfile, setSession, syncCookies } from '../common/api'
 
 function* loginFlow(email: string, password: string) {
   let user
 
   try {
+    // Make sure and clean all cookies known to us
+    yield CookieManager.clearAll()
+
     // Here we go, login the user
     user = yield call(login, email, password)
 
@@ -30,8 +32,10 @@ function* loginFlow(email: string, password: string) {
     // If we came that far, unhide the splash screen
     yield SplashScreen.hide()
 
+    const session = getSession()
+
     // Signal our succesful login and broadcast our fresh token and session
-    yield put({type: LOGIN_SUCCESS, payload: getSession()})
+    yield put({type: LOGIN_SUCCESS, payload: session})
 
     // Save the validated email and password in the device's safe store
     Keychain.setGenericPassword(email, password).then(() => true)
@@ -40,12 +44,6 @@ function* loginFlow(email: string, password: string) {
     yield put({type: PROFILE, payload: yield call(getProfile)})
 
   } catch (error) {
-    // In case we receive a malformed-error, clear all cookies and try again
-    if (error === Results.MALFORMED) {
-      yield CookieManager.clearAll()
-      return yield call(loginFlow, email, password)
-    }
-
     // Signal that something went wrong..
     yield put({ type: LOGIN_ERROR, error })
   }
@@ -92,6 +90,7 @@ function* reauthenticateFlow() {
     // Yes, so instantly forward the user to the internal area and hide the splashscreen
     yield SplashScreen.hide()
     yield Actions.reset('drawer')
+    yield syncCookies()
 
     // Notificate all listeners that we got a valid session running
     yield put({type: LOGIN_SUCCESS, payload: {session, token}})

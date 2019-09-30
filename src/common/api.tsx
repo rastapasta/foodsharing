@@ -1,5 +1,5 @@
-import setCookie from 'set-cookie-parser'
 import { User, Results, Fairteiler, Marker, ConversationDetail, ConversationListEntry, WallPosts, Message, Profile } from './typings'
+import CookieManager from 'react-native-cookies'
 
 const host = 'https://beta.foodsharing.de'
     , endpoints = {
@@ -21,15 +21,19 @@ const host = 'https://beta.foodsharing.de'
         baskets: {uri: '/xhr.php?f=loadMarker&types[]=baskets', method: 'GET'},
         shops: {uri: '/xhr.php?f=loadMarker&types[]=betriebe&options[]=needhelp&options[]=needhelpinstant', method: 'GET'}
       }
-    , cookies = {} as any
 
-const handleCookies = cookieString =>
-  setCookie
-  .parse(cookieString.split(/, /))
-  .forEach(cookie => {
-    cookies[cookie.name] = cookie.value
-    // store.dispatch(reduxActions.cookie(cookie.name, cookie.value))
-  })
+let cookies = {} as any
+
+export const syncCookies = async () => {
+  // Pull our cookies from the native side of things
+  cookies = await CookieManager.get(host)
+
+  // Sync session cookie between beta and production endpoints
+  await CookieManager.setFromResponse(
+    'https://foodsharing.de/',
+    `PHPSESSID=${cookies.PHPSESSID}; path=/; Thu, 1 Jan 2030 00:00:00 -0000; secure`
+  )
+}
 
 function request(
   endpoint:
@@ -69,7 +73,7 @@ function request(
     } : {})
   }).then(response => {
     if (response.headers.has('set-cookie'))
-      handleCookies(response.headers.get('set-cookie'))
+      syncCookies()
 
     if (response.status === 200)
       return response.json()
@@ -93,8 +97,8 @@ export const getSession = (): {session: string, token: string} => ({
 })
 
 export const setSession = ({session, token}) => {
-  cookies.PHPSESSID = session
-  cookies.CSRF_TOKEN = token
+  cookies['PHPSESSID'] = session
+  cookies['CSRF_TOKEN'] = token
 }
 
 export const login = (email: string, password: string): Promise<User> =>
