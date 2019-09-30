@@ -9,7 +9,7 @@ import * as reduxActions from '../common/actions'
 
 import MessageForm from '../components/MessageForm'
 import MessageBubble from '../components/MessageBubble'
-import { ConversationDetail, ConversationListEntry, Message, Profile } from '../common/typings'
+import { ConversationDetail, Message, Profile } from '../common/typings'
 
 import colors from '../common/colors'
 import { translate } from '../common/translation'
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
 })
 
 type Props = {
-  conversation: ConversationListEntry
+  conversationId: number
 
   messages: any
   actions: any
@@ -56,8 +56,8 @@ class Conversation extends PureComponent<Props> {
   }
 
   componentDidMount() {
-    const { conversation, actions } = this.props
-    actions.fetchConversation(conversation.id)
+    const { conversationId, actions } = this.props
+    actions.fetchConversation(conversationId)
   }
 
   // TODO: make sure to only rerender if conversation is affected @redux state
@@ -95,9 +95,9 @@ class Conversation extends PureComponent<Props> {
   }
 
   render() {
-    const { conversation, messages, actions, drafts, profile } = this.props
+    const { conversationId, messages, actions, drafts, profile } = this.props
         , { refreshing } = this.state
-        , data = (messages[conversation.id] || []) as Message[]
+        , data = (messages[conversationId] || []) as Message[]
         , items = this.prepareItems(data, profile)
 
     return (
@@ -109,7 +109,7 @@ class Conversation extends PureComponent<Props> {
         <SafeAreaView style={styles.container}>
           <FlatList
             onRefresh={() => {
-              actions.fetchConversation(conversation.id)
+              actions.fetchConversation(conversationId)
 
               // TODO: hook this into redux
               setTimeout(() => this.setState({refreshing: false}), 1000)
@@ -143,9 +143,9 @@ class Conversation extends PureComponent<Props> {
           />
 
           <MessageForm
-            onSend={() => actions.sendMessage(conversation.id)}
-            model={`drafts.${conversation.id}`}
-            active={!!drafts[conversation.id]}
+            onSend={() => actions.sendMessage(conversationId)}
+            model={`drafts.${conversationId}`}
+            active={!!drafts[conversationId]}
           />
         </SafeAreaView>
       </KeyboardAvoidingView>

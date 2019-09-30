@@ -1,6 +1,7 @@
 import PushNotification from 'react-native-push-notification'
 import PushNotificationIOS from '@react-native-community/push-notification-ios'
 import { Platform } from 'react-native'
+import { Actions } from 'react-native-router-flux'
 
 import { take, select, put } from 'redux-saga/effects'
 import {
@@ -15,8 +16,14 @@ export default function* notificationSaga() {
   yield take(LOGIN_SUCCESS)
 
   yield PushNotification.configure({
-    onNotification: async (notification) => {
-      console.log('notification!!! ', notification)
+    onNotification: notification => {
+      put({type: 'NOTIFICATION_CLICKED'})
+
+      const { conversationId } = notification.data
+      if (conversationId)
+        Actions.conversation({conversationId})
+      else
+        Actions.conversations()
 
       if (Platform.OS === 'ios')
         notification.finish(PushNotificationIOS.FetchResult.NoData)
@@ -63,11 +70,13 @@ export default function* notificationSaga() {
 
       // Websocket Message received in background -> notify user
       if (type === WEBSOCKET_MESSAGE) {
-        const { body, fs_name } = payload
-        console.log('notifying', fs_name, body)
+        const { body, fs_name, cid: conversationId } = payload
         PushNotification.localNotification({
           title: fs_name,
-          message: body
+          message: body,
+          userInfo: {
+            conversationId
+          }
         })
       }
     }
