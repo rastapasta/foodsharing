@@ -119,8 +119,6 @@ class Conversation extends PureComponent<Props> {
           <FlatList
             onRefresh={Platform.OS === 'ios' ? () => {
               actions.fetchConversation(conversationId)
-
-              // TODO: hook this into redux
               setTimeout(() => this.setState({refreshing: false}), 1000)
             } : null}
             refreshing={refreshing}

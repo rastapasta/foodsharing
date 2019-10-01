@@ -58,8 +58,6 @@ class Conversations extends PureComponent<Props> {
         <FlatList
           onRefresh={() => {
             actions.fetchConversations()
-
-            // TODO: hook this into redux
             setTimeout(() => this.setState({refreshing: false}), 1000)
           }}
           refreshing={refreshing}

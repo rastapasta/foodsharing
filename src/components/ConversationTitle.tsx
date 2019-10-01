@@ -39,7 +39,7 @@ const showMemberCount = 4
 class ConversationTitle extends PureComponent<Props> {
   render() {
     const { conversationId, conversations, profile, foodsavers } = this.props
-        , conversation = conversations.find(conversation => conversation.id == conversationId) || {}
+        , conversation = conversations.find(conversation => conversation.id == conversationId) || {member: []}
 
     return conversation.member.length > 2 ?
       <View style={styles.container}>

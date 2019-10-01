@@ -64,3 +64,4 @@ This thingy runs on iOS and Android - one code, one love!
 * Rounded avatars in conversation messages
 * Handle more than the last 20 messages, logic to fill the gap
 * Settings screen to setup background pull / notifications?
+* Handle WebSocket reconnect after long inactivity

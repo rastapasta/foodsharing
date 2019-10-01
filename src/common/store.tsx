@@ -13,7 +13,6 @@ import networkState from '../middlewares/NetworkState'
 
 declare var window: { __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: any }
 
-// WHITELIST
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
@@ -33,9 +32,7 @@ const persistedReducer = persistReducer(persistConfig, reducers)
     , sagaMiddleware = createSagaMiddleware()
     , composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
     , middleware = [backgroundState, networkState, thunk, sagaMiddleware]
-    , enhancer = composeEnhancers(
-      applyMiddleware(...middleware)
-    )
+    , enhancer = composeEnhancers(applyMiddleware(...middleware))
 
 export const store = createStore(persistedReducer, enhancer)
 export const persistor = persistStore(store)

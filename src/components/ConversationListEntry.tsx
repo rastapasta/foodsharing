@@ -17,12 +17,21 @@ const { width } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
   container: {
-    height: 80,
     width,
+    height: width * 0.22 + 10,
     flexDirection: 'row'
   },
+  lastMessage: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    borderBottomWidth: 1,
+    borderColor: '#ddd',
+    paddingBottom: 10
+  },
   images: {
-    width: 70,
+    width: width * 0.22,
     flexWrap: 'wrap',
     padding: 10,
     flexDirection: 'row',
@@ -44,15 +53,6 @@ const styles = StyleSheet.create({
   date: {
     color: colors.conversationDate,
     fontSize: 11
-  },
-  lastMessage: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    borderBottomWidth: 1,
-    borderColor: '#ddd',
-    paddingBottom: 10
   },
   lastMessageImage: {
     width: 18,
