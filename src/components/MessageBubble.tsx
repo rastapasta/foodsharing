@@ -77,7 +77,7 @@ const MAX_LENGTH = 600
 export default ({type, message}: Props) => {
   const [expanded, setExpanded] = useState(false)
       , { body } = message
-      , shortened = !expanded && body.length > 1000
+      , shortened = !expanded && body.length > MAX_LENGTH
       , text = expanded ? body : body.substr(0, MAX_LENGTH)
 
   return (
@@ -93,7 +93,7 @@ export default ({type, message}: Props) => {
             style={[styles.message, styles[type+'Message']]}
             text={text}
           />
-          {shortened && <Text>...{' '}
+          {shortened && <Text style={styles[type+'Message']}>...{' '}
             <Text onPress={() => setExpanded(true)} style={{fontWeight: 'bold'}}>
               {translate('conversations.read_more')}
             </Text>

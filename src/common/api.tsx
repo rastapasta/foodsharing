@@ -1,6 +1,21 @@
 import { Platform } from 'react-native'
-import { User, Results, Fairteiler, Marker, ConversationDetail, ConversationListEntry, WallPosts, Message, Profile } from './typings'
+import {
+  User,
+  Results,
+  Fairteiler,
+  Marker,
+  ConversationDetail,
+  ConversationListEntry,
+  WallPosts,
+  Message,
+  Profile,
+  Region
+} from './typings'
 import CookieManager from 'react-native-cookies'
+import cheerio from 'react-native-cheerio'
+import { AllHtmlEntities } from 'html-entities'
+
+const entities = new AllHtmlEntities()
 
 const host = 'https://beta.foodsharing.de'
     , endpoints = {
@@ -19,6 +34,8 @@ const host = 'https://beta.foodsharing.de'
 
         fairteiler: {uri: '/api/fairSharePoints/{id}', method: 'GET'},
         fairteilerMarker: {uri: '/xhr.php?f=loadMarker&types[]=fairteiler', method: 'GET'},
+
+        regionMembers: {uri: '/?page=bezirk&bid={id}&sub=members', method: 'GET'},
 
         // TODO:
         baskets: {uri: '/xhr.php?f=loadMarker&types[]=baskets', method: 'GET'},
@@ -63,7 +80,9 @@ function request(
     'user2conv' |
     'fairteiler' |
     'fairteilerMarker' |
-    'markAsRead',
+    'markAsRead' |
+    'regionMembers',
+
   data?: any,
   options?: any
 ): Promise<any> {
@@ -71,11 +90,12 @@ function request(
       , opts = options || {}
       , url = host + Object.keys(opts)
                       .reduce((u, key) => u.replace('{' + key +'}', opts[key]), uri)
-      , sendAsJSON = !url.match(/xhrapp/)
+      , handleAsHTML = !!url.match('/?page=')
+      , sendAsJSON = !!url.match(/\/api\//)
 
   return fetch(url, {
     headers: {
-      Accept: 'application/json',
+      Accept: handleAsHTML ? 'text/html' : 'application/json',
       ...(cookies['CSRF_TOKEN'] ? {'X-CSRF-Token': cookies['CSRF_TOKEN']} : {}),
       ...(data ? {'Content-Type': sendAsJSON ? 'application/json' : 'application/x-www-form-urlencoded'} : {})
     },
@@ -86,15 +106,15 @@ function request(
         JSON.stringify(data) :
         Object.keys(data).map(k => k + '=' + encodeURIComponent(data[k])).join('&')
     } : {})
-  }).then(response => {
+  }).then(async response => {
     if (response.headers.has('set-cookie'))
       syncCookies()
 
-    // console.log('request logging', endpoint, data, options, response)
-
+    // If we got what we needed, return it either as JSON or Cheerio object for dirty style parsing
     if (response.status === 200)
-      return response.json()
+      return handleAsHTML ? cheerio.load(await response.text()) : response.json()
 
+    // Translate any error case to one of our error cases
     switch (response.status) {
       case 400: throw Results.MALFORMED
       case 401: throw Results.FORBIDDEN
@@ -153,6 +173,16 @@ export const userToConversationId = async (userId: number): Promise<number> =>
 export const getProfile = (): Promise<Profile> =>
   request('profile')
 
+// TODO: port this into a REST endpoint instead of screenscraping O:)
+export const getRegionMembers = async (id: number): Promise<Region> => {
+  const $ = await request('regionMembers', null, {id})
+  return JSON.parse(
+    entities.decode(
+      $('div#vue-memberlist')
+      .attr('data-vue-props')
+    )
+  )
+}
 
 // TODO: backend returns 500
 // export const getStore = (storeId: number): Promise<any> =>

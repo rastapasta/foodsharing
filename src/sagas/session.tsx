@@ -29,16 +29,14 @@ function* loginFlow(email: string, password: string) {
     // All good, let's proceed to main
     Actions.reset('drawer')
 
+    // Save the validated email and password in the device's safe store
+    yield Keychain.setGenericPassword(email, password)
+
     // If we came that far, unhide the splash screen
     yield SplashScreen.hide()
 
-    const session = getSession()
-
     // Signal our succesful login and broadcast our fresh token and session
-    yield put({type: LOGIN_SUCCESS, payload: session})
-
-    // Save the validated email and password in the device's safe store
-    Keychain.setGenericPassword(email, password).then(() => true)
+    yield put({type: LOGIN_SUCCESS, payload: getSession()})
 
     // Request and broadcast the profile information of our fresh user
     yield put({type: PROFILE, payload: yield call(getProfile)})
@@ -60,7 +58,7 @@ function* logoutFlow() {
   Actions.reset('login')
 
   // Delete the previously stored password from the secure location
-  Keychain.resetGenericPassword().then(() => true)
+  yield Keychain.resetGenericPassword()
 
   // Try to logout the user out from foodsharing.network
   try {

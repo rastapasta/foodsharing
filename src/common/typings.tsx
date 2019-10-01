@@ -105,3 +105,17 @@ export interface WallPicture {
   medium: string,
   thumb: string
 }
+
+export interface Region {
+  regionName: string,
+  members: {
+    user: {
+      id: number,
+      name: string,
+      sleep_status: number
+    },
+    size: number,
+    imageUrl: string
+  }[],
+  isWorkGroup: boolean
+}

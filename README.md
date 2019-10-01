@@ -8,15 +8,16 @@ This thingy runs on iOS and Android - one code, one love!
 ## 🎉 What's implemented?
 
 * Login
+  * Full async login / reauthentication / logout flows
   * Auth via email and password
   * Links to web based register & password restore
   * Using device's keychain to store credentials in a secure location
-  * Display of current build version
+  * Display of the current build version
 
 * Drawer
   * Display of logo and name of user
   * Button for Logout
-  * Display of current build version
+  * Display of the current build version
 
 * Conversations
   * Send and receive messages
@@ -68,6 +69,7 @@ This thingy runs on iOS and Android - one code, one love!
   * Handle WebSocket reconnect after long inactivity
 
 * Should hve
+  * Deep linking via apple-app-site-association, needs to be merged to fs master
   * Tap on group conversation title -> Group scene, list of members, possibility to change name
   * Tap on conversation title -> Jump to Profile page
 
