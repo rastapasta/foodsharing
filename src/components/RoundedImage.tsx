@@ -1,13 +1,12 @@
 import React from 'react'
 import Image from 'react-native-fast-image'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, StyleProp, ViewStyle } from 'react-native'
 
 const url = 'https://foodsharing.de/images/'
     , avatar = 'https://foodsharing.de/img/130_q_avatar.png'
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     borderRadius: 30,
     overflow: 'hidden',
     aspectRatio: 1
@@ -16,10 +15,11 @@ const styles = StyleSheet.create({
 
 interface Props {
   photo: string
+  style?: StyleProp<ViewStyle>
 }
 
 export default (props: Props) =>
-  <View style={styles.container} {...props}>
+  <View {...props} style={[styles.container, props.style || {}]}>
     <Image
       style={{flex: 1}}
       resizeMode="contain"

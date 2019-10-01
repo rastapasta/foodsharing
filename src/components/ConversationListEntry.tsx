@@ -37,8 +37,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     padding: 10,
     flexDirection: 'row',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start'
+    justifyContent: 'space-between'
   },
   header: {
     flex: 1,
@@ -87,22 +86,32 @@ class ConversationsItem extends PureComponent<Props> {
       >
         <View style={styles.images}>
           {party.slice(0, 4).map(person =>
-            <RoundedImage key={`${id}.${person}`} photo={foodsaver(foodsavers[person]).photo} />
+            <RoundedImage
+              key={`${id}.${person}`}
+              style={party.length > 1 ? {width: '48%', margin: '1%'} : {width: '100%'}}
+              photo={foodsaver(foodsavers[person]).photo}
+            />
           )}
         </View>
 
         <View style={{flex: 1, padding: 10}}>
           <View style={styles.header}>
-            <Text style={[conversation.unread !== "0" && {color: colors.messageUnread}]}>
-              {/* TODO: handle too long strings */}
-              {name ? name :
-                isSelfMessage ? translate('conversations.note_to_self') :
-                party.map(person => foodsaver(foodsavers[person]).name).join('|')
-              }
-            </Text>
-            <Text style={styles.date}>
-              {isYesterday ? translate('conversations.yesterday') : date.format(isToday ? 'HH:mm' : 'MMMM Do')}
-            </Text>
+            <View style={{flex: 1}}>
+              <Text
+                numberOfLines={1}
+                style={[conversation.unread !== "0" && {color: colors.messageUnread}]}
+              >
+                {name ? name :
+                  isSelfMessage ? translate('conversations.note_to_self') :
+                  party.map(person => foodsaver(foodsavers[person]).name).join('|')
+                }
+              </Text>
+            </View>
+            <View>
+              <Text style={styles.date}>
+                {isYesterday ? translate('conversations.yesterday') : date.format(isToday ? 'HH:mm' : 'MMMM D')}
+              </Text>
+            </View>
           </View>
 
           <View style={[styles.lastMessage, !!isLast && {borderBottomWidth: 0}]}>
