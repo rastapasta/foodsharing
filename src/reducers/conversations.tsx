@@ -7,12 +7,19 @@ import {
 } from '../common/constants'
 
 const initialState = []
+    , messageToObj = message => ({
+      unread: "1",
+      last_foodsaver_id: `${message.fs_id}`,
+      last_message: message.body,
+      last: message.time,
+      last_ts: Math.floor(Date.parse(message.time)/1000)
+    })
 
 export default function reducer(state = initialState, action: any = {}) {
   switch (action.type) {
     case MESSAGE_SUCCESS:
     case WEBSOCKET_MESSAGE:
-      const { payload: {time, fs_id, body, cid} } = action
+      const { payload: {fs_id, cid} } = action
           , conversationId = action.type === MESSAGE_SUCCESS ? action.conversationId : cid
 
       let found = false
@@ -24,11 +31,7 @@ export default function reducer(state = initialState, action: any = {}) {
         found = true
         return {
           ...conversation,
-          unread: "1",
-          last_foodsaver_id: `${fs_id}`,
-          last_message: body,
-          last: time,
-          last_ts: Math.floor(Date.parse(time)/1000)
+          ...messageToObj(action.payload)
         }
       })
 
@@ -36,12 +39,8 @@ export default function reducer(state = initialState, action: any = {}) {
       if (!found)
         newState.push({
           id: conversationId,
-          unread: "1",
-          last_foodsaver_id: `${fs_id}`,
-          last_message: body,
-          last: time,
-          last_ts: Math.floor(Date.parse(time)/1000),
-          member: [`${fs_id}`]
+          member: [`${fs_id}`],
+          ...messageToObj(action.payload)
         })
 
       return newState
