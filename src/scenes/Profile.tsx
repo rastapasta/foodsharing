@@ -1,9 +1,8 @@
 import { withNavigationFocus } from 'react-navigation'
 
 import React, { PureComponent } from 'react'
-import { View, StyleSheet, Dimensions, Text, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, Dimensions, Text } from 'react-native'
 
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -13,8 +12,7 @@ import ParalxScrolView from '../components/ParalaxScrollView'
 import ProfileCircle from '../components/ProfileCircle'
 
 import { foodsaver } from '../common/placeholder'
-
-import { Actions } from 'react-native-router-flux'
+import BackButton from '../components/BackButton'
 
 const { width, height } = Dimensions.get('window')
 
@@ -77,7 +75,7 @@ class Profile extends PureComponent<Props> {
                 alignItems: 'center',
               }}>
                 <ProfileCircle label="bananacount" value={26} unit="" />
-                <ProfileCircle label="basketcount" value={35} unit="x" />
+                <ProfileCircle label="basketcount" value={35} unit="" />
                 <ProfileCircle label="postcount" value={4412} unit="" />
                 <ProfileCircle label="fetchcount" value={510} unit="x" />
                 <ProfileCircle label="fetchweight" value={16340} unit="kg" />
@@ -87,13 +85,7 @@ class Profile extends PureComponent<Props> {
         >
           <View style={{height: height/2, backgroundColor: 'white', marginTop: 5}} />
         </ParalxScrolView>
-        <TouchableOpacity
-          onPress={() => Actions.pop()}
-          hitSlop={{left: 5, right: 10, bottom: 10, top: 10}}
-          style={{position: 'absolute', left: 0, top: 20, justifyContent: 'center'}}
-        >
-          <Icon name="chevron-left" size={36} color="#000" />
-        </TouchableOpacity>
+        <BackButton />
       </View>
     )
   }
