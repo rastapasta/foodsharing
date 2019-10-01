@@ -13,6 +13,7 @@ import {
   LOGIN_SUCCESS,
   LOGOUT
 } from '../common/constants'
+import { Message } from '../common/typings'
 
 const entities = new AllHtmlEntities()
 
@@ -47,14 +48,13 @@ function initWebsocket() {
       emitter({type: WEBSOCKET_ERROR, error})
     )
 
-    // Handle incoming websocket messages
+    // Handle incoming websocket message
     socket.on('conv', ({m, o}: {m: string, o: string}) => {
       if (m === 'push') {
-        const data = JSON.parse(o)
-        return emitter({type: WEBSOCKET_MESSAGE, payload: {
-          ...data,
-          body: entities.decode(data.body)
-        }})
+        const payload = JSON.parse(o) as Message
+        payload.body = entities.decode(payload.body)
+
+        return emitter({type: WEBSOCKET_MESSAGE, payload})
       }
     })
 

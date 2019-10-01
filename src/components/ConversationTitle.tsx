@@ -44,10 +44,10 @@ class ConversationTitle extends PureComponent<Props> {
 
     return conversation.member.length > 2 ?
       <View style={styles.container}>
-        <Text style={styles.title}>
+        <Text style={styles.title} numberOfLines={1} adjustsFontSizeToFit>
           {conversation.name || 'Gruppenchat'}
         </Text>
-        <Text style={styles.subtitle}>
+        <Text style={styles.subtitle} numberOfLines={1} adjustsFontSizeToFit>
           {conversation.member
             .filter(member => member != profile.id)
             .slice(0, showMemberCount)

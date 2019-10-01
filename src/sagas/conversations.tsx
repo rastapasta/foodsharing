@@ -27,13 +27,14 @@ function* fetch() {
   // Pull the conversations from the API
   const conversations = yield getConversations()
 
+  // Decode HTML entities before the content gets into the hands of any other method
+  for (const conversation of conversations)
+    conversation.last_message = entities.decode(conversation.last_message)
+
   // ... and publish it on the bus
   yield put({
     type: CONVERSATIONS_SUCCESS,
-    payload: conversations.map(conversation => ({
-      ...conversation,
-      last_message: entities.decode(conversation.last_message)
-    }))
+    payload: conversations
   })
 }
 

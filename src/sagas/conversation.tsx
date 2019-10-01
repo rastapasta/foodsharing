@@ -13,13 +13,15 @@ import {
 const entities = new AllHtmlEntities()
 
 function* fetch(id: number) {
+  const conversation = yield getConversation(id)
+
+  // Decode HTML entities before the content gets into the hands of any other method
+  conversation.messages.forEach(message => message.body = entities.decode(message.body))
+
   yield put({
     type: CONVERSATION_SUCCESS,
     id,
-    payload: (yield getConversation(id)).map(conversation => ({
-      ...conversation,
-      body: entities.decode(conversation.body)
-    }))
+    payload: conversation
   })
 }
 
