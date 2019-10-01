@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, View, Dimensions, Text } from 'react-native'
 import { AllHtmlEntities } from 'html-entities'
 import { Message } from '../common/typings'
@@ -6,6 +6,8 @@ import { Message } from '../common/typings'
 import Linkify from './Linkify'
 
 import colors from '../common/colors'
+
+import { translate } from '../common/translation'
 
 import moment from 'moment'
 import RoundedImage from './RoundedImage'
@@ -73,20 +75,37 @@ type Props = {
   message: Message
 }
 
-export default ({type, message}: Props) =>
-  <View style={[styles.container, {justifyContent: type === 'sent' ? 'flex-end' : 'flex-start'}]}>
-    {type === 'received' &&
-      <View style={styles.image}>
-        <RoundedImage photo={message.fs_photo} />
+const MAX_LENGTH = 600
+
+export default ({type, message}: Props) => {
+  const [expanded, setExpanded] = useState(false)
+      , decoded = entities.decode(message.body)
+      , shortened = !expanded && decoded.length > 1000
+      , text = expanded ? decoded : decoded.substr(0, MAX_LENGTH)
+
+  return (
+    <View style={[styles.container, {justifyContent: type === 'sent' ? 'flex-end' : 'flex-start'}]}>
+      {type === 'received' &&
+        <View style={styles.image}>
+          <RoundedImage photo={message.fs_photo} />
+        </View>
+      }
+      <View style={[styles.bubble, styles[type+'Bubble']]}>
+        <Text>
+          <Linkify
+            style={[styles.message, styles[type+'Message']]}
+            text={text}
+          />
+          {shortened && <Text>...{' '}
+            <Text onPress={() => setExpanded(true)} style={{fontWeight: 'bold'}}>
+              {translate('conversations.read_more')}
+            </Text>
+          </Text>}
+        </Text>
+        <Text style={[styles.time, styles[type+'Time']]}>
+          {moment(message.time).format('HH:mm')}
+        </Text>
       </View>
-    }
-    <View style={[styles.bubble, styles[type+'Bubble']]}>
-      <Linkify
-        style={[styles.message, styles[type+'Message']]}
-        text={entities.decode(message.body)}
-      />
-      <Text style={[styles.time, styles[type+'Time']]}>
-        {moment(message.time).format('HH:mm')}
-      </Text>
     </View>
-  </View>
+  )
+}
