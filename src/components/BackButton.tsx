@@ -8,7 +8,15 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     top: 20,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 3.84,
+    elevation: 5
   }
 })
 
@@ -18,5 +26,5 @@ export default () =>
     hitSlop={{left: 5, right: 10, bottom: 10, top: 10}}
     style={styles.container}
   >
-    <Icon name="chevron-left" size={36} color="#000" />
+    <Icon name="chevron-left" size={36} color="#fff" />
   </TouchableOpacity>

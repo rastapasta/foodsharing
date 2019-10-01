@@ -13,7 +13,8 @@ const screen = Dimensions.get('screen')
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: colors.background
   },
   background: {
     position: 'absolute',
@@ -22,7 +23,7 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    backgroundColor: colors.white
+    backgroundColor: colors.background
   },
   header: {
     position: 'absolute',
@@ -34,12 +35,6 @@ const styles = StyleSheet.create({
     width: screen.width,
     height: gradientHeight,
     top: -gradientHeight
-  },
-  gradientBottom: {
-    position: 'absolute',
-    width: screen.width,
-    height: gradientHeight,
-    bottom: -gradientHeight
   }
 })
 
@@ -100,9 +95,8 @@ export default class ParalaxScrollView extends PureComponent<Props> {
       }
       pointerEvents='none'
   >
-    <LinearGradient style={styles.gradientTop} colors={['rgba(255,255,255,0)', 'rgba(255,255,255,1)']}/>
+    <LinearGradient style={styles.gradientTop} colors={['rgba(255,255,255,0)', colors.background]}/>
     {headerComponent}
-    <LinearGradient style={styles.gradientBottom} colors={['rgba(255,255,255,1)', 'rgba(255,255,255,0)']}/>
   </Animated.View>
 
   }

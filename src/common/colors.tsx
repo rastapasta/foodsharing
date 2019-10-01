@@ -10,6 +10,8 @@ export default {
   white: '#fff',
   gray: '#aaa',
 
+  badge: '#64AE24',
+
   version: '#aaa',
 
   drawerBackground: '#5C4038',
@@ -30,7 +32,6 @@ export default {
   messageReceivedBubble: '#EFEFEF',
   messageReceivedText: '#000',
   messageRecievedTime: '#8B8B8B',
-
 
   messageSendButton: '#E0E0E0',
   messageSendIcon: '#7F7F7F',

@@ -13,14 +13,17 @@ import ProfileCircle from '../components/ProfileCircle'
 
 import { foodsaver } from '../common/placeholder'
 import BackButton from '../components/BackButton'
+import colors from '../common/colors'
 
 const { width, height } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: colors.background
   },
   name: {
+    color: colors.white,
     fontSize: 16
   }
 })
@@ -55,15 +58,16 @@ class Profile extends PureComponent<Props> {
       <View style={styles.container}>
         <ParalxScrolView
           image={profile.photo ? {uri: 'https://foodsharing.de/images/' + profile.photo} : null}
-          imageHeight={profile.photo ? height * 0.5 : 0}
+          imageHeight={profile.photo ? height * 0.5 : 1}
           headerComponent={
             <View style={{
               height: headerHeight,
               width,
+              backgroundColor: colors.background,
               alignItems: 'center',
               justifyContent: 'center'
             }}>
-              <View style={{height: 40, alignItems: 'center', justifyContent: 'center'}}>
+              <View style={{height: 50, alignItems: 'center', justifyContent: 'center'}}>
                 <Text style={styles.name}>
                   {profile.name}
                 </Text>
@@ -83,7 +87,7 @@ class Profile extends PureComponent<Props> {
             </View>
           }
         >
-          <View style={{height: height/2, backgroundColor: 'white', marginTop: 5}} />
+          <View style={{minHeight: height - headerHeight, backgroundColor: colors.background, marginTop: 5}} />
         </ParalxScrolView>
         <BackButton />
       </View>

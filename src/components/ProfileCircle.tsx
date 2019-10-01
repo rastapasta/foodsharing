@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     padding: 4,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#64AE24'
+    backgroundColor: colors.badge
   },
   value: {
     color: colors.white,
