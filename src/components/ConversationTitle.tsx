@@ -7,6 +7,7 @@ import * as reduxActions from '../common/actions'
 import colors from '../common/colors'
 import { foodsaver } from '../common/placeholder'
 import { translate } from '../common/translation'
+import { Actions } from 'react-native-router-flux'
 
 const styles = StyleSheet.create({
   container: {
@@ -28,6 +29,7 @@ const styles = StyleSheet.create({
 
 type Props = {
   conversationId: number
+  hideMembers?: boolean
 
   actions: any
   conversations: any
@@ -39,34 +41,40 @@ const showMemberCount = 4
 
 class ConversationTitle extends PureComponent<Props> {
   render() {
-    const { conversationId, conversations, profile, foodsavers } = this.props
+    const { conversationId, conversations, profile, foodsavers, hideMembers } = this.props
         , conversation = conversations.find(conversation => conversation.id == conversationId) || {member: []}
-        , isNoteToSelf = conversation.member.length === 1
+        , otherMembers = conversation.member.filter(member => member != profile.id)
+        , isNoteToSelf = otherMembers.length === 0
 
     return <TouchableOpacity
         style={styles.container}
         hitSlop={{top: 10, bottom: 10, left: 50, right: 50}}
         disabled={conversation.member.length === 1}
+        onPress={() => otherMembers.length === 1 ?
+          Actions.jump('profile', {id: otherMembers[0]}) :
+          Actions.jump('groupchat', {conversationId})
+        }
       >
-        {conversation.member.length > 2 ?
+        {otherMembers.length > 1 ?
           <Fragment>
             <Text style={styles.title} numberOfLines={1} adjustsFontSizeToFit>
               {conversation.name || translate('conversations.groupchat')}
             </Text>
-            <Text style={styles.subtitle} numberOfLines={1} adjustsFontSizeToFit>
-              {conversation.member
-                .filter(member => member != profile.id)
-                .slice(0, showMemberCount)
-                .map(member => foodsaver(foodsavers[member]).name)
-                .join(', ')
-              }{conversation.member.length-1 > showMemberCount ? ', ...' : ''}
-            </Text>
+            {!hideMembers &&
+              <Text style={styles.subtitle} numberOfLines={1} adjustsFontSizeToFit>
+                {otherMembers
+                  .slice(0, showMemberCount)
+                  .map(member => foodsaver(foodsavers[member]).name)
+                  .join(', ')
+                }{conversation.member.length-1 > showMemberCount ? ', ...' : ''}
+              </Text>
+            }
           </Fragment>
         :
           <Text style={styles.title}>
             {isNoteToSelf ?
               translate('conversations.note_to_self') :
-              foodsaver(foodsavers[conversation.member[0]]).name
+              foodsaver(foodsavers[otherMembers[0]]).name
             }
           </Text>
         }

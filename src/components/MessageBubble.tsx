@@ -1,14 +1,13 @@
 import React, { useState } from 'react'
-import { StyleSheet, View, Dimensions, Text } from 'react-native'
-import { Message } from '../common/typings'
-
-import Linkify from './Linkify'
+import { StyleSheet, View, Dimensions, Text, TouchableOpacity } from 'react-native'
+import { Actions } from 'react-native-router-flux'
+import moment from 'moment'
 
 import colors from '../common/colors'
-
 import { translate } from '../common/translation'
 
-import moment from 'moment'
+import { Message } from '../common/typings'
+import Linkify from './Linkify'
 import RoundedImage from './RoundedImage'
 
 const { width } = Dimensions.get('window')
@@ -83,9 +82,12 @@ export default ({type, message}: Props) => {
   return (
     <View style={[styles.container, {justifyContent: type === 'sent' ? 'flex-end' : 'flex-start'}]}>
       {type === 'received' &&
-        <View style={styles.image}>
+        <TouchableOpacity
+          style={styles.image}
+          onPress={() => Actions.jump('profile', {id: message.fs_id})}
+        >
           <RoundedImage photo={message.fs_photo} />
-        </View>
+        </TouchableOpacity>
       }
       <View style={[styles.bubble, styles[type+'Bubble']]}>
         <Text>

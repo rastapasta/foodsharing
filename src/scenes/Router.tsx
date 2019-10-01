@@ -95,7 +95,6 @@ export default () =>
       </RouterDrawer>
       <Scene
         key="conversation"
-        title="Conversation"
         renderTitle={({conversationId}) => <ConversationTitle conversationId={conversationId} />}
 
         component={Conversation}
@@ -114,5 +113,12 @@ export default () =>
         component={Profile}
         hideNavBar={false}
       />
+      <Scene
+        key="groupchat"
+        renderTitle={({conversationId}) => <ConversationTitle conversationId={conversationId} hideMembers />}
+        component={Home}
+        hideNavBar={false}
+      />
+
     </Stack>
   </Router>
