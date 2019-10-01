@@ -175,8 +175,8 @@ export const userToConversationId = async (userId: number): Promise<number> =>
 export const getCurrentProfile = (): Promise<Profile> =>
   request('currentProfile')
 
-// TODO: port this into a REST endpoint instead of screenscraping O:)
-export const getProfile = async (id: number): Promise<any> => {
+// TODO: port this to a REST endpoint instead of screenscraping O:)
+export const getProfile = async (id: number): Promise<{id: number, isOnline: boolean, isFriend: boolean, stats: any}> => {
   const $ = await request('profile', null, {id})
       , stats = [
         'basketcount',
@@ -186,6 +186,8 @@ export const getProfile = async (id: number): Promise<any> => {
         'fetchweight'
       ]
   return {
+    id,
+
     isOnline: $('.msg-inside.info').length === 1,
 
     isFriend: $('.buddyRequest').length === 0,
@@ -197,7 +199,7 @@ export const getProfile = async (id: number): Promise<any> => {
   }
 }
 
-// TODO: port this into a REST endpoint instead of screenscraping O:)
+// TODO: port this to a REST endpoint instead of screenscraping O:)
 export const getRegionMembers = async (id: number): Promise<Region> => {
   const $ = await request('regionMembers', null, {id})
   return {

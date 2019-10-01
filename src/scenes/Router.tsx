@@ -9,6 +9,7 @@ import Drawer from '../components/Drawer'
 
 import Login from './Login'
 import Map from './Map'
+import Profile from './Profile'
 import Conversations from './Conversations'
 import Conversation from './Conversation'
 
@@ -106,6 +107,12 @@ export default () =>
         component={Fairteiler}
         hideNavBar={false}
         path="/?page=fairteiler&sub=ft&id=:id"
+      />
+      <Scene
+        key="profile"
+        title="Profil"
+        component={Profile}
+        hideNavBar={false}
       />
     </Stack>
   </Router>

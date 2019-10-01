@@ -1,5 +1,5 @@
-import React, { PureComponent } from 'react'
-import { View, Text, StyleSheet, Platform } from 'react-native'
+import React, { PureComponent, Fragment } from 'react'
+import { Text, StyleSheet, Platform, TouchableOpacity } from 'react-native'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -41,28 +41,36 @@ class ConversationTitle extends PureComponent<Props> {
   render() {
     const { conversationId, conversations, profile, foodsavers } = this.props
         , conversation = conversations.find(conversation => conversation.id == conversationId) || {member: []}
+        , isNoteToSelf = conversation.member.length === 1
 
-    return conversation.member.length > 2 ?
-      <View style={styles.container}>
-        <Text style={styles.title} numberOfLines={1} adjustsFontSizeToFit>
-          {conversation.name || 'Gruppenchat'}
-        </Text>
-        <Text style={styles.subtitle} numberOfLines={1} adjustsFontSizeToFit>
-          {conversation.member
-            .filter(member => member != profile.id)
-            .slice(0, showMemberCount)
-            .map(member => foodsaver(foodsavers[member]).name)
-            .join(', ')
-          }{conversation.member.length-1 > showMemberCount ? ', ...' : ''}
-        </Text>
-      </View>
-      :
-      <Text style={styles.title}>
-        {conversation.member.length === 1 ?
-          translate('conversations.note_to_self') :
-          foodsaver(foodsavers[conversation.member[0]]).name
+    return <TouchableOpacity
+        style={styles.container}
+        hitSlop={{top: 10, bottom: 10, left: 50, right: 50}}
+        disabled={conversation.member.length === 1}
+      >
+        {conversation.member.length > 2 ?
+          <Fragment>
+            <Text style={styles.title} numberOfLines={1} adjustsFontSizeToFit>
+              {conversation.name || translate('conversations.groupchat')}
+            </Text>
+            <Text style={styles.subtitle} numberOfLines={1} adjustsFontSizeToFit>
+              {conversation.member
+                .filter(member => member != profile.id)
+                .slice(0, showMemberCount)
+                .map(member => foodsaver(foodsavers[member]).name)
+                .join(', ')
+              }{conversation.member.length-1 > showMemberCount ? ', ...' : ''}
+            </Text>
+          </Fragment>
+        :
+          <Text style={styles.title}>
+            {isNoteToSelf ?
+              translate('conversations.note_to_self') :
+              foodsaver(foodsavers[conversation.member[0]]).name
+            }
+          </Text>
         }
-      </Text>
+      </TouchableOpacity>
   }
 }
 

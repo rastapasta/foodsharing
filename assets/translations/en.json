@@ -15,6 +15,8 @@
     "write_message": "Write a message!",
     "read_more": "Read more",
     "today": "Today",
-    "yesterday": "Yesterday"
+    "yesterday": "Yesterday",
+    "groupchat": "Group chat"
+
   }
 }
