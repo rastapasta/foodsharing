@@ -12,8 +12,8 @@ import walls from './walls'
 
 export default combineReducers({
   app,
-  conversations,
   foodsavers,
+  conversations,
   messages,
   profile,
   markers,

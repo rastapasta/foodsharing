@@ -2,7 +2,7 @@ import createOneShotMiddleware from 'redux-middleware-oneshot'
 import NetInfo from '@react-native-community/netinfo'
 import { CONNECTION_STATUS } from '../common/constants'
 
-let last = null
+let last
 
 export default createOneShotMiddleware((dispatch) => {
   NetInfo.addEventListener(state => {
@@ -10,7 +10,6 @@ export default createOneShotMiddleware((dispatch) => {
 
     if (last === online)
       return
-
     last = online
 
     if (online !== null)

@@ -15,12 +15,13 @@ const styles = StyleSheet.create({
   title: {
     color: colors.white,
     fontWeight: '600',
-    fontSize: 17
+    fontSize: 17,
+    textAlign: Platform.OS === 'ios' ? 'center' : 'left'
   },
   subtitle: {
     color: colors.white,
-    fontWeight: '600',
-    fontSize: 14,
+    fontWeight: '400',
+    fontSize: 12,
     textAlign: Platform.OS === 'ios' ? 'center' : 'left'
   }
 })

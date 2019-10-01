@@ -64,3 +64,6 @@ This thingy runs on iOS and Android - one code, one love!
 * Handle more than the last 20 messages, logic to fill the gap
 * Settings screen to setup background pull / notifications?
 * Handle WebSocket reconnect after long inactivity
+* Tap on group conversation title -> Group scene, list of members, possibility to change name
+* Tap on conversation title -> Jump to Profile page
+

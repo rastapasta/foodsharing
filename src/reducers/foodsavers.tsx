@@ -12,7 +12,7 @@ export default function reducer(state = initialState, action: any = {}) {
   switch (type) {
     case CONVERSATION_SUCCESS:
     case CONVERSATIONS_SUCCESS:
-      const convState = state
+      const convState = {...state}
           , members = type === CONVERSATION_SUCCESS ? payload.members :
                       type === CONVERSATIONS_SUCCESS ? payload.reduce(
                         (all, conversation) => all.concat(conversation.member),

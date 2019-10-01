@@ -12,6 +12,8 @@ const host = 'https://beta.foodsharing.de'
         store: {uri: '/api/stores/{storeId}', method: 'GET'},
         conversations: {uri: '/api/conversations', method: 'GET'},
         conversation: {uri: '/api/conversations/{conversationId}', method: 'GET'},
+        markAsRead: {uri: '/api/conversations/{conversationId}?limit=0', method: 'GET'},
+
         message: {uri: '/xhrapp.php?app=msg&m=sendmsg', method: 'POST'},
         user2conv: {uri: '/xhrapp.php?app=msg&m=user2conv&fsid={userId}', method: 'GET'},
 
@@ -60,7 +62,8 @@ function request(
     'message' |
     'user2conv' |
     'fairteiler' |
-    'fairteilerMarker',
+    'fairteilerMarker' |
+    'markAsRead',
   data?: any,
   options?: any
 ): Promise<any> {
@@ -134,6 +137,9 @@ export const getConversations = (): Promise<ConversationListEntry[]> =>
 
 export const getConversation = (conversationId: number): Promise<ConversationDetail> =>
   request('conversation', null, {conversationId})
+
+export const markAsRead = (conversationId: number): Promise<void> =>
+  request('markAsRead', null, {conversationId})
 
 export const getWall = (target: 'foodsaver' | 'fairteiler', targetId: number): Promise<WallPosts> =>
   request('wall', null, {target, targetId})

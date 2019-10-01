@@ -4,7 +4,7 @@ import { Platform } from 'react-native'
 import PushNotificationIOS from '@react-native-community/push-notification-ios'
 import AndroidBadge from 'react-native-android-badge'
 
-import { getConversations } from '../common/api'
+import { getConversations, markAsRead } from '../common/api'
 
 import {
   CONVERSATION_SUCCESS,
@@ -35,7 +35,14 @@ export default function* conversationsSaga() {
 function* unreadWatcher() {
   while (true) {
     // Wait for all actions that could potentially alter the conversation
-    yield take([CONVERSATIONS_SUCCESS, CONVERSATION_SUCCESS, MESSAGE_SUCCESS, WEBSOCKET_MESSAGE])
+    const action = yield take([CONVERSATIONS_SUCCESS, CONVERSATION_SUCCESS, MESSAGE_SUCCESS, WEBSOCKET_MESSAGE])
+
+    // Mark message as read in case the conversation is currently open
+    if (action.type === WEBSOCKET_MESSAGE) {
+      const {scene, sceneId} = yield select(state => state.app)
+      if (scene === 'conversation' && sceneId == action.payload.cid)
+        yield markAsRead(action.payload.cid)
+    }
 
     // Get and count the number of unread conversations
     const conversations = yield select(state => state.conversations)

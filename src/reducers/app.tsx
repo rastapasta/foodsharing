@@ -12,7 +12,6 @@ const initialState = {
   session: null,
   token: null,
   scene: null,
-  modelId: null
 }
 
 export default function reducer(state = initialState, action: any = {}) {

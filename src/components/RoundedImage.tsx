@@ -5,7 +5,6 @@ import { StyleSheet, View } from 'react-native'
 const url = 'https://foodsharing.de/images/'
     , avatar = 'https://foodsharing.de/img/130_q_avatar.png'
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { SafeAreaView, StyleSheet, Text, View, FlatList, KeyboardAvoidingView, Platform } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View, FlatList, KeyboardAvoidingView, Platform, ActivityIndicator } from 'react-native'
 
 import moment from 'moment'
 
@@ -54,7 +54,8 @@ interface Item {
 class Conversation extends PureComponent<Props> {
   state = {
     data: {} as ConversationDetail,
-    refreshing: false
+    refreshing: false,
+    loading: false
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -105,7 +106,7 @@ class Conversation extends PureComponent<Props> {
 
   render() {
     const { conversationId, messages, actions, drafts, profile } = this.props
-        , { refreshing } = this.state
+        , { refreshing, loading } = this.state
         , data = (messages[conversationId] || []) as Message[]
         , items = this.prepareItems(data, profile)
 
@@ -117,16 +118,23 @@ class Conversation extends PureComponent<Props> {
       >
         <SafeAreaView style={styles.container}>
           <FlatList
+            onEndReached={() => {
+              this.setState({loading: true})
+            }}
+            onEndReachedThreshold={0}
             onRefresh={Platform.OS === 'ios' ? () => {
               actions.fetchConversation(conversationId)
               setTimeout(() => this.setState({refreshing: false}), 1000)
             } : null}
             refreshing={refreshing}
-
             inverted
             data={items}
             keyExtractor={item => item.label ? item.label : item.message.id.toString()}
             style={{flex: 1}}
+
+            ListFooterComponent={() => <View style={{height: 100, alignItems: 'center', justifyContent: 'center'}}>
+              {loading && <ActivityIndicator />}
+            </View>}
 
             renderItem={({item: {type, label, message}}) => {
               switch(type) {
