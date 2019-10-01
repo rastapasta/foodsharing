@@ -26,6 +26,7 @@ This thingy runs on iOS and Android - one code, one love!
   * Background conversations list pull every 15 minutes (iOS only for now)
   * Display number of unread conversations as icon badge on home screen (iOS and some Android)
   * Persist message drafts (per conversation)
+  * Shorten very long messages and display a 'read more' button
   * Group chats (incl. multiple avatars displayed)
   * Named chats
   * Today -> Yesterday -> $Date labeling in conversation list

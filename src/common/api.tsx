@@ -135,8 +135,8 @@ export const getFairteilerMarker = async (): Promise<Marker[]> =>
 export const getConversations = (): Promise<ConversationListEntry[]> =>
   request('conversations')
 
-export const getConversation = (conversationId: number): Promise<ConversationDetail> =>
-  request('conversation', null, {conversationId})
+export const getConversation = async (conversationId: number): Promise<ConversationDetail> =>
+  await request('conversation', null, {conversationId})
 
 export const markAsRead = (conversationId: number): Promise<void> =>
   request('markAsRead', null, {conversationId})

@@ -1,3 +1,4 @@
+import { AllHtmlEntities } from 'html-entities'
 import {
   CONVERSATION_SUCCESS,
   MESSAGE_SUCCESS,
@@ -6,6 +7,7 @@ import {
 } from '../common/constants'
 
 const initialState = {}
+  , entities = new AllHtmlEntities()
 
 const replaceOrUnshift = (arr: any[], message: any) =>
   [message, ...(arr || []).filter(msg => msg.id !== message.id)]

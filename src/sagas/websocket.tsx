@@ -1,6 +1,7 @@
 import socketIO from 'socket.io-client'
 import { eventChannel } from 'redux-saga'
 import { take, call, put, race } from 'redux-saga/effects'
+import { AllHtmlEntities } from 'html-entities'
 
 import {
   WEBSOCKET_CONNECTED,
@@ -12,6 +13,8 @@ import {
   LOGIN_SUCCESS,
   LOGOUT
 } from '../common/constants'
+
+const entities = new AllHtmlEntities()
 
 function initWebsocket() {
   return eventChannel(emitter => {
@@ -46,8 +49,13 @@ function initWebsocket() {
 
     // Handle incoming websocket messages
     socket.on('conv', ({m, o}: {m: string, o: string}) => {
-      if (m === 'push')
-        return emitter({type: WEBSOCKET_MESSAGE, payload: JSON.parse(o)})
+      if (m === 'push') {
+        const data = JSON.parse(o)
+        return emitter({type: WEBSOCKET_MESSAGE, payload: {
+          ...data,
+          body: entities.decode(data.body)
+        }})
+      }
     })
 
     // Notify redux any time the connection drops

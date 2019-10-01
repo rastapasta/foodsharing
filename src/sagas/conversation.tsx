@@ -1,6 +1,7 @@
 import { take, put, select, call, fork } from 'redux-saga/effects'
-
+import { AllHtmlEntities } from 'html-entities'
 import { actions as formActions } from 'react-redux-form'
+
 import { getConversation, sendMessage } from '../common/api'
 import {
   CONVERSATION_REQUEST,
@@ -9,11 +10,16 @@ import {
   MESSAGE_SUCCESS
 } from '../common/constants'
 
+const entities = new AllHtmlEntities()
+
 function* fetch(id: number) {
   yield put({
     type: CONVERSATION_SUCCESS,
     id,
-    payload: yield getConversation(id)
+    payload: (yield getConversation(id)).map(conversation => ({
+      ...conversation,
+      body: entities.decode(conversation.body)
+    }))
   })
 }
 

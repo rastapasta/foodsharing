@@ -1,5 +1,7 @@
 import { take, put, call, fork, select } from 'redux-saga/effects'
 
+import { AllHtmlEntities } from 'html-entities'
+
 import { Platform } from 'react-native'
 import PushNotificationIOS from '@react-native-community/push-notification-ios'
 import AndroidBadge from 'react-native-android-badge'
@@ -14,11 +16,26 @@ import {
   WEBSOCKET_MESSAGE
 } from '../common/constants'
 
-const countUnread = (conversations: any[]) =>
-  conversations.reduce(
-    (num, conversation) => num + (conversation.unread !== "0" ? 1 : 0),
-    0
-  )
+const entities = new AllHtmlEntities()
+    ,countUnread = (conversations: any[]) =>
+      conversations.reduce(
+        (num, conversation) => num + (conversation.unread !== "0" ? 1 : 0),
+        0
+      )
+
+function* fetch() {
+  // Pull the conversations from the API
+  const conversations = yield getConversations()
+
+  // ... and publish it on the bus
+  yield put({
+    type: CONVERSATIONS_SUCCESS,
+    payload: conversations.map(conversation => ({
+      ...conversation,
+      last_message: entities.decode(conversation.last_message)
+    }))
+  })
+}
 
 export default function* conversationsSaga() {
   // Wait for actions altering the conversations undread counter
@@ -56,12 +73,4 @@ function* unreadWatcher() {
       count
     )
   }
-}
-
-function* fetch() {
-  // Pull the conversations from the API
-  const conversations = yield getConversations()
-
-  // ... and publish it on the bus
-  yield put({type: CONVERSATIONS_SUCCESS, payload: conversations})
 }

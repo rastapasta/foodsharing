@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { StyleSheet, View, Dimensions, Text } from 'react-native'
-import { AllHtmlEntities } from 'html-entities'
 import { Message } from '../common/typings'
 
 import Linkify from './Linkify'
@@ -11,8 +10,6 @@ import { translate } from '../common/translation'
 
 import moment from 'moment'
 import RoundedImage from './RoundedImage'
-
-const entities = new AllHtmlEntities()
 
 const { width } = Dimensions.get('window')
     , bubbleRadius = 12
@@ -79,9 +76,9 @@ const MAX_LENGTH = 600
 
 export default ({type, message}: Props) => {
   const [expanded, setExpanded] = useState(false)
-      , decoded = entities.decode(message.body)
-      , shortened = !expanded && decoded.length > 1000
-      , text = expanded ? decoded : decoded.substr(0, MAX_LENGTH)
+      , { body } = message
+      , shortened = !expanded && body.length > 1000
+      , text = expanded ? body : body.substr(0, MAX_LENGTH)
 
   return (
     <View style={[styles.container, {justifyContent: type === 'sent' ? 'flex-end' : 'flex-start'}]}>
