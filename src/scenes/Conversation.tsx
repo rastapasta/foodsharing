@@ -117,12 +117,12 @@ class Conversation extends PureComponent<Props> {
       >
         <SafeAreaView style={styles.container}>
           <FlatList
-            onRefresh={() => {
+            onRefresh={Platform.OS === 'ios' ? () => {
               actions.fetchConversation(conversationId)
 
               // TODO: hook this into redux
               setTimeout(() => this.setState({refreshing: false}), 1000)
-            }}
+            } : null}
             refreshing={refreshing}
 
             inverted

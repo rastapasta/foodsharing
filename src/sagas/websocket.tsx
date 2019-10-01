@@ -31,7 +31,7 @@ function initWebsocket() {
       socket.emit('register')
 
       // .. and let everyone know
-      emitter({type: WEBSOCKET_CONNECTED, payload: socket})
+      emitter({type: WEBSOCKET_CONNECTED})
     })
 
     // Error handling on library level
