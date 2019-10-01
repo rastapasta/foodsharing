@@ -112,7 +112,7 @@ export default () =>
         key="profile"
         title="Profil"
         component={Profile}
-        hideNavBar={false}
+        hideNavBar
       />
       <Scene
         key="groupchat"
