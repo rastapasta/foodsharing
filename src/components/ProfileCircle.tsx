@@ -2,8 +2,10 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
 import colors from '../common/colors'
+import { translate } from '../common/translation'
 
 const circleSize = 50
+    , valueSize = 16
 
 const styles = StyleSheet.create({
   container: {
@@ -20,7 +22,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#64AE24'
   },
   value: {
-    color: colors.white
+    color: colors.white,
+    fontSize: valueSize
   },
   label: {
     color: colors.white,
@@ -43,7 +46,7 @@ export default ({label, value, unit}) =>
         numberOfLines={1}
         adjustsFontSizeToFit={true}
       >
-        {label}
+        {translate('profile.'+label)}
       </Text>
     </View>
   </View>

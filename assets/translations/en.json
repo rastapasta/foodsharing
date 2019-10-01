@@ -17,6 +17,13 @@
     "today": "Today",
     "yesterday": "Yesterday",
     "groupchat": "Group chat"
+  },
 
+  "profile": {
+    "bananacount": "Bananas",
+    "basketcount": "Baskets",
+    "postcount": "Posts",
+    "fetchcount": "fetched",
+    "fetchweight": "saved"
   }
 }

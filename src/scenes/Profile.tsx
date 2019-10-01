@@ -13,6 +13,7 @@ import ParalxScrolView from '../components/ParalaxScrollView'
 import ProfileCircle from '../components/ProfileCircle'
 
 import { getProfile } from '../common/api'
+import { Actions } from 'react-native-router-flux'
 
 const { width, height } = Dimensions.get('window')
 
@@ -72,19 +73,19 @@ class Profile extends PureComponent<Props> {
                 justifyContent: 'space-around',
                 alignItems: 'center',
               }}>
-                <ProfileCircle label="Bananen" value={26} unit="" />
-                <ProfileCircle label="Essenskörbe" value={35} unit="x" />
-                <ProfileCircle label="Beiträge" value={4412} unit="" />
-                <ProfileCircle label="abgeholt" value={510} unit="x" />
-                <ProfileCircle label="gerettet" value={16340} unit="kg" />
+                <ProfileCircle label="bananacount" value={26} unit="" />
+                <ProfileCircle label="basketcount" value={35} unit="x" />
+                <ProfileCircle label="postcount" value={4412} unit="" />
+                <ProfileCircle label="fetchcount" value={510} unit="x" />
+                <ProfileCircle label="fetchweight" value={16340} unit="kg" />
               </View>
             </View>
           }
         >
-          {/* <View style={{height, backgroundColor: 'white', marginTop: 5}}>
-          </View> */}
+          <View style={{height: height/2, backgroundColor: 'white', marginTop: 5}} />
         </ParalxScrolView>
         <TouchableOpacity
+          onPress={() => Actions.pop()}
           hitSlop={{left: 5, right: 10, bottom: 10, top: 10}}
           style={{position: 'absolute', left: 0, top: 20, justifyContent: 'center'}}
         >
