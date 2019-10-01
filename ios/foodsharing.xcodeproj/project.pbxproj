@@ -30,6 +30,7 @@
 		955C312823416AA600D903F6 /* SFMono-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SFMono-Regular.otf"; path = "../../assets/fonts/SFMono-Regular.otf"; sourceTree = "<group>"; };
 		955C312923416AA600D903F6 /* AlfaSlabOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "AlfaSlabOne-Regular.ttf"; path = "../../assets/fonts/AlfaSlabOne-Regular.ttf"; sourceTree = "<group>"; };
 		955DCCB3234166C8004B259C /* RNBackgroundFetch+AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "RNBackgroundFetch+AppDelegate.m"; path = "../node_modules/react-native-background-fetch/ios/RNBackgroundFetch/RNBackgroundFetch+AppDelegate.m"; sourceTree = "<group>"; };
+		9590E8A42343A9D6008953D9 /* foodsharing.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = foodsharing.entitlements; path = foodsharing/foodsharing.entitlements; sourceTree = "<group>"; };
 		B65697C066A993E95179112B /* Pods-foodsharing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-foodsharing.debug.xcconfig"; path = "Target Support Files/Pods-foodsharing/Pods-foodsharing.debug.xcconfig"; sourceTree = "<group>"; };
 		E58B61EB65839D9CE329C734 /* libPods-foodsharing.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-foodsharing.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -51,6 +52,7 @@
 		13B07FAE1A68108700A75B9A /* foodsharing */ = {
 			isa = PBXGroup;
 			children = (
+				9590E8A42343A9D6008953D9 /* foodsharing.entitlements */,
 				955DCCB3234166C8004B259C /* RNBackgroundFetch+AppDelegate.m */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -158,6 +160,9 @@
 						DevelopmentTeam = PJ4FY326KF;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.SafariKeychain = {
 								enabled = 1;
 							};
 						};
@@ -335,6 +340,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = foodsharing/foodsharing.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = PJ4FY326KF;
@@ -358,6 +364,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = foodsharing/foodsharing.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = PJ4FY326KF;
 				INFOPLIST_FILE = foodsharing/Info.plist;

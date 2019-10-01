@@ -1,0 +1,21 @@
+{
+  "webcredentials": {
+    "apps": [
+      "PJ4FY326KF.network.foodsharing"
+    ]
+  },
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "PJ4FY326KF.network.foodsharing",
+        "paths": [
+          "/",
+          "/?page=msg&cid=*",
+          "/?page=fairteiler&sub=ft&id=*",
+          "/essenskoerbe/*"
+        ]
+      }
+    ]
+  }
+}

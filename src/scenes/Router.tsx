@@ -43,7 +43,7 @@ const icon = (name: string) =>
   () => <Icon name={name} size={32} style={{marginTop: 3, color: colors.white}}/>
 
 export default () =>
-  <Router>
+  <Router uriPrefix="foodsharing.de">
     <Stack
       tintColor={colors.white}
       key='root'
@@ -105,6 +105,7 @@ export default () =>
         title="Fairteiler"
         component={Fairteiler}
         hideNavBar={false}
+        path="/?page=fairteiler&sub=ft&id=:id"
       />
     </Stack>
   </Router>
