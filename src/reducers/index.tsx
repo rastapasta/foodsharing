@@ -21,10 +21,7 @@ export default combineReducers({
   walls,
 
   ...createForms({
-    login: {
-      email: 'm.strassburger@gmail.com',
-      password: 'testtest'
-    },
+    login: {},
     drafts: {}
   })
 })

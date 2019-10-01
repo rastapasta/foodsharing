@@ -61,7 +61,7 @@ class ConversationMembers extends PureComponent<Props> {
           style={{flex: 1}}
           data={members as ConversationMember[]}
           keyExtractor={foodsaver => 'groupMember.' + foodsaver.id}
-          renderItem={({item: foodsaver, index}) =>
+          renderItem={({item: foodsaver}) =>
             <TouchableOpacity
               style={styles.row}
               onPress={() => Actions.jump('profile', {id: foodsaver.id})}

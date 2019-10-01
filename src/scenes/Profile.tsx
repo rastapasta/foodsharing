@@ -2,7 +2,7 @@ import { withNavigationFocus } from 'react-navigation'
 
 import React, { PureComponent } from 'react'
 import { View, StyleSheet, Dimensions, Text } from 'react-native'
-
+import { isIphoneX } from 'react-native-iphone-x-helper'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -50,7 +50,7 @@ class Profile extends PureComponent<Props> {
   }
 
   render() {
-    const headerHeight = 130
+    const headerHeight = isIphoneX() ? 160 : 130
         , { id, foodsavers } = this.props
         , profile = foodsaver(foodsavers[`${id}`])
     console.log(profile)
