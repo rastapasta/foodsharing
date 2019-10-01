@@ -12,7 +12,8 @@ import * as reduxActions from '../common/actions'
 import ParalxScrolView from '../components/ParalaxScrollView'
 import ProfileCircle from '../components/ProfileCircle'
 
-import { getProfile } from '../common/api'
+import { foodsaver } from '../common/placeholder'
+
 import { Actions } from 'react-native-router-flux'
 
 const { width, height } = Dimensions.get('window')
@@ -22,39 +23,41 @@ const styles = StyleSheet.create({
     flex: 1
   },
   name: {
-    fontSize: 16,
+    fontSize: 16
   }
 })
 
 type Props = {
   id: number
 
+  foodsavers: any
   actions: any
   isFocused: boolean
 }
 
 class Profile extends PureComponent<Props> {
   componentDidUpdate(prevProps: Props) {
-    const { actions } = this.props
+    const { actions, id } = this.props
     if (prevProps.isFocused === false && this.props.isFocused === true)
-      actions.navigation('profile')
+      actions.navigation('profile', id)
   }
 
   async componentDidMount() {
-    const { actions } = this.props
-    actions.navigation('profile')
-
-    console.log(await getProfile(338242))
+    const { actions, id } = this.props
+    actions.navigation('profile', id)
+    actions.fetchProfile(id)
   }
 
   render() {
     const headerHeight = 130
-
+        , { id, foodsavers } = this.props
+        , profile = foodsaver(foodsavers[`${id}`])
+    console.log(profile)
     return (
       <View style={styles.container}>
         <ParalxScrolView
-          image={{uri: 'https://beta.foodsharing.de/images/ccab3b35468b3c9d726aecf67ea89f0d.jpg'}}
-          imageHeight={height * 0.5}
+          image={profile.photo ? {uri: 'https://foodsharing.de/images/' + profile.photo} : null}
+          imageHeight={profile.photo ? height * 0.5 : 0}
           headerComponent={
             <View style={{
               height: headerHeight,
@@ -64,7 +67,7 @@ class Profile extends PureComponent<Props> {
             }}>
               <View style={{height: 40, alignItems: 'center', justifyContent: 'center'}}>
                 <Text style={styles.name}>
-                  Tobias
+                  {profile.name}
                 </Text>
               </View>
               <View style={{
@@ -97,7 +100,7 @@ class Profile extends PureComponent<Props> {
 }
 
 const mapStateToProps = state => ({
-  conversations: state.conversations
+  foodsavers: state.foodsavers
 })
 
 const mapDispatchToProps = dispatch => ({

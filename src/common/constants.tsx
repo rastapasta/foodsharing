@@ -16,6 +16,7 @@ export const KEYCHAIN = '🔑 KEYCHAIN'
 export const BACKGROUND_STATE = '📱 BACKGROUND_STATE'
 
 export const PROFILE = '👤 PROFILE'
+export const PROFILE_REQUEST = '👤 PROFILE_REQUEST'
 
 export const BACKGROUND_WAKEUP = '⏰ BACKGROUND_WAKEUP'
 export const BACKGROUND_DONE = '✅ BACKGROUND_DONE'
