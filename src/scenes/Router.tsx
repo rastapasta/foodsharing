@@ -12,6 +12,7 @@ import Map from './Map'
 import Profile from './Profile'
 import Conversations from './Conversations'
 import Conversation from './Conversation'
+import ConversationMembers from './ConversationMembers'
 
 import ConversationTitle from '../components/ConversationTitle'
 
@@ -115,8 +116,8 @@ export default () =>
       />
       <Scene
         key="groupchat"
-        renderTitle={({conversationId}) => <ConversationTitle conversationId={conversationId} hideMembers />}
-        component={Home}
+        renderTitle={({conversationId}) => <ConversationTitle conversationId={conversationId} showCount />}
+        component={ConversationMembers}
         hideNavBar={false}
       />
 

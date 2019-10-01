@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
 
 type Props = {
   conversationId: number
-  hideMembers?: boolean
+  showCount?: boolean
 
   actions: any
   conversations: any
@@ -41,7 +41,7 @@ const showMemberCount = 4
 
 class ConversationTitle extends PureComponent<Props> {
   render() {
-    const { conversationId, conversations, profile, foodsavers, hideMembers } = this.props
+    const { conversationId, conversations, profile, foodsavers, showCount } = this.props
         , conversation = conversations.find(conversation => conversation.id == conversationId) || {member: []}
         , otherMembers = conversation.member.filter(member => member != profile.id)
         , isNoteToSelf = otherMembers.length === 0
@@ -60,15 +60,16 @@ class ConversationTitle extends PureComponent<Props> {
             <Text style={styles.title} numberOfLines={1} adjustsFontSizeToFit>
               {conversation.name || translate('conversations.groupchat')}
             </Text>
-            {!hideMembers &&
-              <Text style={styles.subtitle} numberOfLines={1} adjustsFontSizeToFit>
-                {otherMembers
+            <Text style={styles.subtitle} numberOfLines={1} adjustsFontSizeToFit>
+              {showCount ?
+                conversation.member.length + ' members' :
+                otherMembers
                   .slice(0, showMemberCount)
                   .map(member => foodsaver(foodsavers[member]).name)
                   .join(', ')
-                }{conversation.member.length-1 > showMemberCount ? ', ...' : ''}
-              </Text>
-            }
+                  + (conversation.member.length-1 > showMemberCount ? ', ...' : '')
+              }
+            </Text>
           </Fragment>
         :
           <Text style={styles.title}>
