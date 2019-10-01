@@ -3,13 +3,12 @@ import { StyleSheet, View, Dimensions, Text } from 'react-native'
 import { AllHtmlEntities } from 'html-entities'
 import { Message } from '../common/typings'
 
-import Image from 'react-native-fast-image'
-
 import Linkify from './Linkify'
 
 import colors from '../common/colors'
 
 import moment from 'moment'
+import RoundedImage from './RoundedImage'
 
 const entities = new AllHtmlEntities()
 
@@ -65,7 +64,7 @@ const styles = StyleSheet.create({
     height: 40,
     marginLeft: 6,
     marginRight: 6,
-    marginBottom: 10
+    marginBottom: 8
   }
 })
 
@@ -74,17 +73,12 @@ type Props = {
   message: Message
 }
 
-const avatar = 'https://foodsharing.de/img/130_q_avatar.png'
-    , url = 'https://foodsharing.de/images/'
-
 export default ({type, message}: Props) =>
   <View style={[styles.container, {justifyContent: type === 'sent' ? 'flex-end' : 'flex-start'}]}>
     {type === 'received' &&
-      <Image
-        source={{uri: message.fs_photo ? url + '130_q_' + message.fs_photo : avatar}}
-        style={styles.image}
-        resizeMode="contain"
-      />
+      <View style={styles.image}>
+        <RoundedImage photo={message.fs_photo} />
+      </View>
     }
     <View style={[styles.bubble, styles[type+'Bubble']]}>
       <Linkify

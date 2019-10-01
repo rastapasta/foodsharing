@@ -1,9 +1,11 @@
 import React, { PureComponent } from 'react'
 import { StyleSheet, View, Text, Dimensions, TouchableOpacity } from 'react-native'
 import { Actions } from 'react-native-router-flux'
-import Image from 'react-native-fast-image'
-import moment from 'moment'
 import { User, ConversationListEntry, Profile } from '../common/typings'
+
+import moment from 'moment'
+
+import RoundedImage from './RoundedImage'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -38,12 +40,6 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'flex-start'
   },
-  image: {
-    flex: 1,
-    borderRadius: 30,
-    overflow: 'hidden',
-    aspectRatio: 1
-  },
   header: {
     flex: 1,
     flexDirection: 'row',
@@ -72,9 +68,6 @@ type Props = {
   profile: Profile
 }
 
-const url = 'https://foodsharing.de/images/'
-    , avatar = 'https://foodsharing.de/img/130_q_avatar.png'
-
 class ConversationsItem extends PureComponent<Props> {
   render() {
     const { conversation, isLast, foodsavers, profile } = this.props
@@ -94,13 +87,7 @@ class ConversationsItem extends PureComponent<Props> {
       >
         <View style={styles.images}>
           {party.slice(0, 4).map(person =>
-            <View key={`${id}.${person}`} style={styles.image}>
-              <Image
-                style={{flex: 1}}
-                resizeMode="contain"
-                source={{uri: foodsaver(foodsavers[person]).photo ? url + '130_q_' + foodsaver(foodsavers[person]).photo : avatar}}
-              />
-            </View>
+            <RoundedImage key={`${id}.${person}`} photo={foodsaver(foodsavers[person]).photo} />
           )}
         </View>
 
@@ -121,11 +108,7 @@ class ConversationsItem extends PureComponent<Props> {
           <View style={[styles.lastMessage, !!isLast && {borderBottomWidth: 0}]}>
             {!!foodsaver(foodsavers[lastMessenger]).photo &&
               <View style={styles.lastMessageImage}>
-                <Image
-                  style={{flex: 1}}
-                  resizeMode="contain"
-                  source={{uri: url + '130_q_' + foodsavers[lastMessenger].photo}}
-                />
+                <RoundedImage photo={foodsavers[lastMessenger].photo} />
               </View>
             }
             <Text style={styles.lastMessageText} numberOfLines={1} ellipsizeMode="tail">
