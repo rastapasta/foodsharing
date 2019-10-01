@@ -8,7 +8,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as reduxActions from '../common/actions'
 
-import { getRegionMembers } from '../common/api'
+import { getProfile } from '../common/api'
 
 const styles = StyleSheet.create({
   container: {
@@ -32,7 +32,7 @@ class Home extends PureComponent<Props> {
     const { actions } = this.props
     actions.navigation('home')
 
-    console.log(await getRegionMembers(242))
+    console.log(await getProfile(338242))
   }
 
   render() {

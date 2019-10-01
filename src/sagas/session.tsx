@@ -14,7 +14,7 @@ import {
   PROFILE
 } from '../common/constants'
 
-import { login, logout, getCurrentUser, getSession, getProfile, setSession, syncCookies } from '../common/api'
+import { login, logout, getCurrentUser, getSession, getCurrentProfile, setSession, syncCookies } from '../common/api'
 
 function* loginFlow(email: string, password: string) {
   let user
@@ -39,7 +39,7 @@ function* loginFlow(email: string, password: string) {
     yield put({type: LOGIN_SUCCESS, payload: getSession()})
 
     // Request and broadcast the profile information of our fresh user
-    yield put({type: PROFILE, payload: yield call(getProfile)})
+    yield put({type: PROFILE, payload: yield call(getCurrentProfile)})
 
   } catch (error) {
     // Signal that something went wrong..

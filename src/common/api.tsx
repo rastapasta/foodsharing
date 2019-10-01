@@ -22,7 +22,8 @@ const host = 'https://beta.foodsharing.de'
         login: {uri: '/api/user/login', method: 'POST'},
         logout: {uri: '/api/user/logout', method: 'POST'},
         current: {uri: '/api/user/current', method: 'GET'},
-        profile: {uri: '/api/profile/current', method: 'GET'},
+        profile: {uri: '/profile/{id}', method: 'GET'},
+        currentProfile: {uri: '/api/profile/current', method: 'GET'},
         wall: {uri: '/api/wall/{target}/{targetId}', method: 'GET'},
         store: {uri: '/api/stores/{storeId}', method: 'GET'},
         conversations: {uri: '/api/conversations', method: 'GET'},
@@ -72,6 +73,7 @@ function request(
     'current' |
     'logout' |
     'profile' |
+    'currentProfile' |
     'wall' |
     'store' |
     'conversations' |
@@ -90,7 +92,7 @@ function request(
       , opts = options || {}
       , url = host + Object.keys(opts)
                       .reduce((u, key) => u.replace('{' + key +'}', opts[key]), uri)
-      , handleAsHTML = !!url.match('/?page=')
+      , handleAsHTML = !!url.match('/?page=') || !!url.match(/\.de\/profile\//)
       , sendAsJSON = !!url.match(/\/api\//)
 
   return fetch(url, {
@@ -170,18 +172,52 @@ export const sendMessage = async (conversationId: number, text: string): Promise
 export const userToConversationId = async (userId: number): Promise<number> =>
   parseInt((await request('user2conv', null, {userId})).data.cid)
 
-export const getProfile = (): Promise<Profile> =>
-  request('profile')
+export const getCurrentProfile = (): Promise<Profile> =>
+  request('currentProfile')
+
+// TODO: port this into a REST endpoint instead of screenscraping O:)
+export const getProfile = async (id: number): Promise<any> => {
+  const $ = await request('profile', null, {id})
+      , stats = [
+        'basketcount',
+        'bananacount',
+        'postcount',
+        'fetchcount',
+        'fetchweight'
+      ]
+  return {
+    isOnline: $('.msg-inside.info').length === 1,
+
+    isFriend: $('.buddyRequest').length === 0,
+
+    stats: stats.reduce((stats, id) => {
+            stats[id] = parseInt($(`.stat_${id} .val`).text().replace(/\D/g, '') || 0)
+            return stats
+          }, {}),
+  }
+}
 
 // TODO: port this into a REST endpoint instead of screenscraping O:)
 export const getRegionMembers = async (id: number): Promise<Region> => {
   const $ = await request('regionMembers', null, {id})
-  return JSON.parse(
-    entities.decode(
-      $('div#vue-memberlist')
-      .attr('data-vue-props')
-    )
-  )
+  return {
+    ...JSON.parse(
+      entities.decode(
+        $('div#vue-memberlist')
+        .attr('data-vue-props')
+      )
+    ),
+    admins:
+      $('#admin-list li a')
+      .map(({}, el) => parseInt($(el).attr('href').replace(/\D/g, '')))
+      .get(),
+
+    stats:
+      $('.welcome_quick_link').text().match(/\d+/g).map(num => parseInt(num)),
+
+    saved:
+      $('.user_display_name').text().match(/\d+/g).map(num => parseInt(num))
+  }
 }
 
 // TODO: backend returns 500
