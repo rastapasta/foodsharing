@@ -1,7 +1,7 @@
 import { withNavigationFocus } from 'react-navigation'
 
 import React, { PureComponent } from 'react'
-import { SafeAreaView, StyleSheet, Picker, Text, View, Dimensions, Platform, TextInput } from 'react-native'
+import { SafeAreaView, StyleSheet, Picker, Text, View, Dimensions, Platform, TextInput, KeyboardAvoidingView, Keyboard } from 'react-native'
 import { CheckBox } from 'react-native-elements'
 import { foodsaver } from '../common/placeholder'
 import report from '../common/report'
@@ -41,7 +41,8 @@ type Props = {
 class Report extends PureComponent<Props> {
   state = {
     reason: report[2],
-    subreason: null
+    subreason: null,
+    onlyText: false
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -50,14 +51,23 @@ class Report extends PureComponent<Props> {
       actions.navigation('report', id)
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     const { actions, id } = this.props
     actions.navigation('report', id)
+
+    Keyboard.addListener('keyboardWillShow', () => this.setState({onlyText: true}))
+    Keyboard.addListener('keyboardWillHide', () => this.setState({onlyText: false}))
   }
+
+  componentWillUnmount() {
+    Keyboard.removeAllListeners('keyboardWillShow')
+    Keyboard.removeAllListeners('keyboardWillHide')
+  }
+
 
   render() {
     const { foodsavers, id } = this.props
-        , { reason, subreason } = this.state
+        , { reason, subreason, onlyText } = this.state
         , profile = foodsaver(foodsavers[id])
 
     const ReportPicker = ({label, onChange, reasons, selected}) =>
@@ -82,55 +92,63 @@ class Report extends PureComponent<Props> {
       </View>
 
     return (
-      <SafeAreaView style={styles.container}>
-        <ReportPicker
-          label={`Warum möchtest Du ${profile.name} melden?`}
-          selected={reason && reason.id}
-          onChange={({}, index) => this.setState({reason: report[index]})}
-          reasons={report}
-        />
+      <KeyboardAvoidingView
+        {...(Platform.OS === 'ios' ? {behavior: 'padding'} : {})}
+        enabled
+        style={{flex: 1}}
+      >
+        <SafeAreaView style={styles.container}>
+          {!onlyText && <ReportPicker
+            label={`Warum möchtest Du ${profile.name} melden?`}
+            selected={reason && reason.id}
+            onChange={({}, index) => this.setState({reason: report[index]})}
+            reasons={report}
+          />}
 
-        {reason && reason.children && reason.children.length &&
-          <View style={{marginTop: 20}}>
-            {reason.children.map(option =>
-              option.children && option.children.length > 0 ?
-                <ReportPicker
-                  label=""
-                  selected={subreason && subreason.id}
-                  onChange={({}, index) => this.setState({subreason: option.children[index]})}
-                  reasons={option.children}
-                /> :
-                <CheckBox
-                  key={'subreason' + option.id}
-                  title={option.name}
-                  checked={false}
-                  wrapperStyle={{margin: 0, padding: 0}}
-                  textStyle={{fontSize: 10}}
-                  containerStyle={{marginTop: 0, paddingTop: 0, borderWidth: 0, backgroundColor: colors.white}}
-                />
-            )}
-          </View>
-        }
+          {!onlyText && reason && reason.children && reason.children.length &&
+            <View style={{marginTop: 20}}>
+              {reason.children.map(option =>
+                option.children && option.children.length > 0 ?
+                  <ReportPicker
+                    label=""
+                    selected={subreason && subreason.id}
+                    onChange={({}, index) => this.setState({subreason: option.children[index]})}
+                    reasons={option.children}
+                  /> :
+                  <CheckBox
+                    key={'subreason' + option.id}
+                    title={option.name}
+                    checked={false}
+                    wrapperStyle={{margin: 0, padding: 0}}
+                    textStyle={{fontSize: 10}}
+                    containerStyle={{marginTop: 0, paddingTop: 0, borderWidth: 0, backgroundColor: colors.white}}
+                  />
+              )}
+            </View>
+          }
 
-        {reason &&
-          <View style={{flex: 1, backgroundColor: colors.white}}>
-            <Text style={styles.category}>
-              Beschreibe den Vorfall noch etwas genauer!
-            </Text>
-            <TextInput
-              multiline
-              placeholder={placeholder}
-              style={{flex: 1, fontSize: 12, paddingLeft: 5, paddingRight: 5, borderWidth: 1, borderRadius: 5, borderColor: colors.gray, margin: 10}}
-            />
-            <Button
-              title="Meldung senden"
-              containerStyle={{marginLeft: 10, marginBottom: 10, marginRight: 10}}
-              buttonStyle={{backgroundColor: colors.green}}
-              titleStyle={{fontSize: 12}}
-            />
-          </View>
-        }
-      </SafeAreaView>
+          {reason &&
+            <View style={{flex: 1, backgroundColor: colors.white}}>
+              <Text style={styles.category}>
+                Beschreibe den Vorfall noch etwas genauer!
+              </Text>
+              <TextInput
+                multiline
+                blurOnSubmit
+                onBlur={() => this.setState({onlyText: false}, () => Keyboard.dismiss())}
+                placeholder={placeholder}
+                style={{flex: 1, fontSize: 12, paddingLeft: 5, paddingRight: 5, borderWidth: 1, borderRadius: 5, borderColor: colors.gray, margin: 10}}
+              />
+              {!onlyText && <Button
+                title="Meldung senden"
+                containerStyle={{marginLeft: 10, marginBottom: 10, marginRight: 10}}
+                buttonStyle={{backgroundColor: colors.green}}
+                titleStyle={{fontSize: 12}}
+              />}
+            </View>
+          }
+        </SafeAreaView>
+      </KeyboardAvoidingView>
     )
   }
 }
