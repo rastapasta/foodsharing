@@ -1,5 +1,7 @@
 export default {
   background: '#795548',
+  backgroundTransparent: 'rgba(121, 85, 72, 0)',
+  backgroundBright: '#f1e7c9',
 
   icon: '#795548',
 

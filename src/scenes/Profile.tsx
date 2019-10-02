@@ -1,8 +1,9 @@
 import { withNavigationFocus } from 'react-navigation'
 
 import React, { PureComponent } from 'react'
-import { View, StyleSheet, Dimensions, Text } from 'react-native'
+import { View, StyleSheet, Dimensions, Text, TouchableOpacity } from 'react-native'
 import { isIphoneX } from 'react-native-iphone-x-helper'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -25,8 +26,33 @@ const styles = StyleSheet.create({
   name: {
     color: colors.white,
     fontSize: 16
+  },
+  button: {
+    borderWidth: 1,
+    flex: 1,
+    padding: 6,
+    marginLeft: 8,
+    marginRight: 8,
+    backgroundColor: colors.backgroundBright,
+    borderRadius: 5,
+    borderColor: colors.background,
+    alignItems: 'center',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 2,
+    elevation: 5
+  },
+  buttonText: {
+    textAlign: 'center',
+    fontSize: 10
   }
 })
+
+const avatar = 'https://foodsharing.de/img/130_q_avatar.png'
 
 type Props = {
   id: number
@@ -54,11 +80,21 @@ class Profile extends PureComponent<Props> {
         , { id, foodsavers } = this.props
         , profile = foodsaver(foodsavers[`${id}`])
     console.log(profile)
+
+    const Button = ({icon, label, onPress}) =>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={onPress}
+      >
+        <Icon name={icon} size={26} />
+        <Text style={styles.buttonText}>{label}</Text>
+      </TouchableOpacity>
+
     return (
       <View style={styles.container}>
         <ParalxScrolView
-          image={profile.photo ? {uri: 'https://foodsharing.de/images/' + profile.photo} : null}
-          imageHeight={profile.photo ? height * 0.5 : 1}
+          image={{uri: profile.photo ? 'https://foodsharing.de/images/' + profile.photo : avatar}}
+          imageHeight={height * 0.5}
           headerComponent={
             <View style={{
               height: headerHeight,
@@ -87,7 +123,27 @@ class Profile extends PureComponent<Props> {
             </View>
           }
         >
-          <View style={{minHeight: height - headerHeight, backgroundColor: colors.background, marginTop: 5}} />
+          <View style={{minHeight: height*0.5 - headerHeight, backgroundColor: colors.backgroundBright, marginTop: 5, padding: 10}}>
+            <View style={{flexDirection: 'row', marginBottom: 10, justifyContent: 'space-evenly'}}>
+              <Button
+                label={`Ich kenne\n${profile.name}`}
+                icon="account-plus-outline"
+                onPress={() => false}
+              />
+              <Button
+                label={`Nachricht\nschreiben`}
+                icon="message-text-outline"
+                onPress={async () => {
+
+                }}
+              />
+              <Button
+                label={`Verstoß\nmelden`}
+                icon="alert-decagram-outline"
+                onPress={() => true}
+              />
+            </View>
+          </View>
         </ParalxScrolView>
         <BackButton />
       </View>
