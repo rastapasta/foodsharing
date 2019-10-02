@@ -30,9 +30,15 @@ This thingy runs on iOS and Android - one code, one love!
   * Shorten very long messages and display a 'read more' button
   * Group chats (incl. multiple avatars displayed)
   * Named chats
+  * Tap on group conversation title -> navigate to list of members
+  * Tap on personal conversation title -> navigate to profile page
   * Today -> Yesterday -> $Date labeling in conversation list
   * Today -> Yesterday -> $Date seperators in conversation
   * Detect URLs to foodsharing* in messages and make them clickable
+
+* Profile
+  * Image of foodsaver
+  * Fetch statistics
 
 * Map
   * Embedded map based on system (iOS: Apple Maps, Android: Google Maps)
@@ -70,8 +76,7 @@ This thingy runs on iOS and Android - one code, one love!
 
 * Should hve
   * Deep linking via apple-app-site-association, needs to be merged to fs master
-  * Tap on group conversation title -> Group scene, list of members, possibility to change name
-  * Tap on conversation title -> Jump to Profile page
+  * Pull conversation again when open and coming from background to make sure its marked as read
 
 * Nice to have
   * Settings screen to setup background pull / notifications?
