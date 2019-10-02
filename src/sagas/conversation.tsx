@@ -51,7 +51,11 @@ export default function* conversationSaga() {
         yield put(formActions.change(`drafts.${conversationId}`, ''))
 
         // Notifiy about the successful send over the bus
-        yield put({type: MESSAGE_SUCCESS, conversationId, payload: {...message, type: MessageType.SENT}})
+        yield put({type: MESSAGE_SUCCESS, conversationId, payload: {
+          ...message,
+          body: entities.decode(message.body),
+          type: MessageType.SENT
+        }})
         break
     }
   }

@@ -29,7 +29,7 @@ export default function reducer(state = initialState, action: any = {}) {
     // Mark a conversation as read as soon as we pulled its latest messages
     case MESSAGE_READ:
     case CONVERSATION_SUCCESS:
-      const id = action.type === 'CONVERSATION_SUCCESS' ? action.id : action.payload
+      const id = action.type === CONVERSATION_SUCCESS ? action.id : action.payload
 
       return state.map(conversation => {
         if (conversation.id != id)
