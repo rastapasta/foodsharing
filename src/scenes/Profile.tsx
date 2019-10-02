@@ -22,6 +22,13 @@ const { width, height } = Dimensions.get('window')
 
 const avatar = 'https://foodsharing.de/img/130_q_avatar.png'
     , headerHeight = isIphoneX() ? 160 : 130
+    , circles = [
+      {name: 'bananacount', unit: ''},
+      {name: 'basketcount', unit: ''},
+      {name: 'postcount', unit: ''},
+      {name: 'fetchcount', unit: 'x'},
+      {name: 'fetchweight', unit: 'kg'}
+    ]
 
 const styles = StyleSheet.create({
   container: {
@@ -123,11 +130,15 @@ class Profile extends PureComponent<Props> {
                 </Text>
               </View>
               <View style={styles.circleBar}>
-                <ProfileCircle label="bananacount" value={26} unit="" />
-                <ProfileCircle label="basketcount" value={35} unit="" />
-                <ProfileCircle label="postcount" value={4412} unit="" />
-                <ProfileCircle label="fetchcount" value={510} unit="x" />
-                <ProfileCircle label="fetchweight" value={16340} unit="kg" />
+                {!!profile.stats && circles.map(circle =>
+                  !!profile.stats[circle.name] &&
+                  <ProfileCircle
+                    key={'circle' + circle.name}
+                    label={circle.name}
+                    value={profile.stats[circle.name]}
+                    unit={circle.unit}
+                  />
+                )}
               </View>
             </View>
           }
