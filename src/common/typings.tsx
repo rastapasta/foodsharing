@@ -34,6 +34,11 @@ export interface ConversationDetail {
   name: string
 }
 
+export enum MessageType {
+  SENT,
+  RECEIVED
+}
+
 export interface Message {
   body: string,
   fs_id: number,
@@ -41,7 +46,9 @@ export interface Message {
   fs_photo: string,
   id: number,
   is_htmlentity_encoded: number,
-  time: string
+  time: string,
+
+  type: MessageType
 }
 
 export interface Profile {

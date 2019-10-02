@@ -5,10 +5,11 @@ import {
   CONVERSATIONS_SUCCESS,
   LOGOUT
 } from '../common/constants'
+import { MessageType } from '../common/typings'
 
 const initialState = []
     , messageToObj = message => ({
-      unread: "1",
+      unread: message.type === MessageType.RECEIVED ? "1" : "0",
       last_foodsaver_id: `${message.fs_id}`,
       last_message: message.body,
       last: message.time,

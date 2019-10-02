@@ -10,7 +10,7 @@ import { withNavigationFocus } from 'react-navigation'
 
 import MessageForm from '../components/MessageForm'
 import MessageBubble from '../components/MessageBubble'
-import { ConversationDetail, Message, Profile } from '../common/typings'
+import { ConversationDetail, Message, Profile, MessageType } from '../common/typings'
 
 import colors from '../common/colors'
 import { translate } from '../common/translation'
@@ -75,7 +75,7 @@ class Conversation extends PureComponent<Props> {
   //   return true
   // }
 
-  prepareItems(messages: Message[], profile: Profile): Item[] {
+  prepareItems(messages: Message[]): Item[] {
     const data = []
     let lastLabel = null
 
@@ -93,7 +93,7 @@ class Conversation extends PureComponent<Props> {
       lastLabel = label
 
       data.push({
-        type: `${message.fs_id}` === `${profile.id}` ? 'sent' : 'received',
+        type: message.type === MessageType.SENT ? 'sent' : 'received',
         message
       })
     })
@@ -105,10 +105,10 @@ class Conversation extends PureComponent<Props> {
   }
 
   render() {
-    const { conversationId, messages, actions, drafts, profile } = this.props
+    const { conversationId, messages, actions, drafts } = this.props
         , { refreshing, loading } = this.state
         , data = (messages[conversationId] || []) as Message[]
-        , items = this.prepareItems(data, profile)
+        , items = this.prepareItems(data)
 
     return (
       <KeyboardAvoidingView
@@ -170,8 +170,7 @@ class Conversation extends PureComponent<Props> {
 
 const mapStateToProps = state => ({
   messages: state.messages,
-  drafts: state.drafts,
-  profile: state.profile
+  drafts: state.drafts
 })
 
 const mapDispatchToProps = dispatch => ({

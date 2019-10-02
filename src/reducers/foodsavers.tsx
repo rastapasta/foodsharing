@@ -1,6 +1,7 @@
 import {
   CONVERSATION_SUCCESS,
   CONVERSATIONS_SUCCESS,
+  PROFILE_SUCCESS,
   LOGOUT
 } from '../common/constants'
 
@@ -35,6 +36,17 @@ export default function reducer(state = initialState, action: any = {}) {
         }
       })
       return convState
+
+    case PROFILE_SUCCESS:
+      const profileState = {...state}
+          , key = `${payload.id}`
+
+      profileState[key] = {
+        ...profileState[key],
+        ...payload
+      }
+
+      return profileState
 
     case LOGOUT:
       return {...initialState}

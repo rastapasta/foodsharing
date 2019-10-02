@@ -17,14 +17,12 @@ import {
 import { login, logout, getCurrentUser, getSession, getCurrentProfile, setSession, syncCookies } from '../common/api'
 
 function* loginFlow(email: string, password: string) {
-  let user
-
   try {
     // Make sure and clean all cookies known to us
     yield CookieManager.clearAll()
 
     // Here we go, login the user
-    user = yield call(login, email, password)
+    const { id } = yield call(login, email, password)
 
     // All good, let's proceed to main
     Actions.reset('drawer')
@@ -36,7 +34,7 @@ function* loginFlow(email: string, password: string) {
     yield SplashScreen.hide()
 
     // Signal our succesful login and broadcast our fresh token and session
-    yield put({type: LOGIN_SUCCESS, payload: getSession()})
+    yield put({type: LOGIN_SUCCESS, payload: {...getSession(), id}})
 
     // Request and broadcast the profile information of our fresh user
     yield put({type: PROFILE, payload: yield call(getCurrentProfile)})
@@ -45,8 +43,6 @@ function* loginFlow(email: string, password: string) {
     // Signal that something went wrong..
     yield put({ type: LOGIN_ERROR, error })
   }
-
-  return user
 }
 
 function* logoutFlow() {
@@ -88,13 +84,13 @@ function* reauthenticateFlow() {
     setSession({session, token})
 
     // Check if we still have a valid session at hand
-    yield getCurrentUser()
+    const { id } = yield getCurrentUser()
 
     // Yes, so instantly forward the user to the internal area and hide the splashscreen
     yield syncCookies()
 
     // Notificate all listeners that we got a valid session running
-    yield put({type: LOGIN_SUCCESS, payload: {session, token}})
+    yield put({type: LOGIN_SUCCESS, payload: {session, token, id}})
 
   } catch(error) {
     // Report why we failed

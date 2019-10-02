@@ -9,14 +9,19 @@ import {
   MESSAGE_REQUEST,
   MESSAGE_SUCCESS
 } from '../common/constants'
+import { MessageType } from '../common/typings'
 
 const entities = new AllHtmlEntities()
 
 function* fetch(id: number) {
   const conversation = yield getConversation(id)
+      , ownId = yield select(state => state.profile.id)
 
   // Decode HTML entities before the content gets into the hands of any other method
-  conversation.messages.forEach(message => message.body = entities.decode(message.body))
+  conversation.messages.forEach(message => {
+    message.body = entities.decode(message.body)
+    message.type = message.fs_id === ownId ? MessageType.SENT : MessageType.RECEIVED
+  })
 
   yield put({
     type: CONVERSATION_SUCCESS,
@@ -46,7 +51,7 @@ export default function* conversationSaga() {
         yield put(formActions.change(`drafts.${conversationId}`, ''))
 
         // Notifiy about the successful send over the bus
-        yield put({type: MESSAGE_SUCCESS, conversationId, payload: message})
+        yield put({type: MESSAGE_SUCCESS, conversationId, payload: {...message, type: MessageType.SENT}})
         break
     }
   }

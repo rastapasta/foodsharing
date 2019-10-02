@@ -1,5 +1,5 @@
 export default {
-  background: '#513A22',
+  background: '#795548',
 
   icon: '#795548',
 

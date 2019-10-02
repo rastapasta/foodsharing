@@ -13,11 +13,11 @@ import {
   LOGIN_SUCCESS,
   LOGOUT
 } from '../common/constants'
-import { Message } from '../common/typings'
+import { Message, MessageType } from '../common/typings'
 
 const entities = new AllHtmlEntities()
 
-function initWebsocket() {
+function initWebsocket(session: any) {
   return eventChannel(emitter => {
     // Connect to the live's system's socket server - handles messages for beta as well
     const socket = socketIO('https://foodsharing.de', {
@@ -52,7 +52,9 @@ function initWebsocket() {
     socket.on('conv', ({m, o}: {m: string, o: string}) => {
       if (m === 'push') {
         const payload = JSON.parse(o) as Message
+
         payload.body = entities.decode(payload.body)
+        payload.type = payload.fs_id === session.id ? MessageType.SENT : MessageType.RECEIVED
 
         return emitter({type: WEBSOCKET_MESSAGE, payload})
       }
@@ -78,10 +80,10 @@ function initWebsocket() {
 export default function* websocketSagas() {
   while (true) {
     // Wait until we got a successful login
-    yield take(LOGIN_SUCCESS)
+    const { payload: session }  = yield take(LOGIN_SUCCESS)
 
     // Start up the websocket event channel
-    const channel = yield call(initWebsocket)
+    const channel = yield call(initWebsocket, session)
 
     while (true) {
       // Wait for a logout or an action emitted by the websocket channel
