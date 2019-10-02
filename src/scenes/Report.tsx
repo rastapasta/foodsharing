@@ -1,7 +1,7 @@
 import { withNavigationFocus } from 'react-navigation'
 
 import React, { PureComponent } from 'react'
-import { SafeAreaView, StyleSheet, Picker, Text, View, Dimensions, Platform, TextInput, KeyboardAvoidingView, Keyboard } from 'react-native'
+import { SafeAreaView, StyleSheet, BackHandler, Picker, Text, View, Dimensions, Platform, TextInput, KeyboardAvoidingView, EventEmitter, Keyboard } from 'react-native'
 import { CheckBox } from 'react-native-elements'
 import { foodsaver } from '../common/placeholder'
 import report from '../common/report'
@@ -44,6 +44,11 @@ class Report extends PureComponent<Props> {
     subreason: null,
     onlyText: false
   }
+  backHandler: any
+
+  interceptBackButton = () => {
+
+  }
 
   componentDidUpdate(prevProps: Props) {
     const { actions, id } = this.props
@@ -55,15 +60,19 @@ class Report extends PureComponent<Props> {
     const { actions, id } = this.props
     actions.navigation('report', id)
 
-    Keyboard.addListener('keyboardWillShow', () => this.setState({onlyText: true}))
-    Keyboard.addListener('keyboardWillHide', () => this.setState({onlyText: false}))
+    this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+      const { onlyText } = this.state
+      if (!onlyText)
+        return false
+
+      this.setState({onlyText: false}, () => Keyboard.dismiss())
+      return true
+    })
   }
 
   componentWillUnmount() {
-    Keyboard.removeAllListeners('keyboardWillShow')
-    Keyboard.removeAllListeners('keyboardWillHide')
+    this.backHandler.remove()
   }
-
 
   render() {
     const { foodsavers, id } = this.props
@@ -77,7 +86,7 @@ class Report extends PureComponent<Props> {
             {label}
           </Text>
         }
-        <View style={{maxHeight: 90, overflow: 'hidden', marginTop: 5}}>
+        <View style={{maxHeight: 90, paddingLeft: 15, overflow: 'hidden', marginTop: 5}}>
           <Picker
             selectedValue={selected}
             itemStyle={{fontSize: 12}}
@@ -135,9 +144,21 @@ class Report extends PureComponent<Props> {
               <TextInput
                 multiline
                 blurOnSubmit
-                onBlur={() => this.setState({onlyText: false}, () => Keyboard.dismiss())}
+                onFocus={() => this.setState({onlyText: true})}
+                onBlur={() => this.setState({onlyText: false})}
                 placeholder={placeholder}
-                style={{flex: 1, fontSize: 12, paddingLeft: 5, paddingRight: 5, borderWidth: 1, borderRadius: 5, borderColor: colors.gray, margin: 10}}
+                style={{
+                  flex: 1,
+                  fontSize: 12,
+                  paddingLeft: 5,
+                  paddingRight: 5,
+                  borderWidth: 1,
+                  borderRadius: 5,
+                  borderColor: colors.gray,
+                  margin: 10,
+                  textAlignVertical: 'top'
+
+                }}
               />
               {!onlyText && <Button
                 title="Meldung senden"
