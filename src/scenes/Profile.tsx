@@ -169,7 +169,7 @@ class Profile extends PureComponent<Props> {
             </Text>
 
             <Text style={styles.category}>
-              Status-Updates von Tobias
+              Status-Updates
             </Text>
           </View>
         </ParalxScrolView>

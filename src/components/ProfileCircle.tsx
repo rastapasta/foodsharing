@@ -47,7 +47,11 @@ export default ({label, value, unit}) =>
         numberOfLines={1}
         adjustsFontSizeToFit={true}
       >
-        {value}{unit}
+        {
+          unit === 'kg' && value > 1000 ? Math.round(value/100)/10 : value
+        }{
+          unit === 'kg' && value > 1000 ? 't' : unit
+        }
       </Text>
       <Text
         style={styles.label}
