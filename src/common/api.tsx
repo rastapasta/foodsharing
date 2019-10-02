@@ -179,7 +179,7 @@ export const getCurrentProfile = (): Promise<Profile> =>
 
 
 // TODO: port this to a REST endpoint instead of screenscraping
-export const getProfile = async (id: number): Promise<{id: number, isOnline: boolean, isFriend: boolean, stats: any}> => {
+export const getProfile = async (id: number): Promise<{id: number, isOnline: boolean, isFriend: boolean, stats: any, bananas: any}> => {
   const $ = await request('profile', null, {id})
       , stats = [
         'basketcount',
@@ -195,10 +195,23 @@ export const getProfile = async (id: number): Promise<{id: number, isOnline: boo
 
     isFriend: $('.buddyRequest').length === 0,
 
-    stats: stats.reduce((stats, id) => {
-            stats[id] = parseInt($(`.stat_${id} .val`).text().replace(/\D/g, '') || 0)
-            return stats
-          }, {}),
+    stats:
+      stats.reduce((stats, id) => {
+        stats[id] = parseInt($(`.stat_${id} .val`).text().replace(/\D/g, '') || 0)
+        return stats
+      }, {}),
+
+    bananas:
+      $('#bananas tr')
+      .map(
+        ({}, e) => ({
+          fs_photo: $(e).find('img').attr('src').replace(/\/im(ages\/[^_]+_[^_]+_|g\/.+|age\/.+)/, ''),
+          fs_id: $(e).find('a').attr('href').match(/\d+/g)[0],
+          body: $(e).find('.msg').text(),
+          time: $(e).find('.time').text().split(/ (von|by) /)[0],
+          fs_name: $(e).find('.time').text().split(/ (von|by) /)[2]
+        })
+      ).get()
   }
 }
 

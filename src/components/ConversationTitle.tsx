@@ -51,8 +51,8 @@ class ConversationTitle extends PureComponent<Props> {
         hitSlop={{top: 10, bottom: 10, left: 50, right: 50}}
         disabled={conversation.member.length === 1}
         onPress={() => otherMembers.length === 1 ?
-          Actions.jump('profile', {id: otherMembers[0]}) :
-          Actions.jump('groupchat', {conversationId})
+          Actions.push('profile', {id: otherMembers[0]}) :
+          Actions.push('groupchat', {conversationId})
         }
       >
         {otherMembers.length > 1 ?

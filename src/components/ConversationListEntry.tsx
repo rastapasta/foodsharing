@@ -82,7 +82,7 @@ class ConversationsItem extends PureComponent<Props> {
     return (
       <TouchableOpacity
         style={styles.container}
-        onPress={() => Actions.jump('conversation', {conversationId: id})}
+        onPress={() => Actions.push('conversation', {conversationId: id})}
       >
         <View style={styles.images}>
           {party.slice(0, 4).map(person =>

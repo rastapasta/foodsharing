@@ -40,11 +40,22 @@ export default function reducer(state = initialState, action: any = {}) {
     case PROFILE_SUCCESS:
       const profileState = {...state}
           , key = `${payload.id}`
+          , { bananas } = payload
 
       profileState[key] = {
         ...profileState[key],
         ...payload
       }
+
+      // All all foodsavers who gave a banana
+      bananas.forEach(({fs_id, fs_name, fs_photo}) => {
+        profileState[`${fs_id}`] = {
+          ...(profileState[`${fs_id}`] || {}),
+          name: fs_name,
+          photo: fs_photo,
+          id: fs_id
+        }
+      })
 
       return profileState
 

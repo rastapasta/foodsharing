@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 
 import colors from '../common/colors'
 import { translate } from '../common/translation'
@@ -40,8 +40,12 @@ const styles = StyleSheet.create({
   }
 })
 
-export default ({label, value, unit}) =>
-  <View style={styles.container}>
+export default ({label, value, unit, onPress}) =>
+  <TouchableOpacity
+    style={styles.container}
+    onPress={onPress}
+    disabled={!onPress}
+  >
     <View style={styles.circle}>
       <Text
         style={styles.value}
@@ -62,4 +66,4 @@ export default ({label, value, unit}) =>
         {translate('profile.'+label)}
       </Text>
     </View>
-  </View>
+  </TouchableOpacity>

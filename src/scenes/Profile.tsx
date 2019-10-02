@@ -120,16 +120,17 @@ class Profile extends PureComponent<Props> {
           imageHeight={height * 0.5}
           headerHeight={headerHeight}
           headerComponent={
-            <View style={[styles.header, {height: headerHeight}]}>
-              <View style={styles.nameContainer}>
+            <View style={[styles.header, {height: headerHeight}]} pointerEvents='box-none'>
+              <View style={styles.nameContainer} pointerEvents='none'>
                 <Text style={styles.name}>
                   {profile.name}
                 </Text>
               </View>
-              <View style={styles.circleBar}>
+              <View style={styles.circleBar} pointerEvents='box-none'>
                 {hasStats && circles.map(circle =>
                   !!profile.stats[circle.name] &&
                   <ProfileCircle
+                    onPress={circle.name === 'bananacount' ? () => Actions.push('bananas', {id: profile.id}): null}
                     key={'circle' + circle.name}
                     label={circle.name}
                     value={profile.stats[circle.name]}
@@ -152,14 +153,14 @@ class Profile extends PureComponent<Props> {
                 icon="message-text-outline"
                 onPress={async () => {
                   const conversationId = (await userToConversationId(profile.id)).toString()
-                  Actions.jump('conversation', {conversationId})
+                  Actions.push('conversation', {conversationId})
                 }}
               />
               <Button
                 label={`Verstoß\nmelden`}
                 icon="alert-decagram-outline"
                 onPress={() =>
-                  Actions.jump('report', {id: profile.id})
+                  Actions.push('report', {id: profile.id})
                 }
               />
             </View>}

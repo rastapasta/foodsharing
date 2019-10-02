@@ -96,7 +96,7 @@ export default class ParalaxScrollView extends PureComponent<Props> {
           })}
         ]
       }]}
-      pointerEvents='none'
+      pointerEvents='box-none'
   >
     <LinearGradient style={styles.gradientTop} colors={[colors.backgroundTransparent, colors.background]}/>
     {headerComponent}

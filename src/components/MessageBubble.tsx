@@ -69,11 +69,12 @@ const styles = StyleSheet.create({
 type Props = {
   type: string
   message: Message
+  hideTime?: boolean
 }
 
 const MAX_LENGTH = 600
 
-export default ({type, message}: Props) => {
+export default ({type, message, hideTime}: Props) => {
   const [expanded, setExpanded] = useState(false)
       , { body } = message
       , shortened = !expanded && body.length > MAX_LENGTH
@@ -84,7 +85,7 @@ export default ({type, message}: Props) => {
       {type === 'received' &&
         <TouchableOpacity
           style={styles.image}
-          onPress={() => Actions.jump('profile', {id: message.fs_id})}
+          onPress={() => Actions.push('profile', {id: message.fs_id})}
         >
           <RoundedImage photo={message.fs_photo} />
         </TouchableOpacity>
@@ -101,9 +102,9 @@ export default ({type, message}: Props) => {
             </Text>
           </Text>}
         </Text>
-        <Text style={[styles.time, styles[type+'Time']]}>
-          {moment(message.time).format('HH:mm')}
-        </Text>
+          <Text style={[styles.time, styles[type+'Time']]}>
+            {!hideTime && moment(message.time).format('HH:mm')}
+          </Text>
       </View>
     </View>
   )

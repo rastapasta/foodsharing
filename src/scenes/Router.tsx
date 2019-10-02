@@ -11,6 +11,7 @@ import Login from './Login'
 import Map from './Map'
 import Profile from './Profile'
 import Report from './Report'
+import Bananas from './Bananas'
 import Conversations from './Conversations'
 import Conversation from './Conversation'
 import ConversationMembers from './ConversationMembers'
@@ -119,6 +120,12 @@ export default () =>
         key="groupchat"
         renderTitle={({conversationId}) => <ConversationTitle conversationId={conversationId} showCount />}
         component={ConversationMembers}
+        hideNavBar={false}
+      />
+      <Scene
+        key="bananas"
+        title="Bananas"
+        component={Bananas}
         hideNavBar={false}
       />
       <Scene

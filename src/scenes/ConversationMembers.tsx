@@ -64,7 +64,7 @@ class ConversationMembers extends PureComponent<Props> {
           renderItem={({item: foodsaver}) =>
             <TouchableOpacity
               style={styles.row}
-              onPress={() => Actions.jump('profile', {id: foodsaver.id})}
+              onPress={() => Actions.push('profile', {id: foodsaver.id})}
             >
               <View style={styles.image}>
                 <RoundedImage
