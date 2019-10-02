@@ -21,7 +21,6 @@ import { Actions } from 'react-native-router-flux'
 const { width, height } = Dimensions.get('window')
 
 const avatar = 'https://foodsharing.de/img/130_q_avatar.png'
-    , headerHeight = isIphoneX() ? 150 : 120
     , circles = [
       {name: 'bananacount', unit: ''},
       {name: 'basketcount', unit: ''},
@@ -65,7 +64,6 @@ const styles = StyleSheet.create({
     color: colors.profileButtonText
   },
   header: {
-    height: headerHeight,
     width,
     backgroundColor: colors.background,
     paddingTop: isIphoneX() ? 30 : 14,
@@ -102,7 +100,8 @@ class Profile extends PureComponent<Props> {
   render() {
     const { id, foodsavers, actions } = this.props
         , profile = foodsaver(foodsavers[`${id}`])
-    console.log(profile)
+        , hasStats = profile.stats && !Object.keys(profile.stats).every(stat => profile.stats[stat] === 0)
+        , headerHeight = (isIphoneX() ? 150 : 120) - (hasStats ? 0 : 65)
 
     const Button = ({icon, label, onPress}) =>
       <TouchableOpacity
@@ -120,14 +119,14 @@ class Profile extends PureComponent<Props> {
           imageHeight={height * 0.5}
           headerHeight={headerHeight}
           headerComponent={
-            <View style={styles.header}>
+            <View style={[styles.header, {height: headerHeight}]}>
               <View style={styles.nameContainer}>
                 <Text style={styles.name}>
                   {profile.name}
                 </Text>
               </View>
               <View style={styles.circleBar}>
-                {!!profile.stats && circles.map(circle =>
+                {hasStats && circles.map(circle =>
                   !!profile.stats[circle.name] &&
                   <ProfileCircle
                     key={'circle' + circle.name}
