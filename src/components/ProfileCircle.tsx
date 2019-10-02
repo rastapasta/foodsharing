@@ -19,7 +19,15 @@ const styles = StyleSheet.create({
     padding: 4,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.badge
+    backgroundColor: colors.badge,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 2,
+    elevation: 5
   },
   value: {
     color: colors.white,

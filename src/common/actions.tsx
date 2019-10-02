@@ -20,3 +20,5 @@ export const fetchFairteiler = (payload: number) => ({type: types.FAIRTEILER_REQ
 
 export const fetchProfile = (id: number) => ({type: types.PROFILE_REQUEST, payload: id})
 export const fetchWall = (target: 'foodsaver' | 'fairteiler', id: number) => ({type: types.WALL_REQUEST, payload: {target, id}})
+
+export const requestFriendship = (id: number) => ({type: types.FRIENDSHIP_REQUEST, payload: id})
