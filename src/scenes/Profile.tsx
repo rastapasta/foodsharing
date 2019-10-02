@@ -80,6 +80,7 @@ type Props = {
   id: number
 
   foodsavers: any
+  profile: any
   actions: any
   isFocused: boolean
 }
@@ -98,7 +99,7 @@ class Profile extends PureComponent<Props> {
   }
 
   render() {
-    const { id, foodsavers, actions } = this.props
+    const { id, foodsavers, actions, profile: user } = this.props
         , profile = foodsaver(foodsavers[`${id}`])
         , hasStats = profile.stats && !Object.keys(profile.stats).every(stat => profile.stats[stat] === 0)
         , headerHeight = (isIphoneX() ? 150 : 120) - (hasStats ? 0 : 65)
@@ -140,7 +141,7 @@ class Profile extends PureComponent<Props> {
           }
         >
           <View style={{minHeight: height - headerHeight, backgroundColor: colors.white, marginTop: 5, padding: 20}}>
-            <View style={{flexDirection: 'row', marginBottom: 10, justifyContent: 'space-evenly'}}>
+            {user.id !== profile.id && <View style={{flexDirection: 'row', marginBottom: 10, justifyContent: 'space-evenly'}}>
               <Button
                 label={`Ich kenne\n${profile.name}`}
                 icon="account-plus-outline"
@@ -161,7 +162,7 @@ class Profile extends PureComponent<Props> {
                   Actions.jump('report', {id: profile.id})
                 }
               />
-            </View>
+            </View>}
 
             <Text style={styles.category}>
               Infos
@@ -179,7 +180,8 @@ class Profile extends PureComponent<Props> {
 }
 
 const mapStateToProps = state => ({
-  foodsavers: state.foodsavers
+  foodsavers: state.foodsavers,
+  profile: state.profile
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -1,32 +1,43 @@
-import { withNavigationFocus } from 'react-navigation'
-
 import React, { PureComponent } from 'react'
-import { SafeAreaView, StyleSheet, BackHandler, Picker, Text, View, Dimensions, Platform, TextInput, KeyboardAvoidingView, EventEmitter, Keyboard } from 'react-native'
-import { CheckBox } from 'react-native-elements'
-import { foodsaver } from '../common/placeholder'
-import report from '../common/report'
-import { Button } from 'react-native-elements'
+import {
+  SafeAreaView,
+  StyleSheet,
+  BackHandler,
+  Picker,
+  Text,
+  View,
+  Dimensions,
+  Platform,
+  TextInput,
+  KeyboardAvoidingView,
+  Keyboard
+} from 'react-native'
+import { withNavigationFocus } from 'react-navigation'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as reduxActions from '../common/actions'
 import colors from '../common/colors'
 
-const { width } = Dimensions.get('window')
+import { Button, CheckBox } from 'react-native-elements'
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.white
-  },
-  category: {
-    fontWeight: 'bold',
-    fontSize: 11,
-    width,
-    marginTop: 20,
-    paddingLeft: 20
-  }
-})
+import { foodsaver } from '../common/placeholder'
+import report from '../common/report'
+
+const { width } = Dimensions.get('window')
+    , styles = StyleSheet.create({
+      container: {
+        flex: 1,
+        backgroundColor: colors.white
+      },
+      category: {
+        fontWeight: 'bold',
+        fontSize: 12,
+        width,
+        marginTop: 20,
+        paddingLeft: 20
+      }
+    })
 
 const placeholder = 'Es ist wichtig alle Fälle, die gegen die Verhaltensregeln verstoßen, zu melden, damit erst gar keine schlechte Stimmung unter den Foodsavern bzw. Betrieben entsteht. So können sich die Verantwortlichen rechtzeitig um Problemfälle kümmern und bei mehrfachem nicht angebrachtem Verhalten die Personen von der Plattform ausschließen. Bitte schildere den Vorfall in mindestens 120 Zeichen, damit die Verantwortlichen bzw. das Mediationsteam sich angemessen um den Fall kümmern können. Nenne dabei Häufigkeit des Vorfalls, Ort, Zeitpunkt und ggf. andere anwesende Foodsaver!'
 
@@ -89,7 +100,7 @@ class Report extends PureComponent<Props> {
         <View style={{maxHeight: 90, paddingLeft: 15, overflow: 'hidden', marginTop: 5}}>
           <Picker
             selectedValue={selected}
-            itemStyle={{fontSize: 12}}
+            itemStyle={{fontSize: 14}}
             style={[{width}, Platform.OS === 'ios' && {transform: [{translateY: -55}]}]}
             onValueChange={onChange}
           >
@@ -129,7 +140,7 @@ class Report extends PureComponent<Props> {
                     title={option.name}
                     checked={false}
                     wrapperStyle={{margin: 0, padding: 0}}
-                    textStyle={{fontSize: 10}}
+                    textStyle={{fontSize: 12}}
                     containerStyle={{marginTop: 0, paddingTop: 0, borderWidth: 0, backgroundColor: colors.white}}
                   />
               )}
@@ -149,22 +160,21 @@ class Report extends PureComponent<Props> {
                 placeholder={placeholder}
                 style={{
                   flex: 1,
-                  fontSize: 12,
-                  paddingLeft: 5,
-                  paddingRight: 5,
+                  fontSize: 14,
+                  padding: 12,
+                  paddingTop: 12,
                   borderWidth: 1,
                   borderRadius: 5,
                   borderColor: colors.gray,
                   margin: 10,
                   textAlignVertical: 'top'
-
                 }}
               />
               {!onlyText && <Button
                 title="Meldung senden"
                 containerStyle={{marginLeft: 10, marginBottom: 10, marginRight: 10}}
                 buttonStyle={{backgroundColor: colors.green}}
-                titleStyle={{fontSize: 12}}
+                titleStyle={{fontSize: 14}}
               />}
             </View>
           }
