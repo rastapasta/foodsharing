@@ -16,6 +16,8 @@ export default {
   profileButtonText: '#000',
   profileButtonIcon: '#000',
 
+  profileCategory: '#4a3520',
+
   badge: '#64AE24',
 
   version: '#aaa',

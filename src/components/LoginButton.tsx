@@ -6,9 +6,9 @@ import { translate } from '../common/translation'
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 5,
-    paddingBottom: 5,
-    borderRadius: 5,
+    paddingTop: 10,
+    paddingBottom: 10,
+    borderRadius: 10,
     paddingLeft: 15
   },
   raised: {
@@ -35,6 +35,7 @@ type Props = {
 export default (props: Props) =>
   <TouchableOpacity
     style={[styles.container, !!props.raised && styles.raised]}
+    hitSlop={{top: 10, left: 20, bottom: 20, right: 20}}
     onPress={props.onPress}
   >
     <Text style={[styles.text, !!props.raised && styles.raisedText]}>

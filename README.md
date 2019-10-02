@@ -43,7 +43,10 @@ This thingy runs on iOS and Android - one code, one love!
   * Report button -> jump to Report scene
 
 * Report
-  * Select component to select report reason
+  * Platform based native picker for report reason
+  * Dynamic displaying of nested options
+  * Text entry for report text, autoscaling to fullscreen on text entry
+  * Hooking into Android's back button & blur event to leave fullscreen
 
 * Map
   * Embedded map based on system (iOS: Apple Maps, Android: Google Maps)
@@ -78,8 +81,10 @@ This thingy runs on iOS and Android - one code, one love!
   * Notifications after background pull / detect new conversations - even pull pull conversations?
   * Handle more than the last 20 messages, logic to fill the gap
   * Handle WebSocket reconnect after long inactivity
+  * Actually send abuse report
 
 * Should hve
+  * Abuse report english translation?
   * Pull conversation again when open and coming from background to make sure its marked as read
 
 * Nice to have

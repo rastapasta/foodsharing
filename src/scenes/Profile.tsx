@@ -21,7 +21,7 @@ import { Actions } from 'react-native-router-flux'
 const { width, height } = Dimensions.get('window')
 
 const avatar = 'https://foodsharing.de/img/130_q_avatar.png'
-    , headerHeight = isIphoneX() ? 160 : 130
+    , headerHeight = isIphoneX() ? 150 : 120
     , circles = [
       {name: 'bananacount', unit: ''},
       {name: 'basketcount', unit: ''},
@@ -36,7 +36,9 @@ const styles = StyleSheet.create({
   },
   name: {
     color: colors.white,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    fontSize: 18,
+    fontFamily: 'Alfa Slab One'
   },
   nameContainer: {
     height: 50,
@@ -54,18 +56,8 @@ const styles = StyleSheet.create({
     padding: 6,
     marginLeft: 8,
     marginRight: 8,
-    borderWidth: 1,
-    backgroundColor: colors.profileButton,
     borderRadius: 5,
-    borderColor: colors.background,
     alignItems: 'center',
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.5,
-    shadowRadius: 2,
   },
   buttonText: {
     textAlign: 'center',
@@ -76,8 +68,13 @@ const styles = StyleSheet.create({
     height: headerHeight,
     width,
     backgroundColor: colors.background,
-    alignItems: 'center',
-    justifyContent: 'center'
+    paddingTop: isIphoneX() ? 30 : 14,
+  },
+  category: {
+    color: colors.profileCategory,
+    fontWeight: 'bold',
+    fontSize: 18,
+    fontFamily: 'Alfa Slab One'
   }
 })
 
@@ -143,7 +140,7 @@ class Profile extends PureComponent<Props> {
             </View>
           }
         >
-          <View style={{minHeight: height*0.5 - headerHeight, backgroundColor: colors.white, marginTop: 5, padding: 10}}>
+          <View style={{minHeight: height - headerHeight, backgroundColor: colors.white, marginTop: 5, padding: 20}}>
             <View style={{flexDirection: 'row', marginBottom: 10, justifyContent: 'space-evenly'}}>
               <Button
                 label={`Ich kenne\n${profile.name}`}
@@ -166,6 +163,14 @@ class Profile extends PureComponent<Props> {
                 }
               />
             </View>
+
+            <Text style={styles.category}>
+              Infos
+            </Text>
+
+            <Text style={styles.category}>
+              Status-Updates von Tobias
+            </Text>
           </View>
         </ParalxScrolView>
         <BackButton />
