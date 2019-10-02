@@ -13,8 +13,10 @@ import {
   CONVERSATIONS_REQUEST,
   CONVERSATIONS_SUCCESS,
   MESSAGE_SUCCESS,
+  MESSAGE_READ,
   WEBSOCKET_MESSAGE
 } from '../common/constants'
+import { MessageType } from '../common/typings'
 
 const entities = new AllHtmlEntities()
     ,countUnread = (conversations: any[]) =>
@@ -38,7 +40,11 @@ function* fetch() {
   })
 }
 
+
 export default function* conversationsSaga() {
+  // Wait for message read actions and mark conversations as read
+  yield fork(markAsReadWatcher)
+
   // Wait for actions altering the conversations undread counter
   yield fork(unreadWatcher)
 
@@ -46,6 +52,14 @@ export default function* conversationsSaga() {
     // Wait until we get a conversation request
     yield take(CONVERSATIONS_REQUEST)
     yield fork(fetch)
+  }
+}
+
+// Wait for message read actions and mark conversations as read
+function* markAsReadWatcher() {
+  while (true) {
+    const { payload: id } = yield take(MESSAGE_READ)
+    yield markAsRead(id)
   }
 }
 
@@ -58,8 +72,8 @@ function* unreadWatcher() {
     // Mark message as read in case the conversation is currently open
     if (action.type === WEBSOCKET_MESSAGE) {
       const {scene, sceneId} = yield select(state => state.app)
-      if (scene === 'conversation' && sceneId == action.payload.cid)
-        yield markAsRead(action.payload.cid)
+      if (action.payload.type === MessageType.RECEIVED && scene === 'conversation' && sceneId == action.payload.cid)
+        yield put({type: MESSAGE_READ, payload: action.payload.cid})
     }
 
     // Get and count the number of unread conversations

@@ -37,6 +37,7 @@ export const WEBSOCKET_MESSAGE = '✉️ WEBSOCKET_MESSAGE'
 
 export const MESSAGE_REQUEST = '✉️ MESSAGE_REQUEST'
 export const MESSAGE_SUCCESS = '✅ MESSAGE_SUCCESS'
+export const MESSAGE_READ = '📭️ MESSAGE_READ'
 
 export const MARKERS_REQUEST = '🔰 MARKERS_REQUEST'
 export const MARKERS_SUCCESS = '✅ MARKERS_SUCCESS'

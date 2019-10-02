@@ -1,5 +1,6 @@
 import {
   MESSAGE_SUCCESS,
+  MESSAGE_READ,
   WEBSOCKET_MESSAGE,
   CONVERSATION_SUCCESS,
   CONVERSATIONS_SUCCESS,
@@ -25,9 +26,11 @@ export default function reducer(state = initialState, action: any = {}) {
         member: conversation.member.map(member => member.id)
       }))
 
-    // Mark a conversation as unread as soon as we pulled its latest messages
+    // Mark a conversation as read as soon as we pulled its latest messages
+    case MESSAGE_READ:
     case CONVERSATION_SUCCESS:
-      const { id } = action
+      const id = action.type === 'CONVERSATION_SUCCESS' ? action.id : action.payload
+
       return state.map(conversation => {
         if (conversation.id != id)
           return conversation

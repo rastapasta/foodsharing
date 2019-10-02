@@ -10,7 +10,7 @@ import { withNavigationFocus } from 'react-navigation'
 
 import MessageForm from '../components/MessageForm'
 import MessageBubble from '../components/MessageBubble'
-import { ConversationDetail, Message, Profile, MessageType } from '../common/typings'
+import { ConversationDetail, Message, MessageType } from '../common/typings'
 
 import colors from '../common/colors'
 import { translate } from '../common/translation'
