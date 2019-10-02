@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
 
 type Props = {
   image: any
+  headerHeight: number
   imageHeight: number
   children?: any
   headerComponent?: any
@@ -54,7 +55,6 @@ type Props = {
 export default class ParalaxScrollView extends PureComponent<Props> {
   state = {
     scrollY: new Animated.Value(0),
-    headerHeight: 0
   }
 
   renderBackground() {
@@ -83,11 +83,12 @@ export default class ParalaxScrollView extends PureComponent<Props> {
   }
 
   renderHeader() {
-    const { headerHeight, scrollY } = this.state
-        , { imageHeight, headerComponent } = this.props
+    const { scrollY } = this.state
+        , { imageHeight, headerComponent, headerHeight } = this.props
 
     return <Animated.View
-      style={[styles.header, headerHeight && {height: headerHeight}, {
+      style={[styles.header, {
+        height: headerHeight,
         transform: [
           {translateY: scrollY.interpolate({
             inputRange: [0, imageHeight, imageHeight + 1],
@@ -95,10 +96,6 @@ export default class ParalaxScrollView extends PureComponent<Props> {
           })}
         ]
       }]}
-      onLayout={({nativeEvent}) =>
-        headerHeight ||
-        this.setState({headerHeight: nativeEvent.layout.height})
-      }
       pointerEvents='none'
   >
     <LinearGradient style={styles.gradientTop} colors={[colors.backgroundTransparent, colors.background]}/>
@@ -109,8 +106,8 @@ export default class ParalaxScrollView extends PureComponent<Props> {
   }
 
   render() {
-    const { children, imageHeight, headerComponent } = this.props
-        , { headerHeight, scrollY } = this.state
+    const { children, imageHeight, headerComponent, headerHeight } = this.props
+        , { scrollY } = this.state
 
     return <View style={styles.container}>
       {this.renderBackground()}
@@ -130,6 +127,7 @@ export default class ParalaxScrollView extends PureComponent<Props> {
           {children}
         </View>
       </Animated.ScrollView>
+
       {headerComponent && this.renderHeader()}
     </View>
   }

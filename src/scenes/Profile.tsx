@@ -20,27 +20,36 @@ import { Actions } from 'react-native-router-flux'
 
 const { width, height } = Dimensions.get('window')
 
+const avatar = 'https://foodsharing.de/img/130_q_avatar.png'
+    , headerHeight = isIphoneX() ? 160 : 130
+
 const styles = StyleSheet.create({
   container: {
     flex: 1
   },
   name: {
     color: colors.white,
-<<<<<<< HEAD
-    fontSize: 16,
     fontWeight: 'bold'
-=======
-    fontSize: 16
->>>>>>> 6b8d02dcf6eb370b64ebb8485a8f71ae63d00e13
+  },
+  nameContainer: {
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  circleBar: {
+    width,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
   },
   button: {
-    borderWidth: 1,
     flex: 1,
     padding: 6,
     marginLeft: 8,
     marginRight: 8,
     backgroundColor: colors.backgroundBright,
     borderRadius: 5,
+    borderWidth: 1,
     borderColor: colors.background,
     alignItems: 'center',
     shadowColor: "#000",
@@ -55,10 +64,15 @@ const styles = StyleSheet.create({
   buttonText: {
     textAlign: 'center',
     fontSize: 10
+  },
+  header: {
+    height: headerHeight,
+    width,
+    backgroundColor: colors.background,
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 })
-
-const avatar = 'https://foodsharing.de/img/130_q_avatar.png'
 
 type Props = {
   id: number
@@ -82,8 +96,7 @@ class Profile extends PureComponent<Props> {
   }
 
   render() {
-    const headerHeight = isIphoneX() ? 160 : 130
-        , { id, foodsavers, actions } = this.props
+    const { id, foodsavers, actions } = this.props
         , profile = foodsaver(foodsavers[`${id}`])
     console.log(profile)
 
@@ -101,25 +114,15 @@ class Profile extends PureComponent<Props> {
         <ParalxScrolView
           image={{uri: profile.photo ? 'https://foodsharing.de/images/' + profile.photo : avatar}}
           imageHeight={height * 0.5}
+          headerHeight={headerHeight}
           headerComponent={
-            <View style={{
-              height: headerHeight,
-              width,
-              backgroundColor: colors.background,
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}>
-              <View style={{height: 50, alignItems: 'center', justifyContent: 'center'}}>
+            <View style={styles.header}>
+              <View style={styles.nameContainer}>
                 <Text style={styles.name}>
                   {profile.name}
                 </Text>
               </View>
-              <View style={{
-                width,
-                flexDirection: 'row',
-                justifyContent: 'space-around',
-                alignItems: 'center',
-              }}>
+              <View style={styles.circleBar}>
                 <ProfileCircle label="bananacount" value={26} unit="" />
                 <ProfileCircle label="basketcount" value={35} unit="" />
                 <ProfileCircle label="postcount" value={4412} unit="" />
@@ -135,7 +138,6 @@ class Profile extends PureComponent<Props> {
                 label={`Ich kenne\n${profile.name}`}
                 icon="account-plus-outline"
                 onPress={() => actions.requestFriendship(profile.id)}
-                onPress={() => false}
               />
               <Button
                 label={`Nachricht\nschreiben`}
