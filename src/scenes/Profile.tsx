@@ -26,8 +26,12 @@ const styles = StyleSheet.create({
   },
   name: {
     color: colors.white,
+<<<<<<< HEAD
     fontSize: 16,
     fontWeight: 'bold'
+=======
+    fontSize: 16
+>>>>>>> 6b8d02dcf6eb370b64ebb8485a8f71ae63d00e13
   },
   button: {
     borderWidth: 1,
@@ -131,6 +135,7 @@ class Profile extends PureComponent<Props> {
                 label={`Ich kenne\n${profile.name}`}
                 icon="account-plus-outline"
                 onPress={() => actions.requestFriendship(profile.id)}
+                onPress={() => false}
               />
               <Button
                 label={`Nachricht\nschreiben`}
