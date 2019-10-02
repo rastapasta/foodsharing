@@ -12,6 +12,10 @@ export default {
   white: '#fff',
   gray: '#aaa',
 
+  profileButton: '#EFEFEF',
+  profileButtonText: '#000',
+  profileButtonIcon: '#000',
+
   badge: '#64AE24',
 
   version: '#aaa',

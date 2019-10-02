@@ -37,8 +37,13 @@ This thingy runs on iOS and Android - one code, one love!
   * Detect URLs to foodsharing* in messages and make them clickable
 
 * Profile
-  * Image of foodsaver
-  * Fetch statistics
+  * Image of foodsaver, paralax style
+  * Fetch and display pickup/fetch-statistics (screen scrapy as no rest interface exists)
+  * Button
+  * Report button -> jump to Report scene
+
+* Report
+  * Select component to select report reason
 
 * Map
   * Embedded map based on system (iOS: Apple Maps, Android: Google Maps)
@@ -75,9 +80,9 @@ This thingy runs on iOS and Android - one code, one love!
   * Handle WebSocket reconnect after long inactivity
 
 * Should hve
-  * Deep linking via apple-app-site-association, needs to be merged to fs master
   * Pull conversation again when open and coming from background to make sure its marked as read
 
 * Nice to have
+  * Deep linking via apple-app-site-association, needs to be merged to fs master
   * Settings screen to setup background pull / notifications?
 

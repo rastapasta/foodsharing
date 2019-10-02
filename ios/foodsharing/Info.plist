@@ -43,6 +43,7 @@
 	<string>Find Basekts and Fairteilers around you - to make it easier, allow access to your current location.</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>FontAwesome.ttf</string>
 		<string>AlfaSlabOne-Regular.ttf</string>
 		<string>SFMono-Regular.otf</string>
 		<string>MaterialCommunityIcons.ttf</string>

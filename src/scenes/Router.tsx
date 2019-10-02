@@ -10,6 +10,7 @@ import Drawer from '../components/Drawer'
 import Login from './Login'
 import Map from './Map'
 import Profile from './Profile'
+import Report from './Report'
 import Conversations from './Conversations'
 import Conversation from './Conversation'
 import ConversationMembers from './ConversationMembers'
@@ -120,6 +121,11 @@ export default () =>
         component={ConversationMembers}
         hideNavBar={false}
       />
-
+      <Scene
+        key="report"
+        title="Verstoß melden"
+        component={Report}
+        hideNavBar={false}
+      />
     </Stack>
   </Router>

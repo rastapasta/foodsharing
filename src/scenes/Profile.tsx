@@ -54,9 +54,9 @@ const styles = StyleSheet.create({
     padding: 6,
     marginLeft: 8,
     marginRight: 8,
-    backgroundColor: colors.backgroundBright,
-    borderRadius: 5,
     borderWidth: 1,
+    backgroundColor: colors.profileButton,
+    borderRadius: 5,
     borderColor: colors.background,
     alignItems: 'center',
     shadowColor: "#000",
@@ -66,11 +66,11 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.5,
     shadowRadius: 2,
-    elevation: 5
   },
   buttonText: {
     textAlign: 'center',
-    fontSize: 10
+    fontSize: 10,
+    color: colors.profileButtonText
   },
   header: {
     height: headerHeight,
@@ -112,7 +112,7 @@ class Profile extends PureComponent<Props> {
         style={styles.button}
         onPress={onPress}
       >
-        <Icon name={icon} size={26} />
+        <Icon name={icon} size={26} color={colors.profileButtonIcon}/>
         <Text style={styles.buttonText}>{label}</Text>
       </TouchableOpacity>
 
@@ -143,7 +143,7 @@ class Profile extends PureComponent<Props> {
             </View>
           }
         >
-          <View style={{minHeight: height*0.5 - headerHeight, backgroundColor: colors.backgroundBright, marginTop: 5, padding: 10}}>
+          <View style={{minHeight: height*0.5 - headerHeight, backgroundColor: colors.white, marginTop: 5, padding: 10}}>
             <View style={{flexDirection: 'row', marginBottom: 10, justifyContent: 'space-evenly'}}>
               <Button
                 label={`Ich kenne\n${profile.name}`}
@@ -161,7 +161,9 @@ class Profile extends PureComponent<Props> {
               <Button
                 label={`Verstoß\nmelden`}
                 icon="alert-decagram-outline"
-                onPress={() => true}
+                onPress={() =>
+                  Actions.jump('report', {id: profile.id})
+                }
               />
             </View>
           </View>

@@ -100,7 +100,7 @@ export default class ParalaxScrollView extends PureComponent<Props> {
   >
     <LinearGradient style={styles.gradientTop} colors={[colors.backgroundTransparent, colors.background]}/>
     {headerComponent}
-    <LinearGradient style={styles.gradientBottom} colors={[colors.background, colors.backgroundBright]}/>
+    <LinearGradient style={styles.gradientBottom} colors={[colors.background, colors.white]}/>
   </Animated.View>
 
   }
