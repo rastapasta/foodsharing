@@ -37,7 +37,7 @@ function finish() {
     BackgroundFetch.finish(BackgroundFetch.FETCH_RESULT_NEW_DATA)
 }
 
-export default function* backgroundSagas() {
+export default function* backgroundSaga() {
   // Only active on iOS for now
   if (Platform.OS !== 'ios')
     return

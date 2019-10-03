@@ -125,7 +125,7 @@ function* reauthenticateFlow() {
   }
 }
 
-export default function* loginWatcher() {
+export default function* loginSaga() {
   // Wait until our store got rehydrated
   yield take('persist/REHYDRATE')
 

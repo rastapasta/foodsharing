@@ -77,7 +77,7 @@ function initWebsocket(session: any) {
   })
 }
 
-export default function* websocketSagas() {
+export default function* websocketSaga() {
   while (true) {
     // Wait until we got a successful login
     const { payload: session }  = yield take(LOGIN_SUCCESS)
