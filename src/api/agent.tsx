@@ -57,7 +57,8 @@ export default (
     'fairteilerMarker' |
     'markAsRead' |
     'regionMembers' |
-    'friendship',
+    'friendship' |
+    'report',
 
   data?: any,
   options?: any
@@ -65,7 +66,7 @@ export default (
   const { method, uri } = config.endpoints[endpoint]
       , opts = options || {}
       , url = config.host + Object.keys(opts)
-                      .reduce((u, key) => u.replace('{' + key +'}', opts[key]), uri)
+                      .reduce((u, key) => u.replace('{' + key +'}', encodeURIComponent(opts[key])), uri)
       , handleAsHTML = url.startsWith(config.host + '/?page=') || url.startsWith(config.host + '/profile')
       , sendAsJSON = !!url.match(/\/api\//)
 
