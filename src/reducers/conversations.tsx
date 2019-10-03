@@ -4,9 +4,11 @@ import {
   WEBSOCKET_MESSAGE,
   CONVERSATION_SUCCESS,
   CONVERSATIONS_SUCCESS,
-  LOGOUT
+  LOGOUT,
+  CONVERSATION_ID_SUCCESS
 } from '../common/constants'
 import { MessageType } from '../common/typings'
+import Conversation from '../scenes/Conversation'
 
 const initialState = []
     , messageToObj = message => ({
@@ -54,7 +56,7 @@ export default function reducer(state = initialState, action: any = {}) {
 
       return freshState
 
-    // Process incoming messages by updating the last conversations last timestamp, user and
+    // Process incoming me\ssages by updating the last conversations last timestamp, user and
     // create conversation in case it didnt exist yet
     case MESSAGE_SUCCESS:
     case WEBSOCKET_MESSAGE:
@@ -82,6 +84,20 @@ export default function reducer(state = initialState, action: any = {}) {
         })
 
       return newState
+
+    case CONVERSATION_ID_SUCCESS:
+      // Prepare for an soon to be navigated to conversation
+      if (state.find(conversation => conversation.id == payload))
+        return state
+
+      return [
+        ...state,
+        {
+          id: payload,
+          member: [`${action.id}`],
+          message: []
+        }
+      ]
 
     // Destroy our conversations from store in case the user logs out
     case LOGOUT:

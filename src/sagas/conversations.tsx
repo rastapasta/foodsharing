@@ -68,7 +68,7 @@ function* conversationIdResolver() {
   while (true) {
     const { payload: id } = yield take(CONVERSATION_ID_REQUEST)
     const conversationId = yield userToConversationId(id)
-    yield put({type: CONVERSATION_ID_SUCCESS, payload: conversationId})
+    yield put({type: CONVERSATION_ID_SUCCESS, id, payload: conversationId})
 
     Actions.push('conversation', {conversationId})
   }

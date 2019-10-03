@@ -39,7 +39,7 @@ This thingy runs on iOS and Android - one code, one love!
 * Profile
   * Fetch and display pickup/fetch-statistics (screen scrapy as no rest interface exists - yet)
   * Image of foodsaver, paralax style
-  * Friendship button - signals friendship sent status
+  * Friendship button - signals friendship-offered status
   * Send friendship request by touching friendship button
   * Message button -> initiate conversation and jump to Conversation scene
   * Report button -> jump to Report scene
