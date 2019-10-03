@@ -1,6 +1,6 @@
 import { take, put, fork, select } from 'redux-saga/effects'
 
-import { getFairteiler } from '../common/api'
+import { getFairteiler } from '../api'
 
 import {
   FAIRTEILER_PREFETCH,

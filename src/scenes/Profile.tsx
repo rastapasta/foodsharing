@@ -17,7 +17,7 @@ import ProfileCircle from '../components/ProfileCircle'
 import { foodsaver } from '../common/placeholder'
 import BackButton from '../components/BackButton'
 import colors from '../common/colors'
-import { userToConversationId } from '../common/api'
+import { userToConversationId } from '../api'
 import { Actions } from 'react-native-router-flux'
 import { translate } from '../common/translation'
 

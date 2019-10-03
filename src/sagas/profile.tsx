@@ -1,6 +1,6 @@
 import { take, put, fork } from 'redux-saga/effects'
 
-import { getProfile } from '../common/api'
+import { getProfile } from '../api'
 import { PROFILE_REQUEST, PROFILE_SUCCESS } from '../common/constants'
 
 function* fetch(id: number) {

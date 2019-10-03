@@ -1,6 +1,6 @@
 import { take, put } from 'redux-saga/effects'
 
-import { getFairteilerMarker } from '../common/api'
+import { getFairteilerMarker } from '../api'
 
 import { MARKERS_REQUEST, MARKERS_SUCCESS } from '../common/constants'
 

@@ -14,7 +14,7 @@ import {
   PROFILE
 } from '../common/constants'
 
-import { login, logout, getCurrentUser, getSession, getCurrentProfile, setSession, syncCookies } from '../common/api'
+import { login, logout, getCurrentUser, getSession, getCurrentProfile, setSession, syncCookies } from '../api'
 
 function* loginFlow(email: string, password: string) {
   try {

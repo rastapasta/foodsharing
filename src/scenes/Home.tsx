@@ -8,7 +8,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as reduxActions from '../common/actions'
 
-import { getProfile } from '../common/api'
+import { getProfile } from '../api'
 
 const styles = StyleSheet.create({
   container: {

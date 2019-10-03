@@ -6,7 +6,7 @@ import { Platform } from 'react-native'
 import PushNotificationIOS from '@react-native-community/push-notification-ios'
 import AndroidBadge from 'react-native-android-badge'
 
-import { getConversations, markAsRead } from '../common/api'
+import { getConversations, markAsRead } from '../api'
 
 import {
   CONVERSATION_SUCCESS,

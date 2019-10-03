@@ -2,7 +2,8 @@ import { take, put, select, call, fork } from 'redux-saga/effects'
 import { AllHtmlEntities } from 'html-entities'
 import { actions as formActions } from 'react-redux-form'
 
-import { getConversation, sendMessage } from '../common/api'
+import { getConversation, sendMessage } from '../api'
+
 import {
   CONVERSATION_REQUEST,
   CONVERSATION_SUCCESS,

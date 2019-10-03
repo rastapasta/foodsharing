@@ -1,6 +1,6 @@
 import { take, put, fork } from 'redux-saga/effects'
 
-import { getWall } from '../common/api'
+import { getWall } from '../api'
 import { WALL_REQUEST, WALL_SUCCESS } from '../common/constants'
 
 function* fetch(target: 'foodsaver' | 'fairteiler', id: number) {
