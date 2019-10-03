@@ -50,7 +50,7 @@ class Bananas extends PureComponent<Props> {
           style={{flex: 1}}
           ListHeaderComponent={() => <View style={{height: 20}} />}
           renderItem={({item}) =>
-            <MessageBubble hideTime type="received" message={item} />
+            <MessageBubble rawTime type="received" message={item} />
           }
         />
       </SafeAreaView>

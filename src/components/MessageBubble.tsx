@@ -69,12 +69,12 @@ const styles = StyleSheet.create({
 type Props = {
   type: string
   message: Message
-  hideTime?: boolean
+  rawTime?: boolean
 }
 
 const MAX_LENGTH = 600
 
-export default ({type, message, hideTime}: Props) => {
+export default ({type, message, rawTime}: Props) => {
   const [expanded, setExpanded] = useState(false)
       , { body } = message
       , shortened = !expanded && body.length > MAX_LENGTH
@@ -103,7 +103,7 @@ export default ({type, message, hideTime}: Props) => {
           </Text>}
         </Text>
           <Text style={[styles.time, styles[type+'Time']]}>
-            {!hideTime && moment(message.time).format('HH:mm')}
+            {rawTime ? message.time : moment(message.time).format('HH:mm')}
           </Text>
       </View>
     </View>
