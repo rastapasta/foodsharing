@@ -37,8 +37,11 @@ This thingy runs on iOS and Android - one code, one love!
   * Detect URLs to foodsharing* in messages and make them clickable
 
 * Profile
+  * Fetch and display pickup/fetch-statistics (screen scrapy as no rest interface exists - yet)
   * Image of foodsaver, paralax style
-  * Fetch and display pickup/fetch-statistics (screen scrapy as no rest interface exists)
+  * Friendship button - signals friendship sent status
+  * Send friendship request by touching friendship button
+  * Message button -> jump to Conversation scene
   * Report button -> jump to Report scene
   * Banana button -> jump to Bananas scene
 
@@ -85,10 +88,12 @@ This thingy runs on iOS and Android - one code, one love!
   * Handle more than the last 20 messages, logic to fill the gap
   * Handle WebSocket reconnect after long inactivity
   * Actually send abuse report
+  * Ask for Chris (or Tobi?) for permission to show user profile
 
 * Should hve
   * Abuse report english translation?
   * Pull conversation again when open and coming from background to make sure its marked as read
+  * User Profile -> message button doesn't work for conversations we didn't have yet
 
 * Nice to have
   * Deep linking via apple-app-site-association, needs to be merged to fs master

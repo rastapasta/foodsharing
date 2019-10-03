@@ -2,9 +2,9 @@ import React, { PureComponent } from 'react'
 import { Animated, StyleSheet, View, Dimensions } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 
-import FastImage from 'react-native-fast-image'
+import Image from 'react-native-fast-image'
 
-const AnimatedFastImage = Animated.createAnimatedComponent(FastImage)
+const AnimatedImage = Animated.createAnimatedComponent(Image)
 
 import colors from '../common/colors'
 
@@ -60,9 +60,8 @@ export default class ParalaxScrollView extends PureComponent<Props> {
   renderBackground() {
     const { scrollY } = this.state
         , { imageHeight, image } = this.props
-        , Component = false ? Animated.View : AnimatedFastImage
 
-    return <Component
+    return <AnimatedImage
       style={[styles.background, {
         height: imageHeight,
         transform: [{
@@ -77,7 +76,7 @@ export default class ParalaxScrollView extends PureComponent<Props> {
           })
         }]
       }]}
-      resizeMode={FastImage.resizeMode.cover}
+      resizeMode={Image.resizeMode.cover}
       source={image}
     />
   }

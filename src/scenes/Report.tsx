@@ -23,7 +23,6 @@ import { Button, CheckBox } from 'react-native-elements'
 
 import { foodsaver } from '../common/placeholder'
 import report from '../common/report'
-import { Actions } from 'react-native-router-flux'
 
 const { width } = Dimensions.get('window')
     , styles = StyleSheet.create({
@@ -58,12 +57,15 @@ class Report extends PureComponent<Props> {
   }
   backHandler: any
 
+  dismiss = () =>
+    this.setState({onlyText: false}, () => Keyboard.dismiss())
+
   interceptBackButton = () => {
     const { onlyText } = this.state
     if (!onlyText)
       return false
 
-    this.setState({onlyText: false}, () => Keyboard.dismiss())
+    this.dismiss()
     return true
   }
 
@@ -149,14 +151,14 @@ class Report extends PureComponent<Props> {
 
           {reason &&
             <View style={{flex: 1, backgroundColor: colors.white}}>
-              <Text style={styles.category}>
+              <Text style={styles.category} onPress={this.dismiss}>
                 Beschreibe den Vorfall noch etwas genauer!
               </Text>
               <TextInput
                 multiline
                 blurOnSubmit
                 onFocus={() => this.setState({onlyText: true})}
-                onBlur={() => this.setState({onlyText: false})}
+                onBlur={this.dismiss}
                 placeholder={placeholder}
                 style={{
                   flex: 1,

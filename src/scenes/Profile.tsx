@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
   buttonText: {
     textAlign: 'center',
     fontSize: 10,
-    color: colors.profileButtonText
+    color: colors.profileButton
   },
   header: {
     width,
