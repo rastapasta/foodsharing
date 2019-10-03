@@ -93,7 +93,12 @@ This thingy runs on iOS and Android - one code, one love!
 * Should hve
   * Abuse report english translation?
   * Pull conversation again when open and coming from background to make sure its marked as read
-  * Loading indicators on login, conversations, conversation, profile
+  * Loading indicators for
+    * login
+    * conversations
+    * conversation
+    * profile
+    * friendship request
   * Disable and pulsate send message button while sending
 
 * Nice to have

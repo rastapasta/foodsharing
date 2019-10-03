@@ -1,7 +1,7 @@
 import { getSession, setSession, syncCookies } from './agent'
 import { login, logout, getCurrentUser, getFairteiler, getConversation, getConversations, markAsRead, getWall, getCurrentProfile } from './adapters/rest'
 import { getFairteilerMarker } from './adapters/xhr'
-import { userToConversationId, sendMessage } from './adapters/xhrapp'
+import { userToConversationId, sendMessage, requestFriendship } from './adapters/xhrapp'
 
 import getProfile from './adapters/scrapers/profile'
 import getRegion from './adapters/scrapers/region'
@@ -25,6 +25,7 @@ export {
 
   userToConversationId,
   sendMessage,
+  requestFriendship,
 
   getProfile,
   getRegion

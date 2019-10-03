@@ -56,7 +56,8 @@ export default (
     'fairteiler' |
     'fairteilerMarker' |
     'markAsRead' |
-    'regionMembers',
+    'regionMembers' |
+    'friendship',
 
   data?: any,
   options?: any

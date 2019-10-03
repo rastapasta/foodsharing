@@ -6,3 +6,6 @@ export const userToConversationId = async (userId: number): Promise<number> =>
 
 export const sendMessage = async (conversationId: number, text: string): Promise<Message> =>
   (await agent('message', {c: conversationId, b: text})).data.msg
+
+export const requestFriendship = async (userId: number): Promise<boolean> =>
+  (await agent('friendship', null, {userId})).status === 1
