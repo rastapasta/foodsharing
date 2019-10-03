@@ -12,21 +12,22 @@ export const syncCookies = async () => {
   cookies = await CookieManager.get(config.host)
 
   // Sync session cookie between beta and production endpoints
-  await (Platform.OS === 'android' ?
-    CookieManager.setFromResponse(
-      'https://foodsharing.de/',
-      `PHPSESSID=${cookies.PHPSESSID}; path=/; Thu, 1 Jan 2030 00:00:00 -0000; secure`
-    ) :
-    CookieManager.set({
-      name: 'PHPSESSID',
-      value: cookies['PHPSESSID'] || '',
-      domain: 'foodsharing.de',
-      origin: 'foodsharing.de',
-      path: '/',
-      version: '1',
-      expiration: '2030-01-01T00:00:00.00-00:00'
-    })
-  )
+  if (config.host !== config.websocketHost)
+    await (Platform.OS === 'android' ?
+      CookieManager.setFromResponse(
+        config.websocketHost,
+        `PHPSESSID=${cookies.PHPSESSID}; path=/; Thu, 1 Jan 2030 00:00:00 -0000; secure`
+      ) :
+      CookieManager.set({
+        name: 'PHPSESSID',
+        value: cookies['PHPSESSID'] || '',
+        domain: config.websocketHost.replace(/https{0,1}:\/\//, ''),
+        origin: config.websocketHost.replace(/https{0,1}:\/\//, ''),
+        path: '/',
+        version: '1',
+        expiration: '2030-01-01T00:00:00.00-00:00'
+      })
+    )
 }
 
 export const getSession = (): {session: string, token: string} => ({

@@ -14,13 +14,14 @@ import {
   LOGOUT
 } from '../common/constants'
 import { Message, MessageType } from '../common/typings'
+import config from '../api/config'
 
 const entities = new AllHtmlEntities()
 
 function initWebsocket(session: any) {
   return eventChannel(emitter => {
     // Connect to the live's system's socket server - handles messages for beta as well
-    const socket = socketIO('https://foodsharing.de', {
+    const socket = socketIO(config.websocketHost, {
       forceNew: true,
       path: '/chat/socket.io/',
       reconnectionDelay: 3000,

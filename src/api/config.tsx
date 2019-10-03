@@ -1,5 +1,7 @@
 export default {
   host: 'https://beta.foodsharing.de',
+  websocketHost: 'https://foodsharing.de',
+
   endpoints: {
     login: {uri: '/api/user/login', method: 'POST'},
     logout: {uri: '/api/user/logout', method: 'POST'},

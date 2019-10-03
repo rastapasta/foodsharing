@@ -98,6 +98,7 @@ This thingy runs on iOS and Android - one code, one love!
 * Nice to have
   * Deep linking via apple-app-site-association, needs to be merged to fs master
   * Settings screen to setup background pull / notifications?
+  * react-native-hyperlink for general linking support?
 
 ## 😢 Why no English version?
 
