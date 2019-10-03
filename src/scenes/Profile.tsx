@@ -117,7 +117,7 @@ class Profile extends PureComponent<Props> {
     const { id, foodsavers, actions, profile: user } = this.props
         , profile = foodsaver(foodsavers[`${id}`])
         , hasStats = profile.stats && !Object.keys(profile.stats).every(stat => profile.stats[stat] === 0)
-        , headerHeight = (isIphoneX() ? 155 : 125) - (hasStats ? 0 : 65)
+        , headerHeight = (isIphoneX() ? 155 : 125)
 
     const Button = ({icon, label, color, onPress, disabled, loading}) =>
       <TouchableOpacity
@@ -153,6 +153,7 @@ class Profile extends PureComponent<Props> {
                 </Text>
               </View>
               <View style={styles.circleBar} pointerEvents='box-none'>
+                {profile.loading && !hasStats && <View style={{justifyContent: 'center', height: 50}}><ActivityIndicator size="small" color={colors.white} /></View>}
                 {hasStats && circles.map(circle =>
                   !!profile.stats[circle.name] &&
                   <ProfileCircle

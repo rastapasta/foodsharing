@@ -8,7 +8,9 @@ import {
   REPORT_REQUEST,
   REPORT_SUCCESS,
 
+  PROFILE_REQUEST,
   PROFILE_SUCCESS,
+
   FRIENDSHIP_REQUEST,
   FRIENDSHIP_SUCCESS,
   LOGOUT
@@ -58,6 +60,11 @@ export default function reducer(state = initialState, action: any = {}) {
       })
       return convState
 
+    case PROFILE_REQUEST:
+      return mergeWithState(state, payload, {
+        loading: true
+      })
+
     case PROFILE_SUCCESS:
       const profileState = {...state}
           , key = `${payload.id}`
@@ -65,7 +72,8 @@ export default function reducer(state = initialState, action: any = {}) {
 
       profileState[key] = {
         ...profileState[key],
-        ...payload
+        ...payload,
+        loading: false
       }
 
       // Inject all foodsavers who gave a banana

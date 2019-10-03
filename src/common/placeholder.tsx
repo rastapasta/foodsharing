@@ -5,5 +5,6 @@ export const foodsaver = (foodsaver: User): any => foodsaver || {
   name: '',
   photo: null,
   email: '',
-  geschlecht: ''
+  geschlecht: '',
+  loading: true
 }
