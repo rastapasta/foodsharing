@@ -179,7 +179,15 @@ export const getCurrentProfile = (): Promise<Profile> =>
 
 
 // TODO: port this to a REST endpoint instead of screenscraping
-export const getProfile = async (id: number): Promise<{id: number, isOnline: boolean, isFriend: boolean, stats: any, bananas: any, infos: any}> => {
+export const getProfile = async (id: number): Promise<{
+  id: number,
+  isOnline: boolean,
+  isFriend: boolean,
+  stats: any,
+  bananas: {body: string, time: string, fs_photo: string, fs_id: string, fs_name: string}[],
+  infos: {title: string, body: string}[],
+  sleepStatus: boolean
+}> => {
   const $ = await request('profile', null, {id})
       , stats = [
         'basketcount',
@@ -222,6 +230,14 @@ export const getProfile = async (id: number): Promise<{id: number, isOnline: boo
           fs_name: $(e).find('.time').text().split(/ (von|by) /)[2]
         })
       ).get(),
+
+    sleepStatus:
+      parseInt(
+        $('[class*="sleepmode-"]')
+        .attr('class')
+        .match(/(\d+)/g)
+        .pop()
+      ) > 0,
 
     infos
   }

@@ -70,7 +70,7 @@ This thingy runs on iOS and Android - one code, one love!
 
 * UI / UX
   * Custom fonts / 'foodsharing identity'
-  * Full i18n support (so far: English included, namings planned to be equal to current Android's implementation)
+  * Full i18n support (so far: German included, see notes below)
 
 * Deployment and CI
   * Fastlane (icon & badge generation, certificates, deploy, ...)
@@ -80,7 +80,7 @@ This thingy runs on iOS and Android - one code, one love!
   * redux / redux-saga for js generator magic :heart:
   * see [package.json](https://github.com/rastapasta/foodsharing/blob/master/package.json) for complete package list
 
-## ToDo
+## 🤔 ToDo
 
 * Show blockers
   * Handle offline mode correctly
@@ -99,3 +99,6 @@ This thingy runs on iOS and Android - one code, one love!
   * Deep linking via apple-app-site-association, needs to be merged to fs master
   * Settings screen to setup background pull / notifications?
 
+## 😢 Why no English version?
+
+It's all ready for it - all string are in an easy to maintain i18n. Just the [foorsharing endpoints](https://gitlab.com/foodsharing-dev/foodsharing/tree/master/src/Controller) deverserve some love by someone motivated. Things like the profile information and report functionalities are German only on the backend - fix it, and i will adapt the app!
