@@ -207,7 +207,7 @@ export const getProfile = async (id: number): Promise<{id: number, isOnline: boo
         ({}, e) => ({
           fs_photo: $(e).find('img').attr('src').replace(/\/im(ages\/[^_]+_[^_]+_|g\/.+|age\/.+)/, ''),
           fs_id: $(e).find('a').attr('href').match(/\d+/g)[0],
-          body: $(e).find('.msg').text(),
+          body: $(e).find('.msg').text().trim(),
           time: $(e).find('.time').text().split(/ (von|by) /)[0],
           fs_name: $(e).find('.time').text().split(/ (von|by) /)[2]
         })

@@ -12,9 +12,8 @@ export default {
   white: '#fff',
   gray: '#aaa',
 
-  profileButton: '#EFEFEF',
-  profileButtonText: '#000',
-  profileButtonIcon: '#000',
+  profileButton: '#000',
+  profileButtonFriend: '#080',
 
   profileCategory: '#4a3520',
 

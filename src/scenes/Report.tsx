@@ -23,6 +23,7 @@ import { Button, CheckBox } from 'react-native-elements'
 
 import { foodsaver } from '../common/placeholder'
 import report from '../common/report'
+import { Actions } from 'react-native-router-flux'
 
 const { width } = Dimensions.get('window')
     , styles = StyleSheet.create({
@@ -51,14 +52,19 @@ type Props = {
 
 class Report extends PureComponent<Props> {
   state = {
-    reason: report[2],
+    reason: report[1],
     subreason: null,
     onlyText: false
   }
   backHandler: any
 
   interceptBackButton = () => {
+    const { onlyText } = this.state
+    if (!onlyText)
+      return false
 
+    this.setState({onlyText: false}, () => Keyboard.dismiss())
+    return true
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -71,14 +77,7 @@ class Report extends PureComponent<Props> {
     const { actions, id } = this.props
     actions.navigation('report', id)
 
-    this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
-      const { onlyText } = this.state
-      if (!onlyText)
-        return false
-
-      this.setState({onlyText: false}, () => Keyboard.dismiss())
-      return true
-    })
+    this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.interceptBackButton)
   }
 
   componentWillUnmount() {
@@ -97,7 +96,7 @@ class Report extends PureComponent<Props> {
             {label}
           </Text>
         }
-        <View style={{maxHeight: 90, paddingLeft: 15, overflow: 'hidden', marginTop: 5}}>
+        <View style={{maxHeight: 90, paddingLeft: Platform.OS === 'android' ? 15 : 0, overflow: 'hidden', marginTop: 5}}>
           <Picker
             selectedValue={selected}
             itemStyle={{fontSize: 14}}
@@ -130,6 +129,7 @@ class Report extends PureComponent<Props> {
               {reason.children.map(option =>
                 option.children && option.children.length > 0 ?
                   <ReportPicker
+                    key={'subreason' + option.id}
                     label=""
                     selected={subreason && subreason.id}
                     onChange={({}, index) => this.setState({subreason: option.children[index]})}
@@ -170,12 +170,12 @@ class Report extends PureComponent<Props> {
                   textAlignVertical: 'top'
                 }}
               />
-              {!onlyText && <Button
+              <Button
                 title="Meldung senden"
                 containerStyle={{marginLeft: 10, marginBottom: 10, marginRight: 10}}
                 buttonStyle={{backgroundColor: colors.green}}
                 titleStyle={{fontSize: 14}}
-              />}
+              />
             </View>
           }
         </SafeAreaView>

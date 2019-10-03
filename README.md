@@ -39,8 +39,11 @@ This thingy runs on iOS and Android - one code, one love!
 * Profile
   * Image of foodsaver, paralax style
   * Fetch and display pickup/fetch-statistics (screen scrapy as no rest interface exists)
-  * Button
   * Report button -> jump to Report scene
+  * Banana button -> jump to Bananas scene
+
+* Bananas
+  * List of all received bananas and corresponding banana texts
 
 * Report
   * Platform based native picker for report reason

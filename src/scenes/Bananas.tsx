@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { SafeAreaView, StyleSheet, FlatList } from 'react-native'
+import { SafeAreaView, StyleSheet, FlatList, View } from 'react-native'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -48,7 +48,7 @@ class Bananas extends PureComponent<Props> {
           data={profile.bananas}
           keyExtractor={(banana: any) => 'banana.' + banana.fs_id}
           style={{flex: 1}}
-
+          ListHeaderComponent={() => <View style={{height: 20}} />}
           renderItem={({item}) =>
             <MessageBubble hideTime type="received" message={item} />
           }

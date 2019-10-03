@@ -17,6 +17,7 @@ import BackButton from '../components/BackButton'
 import colors from '../common/colors'
 import { userToConversationId } from '../common/api'
 import { Actions } from 'react-native-router-flux'
+import { translate } from '../common/translation'
 
 const { width, height } = Dimensions.get('window')
 
@@ -102,15 +103,16 @@ class Profile extends PureComponent<Props> {
     const { id, foodsavers, actions, profile: user } = this.props
         , profile = foodsaver(foodsavers[`${id}`])
         , hasStats = profile.stats && !Object.keys(profile.stats).every(stat => profile.stats[stat] === 0)
-        , headerHeight = (isIphoneX() ? 150 : 120) - (hasStats ? 0 : 65)
+        , headerHeight = (isIphoneX() ? 155 : 125) - (hasStats ? 0 : 65)
 
-    const Button = ({icon, label, onPress}) =>
+    const Button = ({icon, label, color, onPress, disabled}) =>
       <TouchableOpacity
         style={styles.button}
         onPress={onPress}
+        disabled={disabled}
       >
-        <Icon name={icon} size={26} color={colors.profileButtonIcon}/>
-        <Text style={styles.buttonText}>{label}</Text>
+        <Icon name={icon} size={26} color={color}/>
+        <Text style={[styles.buttonText, {color}]}>{label}</Text>
       </TouchableOpacity>
 
     return (
@@ -144,24 +146,31 @@ class Profile extends PureComponent<Props> {
           <View style={{minHeight: height - headerHeight, backgroundColor: colors.white, marginTop: 5, padding: 20}}>
             {user.id !== profile.id && <View style={{flexDirection: 'row', marginBottom: 10, justifyContent: 'space-evenly'}}>
               <Button
-                label={`Ich kenne\n${profile.name}`}
-                icon="account-plus-outline"
+                label={translate(profile.isFriend ? 'profile.you_know_person' : 'profile.i_know_person', {name: profile.name})}
+                icon={profile.isFriend ?  'account-check-outline' : 'account-plus-outline'}
+                color={profile.isFriend ? colors.profileButtonFriend : colors.profileButton}
                 onPress={() => actions.requestFriendship(profile.id)}
+                disabled={!!profile.isFriend}
               />
               <Button
-                label={`Nachricht\nschreiben`}
+                label={translate('profile.write_message')}
                 icon="message-text-outline"
                 onPress={async () => {
+                  // TODO: Improve this, api using logic doesn't belong here
                   const conversationId = (await userToConversationId(profile.id)).toString()
                   Actions.push('conversation', {conversationId})
                 }}
+                color={colors.profileButton}
+                disabled={false}
               />
               <Button
-                label={`Verstoß\nmelden`}
+                label={translate('profile.report_violation')}
                 icon="alert-decagram-outline"
                 onPress={() =>
                   Actions.push('report', {id: profile.id})
                 }
+                color={colors.profileButton}
+                disabled={false}
               />
             </View>}
 

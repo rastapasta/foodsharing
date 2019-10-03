@@ -24,6 +24,11 @@
     "basketcount": "Baskets",
     "postcount": "Posts",
     "fetchcount": "fetched",
-    "fetchweight": "saved"
+    "fetchweight": "saved",
+
+    "i_know_person": "I know\n{{name}}",
+    "you_know_person": "You know\n{{name}}!",
+    "write_message": "Write\nmessage",
+    "report_violation": "Report\nviolation"
   }
 }
