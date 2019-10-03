@@ -15,6 +15,9 @@ export const translate = memoize(
   (key, config) => (config ? key + JSON.stringify(config) : key),
 )
 
+export const pickTranslation = (node: any) =>
+  node[i18n.locale === 'de' ? 'de' : 'en']
+
 const setI18nConfig = () => {
   const fallback = { languageTag: "en", isRTL: false }
 

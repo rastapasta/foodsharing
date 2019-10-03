@@ -23,6 +23,7 @@ import { Button, CheckBox } from 'react-native-elements'
 
 import { foodsaver } from '../common/placeholder'
 import report from '../common/report'
+import { translate, pickTranslation } from '../common/translation'
 
 const { width } = Dimensions.get('window')
     , styles = StyleSheet.create({
@@ -36,10 +37,25 @@ const { width } = Dimensions.get('window')
         width,
         marginTop: 20,
         paddingLeft: 20
+      },
+      picker: {
+        maxHeight: 90,
+        paddingLeft: Platform.OS === 'android' ? 15 : 0,
+        overflow: 'hidden',
+        marginTop: 5
+      },
+      message: {
+        flex: 1,
+        fontSize: 14,
+        padding: 12,
+        paddingTop: 12,
+        borderWidth: 1,
+        borderRadius: 5,
+        borderColor: colors.gray,
+        margin: 10,
+        textAlignVertical: 'top'
       }
     })
-
-const placeholder = 'Es ist wichtig alle Fälle, die gegen die Verhaltensregeln verstoßen, zu melden, damit erst gar keine schlechte Stimmung unter den Foodsavern bzw. Betrieben entsteht. So können sich die Verantwortlichen rechtzeitig um Problemfälle kümmern und bei mehrfachem nicht angebrachtem Verhalten die Personen von der Plattform ausschließen. Bitte schildere den Vorfall in mindestens 120 Zeichen, damit die Verantwortlichen bzw. das Mediationsteam sich angemessen um den Fall kümmern können. Nenne dabei Häufigkeit des Vorfalls, Ort, Zeitpunkt und ggf. andere anwesende Foodsaver!'
 
 type Props = {
   id: number
@@ -52,6 +68,8 @@ type Props = {
 class Report extends PureComponent<Props> {
   state = {
     reason: report[1],
+    selected: [],
+    message: '',
     subreason: null,
     onlyText: false
   }
@@ -86,9 +104,22 @@ class Report extends PureComponent<Props> {
     this.backHandler.remove()
   }
 
+  send = () => {
+    const { reason, selected, subreason, message } = this.state
+        , { actions, id } = this.props
+        , reasons = [reason.de]
+
+    selected.forEach(index => reasons.push(reason.children[index].de))
+
+    if (subreason)
+      reasons.push(reason.children.find(r => r.children).children[subreason].de)
+
+    actions.makeReport(id, reason.id, reasons.join(' => '), message)
+  }
+
   render() {
     const { foodsavers, id } = this.props
-        , { reason, subreason, onlyText } = this.state
+        , { reason, subreason, onlyText, selected, message } = this.state
         , profile = foodsaver(foodsavers[id])
 
     const ReportPicker = ({label, onChange, reasons, selected}) =>
@@ -98,7 +129,7 @@ class Report extends PureComponent<Props> {
             {label}
           </Text>
         }
-        <View style={{maxHeight: 90, paddingLeft: Platform.OS === 'android' ? 15 : 0, overflow: 'hidden', marginTop: 5}}>
+        <View style={styles.picker}>
           <Picker
             selectedValue={selected}
             itemStyle={{fontSize: 14}}
@@ -106,7 +137,7 @@ class Report extends PureComponent<Props> {
             onValueChange={onChange}
           >
             {reasons.map(reason =>
-              <Picker.Item key={`reason${reason.id}`} label={reason.name} value={reason.id} />
+              <Picker.Item key={`reason${reason.id}`} label={pickTranslation(reason)} value={reason.id} />
             )}
           </Picker>
         </View>
@@ -120,27 +151,33 @@ class Report extends PureComponent<Props> {
       >
         <SafeAreaView style={styles.container}>
           {!onlyText && <ReportPicker
-            label={`Warum möchtest Du ${profile.name} melden?`}
+            label={translate('report.why_do_you_want', {name: profile.name})}
             selected={reason && reason.id}
-            onChange={({}, index) => this.setState({reason: report[index]})}
+            onChange={({}, index) => this.setState({
+              reason: report[index],
+              selected: [],
+              subreason: index === 2 ? 1 : null
+            })}
             reasons={report}
           />}
 
           {!onlyText && reason && reason.children && reason.children.length &&
             <View style={{marginTop: 20}}>
-              {reason.children.map(option =>
+              {reason.children.map((option, index) =>
                 option.children && option.children.length > 0 ?
                   <ReportPicker
                     key={'subreason' + option.id}
                     label=""
-                    selected={subreason && subreason.id}
-                    onChange={({}, index) => this.setState({subreason: option.children[index]})}
+                    selected={option.children[subreason].id}
+                    onChange={({}, index) => this.setState({subreason: index})}
                     reasons={option.children}
                   /> :
                   <CheckBox
                     key={'subreason' + option.id}
-                    title={option.name}
-                    checked={false}
+                    title={pickTranslation(option)}
+                    checkedColor={colors.green}
+                    checked={selected.includes(index)}
+                    onPress={() => this.setState({selected: selected.includes(index) ? selected.filter(o => o !== index) : selected.concat(index)})}
                     wrapperStyle={{margin: 0, padding: 0}}
                     textStyle={{fontSize: 12}}
                     containerStyle={{marginTop: 0, paddingTop: 0, borderWidth: 0, backgroundColor: colors.white}}
@@ -152,31 +189,25 @@ class Report extends PureComponent<Props> {
           {reason &&
             <View style={{flex: 1, backgroundColor: colors.white}}>
               <Text style={styles.category} onPress={this.dismiss}>
-                Beschreibe den Vorfall noch etwas genauer!
+                {translate('report.describe_incident')}
               </Text>
               <TextInput
                 multiline
+                value={message}
+                onChangeText={message => this.setState({message})}
                 blurOnSubmit
                 onFocus={() => this.setState({onlyText: true})}
                 onBlur={this.dismiss}
-                placeholder={placeholder}
-                style={{
-                  flex: 1,
-                  fontSize: 14,
-                  padding: 12,
-                  paddingTop: 12,
-                  borderWidth: 1,
-                  borderRadius: 5,
-                  borderColor: colors.gray,
-                  margin: 10,
-                  textAlignVertical: 'top'
-                }}
+                placeholder={translate('report.info')}
+                style={styles.message}
               />
               <Button
-                title="Meldung senden"
+                title={translate('report.send_report')}
+                disabled={message.length < 50}
                 containerStyle={{marginLeft: 10, marginBottom: 10, marginRight: 10}}
                 buttonStyle={{backgroundColor: colors.green}}
                 titleStyle={{fontSize: 14}}
+                onPress={this.send}
               />
             </View>
           }

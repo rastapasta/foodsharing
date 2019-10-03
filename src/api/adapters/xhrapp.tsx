@@ -10,5 +10,5 @@ export const sendMessage = async (conversationId: number, text: string): Promise
 export const requestFriendship = async (userId: number): Promise<boolean> =>
   (await agent('friendship', null, {userId})).status === 1
 
-export const report = (userId: number, reasonId: number, reason: string, message: string): Promise<boolean> =>
-  agent('report', null, {userId, reasonId, reason, message})
+export const report = async (userId: number, reasonId: number, reason: string, message: string): Promise<boolean> =>
+  (await agent('report', null, {userId, reasonId, reason, message})).status === 1

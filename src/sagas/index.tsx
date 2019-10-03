@@ -10,6 +10,7 @@ import Fairteiler from './fairteiler'
 import Wall from './wall'
 import Background from './background'
 import Profile from './profile'
+import Report from './report'
 
 // Start all our sagas in parallel
 export default function* rootSaga () {
@@ -23,6 +24,7 @@ export default function* rootSaga () {
     Fairteiler(),
     Wall(),
     Background(),
-    Profile()
+    Profile(),
+    Report()
   ])
 }

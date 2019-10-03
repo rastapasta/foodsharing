@@ -197,7 +197,7 @@ class Profile extends PureComponent<Props> {
                 {profile.infos.map(info =>
                   <View style={{marginTop: 10}} key={info.title}>
                     <Text style={{fontWeight: 'bold'}}>{info.title}</Text>
-                    <Text>{info.body}</Text>
+                    <Text style={{fontSize: 12, marginTop: 4}}>{info.body}</Text>
                   </View>
                 )}
               </Fragment>
