@@ -33,6 +33,7 @@ title: "Conversation"
 import Home from './Home'
 import Fairteiler from './Fairteiler'
 import Loading from './Loading'
+import { translate } from '../common/translation'
 
 const styles = StyleSheet.create({
   tabBarStyle: {
@@ -79,18 +80,18 @@ export default () =>
           <Scene
             icon={icon('wechat')}
             key="conversations"
-            title="Conversations"
+            title={translate('scenes.conversations')}
             component={Conversations}
           />
           <Scene
             key="basket"
-            title="Baskets"
+            title={translate('scenes.baskets')}
             component={Home}
             icon={icon('basket')}
           />
           <Scene
               key="map"
-              title="Map"
+              title={translate('scenes.map')}
               component={Map}
               icon={icon('map-marker')}
             />
@@ -99,20 +100,19 @@ export default () =>
       <Scene
         key="conversation"
         renderTitle={({conversationId}) => <ConversationTitle conversationId={conversationId} />}
-
         component={Conversation}
         hideNavBar={false}
       />
       <Scene
         key="fairteiler"
-        title="Fairteiler"
+        title={translate('scenes.fairteiler')}
         component={Fairteiler}
         hideNavBar={false}
         path="/?page=fairteiler&sub=ft&id=:id"
       />
       <Scene
         key="profile"
-        title="Profil"
+        title={translate('scenes.profile')}
         component={Profile}
         hideNavBar
       />
@@ -124,13 +124,13 @@ export default () =>
       />
       <Scene
         key="bananas"
-        title="Bananas"
+        title={translate('scenes.bananas')}
         component={Bananas}
         hideNavBar={false}
       />
       <Scene
         key="report"
-        title="Verstoß melden"
+        title={translate('scenes.report_violation')}
         component={Report}
         hideNavBar={false}
       />

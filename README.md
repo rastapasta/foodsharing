@@ -101,4 +101,4 @@ This thingy runs on iOS and Android - one code, one love!
 
 ## 😢 Why no English version?
 
-It's all ready for it - all string are in an easy to maintain i18n. Just the [foorsharing endpoints](https://gitlab.com/foodsharing-dev/foodsharing/tree/master/src/Controller) deverserve some love by someone motivated. Things like the profile information and report functionalities are German only on the backend - fix it, and i will adapt the app!
+It's all ready for it - all string are in an [easy to maintain i18n file](https://github.com/rastapasta/foodsharing/blob/master/assets/translations/en.json). Just the [foorsharing endpoints](https://gitlab.com/foodsharing-dev/foodsharing/tree/master/src/Controller) deserve some love by someone motivated. Things like the profile information and report functionalities are returned by the backend in German only - fix it, and i will adapt the app!

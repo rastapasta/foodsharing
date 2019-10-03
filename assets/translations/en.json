@@ -1,4 +1,13 @@
 {
+  "scenes": {
+    "conversations": "Conversations",
+    "baskets": "Baskets",
+    "map": "Map",
+    "fairteiler": "Fairteiler",
+    "profile": "Profile",
+    "bananas": "Bananas",
+    "report_violation": "Report"
+  },
   "login": {
     "email": "E-Mail",
     "password": "Password",
