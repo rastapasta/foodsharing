@@ -39,7 +39,8 @@
     "i_know_person": "I know\n{{name}}",
     "you_know_person": "You know\n{{name}}!",
     "write_message": "Write\nmessage",
-    "report_violation": "Report\nviolation"
+    "report_violation": "Report\nviolation",
+    "reported": "Violation\nreported!"
   },
 
   "report": {

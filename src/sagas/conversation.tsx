@@ -14,8 +14,8 @@ import { MessageType } from '../common/typings'
 
 const entities = new AllHtmlEntities()
 
-function* fetch(id: number) {
-  const conversation = yield getConversation(id)
+function* fetch(id: number, offset: number) {
+  const conversation = yield getConversation(id, offset)
       , ownId = yield select(state => state.profile.id)
 
   // Decode HTML entities before the content gets into the hands of any other method
@@ -34,12 +34,12 @@ function* fetch(id: number) {
 export default function* conversationSaga() {
   while (true) {
     // Wait until we get either a message or conversation request
-    const { type, id, payload } = yield take([MESSAGE_REQUEST, CONVERSATION_REQUEST])
+    const { type, payload } = yield take([MESSAGE_REQUEST, CONVERSATION_REQUEST])
 
     switch (type) {
       // Request the corresponding conversation from the backend
       case CONVERSATION_REQUEST:
-        yield fork(fetch, id)
+        yield fork(fetch, payload.id, payload.offset)
         break
 
       // Send out a message to a given conversation

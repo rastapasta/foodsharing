@@ -12,7 +12,7 @@ export const navigation = (scene: string, sceneId?: number) => ({type: types.NAV
 export const fetchConversations = () => ({type: types.CONVERSATIONS_REQUEST})
 export const gotConversations = () => ({type: types.CONVERSATIONS_SUCCESS})
 
-export const fetchConversation = (id: number) => ({type: types.CONVERSATION_REQUEST, id})
+export const fetchConversation = (id: number, offset: number = 0) => ({type: types.CONVERSATION_REQUEST, payload: {id, offset}})
 export const fetchConversationId = (fsId: number) => ({type: types.CONVERSATION_ID_REQUEST, payload: fsId})
 
 export const sendMessage = (conversationId: number) => ({type: types.MESSAGE_REQUEST, payload: {conversationId}})

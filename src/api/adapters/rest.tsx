@@ -23,8 +23,8 @@ export const getFairteiler = (id: number): Promise<Fairteiler> =>
 export const getConversations = (): Promise<ConversationListEntry[]> =>
   agent('conversations')
 
-export const getConversation = async (conversationId: number): Promise<ConversationDetail> =>
-  await agent('conversation', null, {conversationId})
+export const getConversation = async (conversationId: number, offset: number = 0): Promise<ConversationDetail> =>
+  await agent('conversation', null, {conversationId, offset})
 
 export const markAsRead = (conversationId: number): Promise<void> =>
   agent('markAsRead', null, {conversationId})

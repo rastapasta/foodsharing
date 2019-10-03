@@ -1,10 +1,11 @@
 import * as React from 'react'
 import { StyleSheet, Text, Linking } from 'react-native'
+import colors from '../common/colors'
 
 const styles = StyleSheet.create({
   link: {
     fontWeight: 'bold',
-    color: '#88f'
+    color: colors.green
   }
 })
 
