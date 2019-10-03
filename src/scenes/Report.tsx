@@ -24,6 +24,7 @@ import { Button, CheckBox } from 'react-native-elements'
 import { foodsaver } from '../common/placeholder'
 import report from '../common/report'
 import { translate, pickTranslation } from '../common/translation'
+import { Actions } from 'react-native-router-flux'
 
 const { width } = Dimensions.get('window')
     , styles = StyleSheet.create({
@@ -115,6 +116,8 @@ class Report extends PureComponent<Props> {
       reasons.push(reason.children.find(r => r.children).children[subreason].de)
 
     actions.makeReport(id, reason.id, reasons.join(' => '), message)
+
+    Actions.pop()
   }
 
   render() {

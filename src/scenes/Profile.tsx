@@ -168,34 +168,34 @@ class Profile extends PureComponent<Props> {
           }
         >
           <View style={{minHeight: height - headerHeight, backgroundColor: colors.white, marginTop: 5, padding: 20}}>
-            {user.id !== profile.id && <View style={{flexDirection: 'row', marginBottom: 10, justifyContent: 'space-evenly'}}>
-              <Button
-                label={translate(profile.isFriend ? 'profile.you_know_person' : 'profile.i_know_person', {name: profile.name})}
-                icon={profile.isFriend ?  'account-check-outline' : 'account-plus-outline'}
-                color={profile.isFriend ? colors.profileButtonFriend : colors.profileButton}
-                onPress={() => actions.requestFriendship(profile.id)}
-                disabled={!!profile.isFriend}
-                loading={profile.friendrequestLoading}
-              />
-              <Button
-                label={translate('profile.write_message')}
-                icon="message-text-outline"
-                onPress={() => actions.fetchConversationId(profile.id)}
-                color={colors.profileButton}
-                disabled={false}
-                loading={profile.conversationIdLoading}
-              />
-              <Button
-                label={translate('profile.report_violation')}
-                icon="alert-decagram-outline"
-                onPress={() =>
-                  Actions.push('report', {id: profile.id})
-                }
-                color={colors.profileButton}
-                disabled={false}
-                loading={false}
-              />
-            </View>}
+            {user.id !== profile.id &&
+              <View style={{flexDirection: 'row', marginBottom: 10, justifyContent: 'space-evenly'}}>
+                <Button
+                  label={translate(profile.isFriend ? 'profile.you_know_person' : 'profile.i_know_person', {name: profile.name})}
+                  icon={profile.isFriend ?  'account-check-outline' : 'account-plus-outline'}
+                  color={profile.isFriend ? colors.profileButtonFriend : colors.profileButton}
+                  onPress={() => actions.requestFriendship(profile.id)}
+                  disabled={!!profile.isFriend}
+                  loading={profile.friendrequestLoading}
+                />
+                <Button
+                  label={translate('profile.write_message')}
+                  icon="message-text-outline"
+                  onPress={() => actions.fetchConversationId(profile.id)}
+                  color={colors.profileButton}
+                  disabled={false}
+                  loading={profile.conversationIdLoading}
+                />
+                <Button
+                  label={translate(profile.reported && !profile.reportSending ? 'profile.reported' : 'profile.report_violation')}
+                  icon={profile.reported ? 'shield-check-outline' : 'alert-decagram-outline'}
+                  onPress={() => Actions.push('report', {id: profile.id})}
+                  color={profile.reported ? colors.green : colors.profileButton}
+                  disabled={false}
+                  loading={profile.reportSending}
+                />
+              </View>
+            }
 
             {profile.infos && profile.infos.length > 0 &&
               <Fragment>

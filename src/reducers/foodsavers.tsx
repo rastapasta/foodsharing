@@ -5,6 +5,9 @@ import {
   CONVERSATION_ID_REQUEST,
   CONVERSATION_ID_SUCCESS,
 
+  REPORT_REQUEST,
+  REPORT_SUCCESS,
+
   PROFILE_SUCCESS,
   FRIENDSHIP_REQUEST,
   FRIENDSHIP_SUCCESS,
@@ -12,6 +15,18 @@ import {
 } from '../common/constants'
 
 const initialState = {}
+
+const mergeWithState = (state, id, options) => {
+  const newState = {...state}
+      , key = `${id}`
+
+  newState[key] = {
+    ...state[key],
+    ...options
+  }
+
+  return newState
+}
 
 export default function reducer(state = initialState, action: any = {}) {
   const { type, payload } = action
@@ -66,25 +81,36 @@ export default function reducer(state = initialState, action: any = {}) {
       return profileState
 
     case FRIENDSHIP_REQUEST:
-      const friendState = {...state}
-      friendState[`${payload}`].friendrequestLoading = true
-      return friendState
+      return mergeWithState(state, payload, {
+        friendrequestLoading: true
+      })
 
     case FRIENDSHIP_SUCCESS:
-      const friendshipState = {...state}
-      friendshipState[`${payload}`].isFriend = true
-      friendshipState[`${payload}`].friendrequestLoading = false
-      return friendshipState
+      return mergeWithState(state, payload, {
+        isFriend: true,
+        friendrequestLoading: false
+      })
 
     case CONVERSATION_ID_REQUEST:
-      const idRequestState = {...state}
-      idRequestState[`${payload}`].conversationIdLoading = true
-      return idRequestState
+      return mergeWithState(state, payload, {
+        conversationIdLoading: true
+      })
 
     case CONVERSATION_ID_SUCCESS:
-      const idSuccessState = {...state}
-      idSuccessState[`${action.id}`].conversationIdLoading = false
-      return idSuccessState
+      return mergeWithState(state, action.id, {
+        conversationIdLoading: false
+      })
+
+    case REPORT_REQUEST:
+      return mergeWithState(state, payload.userId, {
+        reportSending: true
+      })
+
+    case REPORT_SUCCESS:
+      return mergeWithState(state, payload, {
+        reportSending: false,
+        reported: true
+      })
 
     case LOGOUT:
       return {...initialState}
