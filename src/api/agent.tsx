@@ -91,6 +91,7 @@ export default (
     if (response.status === 200)
       return handleAsHTML ? cheerio.load(await response.text()) : response.json()
 
+    console.log('request error', url, data, opts, response)
     // Translate any error case to one of our error cases
     switch (response.status) {
       case 400: throw Results.MALFORMED

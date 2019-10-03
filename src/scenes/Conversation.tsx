@@ -119,7 +119,8 @@ class Conversation extends PureComponent<Props> {
         <SafeAreaView style={styles.container}>
           <FlatList
             onEndReached={() => {
-              this.setState({loading: true})
+              if (data.length >= 20)
+                this.setState({loading: true})
             }}
             onEndReachedThreshold={0}
             onRefresh={Platform.OS === 'ios' ? () => {

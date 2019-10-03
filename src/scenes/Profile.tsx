@@ -117,7 +117,7 @@ class Profile extends PureComponent<Props> {
     const { id, foodsavers, actions, profile: user } = this.props
         , profile = foodsaver(foodsavers[`${id}`])
         , hasStats = profile.stats && !Object.keys(profile.stats).every(stat => profile.stats[stat] === 0)
-        , headerHeight = (isIphoneX() ? 155 : 125)
+        , headerHeight = (isIphoneX() ? 155 : 125) - (!hasStats && !profile.loading ? 65 : 0)
 
     const Button = ({icon, label, color, onPress, disabled, loading}) =>
       <TouchableOpacity

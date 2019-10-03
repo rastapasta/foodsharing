@@ -3,7 +3,11 @@ import { Text, StyleSheet, TouchableOpacity } from 'react-native'
 import DeviceInfo from 'react-native-device-info'
 import colors from '../common/colors'
 
+import CookieManager from 'react-native-cookies'
 import AsyncStorage from '@react-native-community/async-storage'
+
+import { store } from '../common/store'
+import { LOGOUT } from '../common/constants'
 
 const styles = StyleSheet.create({
   container: {
@@ -35,7 +39,11 @@ export default class Version extends PureComponent {
     return (
       <TouchableOpacity
         style={styles.container}
-        onPress={() => AsyncStorage.clear()}
+        onPress={() => {
+          CookieManager.clearAll()
+          AsyncStorage.clear()
+          store.dispatch({type: LOGOUT})
+        }}
       >
         <Text style={styles.text}>Version {version} (build #{build})</Text>
       </TouchableOpacity>
