@@ -14,6 +14,8 @@ export default function* profileSaga() {
   while (true) {
     // Wait until we get a profile request
     const { payload: id } = yield take(PROFILE_REQUEST)
+
+    // ... and process it in the 'background'
     yield fork(fetch, id)
   }
 }

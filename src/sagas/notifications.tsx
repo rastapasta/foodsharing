@@ -19,20 +19,26 @@ import {
   NOTIFICATION_CLICKED
 } from '../common/constants'
 
+// Setup our nofitication flow
 export default function* notificationSaga() {
+  // Wait for a successful login
   yield take(LOGIN_SUCCESS)
 
+  // Seupt the native Push Notification service
   yield PushNotification.configure({
+
+    // Listen for interactions with a displayed notification
     onNotification: notification => {
       store.dispatch({type: NOTIFICATION_CLICKED})
-      console.log(notification)
 
+      // If we were able to set some data along with the notification (iOS), handle it!
       const { data } = notification
       if (data && data.conversationId)
         Actions.conversation({conversationId: data.conversationId})
       else
         Actions.conversations()
 
+      // If we're on iOS, trigger the expected callback
       if (Platform.OS === 'ios')
         notification.finish(PushNotificationIOS.FetchResult.NoData)
     }

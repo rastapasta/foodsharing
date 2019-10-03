@@ -9,6 +9,8 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as reduxActions from '../common/actions'
 
+import Image from 'react-native-fast-image'
+
 import ParalxScrolView from '../components/ParalaxScrollView'
 import ProfileCircle from '../components/ProfileCircle'
 
@@ -22,6 +24,7 @@ import { translate } from '../common/translation'
 const { width, height } = Dimensions.get('window')
 
 const avatar = 'https://foodsharing.de/img/130_q_avatar.png'
+    , hat = 'https://beta.foodsharing.de/img/sleep130x130.png'
     , circles = [
       {name: 'bananacount', unit: ''},
       {name: 'basketcount', unit: ''},
@@ -74,6 +77,17 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 18,
     fontFamily: 'Alfa Slab One'
+  },
+  hat: {
+    width: 40,
+    height: 40,
+    position: 'absolute',
+    aspectRatio: 1,
+    left: 0,
+    transform: [
+      {translateY: -35},
+      {translateX: -25}
+    ]
   }
 })
 
@@ -125,6 +139,11 @@ class Profile extends PureComponent<Props> {
             <View style={[styles.header, {height: headerHeight}]} pointerEvents='box-none'>
               <View style={styles.nameContainer} pointerEvents='none'>
                 <Text style={styles.name}>
+                  {!!profile.sleepStatus &&
+                    <View style={styles.hat}>
+                      <Image source={{uri: hat}} style={{flex: 1}} resizeMode="contain" />
+                    </View>
+                  }
                   {profile.name}
                 </Text>
               </View>

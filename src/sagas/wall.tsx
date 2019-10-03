@@ -16,6 +16,8 @@ export default function* conversationSaga() {
   while (true) {
     // Wait until we get a wall request
     const { payload: { target, id } } = yield take(WALL_REQUEST)
+
+    // .. and process it in the 'background'
     yield fork(fetch, target, id)
   }
 }

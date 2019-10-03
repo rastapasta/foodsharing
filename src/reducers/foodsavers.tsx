@@ -47,7 +47,7 @@ export default function reducer(state = initialState, action: any = {}) {
         ...payload
       }
 
-      // All all foodsavers who gave a banana
+      // Inject all foodsavers who gave a banana
       bananas.forEach(({fs_id, fs_name, fs_photo}) => {
         profileState[`${fs_id}`] = {
           ...(profileState[`${fs_id}`] || {}),
