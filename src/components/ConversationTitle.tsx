@@ -72,7 +72,7 @@ class ConversationTitle extends PureComponent<Props> {
             </Text>
           </Fragment>
         :
-          <Text style={styles.title}>
+          <Text style={[styles.title, {fontFamily: 'Alfa Slab One'}]}>
             {isNoteToSelf ?
               translate('conversations.note_to_self') :
               foodsaver(foodsavers[otherMembers[0]]).name

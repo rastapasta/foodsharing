@@ -179,7 +179,7 @@ export const getCurrentProfile = (): Promise<Profile> =>
 
 
 // TODO: port this to a REST endpoint instead of screenscraping
-export const getProfile = async (id: number): Promise<{id: number, isOnline: boolean, isFriend: boolean, stats: any, bananas: any}> => {
+export const getProfile = async (id: number): Promise<{id: number, isOnline: boolean, isFriend: boolean, stats: any, bananas: any, infos: any}> => {
   const $ = await request('profile', null, {id})
       , stats = [
         'basketcount',
@@ -188,6 +188,16 @@ export const getProfile = async (id: number): Promise<{id: number, isOnline: boo
         'fetchcount',
         'fetchweight'
       ]
+
+      , infoTitles = $('.pure-g .infos').find('p strong').map(({}, e) => $(e).text().trim()).get()
+      , infoData = $('.pure-g .infos').find('p').map(({}, e) => $(e).text().trim()).get()
+      , infos = infoTitles.reduce((infos, title, index) => infos.concat({
+        title,
+        body:
+          infoData[index]
+          .substr(title.length, infoData[index].length - title.length)
+      }), [])
+
   return {
     id,
 
@@ -211,7 +221,9 @@ export const getProfile = async (id: number): Promise<{id: number, isOnline: boo
           time: $(e).find('.time').text().split(/ (von|by) /)[0].split(/, /)[1],
           fs_name: $(e).find('.time').text().split(/ (von|by) /)[2]
         })
-      ).get()
+      ).get(),
+
+    infos
   }
 }
 

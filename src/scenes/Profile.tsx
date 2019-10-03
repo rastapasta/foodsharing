@@ -1,6 +1,6 @@
 import { withNavigationFocus } from 'react-navigation'
 
-import React, { PureComponent } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import { View, StyleSheet, Dimensions, Text, TouchableOpacity } from 'react-native'
 import { isIphoneX } from 'react-native-iphone-x-helper'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -174,13 +174,19 @@ class Profile extends PureComponent<Props> {
               />
             </View>}
 
-            <Text style={styles.category}>
-              Infos
-            </Text>
-
-            <Text style={styles.category}>
-              Status-Updates
-            </Text>
+            {profile.infos && profile.infos.length > 0 &&
+              <Fragment>
+                <Text style={styles.category}>
+                  Infos
+                </Text>
+                {profile.infos.map(info =>
+                  <View style={{marginTop: 10}} key={info.title}>
+                    <Text style={{fontWeight: 'bold'}}>{info.title}</Text>
+                    <Text>{info.body}</Text>
+                  </View>
+                )}
+              </Fragment>
+            }
           </View>
         </ParalxScrolView>
         <BackButton />

@@ -74,9 +74,10 @@ function* reauthenticateFlow() {
     if (!session)
       throw 'no stored session'
 
-    // Let's assume we got a working session!
+    // Let's always assume we got a working session - predictive ux for the win!
     setTimeout(() => {
       Actions.reset('drawer')
+      // Actions.reset('profile', {id: 7378})
       SplashScreen.hide()
     }, 100)
 
@@ -86,7 +87,7 @@ function* reauthenticateFlow() {
     // Check if we still have a valid session at hand
     const { id } = yield getCurrentUser()
 
-    // Yes, so instantly forward the user to the internal area and hide the splashscreen
+    // Yep, let's save and sync our cookies between production and beta
     yield syncCookies()
 
     // Notificate all listeners that we got a valid session running
