@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux'
 import { createForms } from 'react-redux-form'
 
+import config from '../common/config'
+
 import app from './app'
 import conversations from './conversations'
 import messages from './messages'
@@ -21,7 +23,7 @@ export default combineReducers({
   walls,
 
   ...createForms({
-    login: {},
+    login: config.credentials || {},
     drafts: {}
   })
 })

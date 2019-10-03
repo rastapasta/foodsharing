@@ -14,7 +14,7 @@ import {
   LOGOUT
 } from '../common/constants'
 import { Message, MessageType } from '../common/typings'
-import config from '../api/config'
+import config from '../common/config'
 
 const entities = new AllHtmlEntities()
 

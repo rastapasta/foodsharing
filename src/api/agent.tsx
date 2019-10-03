@@ -3,7 +3,7 @@ import CookieManager from 'react-native-cookies'
 import cheerio from 'react-native-cheerio'
 
 import { Results } from '../common/typings'
-import config from './config'
+import config from '../common/config'
 
 let cookies = {} as any
 
@@ -65,7 +65,7 @@ export default (
       , opts = options || {}
       , url = config.host + Object.keys(opts)
                       .reduce((u, key) => u.replace('{' + key +'}', opts[key]), uri)
-      , handleAsHTML = !!url.match('/?page=') || !!url.match(/\.de\/profile\//)
+      , handleAsHTML = url.startsWith(config.host + '/?page=') || url.startsWith(config.host + '/profile')
       , sendAsJSON = !!url.match(/\/api\//)
 
   return fetch(url, {

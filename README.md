@@ -94,6 +94,8 @@ This thingy runs on iOS and Android - one code, one love!
   * Abuse report english translation?
   * Pull conversation again when open and coming from background to make sure its marked as read
   * User Profile -> message button doesn't work for conversations we didn't have yet
+  * Loading indicators on login, conversations, conversation, profile
+  * Disable and pulsate send message button while sending
 
 * Nice to have
   * Deep linking via apple-app-site-association, needs to be merged to fs master

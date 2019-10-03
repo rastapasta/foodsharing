@@ -3,8 +3,8 @@ import { login, logout, getCurrentUser, getFairteiler, getConversation, getConve
 import { getFairteilerMarker } from './adapters/xhr'
 import { userToConversationId, sendMessage } from './adapters/xhrapp'
 
-import getProfile from './adapters/scraping/profile'
-import getRegion from './adapters/scraping/region'
+import getProfile from './adapters/scrapers/profile'
+import getRegion from './adapters/scrapers/region'
 
 export {
   getSession,

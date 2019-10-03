@@ -1,6 +1,10 @@
+const LOCAL = true
+
 export default {
-  host: 'https://beta.foodsharing.de',
-  websocketHost: 'https://foodsharing.de',
+  host: LOCAL ? 'http://localhost:18080/' : 'https://beta.foodsharing.de',
+  websocketHost: LOCAL ? 'http://localhost:18080/' : 'https://foodsharing.de',
+
+  credentials: LOCAL ? {email: 'userbot@example.com', password: 'user'} : {},
 
   endpoints: {
     login: {uri: '/api/user/login', method: 'POST'},
