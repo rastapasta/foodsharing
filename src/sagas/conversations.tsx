@@ -67,9 +67,14 @@ export default function* conversationsSaga() {
 function* conversationIdResolver() {
   while (true) {
     const { payload: id } = yield take(CONVERSATION_ID_REQUEST)
-    const conversationId = yield userToConversationId(id)
-    yield put({type: CONVERSATION_ID_SUCCESS, id, payload: conversationId})
+        , conversations = yield select(state => state.conversations)
+        , conversation = conversations.find(conversation =>
+            conversation.member.length === 2 &&
+            conversation.member.find(member => member == id)
+          )
+        , conversationId = conversation ? conversation.id : yield userToConversationId(id)
 
+    yield put({type: CONVERSATION_ID_SUCCESS, id, payload: conversationId})
     Actions.push('conversation', {conversationId})
   }
 }
