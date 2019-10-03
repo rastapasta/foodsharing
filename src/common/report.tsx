@@ -1,5 +1,5 @@
 export default [
-  {id: 1, de: 'Ist zu spät zum Abholen gekommen', en: 'Came too late for an arranged pick-up'},
+  {id: 1, de: 'Ist zu spät zum Abholen gekommen', en: 'Came too late to an arranged pick-up'},
   {id: 2, de: 'Ist gar nicht zum Abholen gekommen', en: 'Did not appear to an arranged pick-up'},
   {id: 3, de: 'Hat sich unhöflich oder respektlos verhalten', en: 'Behaved rudely or disrespectfully', children: [
     {id: 1, de: 'gegenüber Foodsavern', en: 'to foodsavers'},

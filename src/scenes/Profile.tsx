@@ -1,7 +1,7 @@
 import { withNavigationFocus } from 'react-navigation'
 
 import React, { PureComponent, Fragment } from 'react'
-import { View, StyleSheet, Dimensions, Text, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, Dimensions, Text, TouchableOpacity, ActivityIndicator } from 'react-native'
 import { isIphoneX } from 'react-native-iphone-x-helper'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
@@ -119,13 +119,18 @@ class Profile extends PureComponent<Props> {
         , hasStats = profile.stats && !Object.keys(profile.stats).every(stat => profile.stats[stat] === 0)
         , headerHeight = (isIphoneX() ? 155 : 125) - (hasStats ? 0 : 65)
 
-    const Button = ({icon, label, color, onPress, disabled}) =>
+    const Button = ({icon, label, color, onPress, disabled, loading}) =>
       <TouchableOpacity
         style={styles.button}
         onPress={onPress}
-        disabled={disabled}
+        disabled={disabled || loading}
       >
-        <Icon name={icon} size={26} color={color}/>
+        {loading ?
+          <View style={{width: 28, height: 28, alignItems: 'center', justifyContent: 'center'}}>
+            <ActivityIndicator size="small" color={color} />
+          </View> :
+          <Icon name={icon} size={26} color={color}/>
+        }
         <Text style={[styles.buttonText, {color}]}>{label}</Text>
       </TouchableOpacity>
 
@@ -170,6 +175,7 @@ class Profile extends PureComponent<Props> {
                 color={profile.isFriend ? colors.profileButtonFriend : colors.profileButton}
                 onPress={() => actions.requestFriendship(profile.id)}
                 disabled={!!profile.isFriend}
+                loading={false}
               />
               <Button
                 label={translate('profile.write_message')}
@@ -177,6 +183,7 @@ class Profile extends PureComponent<Props> {
                 onPress={() => actions.fetchConversationId(profile.id)}
                 color={colors.profileButton}
                 disabled={false}
+                loading={false}
               />
               <Button
                 label={translate('profile.report_violation')}
@@ -186,6 +193,7 @@ class Profile extends PureComponent<Props> {
                 }
                 color={colors.profileButton}
                 disabled={false}
+                loading={false}
               />
             </View>}
 
