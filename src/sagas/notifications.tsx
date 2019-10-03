@@ -6,9 +6,7 @@ import { Platform } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import { store } from '../common/store'
 
-const config = {
-  NOTIFICATIONS_ONLY_IN_BACKGROUND: true
-}
+import config from '../common/config'
 
 import {
   BACKGROUND_STATE,
@@ -46,7 +44,7 @@ export default function* notificationSaga() {
 
   while (true) {
     // Wait until the app switches into background mode when requested
-    if (config.NOTIFICATIONS_ONLY_IN_BACKGROUND)
+    if (config.notificationsOnlyInBackground)
       while (true) {
         const { payload } = yield take(BACKGROUND_STATE)
         if (payload === true)
@@ -59,7 +57,7 @@ export default function* notificationSaga() {
 
       // Woke up and only enabled in background? Start over!
       if (type === BACKGROUND_STATE) {
-        if (config.NOTIFICATIONS_ONLY_IN_BACKGROUND && payload === false)
+        if (config.notificationsOnlyInBackground && payload === false)
           break
         continue
       }
@@ -67,7 +65,7 @@ export default function* notificationSaga() {
       const inBackground = (yield select(state => state.app.state)) === true
 
       // Only send a notification if either in background or user configured foreground notifications
-      if (!inBackground && config.NOTIFICATIONS_ONLY_IN_BACKGROUND)
+      if (!inBackground && config.notificationsOnlyInBackground)
         continue
 
       // Successful conversations pull after waking up

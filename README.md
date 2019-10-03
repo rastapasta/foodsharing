@@ -41,7 +41,7 @@ This thingy runs on iOS and Android - one code, one love!
   * Image of foodsaver, paralax style
   * Friendship button - signals friendship sent status
   * Send friendship request by touching friendship button
-  * Message button -> jump to Conversation scene
+  * Message button -> initiate conversation and jump to Conversation scene
   * Report button -> jump to Report scene
   * Banana button -> jump to Bananas scene
 
@@ -93,7 +93,6 @@ This thingy runs on iOS and Android - one code, one love!
 * Should hve
   * Abuse report english translation?
   * Pull conversation again when open and coming from background to make sure its marked as read
-  * User Profile -> message button doesn't work for conversations we didn't have yet
   * Loading indicators on login, conversations, conversation, profile
   * Disable and pulsate send message button while sending
 

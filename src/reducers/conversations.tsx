@@ -18,10 +18,11 @@ const initialState = []
     })
 
 export default function reducer(state = initialState, action: any = {}) {
-  switch (action.type) {
+  const { type, payload } = action
+  switch (type) {
     // Process a sucessful conversations request
     case CONVERSATIONS_SUCCESS:
-      return action.payload.map(conversation => ({
+      return payload.map(conversation => ({
         ...conversation,
         member: conversation.member.map(member => member.id)
       }))
@@ -29,27 +30,38 @@ export default function reducer(state = initialState, action: any = {}) {
     // Mark a conversation as read as soon as we pulled its latest messages
     case MESSAGE_READ:
     case CONVERSATION_SUCCESS:
-      const id = action.type === CONVERSATION_SUCCESS ? action.id : action.payload
+      const id = type === CONVERSATION_SUCCESS ? action.id : payload
 
-      return state.map(conversation => {
+      let exists = false
+      const freshState = state.map(conversation => {
         if (conversation.id != id)
           return conversation
 
+        exists = true
         return {
           ...conversation,
           unread: "0"
         }
       })
 
+      // Push the conversation into our mailbox - happens for freshly initiated conversations
+      if (type === CONVERSATION_SUCCESS && exists === false)
+        freshState.push({
+          id,
+          ...payload,
+          member: payload.member.map(member => member.id)
+        })
+
+      return freshState
+
     // Process incoming messages by updating the last conversations last timestamp, user and
     // create conversation in case it didnt exist yet
     case MESSAGE_SUCCESS:
     case WEBSOCKET_MESSAGE:
       const { payload: {fs_id, cid} } = action
-          , conversationId = action.type === MESSAGE_SUCCESS ? action.conversationId : cid
+          , conversationId = type === MESSAGE_SUCCESS ? action.conversationId : cid
 
       let found = false
-
       const newState = state.map(conversation => {
         if (conversation.id != conversationId)
           return conversation
@@ -57,7 +69,7 @@ export default function reducer(state = initialState, action: any = {}) {
         found = true
         return {
           ...conversation,
-          ...messageToObj(action.payload)
+          ...messageToObj(payload)
         }
       })
 
@@ -66,7 +78,7 @@ export default function reducer(state = initialState, action: any = {}) {
         newState.push({
           id: conversationId,
           member: [`${fs_id}`],
-          ...messageToObj(action.payload)
+          ...messageToObj(payload)
         })
 
       return newState

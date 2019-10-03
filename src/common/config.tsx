@@ -1,10 +1,10 @@
-const LOCAL = true
+const PRODUCTION = true
 
 export default {
-  host: LOCAL ? 'http://localhost:18080/' : 'https://beta.foodsharing.de',
-  websocketHost: LOCAL ? 'http://localhost:18080/' : 'https://foodsharing.de',
+  host: PRODUCTION ? 'https://beta.foodsharing.de' : 'http://localhost:18080/',
+  websocketHost: PRODUCTION ? 'https://foodsharing.de' : 'http://localhost:18080/',
 
-  credentials: LOCAL ? {email: 'userbot@example.com', password: 'user'} : {},
+  credentials: PRODUCTION ? {} : {email: 'userbot@example.com', password: 'user'},
 
   endpoints: {
     login: {uri: '/api/user/login', method: 'POST'},
@@ -29,5 +29,7 @@ export default {
     // TODO:
     baskets: {uri: '/xhr.php?f=loadMarker&types[]=baskets', method: 'GET'},
     shops: {uri: '/xhr.php?f=loadMarker&types[]=betriebe&options[]=needhelp&options[]=needhelpinstant', method: 'GET'}
-  }
+  },
+
+  notificationsOnlyInBackground: true
 }

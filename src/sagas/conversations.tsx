@@ -6,17 +6,22 @@ import { Platform } from 'react-native'
 import PushNotificationIOS from '@react-native-community/push-notification-ios'
 import AndroidBadge from 'react-native-android-badge'
 
-import { getConversations, markAsRead } from '../api'
+import { getConversations, markAsRead, userToConversationId } from '../api'
 
 import {
   CONVERSATION_SUCCESS,
+  CONVERSATION_ID_REQUEST,
+
   CONVERSATIONS_REQUEST,
   CONVERSATIONS_SUCCESS,
   MESSAGE_SUCCESS,
   MESSAGE_READ,
-  WEBSOCKET_MESSAGE
+  WEBSOCKET_MESSAGE,
+  CONVERSATION_ID_SUCCESS
 } from '../common/constants'
+
 import { MessageType } from '../common/typings'
+import { Actions } from 'react-native-router-flux'
 
 const entities = new AllHtmlEntities()
     ,countUnread = (conversations: any[]) =>
@@ -45,6 +50,9 @@ export default function* conversationsSaga() {
   // Wait for message read actions and mark conversations as read
   yield fork(markAsReadWatcher)
 
+  // Wait for and handle userid->conversation requests
+  yield fork(conversationIdResolver)
+
   // Wait for actions altering the conversations undread counter
   yield fork(unreadWatcher)
 
@@ -52,6 +60,17 @@ export default function* conversationsSaga() {
     // Wait until we get a conversation request
     yield take(CONVERSATIONS_REQUEST)
     yield fork(fetch)
+  }
+}
+
+// Wait for message read actions and mark conversations as read
+function* conversationIdResolver() {
+  while (true) {
+    const { payload: id } = yield take(CONVERSATION_ID_REQUEST)
+    const conversationId = yield userToConversationId(id)
+    yield put({type: CONVERSATION_ID_SUCCESS, payload: conversationId})
+
+    Actions.push('conversation', {conversationId})
   }
 }
 

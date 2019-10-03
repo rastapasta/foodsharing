@@ -73,8 +73,8 @@ class ConversationTitle extends PureComponent<Props> {
           </Fragment>
         :
           <Text style={styles.title}>
-            {isNoteToSelf ?
-              translate('conversations.note_to_self') :
+            {!conversation.member.length ? '' :
+              isNoteToSelf ? translate('conversations.note_to_self') :
               foodsaver(foodsavers[otherMembers[0]]).name
             }
           </Text>

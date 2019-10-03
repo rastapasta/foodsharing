@@ -17,7 +17,7 @@ import ProfileCircle from '../components/ProfileCircle'
 import { foodsaver } from '../common/placeholder'
 import BackButton from '../components/BackButton'
 import colors from '../common/colors'
-import { userToConversationId } from '../api'
+
 import { Actions } from 'react-native-router-flux'
 import { translate } from '../common/translation'
 
@@ -174,11 +174,7 @@ class Profile extends PureComponent<Props> {
               <Button
                 label={translate('profile.write_message')}
                 icon="message-text-outline"
-                onPress={async () => {
-                  // TODO: Improve this, api using logic doesn't belong here
-                  const conversationId = (await userToConversationId(profile.id)).toString()
-                  Actions.push('conversation', {conversationId})
-                }}
+                onPress={() => actions.fetchConversationId(profile.id)}
                 color={colors.profileButton}
                 disabled={false}
               />
