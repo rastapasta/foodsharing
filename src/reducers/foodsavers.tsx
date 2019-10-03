@@ -1,7 +1,12 @@
 import {
   CONVERSATION_SUCCESS,
   CONVERSATIONS_SUCCESS,
+
+  CONVERSATION_ID_REQUEST,
+  CONVERSATION_ID_SUCCESS,
+
   PROFILE_SUCCESS,
+  FRIENDSHIP_REQUEST,
   FRIENDSHIP_SUCCESS,
   LOGOUT
 } from '../common/constants'
@@ -60,10 +65,26 @@ export default function reducer(state = initialState, action: any = {}) {
 
       return profileState
 
+    case FRIENDSHIP_REQUEST:
+      const friendState = {...state}
+      friendState[`${payload}`].friendrequestLoading = true
+      return friendState
+
     case FRIENDSHIP_SUCCESS:
       const friendshipState = {...state}
       friendshipState[`${payload}`].isFriend = true
+      friendshipState[`${payload}`].friendrequestLoading = false
       return friendshipState
+
+    case CONVERSATION_ID_REQUEST:
+      const idRequestState = {...state}
+      idRequestState[`${payload}`].conversationIdLoading = true
+      return idRequestState
+
+    case CONVERSATION_ID_SUCCESS:
+      const idSuccessState = {...state}
+      idSuccessState[`${action.id}`].conversationIdLoading = false
+      return idSuccessState
 
     case LOGOUT:
       return {...initialState}

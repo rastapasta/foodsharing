@@ -175,7 +175,7 @@ class Profile extends PureComponent<Props> {
                 color={profile.isFriend ? colors.profileButtonFriend : colors.profileButton}
                 onPress={() => actions.requestFriendship(profile.id)}
                 disabled={!!profile.isFriend}
-                loading={false}
+                loading={profile.friendrequestLoading}
               />
               <Button
                 label={translate('profile.write_message')}
@@ -183,7 +183,7 @@ class Profile extends PureComponent<Props> {
                 onPress={() => actions.fetchConversationId(profile.id)}
                 color={colors.profileButton}
                 disabled={false}
-                loading={false}
+                loading={profile.conversationIdLoading}
               />
               <Button
                 label={translate('profile.report_violation')}
