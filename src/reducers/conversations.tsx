@@ -5,10 +5,10 @@ import {
   CONVERSATION_SUCCESS,
   CONVERSATIONS_SUCCESS,
   LOGOUT,
-  CONVERSATION_ID_SUCCESS
+  CONVERSATION_ID_SUCCESS,
+  CONVERSATION_REQUEST
 } from '../common/constants'
 import { MessageType } from '../common/typings'
-import Conversation from '../scenes/Conversation'
 
 const initialState = []
     , messageToObj = message => ({
@@ -29,6 +29,17 @@ export default function reducer(state = initialState, action: any = {}) {
         member: conversation.member.map(member => member.id)
       }))
 
+    case CONVERSATION_REQUEST:
+      return state.map(conversation => {
+        if (conversation.id != id)
+          return conversation
+
+        return {
+          ...conversation,
+          loading: true
+        }
+      })
+
     // Mark a conversation as read as soon as we pulled its latest messages
     case MESSAGE_READ:
     case CONVERSATION_SUCCESS:
@@ -42,7 +53,8 @@ export default function reducer(state = initialState, action: any = {}) {
         exists = true
         return {
           ...conversation,
-          unread: "0"
+          unread: "0",
+          loading: false
         }
       })
 

@@ -27,6 +27,7 @@ function* fetch(id: number, offset: number) {
   yield put({
     type: CONVERSATION_SUCCESS,
     id,
+    offset,
     payload: conversation
   })
 }

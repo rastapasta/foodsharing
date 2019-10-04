@@ -21,6 +21,7 @@ This thingy runs on iOS and Android - one code, one love!
 
 * Conversations
   * Send and receive messages
+  * Highlight/unhighlight of unread messages (sending 'read' signal to backend)
   * Connect to and handle WebSocket chat interface
   * Local Notifications while app runs in the background
   * Touch on Notification directly brings you to corresponding conversation (iOS only for now)
@@ -37,23 +38,27 @@ This thingy runs on iOS and Android - one code, one love!
   * Detect URLs to foodsharing* in messages and make them clickable
 
 * Profile
-  * Fetch and display pickup/fetch-statistics (screen scrapy as no rest interface exists - yet)
+  * Screen scrape (until rest interface exists) of stats/information
   * Image of foodsaver, paralax style
+  * Loading indicator
+  * Statistic circles
+  * Banana support! Button -> jump to Bananas scene
   * Friendship button - signals friendship-offered status
   * Send friendship request by touching friendship button (incl. loading indicator)
   * Message button -> initiate conversation and jump to Conversation scene (incl. loading indicator)
   * Report button -> jump to Report scene -> jump back (incl. loading indicator)
-  * Banana button -> jump to Bananas scene
+  * Information segments parsed from the profile page
 
 * Bananas
   * List of all received bananas and corresponding banana texts
 
 * Report
-  * Translated German <> English reporting system
+  * Fully translated German <> English reporting system
   * Platform based native picker for report reason
   * Dynamic displaying of nested options
   * Text entry for report text, autoscaling to fullscreen on text entry
   * Hooking into Android's back button & blur event to leave fullscreen
+  * Sending/Success indicator on Profile scene
 
 * Map
   * Embedded map based on system (iOS: Apple Maps, Android: Google Maps)
@@ -104,6 +109,6 @@ This thingy runs on iOS and Android - one code, one love!
   * Settings screen to setup background pull / notifications?
   * react-native-hyperlink for general linking support?
 
-## 😢 Why some German in between?
+## 😢 Why some German in between (profile sceen)?
 
 It's all ready for it - all string are in an [easy to maintain i18n file](https://github.com/rastapasta/foodsharing/blob/master/assets/translations/en.json). Just the [foorsharing endpoints](https://gitlab.com/foodsharing-dev/foodsharing/tree/master/src/Controller) deserve some love by someone motivated. Things like the profile information are returned by the backend in German only - fix it, and i will adapt the app!

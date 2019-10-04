@@ -45,6 +45,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingTop: 3
   },
+  name: {
+    fontSize: 14,
+    fontWeight: '400'
+  },
   date: {
     color: colors.conversationDate,
     fontSize: 11
@@ -99,7 +103,7 @@ class ConversationsItem extends PureComponent<Props> {
             <View style={{flex: 1}}>
               <Text
                 numberOfLines={1}
-                style={[conversation.unread !== "0" && {color: colors.messageUnread}]}
+                style={[styles.name, conversation.unread !== "0" && {color: colors.messageUnread}]}
               >
                 {name ? name :
                   isSelfMessage ? translate('conversations.note_to_self') :

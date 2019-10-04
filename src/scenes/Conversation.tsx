@@ -10,7 +10,7 @@ import { withNavigationFocus } from 'react-navigation'
 
 import MessageForm from '../components/MessageForm'
 import MessageBubble from '../components/MessageBubble'
-import { ConversationDetail, Message, MessageType } from '../common/typings'
+import { ConversationDetail, Message, MessageType, ConversationListEntry } from '../common/typings'
 
 import colors from '../common/colors'
 import { translate } from '../common/translation'
@@ -43,6 +43,7 @@ type Props = {
   actions: any
   drafts: any
   profile: any
+  conversations: any
 }
 
 interface Item {
@@ -105,9 +106,10 @@ class Conversation extends PureComponent<Props> {
   }
 
   render() {
-    const { conversationId, messages, actions, drafts } = this.props
-        , { refreshing, loading } = this.state
+    const { conversationId, conversations, messages, actions, drafts } = this.props
+        , { refreshing } = this.state
         , data = (messages[conversationId] || []) as Message[]
+        , conversation = (conversations.find(c => c.id == conversationId) || {}) as ConversationListEntry
         , items = this.prepareItems(data)
 
     return (
@@ -118,12 +120,9 @@ class Conversation extends PureComponent<Props> {
       >
         <SafeAreaView style={styles.container}>
           <FlatList
-            onEndReached={() => {
-              if (data.length >= 20) {
-                this.setState({loading: true})
-                alert('reload time!')
-              }
-            }}
+            onEndReached={() =>
+              conversation.loading || actions.fetchConversation(conversationId, data.length - 5)
+            }
             onEndReachedThreshold={0}
             onRefresh={Platform.OS === 'ios' ? () => {
               actions.fetchConversation(conversationId)
@@ -136,7 +135,7 @@ class Conversation extends PureComponent<Props> {
             style={{flex: 1}}
 
             ListFooterComponent={() => <View style={{height: 100, alignItems: 'center', justifyContent: 'center'}}>
-              {loading && <ActivityIndicator />}
+              {conversation.loading && <ActivityIndicator />}
             </View>}
 
             renderItem={({item: {type, label, message}}) => {
@@ -173,7 +172,8 @@ class Conversation extends PureComponent<Props> {
 
 const mapStateToProps = state => ({
   messages: state.messages,
-  drafts: state.drafts
+  drafts: state.drafts,
+  conversations: state.conversations
 })
 
 const mapDispatchToProps = dispatch => ({

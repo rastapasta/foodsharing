@@ -17,8 +17,19 @@ export default function reducer(state = initialState, action: any = {}) {
       const convState = {...state}
           , {id } = action
           , { messages } = payload
+          , previous = convState[`${id}`] || []
 
-      convState[`${id}`] = messages
+          // Convert to object
+          , id2msg = previous.reduce((all, cur) => {all[cur.id] = cur; return all}, {})
+
+      console.log(id2msg)
+
+      // Merge in the new message to our existing store
+      messages.forEach(message =>
+        id2msg[message.id] = {...(id2msg[message.id] || {}), ...message}
+      )
+
+      convState[`${id}`] = Object.keys(id2msg).map(id => id2msg[id]).sort((a, b) => b.id - a.id)
       return convState
 
     case MESSAGE_SUCCESS:

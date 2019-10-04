@@ -15,7 +15,7 @@ export default {
     wall: {uri: '/api/wall/{target}/{targetId}', method: 'GET'},
     store: {uri: '/api/stores/{storeId}', method: 'GET'},
     conversations: {uri: '/api/conversations', method: 'GET'},
-    conversation: {uri: '/api/conversations/{conversationId}?offset={offset}', method: 'GET'},
+    conversation: {uri: '/api/conversations/{conversationId}?messagesOffset={offset}', method: 'GET'},
     markAsRead: {uri: '/api/conversations/{conversationId}?limit=0', method: 'GET'},
 
     message: {uri: '/xhrapp.php?app=msg&m=sendmsg', method: 'POST'},

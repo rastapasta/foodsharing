@@ -16,7 +16,9 @@ export interface ConversationListEntry {
   last_ts: string,
   name: string,
   unread: string,
-  member: ConversationMember[]
+  member: ConversationMember[],
+
+  loading?: boolean
 }
 
 export interface ConversationMember {
