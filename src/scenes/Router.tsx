@@ -18,18 +18,6 @@ import ConversationMembers from './ConversationMembers'
 
 import ConversationTitle from '../components/ConversationTitle'
 
-/* given in scene:
-component: {$$typeof: Symbol(react.memo), type: ƒ, compare: null, WrappedComponent: ƒ, displayName: "Connect(withNavigation(withNavigationFocus(Conversation)))", …}
-conversationId: "1357698"
-hideNavBar: false
-init: false
-navigation: {pop: ƒ, popToTop: ƒ, push: ƒ, replace: ƒ, reset: ƒ, …}
-navigationBarStyle: {backgroundColor: "#513A22"}
-renderTitle: ƒ renderTitle(options)
-tintColor: "#fff"
-title: "Conversation"
-*/
-
 import Home from './Home'
 import Fairteiler from './Fairteiler'
 import Loading from './Loading'
@@ -44,8 +32,8 @@ const styles = StyleSheet.create({
   }
 })
 
-const icon = (name: string) =>
-  () => <Icon name={name} size={32} style={{marginTop: 3, color: colors.white}}/>
+const icon = (name: string, size: number = 32) =>
+  () => <Icon name={name} size={size} style={{marginTop: 3, color: colors.white}}/>
 
 export default () =>
   <Router uriPrefix="foodsharing.de">
@@ -68,6 +56,7 @@ export default () =>
         hideNavBar
         key="drawer"
         contentComponent={Drawer}
+        drawerIcon={icon('menu', 26)}
         drawerWidth={240}
       >
         <Tabs
