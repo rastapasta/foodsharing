@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { StyleSheet, View, Text, Dimensions, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, Text, Dimensions, TouchableOpacity, Platform } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import { User, ConversationListEntry, Profile } from '../common/typings'
 
@@ -89,7 +89,7 @@ class ConversationsItem extends PureComponent<Props> {
         onPress={() => Actions.jump('conversation', {conversationId: id})}
       >
         <View style={styles.images}>
-          {party.slice(0, 4).map(person =>
+          {party.slice(0, Platform.OS === 'ios' ? 4 : 2).map(person =>
             <RoundedImage
               key={`${id}.${person}`}
               style={party.length > 1 ? {width: '48%', margin: '1%'} : {width: '100%'}}

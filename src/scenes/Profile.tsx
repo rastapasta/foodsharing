@@ -1,7 +1,7 @@
 import { withNavigationFocus } from 'react-navigation'
 
 import React, { PureComponent, Fragment } from 'react'
-import { View, StyleSheet, Dimensions, Text, TouchableOpacity, ActivityIndicator } from 'react-native'
+import { View, StyleSheet, Dimensions, Text, TouchableOpacity, ActivityIndicator, Platform } from 'react-native'
 import { isIphoneX } from 'react-native-iphone-x-helper'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
@@ -168,7 +168,7 @@ class Profile extends PureComponent<Props> {
             </View>
           }
         >
-          <View style={{minHeight: height - headerHeight, backgroundColor: colors.white, marginTop: 5, padding: 20}}>
+          <View style={{minHeight: height - (Platform.OS === 'ios' ? headerHeight : headerHeight +  24), backgroundColor: colors.white, marginTop: 5, padding: 20}}>
             {user.id !== profile.id &&
               <View style={{flexDirection: 'row', marginBottom: 10, justifyContent: 'space-evenly'}}>
                 <Button

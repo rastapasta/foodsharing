@@ -45,6 +45,7 @@ Timeframe: 2 weeks project from scratch to production 😎
   * Today -> Yesterday -> $Date labeling in conversation list
   * Today -> Yesterday -> $Date seperators in conversation
   * Detect URLs to foodsharing* in messages and make them clickable
+  * Pull to refresh
 
 * Group Conversation members
   * Photo and name of group members
@@ -115,8 +116,6 @@ Timeframe: 2 weeks project from scratch to production 😎
 
 * Show blockers
   * No baskets - yet
-  * Android
-    * Grid in conversations list is screwed
 
 * Should have
   * Reflect REQUEST_ERROR errors in the seperate UIs

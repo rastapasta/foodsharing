@@ -1,5 +1,5 @@
 import React from 'react'
-import {TouchableOpacity} from 'react-native'
+import {TouchableOpacity, Platform} from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import colors from '../common/colors'
 
@@ -16,6 +16,6 @@ export default ({icon, onPress}: Props) =>
       name={icon}
       color={colors.white}
       size={25}
-      style={{marginRight: 11, marginTop: 1}}
+      style={{marginRight: Platform.OS === 'android' ? 20 : 11, marginTop: 1}}
     />
   </TouchableOpacity>
