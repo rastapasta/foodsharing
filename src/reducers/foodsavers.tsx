@@ -13,6 +13,9 @@ import {
 
   FRIENDSHIP_REQUEST,
   FRIENDSHIP_SUCCESS,
+
+  WALL_SUCCESS,
+
   LOGOUT
 } from '../common/constants'
 
@@ -109,6 +112,20 @@ export default function reducer(state = initialState, action: any = {}) {
         reportSending: false,
         reported: true
       })
+
+    case WALL_SUCCESS:
+      const newState = {...state}
+      payload.results.forEach(result => {
+        const { id, name, avatar } = result.author
+            , k = `${id}`
+
+        newState[k] = {
+          ...(newState[k] || {}),
+          name,
+          photo: avatar
+        }
+      })
+      return newState
 
     case LOGOUT:
       return {...initialState}
