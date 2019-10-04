@@ -25,6 +25,7 @@ Timeframe: 2 weeks project from scratch to production 😎
   * Send and receive messages
   * Highlight/unhighlight of unread messages (sending 'read' signal to backend)
   * Unlimitted scroll and pagination for conversation messages
+  * Activity indicator for all interactions
   * Conversation overview limited to the 50 latest conversations for now - because.. so much to do.. :)
   * Connect to and handle WebSocket chat interface
   * Local Notifications while app runs in the background
@@ -34,12 +35,17 @@ Timeframe: 2 weeks project from scratch to production 😎
   * Persist message drafts (per conversation)
   * Shorten very long messages and display a 'read more' button
   * Group chats (incl. multiple avatars displayed)
-  * Named chats
+  * Named chats (= title changed via web UI)
+  * Disable sending button while sending
   * Tap on group conversation title -> navigate to list of members
   * Tap on personal conversation title -> navigate to profile page
   * Today -> Yesterday -> $Date labeling in conversation list
   * Today -> Yesterday -> $Date seperators in conversation
   * Detect URLs to foodsharing* in messages and make them clickable
+
+* Group Conversation members
+  * Photo and name of group members
+  * Tap on list item -> navigate to profile of foodsaver
 
 * Profile
   * Screen scrape (until rest interface exists) of stats/information
@@ -57,7 +63,7 @@ Timeframe: 2 weeks project from scratch to production 😎
   * List of all received bananas and corresponding banana texts
 
 * Incident Report
-  * Wait, what? There's an API for it? [Yep](https://gitlab.com/foodsharing-dev/foodsharing/blob/master/src/Modules/Report/ReportXhr.php#L189-209) :)
+  * Wait, what? There's an API for it? Yep, at least to [send them in](https://gitlab.com/foodsharing-dev/foodsharing/blob/master/src/Modules/Report/ReportXhr.php#L189-209) :)
   * Fully translated German <> English reporting system
   * Picker(s) for report reason(s)
   * Dynamic checkbox displaying of nested options
@@ -95,23 +101,19 @@ Timeframe: 2 weeks project from scratch to production 😎
   * redux / [redux-saga](https://github.com/rastapasta/foodsharing/tree/master/src/sagas) for js generator magic :heart:
   * see [package.json](https://github.com/rastapasta/foodsharing/blob/master/package.json) for complete package list
 
-## 🤔 ToDo
+## 🤔 Personal ToDos
 
 * Show blockers
-  * Features
-    * Handle offline mode correctly
-    * Notifications after background pull / detect new conversations - even pull pull conversations?
-    * Handle WebSocket reconnect after long inactivity
-  * Deploy
-    * Ask for Chris (or Tobi?) for permission to show user profile
+  * Loading indicators for
+    * login
   * Android
     * Grid in conversations list is screwed
 
 * Should have
+  * Handle offline mode correctly
   * Pull conversation again when open and coming from background to make sure its marked as read
-  * Loading indicators for
-    * login
-  * Disable and pulsate send message button while sending
+  * Notifications after background pull / detect new conversations - even pull pull conversations? Delta algo!
+  * Handle WebSocket reconnect after long inactivity
   * fastlane screenshot generation
 
 * Nice to have
@@ -119,6 +121,7 @@ Timeframe: 2 weeks project from scratch to production 😎
   * Deep linking via apple-app-site-association, needs to be merged to fs master
   * Settings screen to setup background pull / notifications?
   * react-native-hyperlink for general linking support?
+  * Use ```CONVERSATIONS_SUCCESS``` to warm up conversation's message (at least one)
 
 * Feature creep
   * Edit profile information / Mütze :)

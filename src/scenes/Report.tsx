@@ -3,7 +3,6 @@ import {
   SafeAreaView,
   StyleSheet,
   BackHandler,
-  Picker,
   Text,
   View,
   Dimensions,
@@ -13,18 +12,19 @@ import {
   Keyboard
 } from 'react-native'
 import { withNavigationFocus } from 'react-navigation'
+import { Actions } from 'react-native-router-flux'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as reduxActions from '../common/actions'
+
 import colors from '../common/colors'
-
 import { Button, CheckBox } from 'react-native-elements'
-
 import { foodsaver } from '../common/placeholder'
 import report from '../common/report'
 import { translate, pickTranslation } from '../common/translation'
-import { Actions } from 'react-native-router-flux'
+
+import ReportPicker from '../components/ReportPicker'
 
 const { width } = Dimensions.get('window')
     , styles = StyleSheet.create({
@@ -38,12 +38,6 @@ const { width } = Dimensions.get('window')
         width,
         marginTop: 20,
         paddingLeft: 20
-      },
-      picker: {
-        maxHeight: 90,
-        paddingLeft: Platform.OS === 'android' ? 15 : 0,
-        overflow: 'hidden',
-        marginTop: 5
       },
       message: {
         flex: 1,
@@ -125,27 +119,6 @@ class Report extends PureComponent<Props> {
         , { reason, subreason, onlyText, selected, message } = this.state
         , profile = foodsaver(foodsavers[id])
 
-    const ReportPicker = ({label, onChange, reasons, selected}) =>
-      <View>
-        {!!label &&
-          <Text style={styles.category}>
-            {label}
-          </Text>
-        }
-        <View style={styles.picker}>
-          <Picker
-            selectedValue={selected}
-            itemStyle={{fontSize: 14}}
-            style={[{width}, Platform.OS === 'ios' && {transform: [{translateY: -55}]}]}
-            onValueChange={onChange}
-          >
-            {reasons.map(reason =>
-              <Picker.Item key={`reason${reason.id}`} label={pickTranslation(reason)} value={reason.id} />
-            )}
-          </Picker>
-        </View>
-      </View>
-
     return (
       <KeyboardAvoidingView
         {...(Platform.OS === 'ios' ? {behavior: 'padding'} : {})}
@@ -170,7 +143,6 @@ class Report extends PureComponent<Props> {
                 option.children && option.children.length > 0 ?
                   <ReportPicker
                     key={'subreason' + option.id}
-                    label=""
                     selected={option.children[subreason].id}
                     onChange={({}, index) => this.setState({subreason: index})}
                     reasons={option.children}
