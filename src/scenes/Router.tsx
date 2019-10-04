@@ -23,6 +23,7 @@ import Home from './Home'
 import Fairteiler from './Fairteiler'
 import Loading from './Loading'
 import { translate } from '../common/translation'
+import ShareButton from '../components/ShareButton'
 
 const styles = StyleSheet.create({
   tabBarStyle: {
@@ -33,8 +34,8 @@ const styles = StyleSheet.create({
   }
 })
 
-const icon = (name: string, size: number = 32) =>
-  () => <Icon name={name} size={size} style={{marginTop: 3, color: colors.white}}/>
+const icon = (name: string, size: number = 32) => ({focused}) =>
+    <Icon name={name} size={size} style={{marginTop: 3, color: focused ? colors.white : colors.gray}}/>
 
 export default () =>
   <Router uriPrefix="foodsharing.de">
@@ -62,7 +63,7 @@ export default () =>
       >
         <Tabs
           key="main"
-          showLabel={true}
+          showLabel={false}
           tabBarStyle={styles.tabBarStyle}
           activeTintColor="#D7CCC8"
           inactiveTintColor="#9E837A"
@@ -78,6 +79,7 @@ export default () =>
             title={translate('scenes.baskets')}
             component={Home}
             icon={icon('basket')}
+
           />
           <Scene
               key="map"
@@ -98,6 +100,12 @@ export default () =>
         title={translate('scenes.fairteiler')}
         component={Fairteiler}
         hideNavBar={false}
+        renderRightButton={({id}) =>
+          <ShareButton
+            title={translate('fairteiler.share')}
+            url={`https://foodsharing.de/?page=fairteiler&sub=ft&id=${id}`}
+          />
+        }
 
         // renderTitle={({id}) => <FairteilerTitle id={id} />}
         // path="/?page=fairteiler&sub=ft&id=:id"

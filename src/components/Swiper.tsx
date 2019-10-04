@@ -61,7 +61,7 @@ export default class Swiper extends PureComponent<Props> {
             <TouchableOpacity
               key={'swiper.'+i}
               style={styles.tab}
-              onPress={() => this.refs.swiper.scrollBy(i ? -1 : 1)}
+              onPress={() => this.refs.swiper._component.scrollTo({x: i * width})}
             >
               <Text style={styles.tabLabel}>
                 {label}

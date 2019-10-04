@@ -82,6 +82,9 @@ Timeframe: 2 weeks project from scratch to production 😎
 * Fairteiler
   * Adress, picture and information
   * Comments made to the Fairteilers wall
+  * Share button to copy or forward public Fairteiler URL
+  * Swipeable layout, number of comments in tab
+  * Navigate to profile on foodsaver image touch
 
 * Persisted central data ([redux](https://redux.js.org/)) store
   * Persistence of conversations, messages, foodsavers, ...

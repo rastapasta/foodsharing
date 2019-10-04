@@ -54,5 +54,9 @@
     "send_report": "Send report",
     "describe_incident": "Describe the incident a bit more detailed!",
     "info": "It is important to report all cases that violate the rules of conduct, so that no bad mood arises among the food savers or businesses. In this way, those responsible can take care of problem cases in good time and exclude people from the platform if they behave inappropriately several times. Please describe the incident in at least 120 characters so that those responsible or the mediation team can take appropriate care of the case. Mention the frequency of the incident, place, time and any other food savers present!"
+  },
+
+  "fairteiler": {
+    "share": "Share Fairteiler"
   }
 }
