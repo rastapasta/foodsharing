@@ -10,6 +10,8 @@ import Logo from './Logo'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as reduxActions from '../common/actions'
+import { translate } from '../common/translation'
+import { Actions } from 'react-native-router-flux'
 
 const styles = StyleSheet.create({
   container: {
@@ -46,7 +48,7 @@ type Props = {
 
 class Drawer extends PureComponent<Props> {
   render() {
-    const {profile: {name}, actions: { logout }} = this.props
+    const {profile: {name, id}, actions: { logout }} = this.props
 
     return (
       <View style={styles.container}>
@@ -58,9 +60,14 @@ class Drawer extends PureComponent<Props> {
         </View>
         <View style={styles.content}>
           <DrawerButton
+            onPress={() => Actions.jump('profile', {id})}
+            icon="account"
+            label={translate('drawer.profile')}
+          />
+          <DrawerButton
             onPress={logout}
             icon="exit-to-app"
-            label="Logout"
+            label={translate('drawer.logout')}
           />
         </View>
         <View style={styles.footer}>

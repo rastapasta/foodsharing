@@ -9,6 +9,11 @@
     "report_violation": "Report"
   },
 
+  "drawer": {
+    "profile": "Profile",
+    "logout": "Logout"
+  },
+
   "login": {
     "email": "E-Mail",
     "password": "Password",
