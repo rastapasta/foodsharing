@@ -8,11 +8,14 @@ export default function* reportSaga() {
     // Wait until we get a report request
     const { payload: {userId, reasonId, reason, message} } = yield take(REPORT_REQUEST)
 
-    // .. and handle it accordingly
-    yield report(userId, reasonId, reason, message)
-    yield put({
-      type: REPORT_SUCCESS,
-      payload: userId
-    })
+    try {
+      // .. and handle it accordingly
+      yield report(userId, reasonId, reason, message)
+      yield put({
+        type: REPORT_SUCCESS,
+        payload: userId
+      })
+
+    } catch(e) {/* Errors are handled via Redux reducers */}
   }
 }

@@ -13,7 +13,7 @@ export default function reducer(state = initialState, action: any = {}) {
       return {...payload}
 
     case LOGIN_SUCCESS:
-        return {...state, id: payload.id}
+        return {...state, ...(payload.id ? {id: payload.id} : {})}
 
     case LOGOUT:
       return {...initialState}

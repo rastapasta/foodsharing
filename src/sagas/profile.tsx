@@ -9,18 +9,23 @@ import {
 } from '../common/constants'
 
 function* fetchProfile(id: number) {
-  yield put({
-    type: PROFILE_SUCCESS,
-    payload: yield getProfile(id)
-  })
+  try {
+    yield put({
+      type: PROFILE_SUCCESS,
+      payload: yield getProfile(id)
+    })
+  } catch(e) {/* Errors are handled via Redux reducers */}
 }
 
 function* fetchFriendship(userId: number) {
-  yield requestFriendship(userId)
-  yield put({
-    type: FRIENDSHIP_SUCCESS,
-    payload: userId
-  })
+  try {
+    yield requestFriendship(userId)
+    yield put({
+      type: FRIENDSHIP_SUCCESS,
+      payload: userId
+    })
+
+  } catch(e) {/* Errors are handled via Redux reducers */}
 }
 
 export default function* profileSaga() {

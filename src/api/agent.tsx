@@ -5,6 +5,11 @@ import cheerio from 'react-native-cheerio'
 import { Results } from '../common/typings'
 import config from '../common/config'
 
+// TODO: This is suboptimal and leads to a recursive import
+// solution: refactor agent to generator to be called from sagas
+import { store } from '../common/store'
+import { REQUEST_ERROR } from '../common/constants'
+
 let cookies = {} as any
 
 export const syncCookies = async () => {
@@ -91,7 +96,6 @@ export default (
     if (response.status === 200)
       return handleAsHTML ? cheerio.load(await response.text()) : response.json()
 
-    console.log('request error', url, data, opts, response)
     // Translate any error case to one of our error cases
     switch (response.status) {
       case 400: throw Results.MALFORMED
@@ -102,5 +106,12 @@ export default (
 
       default: throw Results.SERVER_ERROR
     }
+  }).catch(e => {
+    const error = typeof e === 'object' ? Results.CONNECTION_ERROR : e
+    // console.log('agent error', url, data, opts, error)
+
+    store.dispatch({type: REQUEST_ERROR, payload: error})
+
+    throw error
   })
 }

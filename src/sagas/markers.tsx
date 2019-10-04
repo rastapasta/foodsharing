@@ -9,10 +9,13 @@ export default function* markersSaga() {
     // Wait until we get a markers request
     yield take(MARKERS_REQUEST)
 
-    // Pull the markers from the API
-    const markers = yield getFairteilerMarker()
+    try {
+      // Pull the markers from the API
+      const markers = yield getFairteilerMarker()
 
-    // ... and publish them on the bus
-    yield put({type: MARKERS_SUCCESS, payload: markers})
+      // ... and publish them on the bus
+      yield put({type: MARKERS_SUCCESS, payload: markers})
+
+    } catch(e) {/* Errors are handled via Redux reducers */}
   }
 }

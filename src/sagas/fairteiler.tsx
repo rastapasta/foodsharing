@@ -9,11 +9,14 @@ import {
 } from '../common/constants'
 
 function* fetch(id: number) {
-  // Pull the markers from the API
-  const fairteiler = yield getFairteiler(id)
+  try {
+    // Pull the markers from the API
+    const fairteiler = yield getFairteiler(id)
 
-  // ... and publish them on the bus
-  yield put({type: FAIRTEILER_SUCCESS, payload: fairteiler})
+    // ... and publish them on the bus
+    yield put({type: FAIRTEILER_SUCCESS, payload: fairteiler})
+
+  } catch(e) {/* Errors are handled via Redux reducers */}
 }
 
 export default function* fairteilerSaga() {

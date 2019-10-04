@@ -4,12 +4,14 @@ import { getWall } from '../api'
 import { WALL_REQUEST, WALL_SUCCESS } from '../common/constants'
 
 function* fetch(target: 'foodsaver' | 'fairteiler', id: number) {
-  yield put({
-    type: WALL_SUCCESS,
-    target,
-    id,
-    payload: yield getWall(target, id)
-  })
+  try {
+    yield put({
+      type: WALL_SUCCESS,
+      target,
+      id,
+      payload: yield getWall(target, id)
+    })
+  } catch(e) {/* Errors are handled via Redux reducers */}
 }
 
 export default function* conversationSaga() {

@@ -15,21 +15,24 @@ import { MessageType } from '../common/typings'
 const entities = new AllHtmlEntities()
 
 function* fetch(id: number, offset: number) {
-  const conversation = yield getConversation(id, offset)
-      , ownId = yield select(state => state.profile.id)
+  try {
+    const conversation = yield getConversation(id, offset)
+        , ownId = yield select(state => state.profile.id)
 
-  // Decode HTML entities before the content gets into the hands of any other method
-  conversation.messages.forEach(message => {
-    message.body = entities.decode(message.body)
-    message.type = message.fs_id === ownId ? MessageType.SENT : MessageType.RECEIVED
-  })
+    // Decode HTML entities before the content gets into the hands of any other method
+    conversation.messages.forEach(message => {
+      message.body = entities.decode(message.body)
+      message.type = message.fs_id === ownId ? MessageType.SENT : MessageType.RECEIVED
+    })
 
-  yield put({
-    type: CONVERSATION_SUCCESS,
-    id,
-    offset,
-    payload: conversation
-  })
+    yield put({
+      type: CONVERSATION_SUCCESS,
+      id,
+      offset,
+      payload: conversation
+    })
+
+  } catch(e) {/* Errors are handled via Redux reducers */}
 }
 
 export default function* conversationSaga() {
@@ -45,19 +48,21 @@ export default function* conversationSaga() {
 
       // Send out a message to a given conversation
       case MESSAGE_REQUEST:
-        const { conversationId } = payload
-            , body = yield select(state => state.drafts[conversationId])
-            , message = yield call(sendMessage, conversationId, body)
+        try {
+          const { conversationId } = payload
+              , body = yield select(state => state.drafts[conversationId])
+              , message = yield call(sendMessage, conversationId, body)
 
-        // Reset the drafted message
-        yield put(formActions.change(`drafts.${conversationId}`, ''))
+          // Reset the drafted message
+          yield put(formActions.change(`drafts.${conversationId}`, ''))
 
-        // Notifiy about the successful send over the bus
-        yield put({type: MESSAGE_SUCCESS, conversationId, payload: {
-          ...message,
-          body: entities.decode(message.body),
-          type: MessageType.SENT
-        }})
+          // Notifiy about the successful send over the bus
+          yield put({type: MESSAGE_SUCCESS, conversationId, payload: {
+            ...message,
+            body: entities.decode(message.body),
+            type: MessageType.SENT
+          }})
+        } catch(e) {/* Errors are handled via Redux reducers */}
         break
     }
   }

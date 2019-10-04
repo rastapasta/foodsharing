@@ -15,6 +15,7 @@ import {
 } from '../common/constants'
 
 import { login, logout, getCurrentUser, getSession, getCurrentProfile, setSession, syncCookies } from '../api'
+import { Results } from '../common/typings'
 
 function* loginFlow(email: string, password: string) {
   try {
@@ -41,7 +42,8 @@ function* loginFlow(email: string, password: string) {
 
   } catch (error) {
     // Signal that something went wrong..
-    yield put({ type: LOGIN_ERROR, error })
+    // yield put({ type: LOGIN_ERROR, error })
+    // TODO: !!!!! temporary
   }
 }
 
@@ -95,26 +97,31 @@ function* reauthenticateFlow() {
     yield put({type: LOGIN_SUCCESS, payload: {session, token, id}})
 
   } catch(error) {
-    // Report why we failed
-    console.log('reauthentication failed', error)
+    if (error === Results.CONNECTION_ERROR) {
+      console.log('continuing in offline mode and assume we got a valid session ;)')
+      yield put({type: LOGIN_SUCCESS, payload: {session, token}})
+    } else {
+      // Report why we failed
+      console.log('reauthentication failed', error)
 
-    // Try to pull previously stored credentials from secure store
-    const result = yield Keychain.getGenericPassword()
+      // Try to pull previously stored credentials from secure store
+      const result = yield Keychain.getGenericPassword()
 
-    // If we don't find what we need, directly proceed to login
-    if (!result || !result.username || !result.password)
-      return Actions.reset('login')
+      // If we don't find what we need, directly proceed to login
+      if (!result || !result.username || !result.password)
+        return Actions.reset('login')
 
-    // Blast them through the pipe to get 'em into the store
-    const { username: email, password } = result
-    yield put({type: KEYCHAIN, payload: {email, password}})
+      // Blast them through the pipe to get 'em into the store
+      const { username: email, password } = result
+      yield put({type: KEYCHAIN, payload: {email, password}})
 
-    // Populate our login state/form
-    yield put(formActions.change('login.email', email))
-    yield put(formActions.change('login.password', password))
+      // Populate our login state/form
+      yield put(formActions.change('login.email', email))
+      yield put(formActions.change('login.password', password))
 
-    // ... to finally trigger the login procedure
-    yield put({type: LOGIN_REQUEST})
+      // ... to finally trigger the login procedure
+      yield put({type: LOGIN_REQUEST})
+    }
   }
 
   // Wait for our reauthentication either fail or succeed

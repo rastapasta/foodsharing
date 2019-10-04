@@ -7,7 +7,8 @@ import {
   CONVERSATIONS_SUCCESS,
   LOGOUT,
   CONVERSATION_ID_SUCCESS,
-  CONVERSATION_REQUEST
+  CONVERSATION_REQUEST,
+  REQUEST_ERROR
 } from '../common/constants'
 import { MessageType } from '../common/typings'
 
@@ -126,6 +127,14 @@ export default function reducer(state = initialState, action: any = {}) {
           message: []
         }
       ]
+
+    // In case we get any request error, reset all our sending states
+    // TODO: might be optimizable to not spread the full conversations
+    case REQUEST_ERROR:
+      return state.map(conversation => ({
+        ...conversation,
+        sending: false
+      }))
 
     // Destroy our conversations from store in case the user logs out
     case LOGOUT:
