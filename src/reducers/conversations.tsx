@@ -6,7 +6,8 @@ import {
   CONVERSATIONS_SUCCESS,
   LOGOUT,
   CONVERSATION_ID_SUCCESS,
-  CONVERSATION_REQUEST
+  CONVERSATION_REQUEST,
+  CONVERSATION_ID_REQUEST
 } from '../common/constants'
 import { MessageType } from '../common/typings'
 
@@ -31,7 +32,7 @@ export default function reducer(state = initialState, action: any = {}) {
 
     case CONVERSATION_REQUEST:
       return state.map(conversation => {
-        if (conversation.id != id)
+        if (conversation.id != payload.id)
           return conversation
 
         return {
@@ -40,7 +41,8 @@ export default function reducer(state = initialState, action: any = {}) {
         }
       })
 
-    // Mark a conversation as read as soon as we pulled its latest messages
+    // Mark a conversation as not loading anymore or read as soon as
+    // we pulled its latest messages
     case MESSAGE_READ:
     case CONVERSATION_SUCCESS:
       const id = type === CONVERSATION_SUCCESS ? action.id : payload
@@ -54,7 +56,8 @@ export default function reducer(state = initialState, action: any = {}) {
         return {
           ...conversation,
           unread: "0",
-          loading: false
+          loading: false,
+          ...(type === CONVERSATION_SUCCESS && payload.messages.length === 5 ? {fullyLoaded: true} : {})
         }
       })
 

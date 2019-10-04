@@ -71,11 +71,6 @@ class Conversation extends PureComponent<Props> {
     actions.fetchConversation(conversationId)
   }
 
-  // TODO: make sure to only rerender if conversation is affected @redux state
-  // shouldComponentUpdate() {
-  //   return true
-  // }
-
   prepareItems(messages: Message[]): Item[] {
     const data = []
     let lastLabel = null
@@ -120,10 +115,11 @@ class Conversation extends PureComponent<Props> {
       >
         <SafeAreaView style={styles.container}>
           <FlatList
-            onEndReached={() =>
-              conversation.loading || actions.fetchConversation(conversationId, data.length - 5)
-            }
-            onEndReachedThreshold={0}
+            onEndReached={() => {
+              if (!conversation.loading && !conversation.fullyLoaded)
+                actions.fetchConversation(conversationId, data.length - 5)
+            }}
+            onEndReachedThreshold={10}
             onRefresh={Platform.OS === 'ios' ? () => {
               actions.fetchConversation(conversationId)
               setTimeout(() => this.setState({refreshing: false}), 1000)

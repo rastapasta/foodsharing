@@ -18,7 +18,8 @@ export interface ConversationListEntry {
   unread: string,
   member: ConversationMember[],
 
-  loading?: boolean
+  loading?: boolean,
+  fullyLoaded?: boolean
 }
 
 export interface ConversationMember {

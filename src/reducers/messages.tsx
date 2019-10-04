@@ -22,8 +22,6 @@ export default function reducer(state = initialState, action: any = {}) {
           // Convert to object
           , id2msg = previous.reduce((all, cur) => {all[cur.id] = cur; return all}, {})
 
-      console.log(id2msg)
-
       // Merge in the new message to our existing store
       messages.forEach(message =>
         id2msg[message.id] = {...(id2msg[message.id] || {}), ...message}
