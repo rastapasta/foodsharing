@@ -1,7 +1,7 @@
 import React from 'react'
-import {TouchableOpacity, Share} from 'react-native'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import colors from '../common/colors'
+import {Share} from 'react-native'
+
+import SceneButton from './SceneButton'
 
 type Props = {
   title: string
@@ -9,18 +9,12 @@ type Props = {
 }
 
 export default ({title, url}: Props) =>
-  <TouchableOpacity
+  <SceneButton
     onPress={() =>
       Share.share({
         dialogTitle: title,
         message: url
       } as any)
     }
-  >
-    <Icon
-      name="share-variant"
-      color={colors.white}
-      size={25}
-      style={{marginRight: 11, marginTop: 1}}
-    />
-  </TouchableOpacity>
+    icon="share-variant"
+  />

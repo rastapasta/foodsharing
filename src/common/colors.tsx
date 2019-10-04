@@ -8,6 +8,9 @@ export default {
   inputPlaceholder: '#795548',
   inputText: '#000',
 
+  navigationTabInactive: '#9E837A',
+  navigationTabActive: '#D7CCC8',
+
   green: '#64AE25',
   white: '#fff',
   gray: '#aaa',
@@ -22,6 +25,7 @@ export default {
   version: '#aaa',
 
   drawerBackground: '#5C4038',
+  drawerButton: '#fff',
   drawerUser: '#CFC6C3',
   drawerIcon: '#737373',
   drawerText: '#000',

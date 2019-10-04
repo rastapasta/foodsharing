@@ -16,14 +16,15 @@ import Baskets from './Baskets'
 import Conversations from './Conversations'
 import Conversation from './Conversation'
 import ConversationMembers from './ConversationMembers'
+import Fairteiler from './Fairteiler'
+import Loading from './Loading'
 
 import ConversationTitle from '../components/ConversationTitle'
 // import FairteilerTitle from '../components/FairteilerTitle'
-
-import Fairteiler from './Fairteiler'
-import Loading from './Loading'
-import { translate } from '../common/translation'
 import ShareButton from '../components/ShareButton'
+import SceneButton from '../components/SceneButton'
+
+import { translate } from '../common/translation'
 
 const styles = StyleSheet.create({
   tabBarStyle: {
@@ -34,8 +35,16 @@ const styles = StyleSheet.create({
   }
 })
 
-const icon = (name: string, size: number = 32) => ({focused}) =>
-    <Icon name={name} size={size} style={{marginTop: 3, color: focused ? colors.white : colors.gray}}/>
+const icon = (name: string, size: number = 32, color?: string) => ({focused}) =>
+    <Icon
+      name={name}
+      size={size}
+      style={{marginTop: 3, color:
+        color ? color :
+        focused ? colors.navigationTabActive :
+        colors.navigationTabInactive
+      }}
+    />
 
 export default () =>
   <Router uriPrefix="foodsharing.de">
@@ -58,7 +67,7 @@ export default () =>
         hideNavBar
         key="drawer"
         contentComponent={Drawer}
-        drawerIcon={icon('menu', 26)}
+        drawerIcon={icon('menu', 26, colors.drawerButton)}
         drawerWidth={240}
       >
         <Tabs
@@ -79,7 +88,12 @@ export default () =>
             title={translate('scenes.baskets')}
             component={Baskets}
             icon={icon('basket')}
-
+            renderRightButton={({id}) =>
+              <SceneButton
+                icon="plus"
+                onPress={() => false}
+              />
+            }
           />
           <Scene
               key="map"

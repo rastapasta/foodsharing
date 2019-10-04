@@ -99,7 +99,7 @@ export default function reducer(state = initialState, action: any = {}) {
         return {
           ...conversation,
           ...messageToObj(payload),
-          sending: false
+          ...(type === MESSAGE_SUCCESS ? {sending: false} : {})
         }
       })
 
