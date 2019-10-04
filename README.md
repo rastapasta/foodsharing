@@ -4,7 +4,7 @@ This is a Proof of Concept to show how [React Native](https://github.com/faceboo
 
 This thingy is optimized for iOS and Android - one code, one love!
 
-Timeframe: 2 weeks project from scratch to production.
+Timeframe: 2 weeks project from scratch to production 😎
 
 ## 🎉 What's implemented?
 
@@ -24,6 +24,7 @@ Timeframe: 2 weeks project from scratch to production.
   * Send and receive messages
   * Highlight/unhighlight of unread messages (sending 'read' signal to backend)
   * Unlimitted scroll and pagination for conversation messages
+  * Conversation overview limited to the 50 latest conversations for now - because.. so much to do.. :)
   * Connect to and handle WebSocket chat interface
   * Local Notifications while app runs in the background
   * Touch on Notification directly brings you to corresponding conversation (iOS only for now)
@@ -98,8 +99,6 @@ Timeframe: 2 weeks project from scratch to production.
 * Show blockers
   * Handle offline mode correctly
   * Notifications after background pull / detect new conversations - even pull pull conversations?
-  * Handle more than the last 20 messages
-    * in conversation list
   * Handle WebSocket reconnect after long inactivity
   * Ask for Chris (or Tobi?) for permission to show user profile
 
@@ -107,7 +106,6 @@ Timeframe: 2 weeks project from scratch to production.
   * Pull conversation again when open and coming from background to make sure its marked as read
   * Loading indicators for
     * login
-    * conversations
   * Disable and pulsate send message button while sending
   * fastlane screenshot generation
 

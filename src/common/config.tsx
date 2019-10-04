@@ -14,7 +14,7 @@ export default {
     currentProfile: {uri: '/api/profile/current', method: 'GET'},
     wall: {uri: '/api/wall/{target}/{targetId}', method: 'GET'},
     store: {uri: '/api/stores/{storeId}', method: 'GET'},
-    conversations: {uri: '/api/conversations', method: 'GET'},
+    conversations: {uri: '/api/conversations?offset={offset}&limit={limit}', method: 'GET'},
     conversation: {uri: '/api/conversations/{conversationId}?messagesOffset={offset}&messagesLimit={limit}', method: 'GET'},
     markAsRead: {uri: '/api/conversations/{conversationId}?limit=0', method: 'GET'},
 

@@ -75,6 +75,8 @@ class Conversation extends PureComponent<Props> {
     const data = []
     let lastLabel = null
 
+    // TODO: this is kinda intensive for conversations with many many message
+    // -> find better solution?
     messages.forEach(message => {
       const { time } = message
         , date = moment(time)

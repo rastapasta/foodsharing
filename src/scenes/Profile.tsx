@@ -208,7 +208,7 @@ class Profile extends PureComponent<Props> {
                     <Text style={{fontWeight: 'bold'}}>
                       {
                         info.title
-                        .replace(new RegExp(`( von )*${profile.name}( ist )*`), '')
+                        .replace(new RegExp(`( von )*${profile.name}( ist | hat eine )*`), '')
                         .replace(/^(Er|Sie) ist /, '')
                       }
                     </Text>

@@ -21,6 +21,7 @@
   },
 
   "conversations": {
+    "no_conversations": "You don't have any conversations yet.",
     "note_to_self": "Note to self",
     "write_message": "Write a message!",
     "read_more": "Read more",

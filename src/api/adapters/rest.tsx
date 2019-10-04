@@ -20,8 +20,8 @@ export const getCurrentUser = (): Promise<User> =>
 export const getFairteiler = (id: number): Promise<Fairteiler> =>
   agent('fairteiler', null, {id})
 
-export const getConversations = (): Promise<ConversationListEntry[]> =>
-  agent('conversations')
+export const getConversations = (offset: number = 0, limit: number = 50): Promise<ConversationListEntry[]> =>
+  agent('conversations', null, {offset, limit})
 
 export const getConversation = async (conversationId: number, offset: number = 0, limit: number = 30): Promise<ConversationDetail> =>
   await agent('conversation', null, {conversationId, offset, limit})

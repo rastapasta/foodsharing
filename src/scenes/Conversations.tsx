@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { SafeAreaView, StyleSheet, FlatList, StatusBar } from 'react-native'
+import { SafeAreaView, StyleSheet, FlatList, StatusBar, View, Text } from 'react-native'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -10,6 +10,7 @@ import ConversationListEntry from '../components/ConversationListEntry'
 import { withNavigationFocus } from 'react-navigation'
 
 import { ConversationListEntry as ConversationListEntryType } from '../common/typings'
+import { translate } from '../common/translation'
 
 const styles = StyleSheet.create({
   container: {
@@ -54,22 +55,28 @@ class Conversations extends PureComponent<Props> {
     return (
       <SafeAreaView style={styles.container}>
         <StatusBar backgroundColor={colors.background} barStyle="light-content" />
-
-        <FlatList
-          onRefresh={() => {
-            actions.fetchConversations()
-            setTimeout(() => this.setState({refreshing: false}), 1000)
-          }}
-          refreshing={refreshing}
-          style={styles.list}
-          data={data}
-          renderItem={({item, index}) =>
-            <ConversationListEntry
-              conversation={item}
-              isLast={index === data.length - 1}
-            />
-          }
-        />
+        {data.length ?
+          <FlatList
+            onRefresh={() => {
+              actions.fetchConversations()
+              setTimeout(() => this.setState({refreshing: false}), 1000)
+            }}
+            refreshing={refreshing}
+            style={styles.list}
+            data={data}
+            renderItem={({item, index}) =>
+              <ConversationListEntry
+                conversation={item}
+                isLast={index === data.length - 1}
+              />
+            }
+          />
+        : <View style={{padding: 10}}>
+            <Text style={{textAlign: 'center'}}>
+              {translate('conversations.no_conversations')}
+            </Text>
+          </View>
+      }
       </SafeAreaView>
     )
   }
