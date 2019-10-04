@@ -57,7 +57,7 @@ export default function reducer(state = initialState, action: any = {}) {
           ...conversation,
           unread: "0",
           loading: false,
-          ...(type === CONVERSATION_SUCCESS && payload.messages.length === 5 ? {fullyLoaded: true} : {})
+          ...(type === CONVERSATION_SUCCESS && payload.messages.length <= 5 ? {fullyLoaded: true} : {})
         }
       })
 

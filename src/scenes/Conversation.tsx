@@ -80,9 +80,11 @@ class Conversation extends PureComponent<Props> {
         , date = moment(time)
         , isToday = date.isSame(new Date(), 'day')
         , isYesterday = date.isSame(new Date(Date.now() - 24*60*60*1000), 'day')
+        , thisYear = date.isSame(new Date(), 'year')
         , label = isToday ? translate('conversations.today') :
                   isYesterday ? translate('conversations.yesterday') :
-                  date.format('MMMM Do')
+                  thisYear ? date.format('MMMM Do') :
+                  date.format('MMMM Do YYYY')
 
       if (lastLabel !== label && lastLabel)
         data.push({type: 'seperator', label: lastLabel})
@@ -117,7 +119,7 @@ class Conversation extends PureComponent<Props> {
           <FlatList
             onEndReached={() => {
               if (!conversation.loading && !conversation.fullyLoaded)
-                actions.fetchConversation(conversationId, data.length - 5)
+                actions.fetchConversation(conversationId, data.length - 1)
             }}
             onEndReachedThreshold={10}
             onRefresh={Platform.OS === 'ios' ? () => {

@@ -2,8 +2,9 @@
 
 This is a Proof of Concept to show how [React Native](https://github.com/facebook/react-native) could rock the [foodsharing](https://foodsharing.network) world :smile:
 
-This thingy runs on iOS and Android - one code, one love!
+This thingy is optimized for iOS and Android - one code, one love!
 
+Timeframe: 2 weeks project from scratch to production.
 
 ## 🎉 What's implemented?
 
@@ -22,6 +23,7 @@ This thingy runs on iOS and Android - one code, one love!
 * Conversations
   * Send and receive messages
   * Highlight/unhighlight of unread messages (sending 'read' signal to backend)
+  * Unlimitted scroll and pagination for conversation messages
   * Connect to and handle WebSocket chat interface
   * Local Notifications while app runs in the background
   * Touch on Notification directly brings you to corresponding conversation (iOS only for now)
@@ -52,11 +54,12 @@ This thingy runs on iOS and Android - one code, one love!
 * Bananas
   * List of all received bananas and corresponding banana texts
 
-* Report
+* Incident Report
+  * Wait, what? There's an API for it? [Yep](https://gitlab.com/foodsharing-dev/foodsharing/blob/master/src/Modules/Report/ReportXhr.php#L189-209) :)
   * Fully translated German <> English reporting system
-  * Platform based native picker for report reason
-  * Dynamic displaying of nested options
-  * Text entry for report text, autoscaling to fullscreen on text entry
+  * Picker(s) for report reason(s)
+  * Dynamic checkbox displaying of nested options
+  * Text entry for report text, autoscaling to fullscreen on text focus
   * Hooking into Android's back button & blur event to leave fullscreen
   * Sending/Success indicator on Profile scene
 
@@ -68,22 +71,26 @@ This thingy runs on iOS and Android - one code, one love!
   * Prompt for location permission on demand
   * Reusing marker icons from Android version
 
-* Central redux/data store
-  * Persistence of conversations, messages and user data
-  * Caching of downloaded images
+* Persisted central data ([redux](https://redux.js.org/)) store
+  * Persistence of conversations, messages, foodsavers, ...
   * Full reset on logout
   * Full offline read-only capability
+  * Caching of downloaded images via native libraries
 
 * UI / UX
   * Custom fonts / 'foodsharing identity'
-  * Full i18n support (so far: German included, see notes below)
+  * All strings mapped to [i18n files](https://github.com/rastapasta/foodsharing/tree/master/assets/translations)
 
 * Deployment and CI
-  * Fastlane (icon & badge generation, certificates, deploy, ...)
+  * Fastlane iOS
+    * app icon generation
+    * app icon badge generation (version & build number)
+    * certificate handling
+    * testflight/appstore deployment
 
 * Tech stack
   * React Native
-  * redux / redux-saga for js generator magic :heart:
+  * redux / [redux-saga](https://github.com/rastapasta/foodsharing/tree/master/src/sagas) for js generator magic :heart:
   * see [package.json](https://github.com/rastapasta/foodsharing/blob/master/package.json) for complete package list
 
 ## 🤔 ToDo
@@ -91,9 +98,9 @@ This thingy runs on iOS and Android - one code, one love!
 * Show blockers
   * Handle offline mode correctly
   * Notifications after background pull / detect new conversations - even pull pull conversations?
-  * Handle more than the last 20 messages, logic to fill the gap
+  * Handle more than the last 20 messages
+    * in conversation list
   * Handle WebSocket reconnect after long inactivity
-  * Actually send abuse report
   * Ask for Chris (or Tobi?) for permission to show user profile
 
 * Should hve
@@ -101,14 +108,15 @@ This thingy runs on iOS and Android - one code, one love!
   * Loading indicators for
     * login
     * conversations
-    * conversation
   * Disable and pulsate send message button while sending
+  * fastlane screenshot generation
 
 * Nice to have
+  * Make sure there is no gap between old store and long-time-no-see message list request -> hotfix: logout-in
   * Deep linking via apple-app-site-association, needs to be merged to fs master
   * Settings screen to setup background pull / notifications?
   * react-native-hyperlink for general linking support?
 
-## 😢 Why some German in between (profile sceen)?
+## 😢 Why some (few) German in between? (example: foodsaver profile scene)
 
-It's all ready for it - all string are in an [easy to maintain i18n file](https://github.com/rastapasta/foodsharing/blob/master/assets/translations/en.json). Just the [foorsharing endpoints](https://gitlab.com/foodsharing-dev/foodsharing/tree/master/src/Controller) deserve some love by someone motivated. Things like the profile information are returned by the backend in German only - fix it, and i will adapt the app!
+While the app and its screens are fully [i18n translated](https://github.com/rastapasta/foodsharing/blob/master/assets/translations/en.json), a few [foorsharing endpoints](https://gitlab.com/foodsharing-dev/foodsharing/tree/master/src/Controller) deserve some love by someone motivated. Information like the profile details are returned by the backend in German only - fix it, and i will adapt it!
