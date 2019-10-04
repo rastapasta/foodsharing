@@ -58,6 +58,16 @@
   },
 
   "fairteiler": {
-    "share": "Share Fairteiler"
+    "share": "Share Fairteiler",
+    "messages": "Messages",
+    "information": "Information"
+  },
+
+  "wall": {
+    "no_posts": "No messages yet."
+  },
+
+  "baskets": {
+    "non_found": "You have no published food baskets and there are no baskets nearby."
   }
 }

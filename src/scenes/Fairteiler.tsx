@@ -15,6 +15,7 @@ import Swiper from '../components/Swiper'
 import { Fairteiler as FairteilerType } from '../common/typings'
 import colors from '../common/colors'
 import config from '../common/config'
+import { translate } from '../common/translation'
 
 const placeholderImage = 'https://foodsharing.de/img/fairteiler_head.jpg'
     , { width, height } = Dimensions.get('window')
@@ -77,7 +78,7 @@ class Fairteiler extends PureComponent<Props> {
 
   render() {
     const { id, fairteiler, walls } = this.props
-        , wall = walls.fairteiler[`${id}`] || []
+        , wall = walls.fairteiler[`${id}`] || {}
         , data = fairteiler[id] || null
 
     if (!data)
@@ -102,8 +103,8 @@ class Fairteiler extends PureComponent<Props> {
         />
 
         <Swiper tabs={[
-          'Informationen',
-          `Nachrichten${wall && wall.results && wall.results.length ? ` (${wall.results.length})` : ''}`
+          translate('fairteiler.information'),
+          translate('fairteiler.messages') + (wall.results && wall.results.length ? ` (${wall.results.length})` : '')
         ]}>
           <ScrollView style={{width}}>
             <View style={styles.box}>
@@ -116,15 +117,15 @@ class Fairteiler extends PureComponent<Props> {
           </ScrollView>
 
           <FlatList
-            data={wall && wall.results || []}
+            data={wall.results || []}
             style={{width}}
-            ListHeaderComponent={() => wall && !!wall.results && !!wall.results.length && <View style={{height: 5}} />}
+            ListHeaderComponent={() => !!wall.results && !!wall.results.length && <View style={{height: 5}} />}
             keyExtractor={(item: any)=> item.id.toString()}
             renderItem={WallPost}
             ListEmptyComponent={() =>
               <View style={styles.box}>
                 <Text style={styles.text}>
-                  No comments yet.
+                  {translate('wall.no_posts')}
                 </Text>
               </View>
             }

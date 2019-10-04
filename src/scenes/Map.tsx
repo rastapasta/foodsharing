@@ -15,11 +15,15 @@ import ClusteredMapView from 'react-native-maps-super-cluster'
 import MapMarker from '../components/MapMarker'
 
 const MAIN_REGION = {
-  longitude: 10.60117067,
-  latitude: 50.34470266,
-  longitudeDelta: 13.894483079,
-  latitudeDelta: 12.61906546
-}
+        longitude: 10.60117067,
+        latitude: 50.34470266,
+        longitudeDelta: 13.894483079,
+        latitudeDelta: 12.61906546
+      },
+      defaultZoom = {
+        longitudeDelta: 1.1,
+        latitudeDelta: 1.1
+      }
 
 const styles = StyleSheet.create({
   container: {
@@ -87,8 +91,7 @@ class Map extends PureComponent<Props> {
           {
             longitude: parseFloat(profile.lon),
             latitude: parseFloat(profile.lat),
-            longitudeDelta: 0.7,
-            latitudeDelta: 0.7
+            ...defaultZoom
           } : MAIN_REGION
 
     return (

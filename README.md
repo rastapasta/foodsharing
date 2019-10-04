@@ -81,7 +81,7 @@ Timeframe: 2 weeks project from scratch to production 😎
 
 * Fairteiler
   * Adress, picture and information
-  * Comments made to the Fairteilers wall
+  * Posts made to the Fairteilers wall (incl. images)
   * Share button to copy or forward public Fairteiler URL
   * Swipeable layout, number of comments in tab
   * Navigate to profile on foodsaver image touch

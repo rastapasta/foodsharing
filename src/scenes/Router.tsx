@@ -12,6 +12,7 @@ import Map from './Map'
 import Profile from './Profile'
 import Report from './Report'
 import Bananas from './Bananas'
+import Baskets from './Baskets'
 import Conversations from './Conversations'
 import Conversation from './Conversation'
 import ConversationMembers from './ConversationMembers'
@@ -19,7 +20,6 @@ import ConversationMembers from './ConversationMembers'
 import ConversationTitle from '../components/ConversationTitle'
 // import FairteilerTitle from '../components/FairteilerTitle'
 
-import Home from './Home'
 import Fairteiler from './Fairteiler'
 import Loading from './Loading'
 import { translate } from '../common/translation'
@@ -75,9 +75,9 @@ export default () =>
             component={Conversations}
           />
           <Scene
-            key="basket"
+            key="baskets"
             title={translate('scenes.baskets')}
-            component={Home}
+            component={Baskets}
             icon={icon('basket')}
 
           />
