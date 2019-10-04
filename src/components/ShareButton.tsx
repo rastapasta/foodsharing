@@ -21,6 +21,6 @@ export default ({title, url}: Props) =>
       name="share-variant"
       color={colors.white}
       size={25}
-      style={{marginRight: 15, marginTop: 1}}
+      style={{marginRight: 11, marginTop: 1}}
     />
   </TouchableOpacity>

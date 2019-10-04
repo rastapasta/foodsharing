@@ -111,8 +111,10 @@ Timeframe: 2 weeks project from scratch to production 😎
 ## 🤔 Personal ToDos
 
 * Show blockers
+  * No baskets - yet
   * Loading indicators for
     * login
+  * Sending button jumps colors
   * Android
     * Grid in conversations list is screwed
 

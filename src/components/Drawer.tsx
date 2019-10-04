@@ -48,7 +48,7 @@ type Props = {
 
 class Drawer extends PureComponent<Props> {
   render() {
-    const {profile: {name, id}, actions: { logout }} = this.props
+    const {profile: {name, id}, actions: { logout, fetchConversationId }} = this.props
 
     return (
       <View style={styles.container}>
@@ -64,6 +64,13 @@ class Drawer extends PureComponent<Props> {
             icon="account"
             label={translate('drawer.profile')}
           />
+
+          <DrawerButton
+            onPress={() => fetchConversationId(338241)}
+            icon="heart-outline"
+            label={translate('drawer.feedback')}
+          />
+
           <DrawerButton
             onPress={logout}
             icon="exit-to-app"

@@ -14,7 +14,7 @@ import MapCluster from '../components/MapCluster'
 import ClusteredMapView from 'react-native-maps-super-cluster'
 import MapMarker from '../components/MapMarker'
 
-const INIT_REGION = {
+const MAIN_REGION = {
   longitude: 10.60117067,
   latitude: 50.34470266,
   longitudeDelta: 13.894483079,
@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
 type Props = {
   actions: any,
   markers: any,
+  profile: any,
   isFocused: boolean
 }
 
@@ -80,7 +81,15 @@ class Map extends PureComponent<Props> {
 
   render() {
     const { trackPosition } = this.state
+        , { profile } = this.props
         , data = this.transformMarkers()
+        , INIT_REGION = profile.lat && profile.lon ?
+          {
+            longitude: parseFloat(profile.lon),
+            latitude: parseFloat(profile.lat),
+            longitudeDelta: 0.7,
+            latitudeDelta: 0.7
+          } : MAIN_REGION
 
     return (
       <View style={styles.container}>
@@ -97,9 +106,23 @@ class Map extends PureComponent<Props> {
 
           showsUserLocation={trackPosition}
           followsUserLocation
+          animateClusters={false}
 
-          renderMarker={marker => <MapMarker key={'marker.'+marker.id} marker={marker} onPress={() => Actions.fairteiler({id: marker.id})} />}
-          renderCluster={(cluster, onPress) => <MapCluster key={'cluster.'+cluster.id} cluster={cluster} onPress={onPress} />}
+          renderMarker={marker =>
+            <MapMarker
+              key={'marker.'+marker.id}
+              marker={marker}
+              onPress={() => Actions.fairteiler({id: marker.id})}
+            />
+          }
+
+          renderCluster={(cluster, onPress) =>
+            <MapCluster
+              key={'cluster.'+cluster.id}
+              cluster={cluster}
+              onPress={onPress}
+            />
+          }
         />
         <MapButton
           onPress={() => this.setState({trackPosition: !trackPosition})}
@@ -108,7 +131,7 @@ class Map extends PureComponent<Props> {
           color={colors[trackPosition ? 'green' : 'black']}
         />
         <MapButton
-          onPress={() => this.refs.map.mapview.animateToRegion(INIT_REGION)}
+          onPress={() => this.refs.map.mapview.animateToRegion(MAIN_REGION)}
           style={styles.zoomOut}
           icon="arrow-decision-outline"
         />
@@ -118,7 +141,8 @@ class Map extends PureComponent<Props> {
 }
 
 const mapStateToProps = state => ({
-  markers: state.markers
+  markers: state.markers,
+  profile: state.profile
 })
 
 const mapDispatchToProps = dispatch => ({

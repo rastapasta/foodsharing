@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { StyleSheet, View, Text, Dimensions, ScrollView, FlatList } from 'react-native'
+import { StyleSheet, View, Text, Dimensions, ScrollView, FlatList, SafeAreaView } from 'react-native'
 import ActivityIndicator from '../components/ActivityIndicator'
 import { withNavigationFocus } from 'react-navigation'
 import Image from 'react-native-fast-image'
@@ -84,7 +84,7 @@ class Fairteiler extends PureComponent<Props> {
       return <ActivityIndicator backgroundColor={colors.white} color={colors.background} />
 
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <View style={styles.box}>
           <Text style={styles.headline}>{data.name}</Text>
           <Text style={styles.text}>
@@ -123,7 +123,7 @@ class Fairteiler extends PureComponent<Props> {
             renderItem={WallPost}
           />
         </Swiper>
-      </View>
+      </SafeAreaView>
     )
   }
 }

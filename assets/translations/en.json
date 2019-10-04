@@ -11,7 +11,8 @@
 
   "drawer": {
     "profile": "Profile",
-    "logout": "Logout"
+    "logout": "Logout",
+    "feedback": "Feedback"
   },
 
   "login": {
