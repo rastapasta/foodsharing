@@ -17,7 +17,7 @@ import colors from '../common/colors'
 import config from '../common/config'
 
 const placeholderImage = 'https://foodsharing.de/img/fairteiler_head.jpg'
-    , { height } = Dimensions.get('window')
+    , { width, height } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
   container: {
@@ -105,7 +105,7 @@ class Fairteiler extends PureComponent<Props> {
           'Informationen',
           `Nachrichten${wall && wall.results ? ` (${wall.results.length})` : ''}`
         ]}>
-          <ScrollView style={{flex: 1}}>
+          <ScrollView style={{width}}>
             <View style={styles.box}>
               <Hyperlink linkDefault linkStyle={{color: colors.green}}>
                 <Text style={styles.text}>
@@ -117,7 +117,7 @@ class Fairteiler extends PureComponent<Props> {
 
           <FlatList
             data={wall && wall.results || []}
-            style={{flex: 1}}
+            style={{width}}
             ListHeaderComponent={() => <View style={{height: 5}} />}
             keyExtractor={(item: any)=> item.id.toString()}
             renderItem={WallPost}

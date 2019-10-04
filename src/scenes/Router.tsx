@@ -17,7 +17,7 @@ import Conversation from './Conversation'
 import ConversationMembers from './ConversationMembers'
 
 import ConversationTitle from '../components/ConversationTitle'
-import FairteilerTitle from '../components/FairteilerTitle'
+// import FairteilerTitle from '../components/FairteilerTitle'
 
 import Home from './Home'
 import Fairteiler from './Fairteiler'
@@ -95,11 +95,12 @@ export default () =>
       />
       <Scene
         key="fairteiler"
-        renderTitle={({id}) => <FairteilerTitle id={id} />}
         title={translate('scenes.fairteiler')}
         component={Fairteiler}
         hideNavBar={false}
-        path="/?page=fairteiler&sub=ft&id=:id"
+
+        // renderTitle={({id}) => <FairteilerTitle id={id} />}
+        // path="/?page=fairteiler&sub=ft&id=:id"
       />
       <Scene
         key="profile"
@@ -109,7 +110,9 @@ export default () =>
       />
       <Scene
         key="groupchat"
-        renderTitle={({conversationId}) => <ConversationTitle conversationId={conversationId} showCount />}
+        renderTitle={({conversationId}) =>
+          <ConversationTitle conversationId={conversationId} showCount />
+        }
         component={ConversationMembers}
         hideNavBar={false}
       />

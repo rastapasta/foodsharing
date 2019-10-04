@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Animated, Dimensions } from 'react-native'
-import ReactSwiper from 'react-native-swiper'
 import colors from '../common/colors'
 
 const { width } = Dimensions.get('window')
@@ -81,19 +80,19 @@ export default class Swiper extends PureComponent<Props> {
           }]}/>
         </View>
 
-        <ReactSwiper
-          animated
+        <Animated.ScrollView
+          horizontal
           ref="swiper"
-          loop={false}
-          showsPagination={false}
           onScroll={Animated.event(
             [{nativeEvent: {contentOffset: {x: scrollX}}}],
             {useNativeDriver: true}
           )}
+          style={{width}}
+          pagingEnabled
           scrollEventThrottle={8}
         >
           {...children}
-        </ReactSwiper>
+        </Animated.ScrollView>
       </View>
     )
   }

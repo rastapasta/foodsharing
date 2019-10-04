@@ -76,11 +76,11 @@ function* reauthenticateFlow() {
 
     // Let's always assume we got a working session - predictive ux for the win!
     setTimeout(() => {
-      Actions.reset('fairteiler', {id: 666})
+      // Actions.reset('fairteiler', {id: 666})
 
-      // Actions.reset('drawer')
+      Actions.reset('drawer')
       SplashScreen.hide()
-    }, 2000)
+    }, 100)
 
     // Configure our API adapter to use the stored session & token
     setSession({session, token})
