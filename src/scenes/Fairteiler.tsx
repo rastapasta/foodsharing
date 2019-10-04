@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
-import { SafeAreaView, StyleSheet, View, Text, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, Text } from 'react-native'
+import Swiper from 'react-native-swiper'
 import ActivityIndicator from '../components/ActivityIndicator'
 import { withNavigationFocus } from 'react-navigation'
 import Image from 'react-native-fast-image'
@@ -13,6 +14,8 @@ import { Fairteiler as FairteilerType } from '../common/typings'
 import colors from '../common/colors'
 import config from '../common/config'
 
+const placeholderImage = 'https://foodsharing.de/img/fairteiler_head.jpg'
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -22,9 +25,11 @@ const styles = StyleSheet.create({
     padding: 10
   },
   headline: {
-    fontSize: 12,
+    fontFamily: 'Alfa Slab One',
+    fontSize: 14,
     fontWeight: '600',
-    marginBottom: 10
+    marginBottom: 10,
+    color: colors.background
   },
   text: {
     fontSize: 12,
@@ -34,6 +39,20 @@ const styles = StyleSheet.create({
     height: 1,
     marginLeft: 10,
     marginRight: 10
+  },
+  tabs: {
+    flexDirection: 'row'
+  },
+  tab: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 10
+  },
+  tabLabel: {
+    fontFamily: 'Alfa Slab One',
+    fontSize: 14,
+    color: colors.background
   }
 })
 
@@ -62,14 +81,14 @@ class Fairteiler extends PureComponent<Props> {
 
   render() {
     const { id, fairteiler, walls } = this.props
-        , wall = walls.fairteiler[`${id}`] || null
+        // , wall = walls.fairteiler[`${id}`] || null
         , data = fairteiler[id] || null
 
     if (!data)
       return <ActivityIndicator backgroundColor={colors.white} color={colors.background} />
 
     return (
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         <View style={{flexDirection: 'row'}}>
           <View style={styles.box}>
             <Text style={styles.headline}>{data.name}</Text>
@@ -78,27 +97,49 @@ class Fairteiler extends PureComponent<Props> {
               {data.postcode} {data.city}
             </Text>
           </View>
-          <TouchableOpacity style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+          {/* <TouchableOpacity style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
             <Text>mini map placeholder</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
         <View style={styles.seperator} />
-        {!!data.picture &&
-          <Image
-            source={{uri: config.host + '/images/' + data.picture}}
-            style={{height: 200}}
-            resizeMode="cover"
-          />
-        }
-        <View style={styles.box}>
-          <Hyperlink linkDefault linkStyle={{color: colors.green}}>
-            <Text style={styles.text}>
-              {data.description}
+        <Image
+          source={{uri: data.picture ? config.host + '/images/' + data.picture : placeholderImage}}
+          style={{height: 200}}
+          resizeMode="cover"
+        />
+        <View style={styles.tabs}>
+          <View style={styles.tab}>
+            <Text style={styles.tabLabel}>
+              Informationen
             </Text>
-          </Hyperlink>
+          </View>
+          <View style={styles.tab}>
+            <Text style={styles.tabLabel}>
+              Nachrichten
+            </Text>
+          </View>
         </View>
-        <Text>{JSON.stringify(data)}</Text>
-      </SafeAreaView>
+        <Swiper>
+          <View style={{flex: 1}}>
+            <View style={styles.box}>
+              <Hyperlink linkDefault linkStyle={{color: colors.green}}>
+                <Text style={styles.text}>
+                  {data.description}
+                </Text>
+              </Hyperlink>
+            </View>
+          </View>
+          <View style={{flex: 1}}>
+            <View style={styles.box}>
+              <Hyperlink linkDefault linkStyle={{color: colors.green}}>
+                <Text style={styles.text}>
+                  {data.description}
+                </Text>
+              </Hyperlink>
+            </View>
+          </View>
+        </Swiper>
+      </View>
     )
   }
 }
