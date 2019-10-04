@@ -10,9 +10,12 @@ Timeframe: 2 weeks project from scratch to production 😎
 
 * Login
   * Full async login / reauthentication / logout flows
-  * Auth via email and password
-  * Links to web based register & password restore
+  * Restores session if previously logged in - even if device offline
   * Using device's keychain to store credentials in a secure location
+  * Auth via email and password
+  * Buttons -> navigate to web based register & password restore
+  * Loading indication inside login button
+  * Notification of failed login
   * Display of the current build version
 
 * Drawer
@@ -112,14 +115,11 @@ Timeframe: 2 weeks project from scratch to production 😎
 
 * Show blockers
   * No baskets - yet
-  * Loading indicators for
-    * login
-  * Sending button jumps colors
   * Android
     * Grid in conversations list is screwed
 
 * Should have
-  * Handle offline mode correctly
+  * Reflect REQUEST_ERROR errors in the seperate UIs
   * Pull conversation again when open and coming from background to make sure its marked as read
   * Notifications after background pull / detect new conversations - even pull pull conversations? Delta algo!
   * Handle WebSocket reconnect after long inactivity
@@ -127,7 +127,7 @@ Timeframe: 2 weeks project from scratch to production 😎
 
 * Nice to have
   * Make sure there is no gap between old store and long-time-no-see message list request -> hotfix: logout-in
-  * Deep linking via apple-app-site-association, needs to be merged to fs master
+  * Deep linking via apple-app-site-association, needs to be merged to fs master & production
   * Settings screen to setup background pull / notifications?
   * Use ```CONVERSATIONS_SUCCESS``` to warm up conversation's message (at least one)
 

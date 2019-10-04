@@ -3,7 +3,7 @@ update_fastlane
 app = 'network.foodsharing'
 project = './ios/foodsharing.xcodeproj'
 workspace = './ios/foodsharing.xcworkspace'
-profile_uuid = 'd7e83ed2-18d1-4480-b721-3a25c36e6312'
+profile_uuid = '769976eb-c43e-4c30-9004-79fd6bc29874'
 scheme = 'foodsharing'
 
 default_platform(:ios)
@@ -66,7 +66,7 @@ platform :ios do
   private_lane :bump do
     latest = latest_testflight_build_number
     if latest >= get_build_number(xcodeproj: project).to_i
-      increment_build_number(xcodeproj: project, build_number: latest + 1)
+      increment_build_number(xcodeproj: project, build_number: latest)
       commit_version_bump(message: ':construction_worker: iOS build version bump', xcodeproj: project)
     end
   end
@@ -87,7 +87,7 @@ platform :ios do
   end
 
   lane :beta do
-    bump
+    # bump
     icon
     beta_badge
     build

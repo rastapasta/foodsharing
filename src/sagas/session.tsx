@@ -42,8 +42,7 @@ function* loginFlow(email: string, password: string) {
 
   } catch (error) {
     // Signal that something went wrong..
-    // yield put({ type: LOGIN_ERROR, error })
-    // TODO: !!!!! temporary
+    yield put({ type: LOGIN_ERROR, error })
   }
 }
 

@@ -29,6 +29,7 @@ import LoginForgotPassword from '../components/LoginForgotPassword'
 import Version from '../components/Version'
 
 import colors from '../common/colors'
+import { translate } from '../common/translation'
 
 const {width} = Dimensions.get('window')
     , registerURL = 'https://foodsharing.de/?page=content&sub=joininfo'
@@ -48,12 +49,20 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     marginTop: 30
+  },
+  messageContainer: {
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  messageText: {
+    color: colors.white
   }
 })
 
 type Props = {
   actions: any
   isFocused: boolean
+  app: any
 }
 
 class Login extends PureComponent<Props> {
@@ -67,9 +76,13 @@ class Login extends PureComponent<Props> {
   }
 
   componentDidUpdate(prevProps: Props) {
-    const { actions } = this.props
+    const { actions, app: { authenticating } } = this.props
+
     if (prevProps.isFocused === false && this.props.isFocused === true)
       actions.navigation('login')
+
+    if (prevProps.app.authenticating !== authenticating && authenticating === false)
+      this.refs.toast.show(translate('login.failed'), 3000)
   }
 
   componentDidMount() {
@@ -77,21 +90,9 @@ class Login extends PureComponent<Props> {
     actions.navigation('login')
     SplashScreen.hide()
   }
-  // doLogin = async () => {
-  //   const {email, password} = this.state
-
-  //   Keyboard.dismiss()
-
-  //   try {
-  //     const { name } = await login(email, password)
-  //     this.refs.toast.show(`Welcome, ${name}!`, 3000)
-  //   } catch(e) {
-  //     this.refs.toast.show(translate('login.failed'), 1000)
-  //   }
-  // }
 
   render() {
-    const { actions } = this.props as any
+    const { actions, app: { authenticating } } = this.props
     return (
       <SafeAreaView style={styles.container}>
         <StatusBar backgroundColor={colors.background} barStyle="light-content" />
@@ -128,6 +129,7 @@ class Login extends PureComponent<Props> {
               <LoginButton
                 label="login.login"
                 raised
+                loading={authenticating}
                 onPress={() => {
                   Keyboard.dismiss()
                   actions.login()
@@ -144,7 +146,9 @@ class Login extends PureComponent<Props> {
   }
 }
 
-const mapStateToProps = () => ({})
+const mapStateToProps = (state) => ({
+  app: state.app
+})
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(reduxActions, dispatch)

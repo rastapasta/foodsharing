@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View, ActivityIndicator } from 'react-native'
 
 import colors from '../common/colors'
 import { translate } from '../common/translation'
@@ -23,12 +23,18 @@ const styles = StyleSheet.create({
   },
   raisedText: {
     color: colors.background,
+  },
+  incicator: {
+    ...StyleSheet.absoluteFillObject,
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 })
 
 type Props = {
   label: string
   raised?: boolean
+  loading?: boolean
   onPress: () => void
 }
 
@@ -38,7 +44,12 @@ export default (props: Props) =>
     hitSlop={{top: 10, left: 20, bottom: 20, right: 20}}
     onPress={props.onPress}
   >
-    <Text style={[styles.text, !!props.raised && styles.raisedText]}>
+    <Text style={[styles.text, !!props.raised && styles.raisedText, !!props.loading && {opacity: 0}]}>
       {translate(props.label)}
     </Text>
+    {props.loading &&
+      <View style={styles.incicator}>
+        <ActivityIndicator size="small" color={colors.background} />
+      </View>
+    }
   </TouchableOpacity>

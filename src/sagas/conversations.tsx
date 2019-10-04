@@ -44,7 +44,7 @@ function* fetch() {
       type: CONVERSATIONS_SUCCESS,
       payload: conversations
     })
-  } catch(e) {/* Errors being handled via Redux reducers */}
+  } catch(e) {/* Errors are handled via Redux reducers */}
 }
 
 

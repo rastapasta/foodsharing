@@ -24,7 +24,8 @@ const persistConfig = {
     'foodsavers',
     'profile',
     'markers',
-    'fairteiler'
+    'fairteiler',
+    'walls'
   ]
 }
 
