@@ -1,4 +1,4 @@
-const PRODUCTION = false
+const PRODUCTION = true
 
 export default {
   host: PRODUCTION ? 'https://beta.foodsharing.de' : 'http://localhost:18080/',

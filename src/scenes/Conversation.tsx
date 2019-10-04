@@ -123,7 +123,7 @@ class Conversation extends PureComponent<Props> {
               if (!conversation.loading && !conversation.fullyLoaded)
                 actions.fetchConversation(conversationId, data.length - 1)
             }}
-            onEndReachedThreshold={10}
+            onEndReachedThreshold={5}
             onRefresh={Platform.OS === 'ios' ? () => {
               actions.fetchConversation(conversationId)
               setTimeout(() => this.setState({refreshing: false}), 1000)

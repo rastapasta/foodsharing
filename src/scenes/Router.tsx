@@ -17,6 +17,7 @@ import Conversation from './Conversation'
 import ConversationMembers from './ConversationMembers'
 
 import ConversationTitle from '../components/ConversationTitle'
+import FairteilerTitle from '../components/FairteilerTitle'
 
 import Home from './Home'
 import Fairteiler from './Fairteiler'
@@ -94,6 +95,7 @@ export default () =>
       />
       <Scene
         key="fairteiler"
+        renderTitle={({id}) => <FairteilerTitle id={id} />}
         title={translate('scenes.fairteiler')}
         component={Fairteiler}
         hideNavBar={false}
