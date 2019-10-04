@@ -16,19 +16,9 @@ import {
   LOGOUT
 } from '../common/constants'
 
+import { mergeWithState } from '../common/utils'
+
 const initialState = {}
-
-const mergeWithState = (state, id, options) => {
-  const newState = {...state}
-      , key = `${id}`
-
-  newState[key] = {
-    ...state[key],
-    ...options
-  }
-
-  return newState
-}
 
 export default function reducer(state = initialState, action: any = {}) {
   const { type, payload } = action

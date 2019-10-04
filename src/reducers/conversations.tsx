@@ -1,4 +1,5 @@
 import {
+  MESSAGE_REQUEST,
   MESSAGE_SUCCESS,
   MESSAGE_READ,
   WEBSOCKET_MESSAGE,
@@ -6,8 +7,7 @@ import {
   CONVERSATIONS_SUCCESS,
   LOGOUT,
   CONVERSATION_ID_SUCCESS,
-  CONVERSATION_REQUEST,
-  CONVERSATION_ID_REQUEST
+  CONVERSATION_REQUEST
 } from '../common/constants'
 import { MessageType } from '../common/typings'
 
@@ -71,6 +71,18 @@ export default function reducer(state = initialState, action: any = {}) {
 
       return freshState
 
+    // Set this conversations sending state
+    case MESSAGE_REQUEST:
+      return state.map(conversation => {
+        if (conversation.id != payload.conversationId)
+          return conversation
+
+        return {
+          ...conversation,
+          sending: true
+        }
+      })
+
     // Process incoming me\ssages by updating the last conversations last timestamp, user and
     // create conversation in case it didnt exist yet
     case MESSAGE_SUCCESS:
@@ -86,7 +98,8 @@ export default function reducer(state = initialState, action: any = {}) {
         found = true
         return {
           ...conversation,
-          ...messageToObj(payload)
+          ...messageToObj(payload),
+          sending: false
         }
       })
 

@@ -18,8 +18,10 @@ export interface ConversationListEntry {
   unread: string,
   member: ConversationMember[],
 
+  // Whacky hacky - TODO: abstract API -> own model
   loading?: boolean,
-  fullyLoaded?: boolean
+  fullyLoaded?: boolean,
+  sending?: boolean
 }
 
 export interface ConversationMember {

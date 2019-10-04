@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { StyleSheet, View, TouchableOpacity} from 'react-native'
+import { StyleSheet, View, TouchableOpacity, ActivityIndicator} from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import { Control } from 'react-redux-form/native'
@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
 
 type Props = {
   onSend: (message) => Promise<boolean>
+  sending: boolean
   model: string
   active: boolean
 }
@@ -43,16 +44,15 @@ export default class MessageForm extends PureComponent<Props> {
     value: ''
   }
 
-  sendMessage = async () => {
+  sendMessage = () => {
     const { value } = this.state
         , { onSend } = this.props
 
-    if (await onSend(value))
-      this.setState({value: ''})
+    onSend(value)
   }
 
   render() {
-    const { model, active } = this.props
+    const { model, active, sending } = this.props
 
     return (
       <View style={styles.container}>
@@ -69,12 +69,17 @@ export default class MessageForm extends PureComponent<Props> {
           onPress={this.sendMessage}
           disabled={!active}
         >
-          <Icon
-            name="send"
-            color={active ? colors.messageSendIconActive : colors.messageSendIcon}
-            size={20}
-            style={styles.icon}
-          />
+          {sending ?
+            <View style={{padding: 2}}>
+              <ActivityIndicator size="small" color={colors.messageSendIconActive} />
+            </View> :
+            <Icon
+              name="send"
+              color={active ? colors.messageSendIconActive : colors.messageSendIcon}
+              size={20}
+              style={styles.icon}
+            />
+          }
         </TouchableOpacity>
       </View>
     )

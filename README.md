@@ -17,6 +17,7 @@ Timeframe: 2 weeks project from scratch to production 😎
 
 * Drawer
   * Display of logo and name of user
+  * Button for navigation to own profile
   * Button for Logout
   * Display of the current build version
 
@@ -97,12 +98,16 @@ Timeframe: 2 weeks project from scratch to production 😎
 ## 🤔 ToDo
 
 * Show blockers
-  * Handle offline mode correctly
-  * Notifications after background pull / detect new conversations - even pull pull conversations?
-  * Handle WebSocket reconnect after long inactivity
-  * Ask for Chris (or Tobi?) for permission to show user profile
+  * Features
+    * Handle offline mode correctly
+    * Notifications after background pull / detect new conversations - even pull pull conversations?
+    * Handle WebSocket reconnect after long inactivity
+  * Deploy
+    * Ask for Chris (or Tobi?) for permission to show user profile
+  * Android
+    * Grid in conversations list is screwed
 
-* Should hve
+* Should have
   * Pull conversation again when open and coming from background to make sure its marked as read
   * Loading indicators for
     * login
@@ -114,6 +119,9 @@ Timeframe: 2 weeks project from scratch to production 😎
   * Deep linking via apple-app-site-association, needs to be merged to fs master
   * Settings screen to setup background pull / notifications?
   * react-native-hyperlink for general linking support?
+
+* Feature creep
+  * Edit profile information / Mütze :)
 
 ## 😢 Why some (few) German in between? (example: foodsaver profile scene)
 

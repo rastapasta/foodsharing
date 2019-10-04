@@ -163,6 +163,7 @@ class Conversation extends PureComponent<Props> {
             onSend={() => actions.sendMessage(conversationId)}
             model={`drafts.${conversationId}`}
             active={!!drafts[conversationId]}
+            sending={conversation.sending}
           />
         </SafeAreaView>
       </KeyboardAvoidingView>
