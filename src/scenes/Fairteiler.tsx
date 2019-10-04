@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View, Text, Dimensions, TouchableOpacity, Animated, ScrollView, FlatList } from 'react-native'
 import Swiper from 'react-native-swiper'
 import ActivityIndicator from '../components/ActivityIndicator'
 import { withNavigationFocus } from 'react-navigation'
@@ -10,11 +10,14 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as reduxActions from '../common/actions'
 
+import WallPost from '../components/WallPost'
+
 import { Fairteiler as FairteilerType } from '../common/typings'
 import colors from '../common/colors'
 import config from '../common/config'
 
 const placeholderImage = 'https://foodsharing.de/img/fairteiler_head.jpg'
+    , { width, height } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
   container: {
@@ -29,7 +32,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '600',
     marginBottom: 10,
-    color: colors.background
+    color: '#000'
   },
   text: {
     fontSize: 12,
@@ -39,6 +42,9 @@ const styles = StyleSheet.create({
     height: 1,
     marginLeft: 10,
     marginRight: 10
+  },
+  image: {
+    height: height * 0.2
   },
   tabs: {
     flexDirection: 'row'
@@ -53,7 +59,8 @@ const styles = StyleSheet.create({
     fontFamily: 'Alfa Slab One',
     fontSize: 14,
     color: colors.background
-  }
+  },
+
 })
 
 type Props = {
@@ -65,6 +72,13 @@ type Props = {
 }
 
 class Fairteiler extends PureComponent<Props> {
+  refs: {
+    swiper: any
+  }
+  state = {
+    scrollX: new Animated.Value(0)
+  }
+
   componentDidUpdate(prevProps: Props) {
     const { actions, id } = this.props
     if (prevProps.isFocused === false && this.props.isFocused === true)
@@ -81,7 +95,8 @@ class Fairteiler extends PureComponent<Props> {
 
   render() {
     const { id, fairteiler, walls } = this.props
-        // , wall = walls.fairteiler[`${id}`] || null
+        , { scrollX } = this.state
+        , wall = walls.fairteiler[`${id}`] || []
         , data = fairteiler[id] || null
 
     if (!data)
@@ -89,38 +104,73 @@ class Fairteiler extends PureComponent<Props> {
 
     return (
       <View style={styles.container}>
-        <View style={{flexDirection: 'row'}}>
-          <View style={styles.box}>
-            <Text style={styles.headline}>{data.name}</Text>
-            <Text style={styles.text}>
-              {data.address}{'\n'}
-              {data.postcode} {data.city}
-            </Text>
-          </View>
-          {/* <TouchableOpacity style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-            <Text>mini map placeholder</Text>
-          </TouchableOpacity> */}
+        <View style={styles.box}>
+          <Text style={styles.headline}>{data.name}</Text>
+          <Text style={styles.text}>
+            {data.address}{'\n'}
+            {data.postcode} {data.city}
+          </Text>
         </View>
+
         <View style={styles.seperator} />
+
         <Image
           source={{uri: data.picture ? config.host + '/images/' + data.picture : placeholderImage}}
-          style={{height: 200}}
+          style={styles.image}
           resizeMode="cover"
         />
+
         <View style={styles.tabs}>
-          <View style={styles.tab}>
+          <TouchableOpacity
+            style={styles.tab}
+            onPress={() => this.refs.swiper.scrollBy(-1)}
+          >
             <Text style={styles.tabLabel}>
               Informationen
             </Text>
-          </View>
-          <View style={styles.tab}>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.tab}
+            onPress={() => this.refs.swiper.scrollBy(1)}
+          >
             <Text style={styles.tabLabel}>
-              Nachrichten
+              Nachrichten{wall && wall.results ? ` (${wall.results.length})` : ''}
             </Text>
-          </View>
+          </TouchableOpacity>
+
+          <View style={{
+            position: 'absolute',
+            height: 3,
+            backgroundColor: colors.backgroundBright,
+            width: width,
+            bottom: 0
+          }}/>
+          <Animated.View style={{
+            position: 'absolute',
+            height: 3,
+            backgroundColor: colors.background,
+            width: width/2,
+            bottom: 0,
+            transform: [{
+              translateX: scrollX.interpolate({
+                inputRange: [0, width],
+                outputRange: [0, width/2]
+              })
+            }]
+          }}/>
         </View>
-        <Swiper>
-          <View style={{flex: 1}}>
+        <Swiper
+          animated
+          ref="swiper"
+          loop={false}
+          showsPagination={false}
+          onScroll={Animated.event(
+            [{nativeEvent: {contentOffset: {x: scrollX}}}],
+            {useNativeDriver: true}
+          )}
+          scrollEventThrottle={8}
+        >
+          <ScrollView style={{flex: 1}}>
             <View style={styles.box}>
               <Hyperlink linkDefault linkStyle={{color: colors.green}}>
                 <Text style={styles.text}>
@@ -128,16 +178,14 @@ class Fairteiler extends PureComponent<Props> {
                 </Text>
               </Hyperlink>
             </View>
-          </View>
-          <View style={{flex: 1}}>
-            <View style={styles.box}>
-              <Hyperlink linkDefault linkStyle={{color: colors.green}}>
-                <Text style={styles.text}>
-                  {data.description}
-                </Text>
-              </Hyperlink>
-            </View>
-          </View>
+          </ScrollView>
+          <FlatList
+            data={wall && wall.results || []}
+            style={{flex: 1}}
+            keyExtractor={(item: any)=> item.id.toString()}
+            renderItem={WallPost}
+              // <Text>{JSON.stringify(item)}</Text>
+          />
         </Swiper>
       </View>
     )

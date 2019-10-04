@@ -80,7 +80,7 @@ function* reauthenticateFlow() {
 
       // Actions.reset('drawer')
       SplashScreen.hide()
-    }, 100)
+    }, 2000)
 
     // Configure our API adapter to use the stored session & token
     setSession({session, token})

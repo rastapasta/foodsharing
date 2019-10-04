@@ -79,6 +79,10 @@ Timeframe: 2 weeks project from scratch to production 😎
   * Prompt for location permission on demand
   * Reusing marker icons from Android version
 
+* Fairteiler
+  * Adress, picture and information
+  * Comments made to the Fairteilers wall
+
 * Persisted central data ([redux](https://redux.js.org/)) store
   * Persistence of conversations, messages, foodsavers, ...
   * Full reset on logout
@@ -120,12 +124,11 @@ Timeframe: 2 weeks project from scratch to production 😎
   * Make sure there is no gap between old store and long-time-no-see message list request -> hotfix: logout-in
   * Deep linking via apple-app-site-association, needs to be merged to fs master
   * Settings screen to setup background pull / notifications?
-  * react-native-hyperlink for general linking support?
   * Use ```CONVERSATIONS_SUCCESS``` to warm up conversation's message (at least one)
 
 * Feature creep
   * Edit profile information / Mütze :)
 
-## 😢 Why some (few) German in between? (example: foodsaver profile scene)
+## 😢 Why some few German in between the UI? (example: foodsaver profile scene)
 
 While the app and its screens are fully [i18n translated](https://github.com/rastapasta/foodsharing/blob/master/assets/translations/en.json), a few [foorsharing endpoints](https://gitlab.com/foodsharing-dev/foodsharing/tree/master/src/Controller) deserve some love by someone motivated. Information like the profile details are returned by the backend in German only - fix it, and i will adapt it!

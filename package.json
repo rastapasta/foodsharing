@@ -39,7 +39,7 @@
     "react-native-push-notification": "^3.1.9",
     "react-native-router-flux": "^4.0.6",
     "react-native-splash-screen": "^3.2.0",
-    "react-native-swiper": "^1.5.14",
+    "react-native-swiper": "git+https://github.com/rastapasta/react-native-swiper#master",
     "react-native-vector-icons": "^6.6.0",
     "react-redux": "^7.1.1",
     "react-redux-form": "^1.16.14",

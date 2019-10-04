@@ -5952,10 +5952,9 @@ react-native-stream@^0.1.0:
     base64-js "^1.2.0"
     ieee754 "^1.1.8"
 
-react-native-swiper@^1.5.14:
+"react-native-swiper@git+https://github.com/rastapasta/react-native-swiper#master":
   version "1.5.14"
-  resolved "https://registry.yarnpkg.com/react-native-swiper/-/react-native-swiper-1.5.14.tgz#1c6f949ca377186300f972bb0f30d24062c899aa"
-  integrity sha512-Kn0fxKooN7Shwu1qJYHB+Y8ssXXnvrIwReHXU5jCdyYNfz2QbBv0Cv3sa2Mqzr+XgzORCFFIokc8uCCUITDrVA==
+  resolved "git+https://github.com/rastapasta/react-native-swiper#62086fddb47f7c3c30f89e3ebf198380d5516588"
   dependencies:
     prop-types "^15.5.10"
 
