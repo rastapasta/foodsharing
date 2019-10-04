@@ -1,20 +1,39 @@
 import React, { PureComponent } from 'react'
-import { SafeAreaView, StyleSheet, View, Text } from 'react-native'
+import { SafeAreaView, StyleSheet, View, Text, TouchableOpacity } from 'react-native'
 import ActivityIndicator from '../components/ActivityIndicator'
 import { withNavigationFocus } from 'react-navigation'
+import Image from 'react-native-fast-image'
+import Hyperlink from 'react-native-hyperlink'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as reduxActions from '../common/actions'
 
-import colors from '../common/colors'
-
 import { Fairteiler as FairteilerType } from '../common/typings'
+import colors from '../common/colors'
+import config from '../common/config'
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.white
+  },
+  box: {
+    padding: 10
+  },
+  headline: {
+    fontSize: 12,
+    fontWeight: '600',
+    marginBottom: 10
+  },
+  text: {
+    fontSize: 12,
+  },
+  seperator: {
+    backgroundColor: colors.gray,
+    height: 1,
+    marginLeft: 10,
+    marginRight: 10
   }
 })
 
@@ -23,7 +42,6 @@ type Props = {
   fairteiler: {string: FairteilerType}
   actions: any
   walls: any
-
   isFocused: boolean
 }
 
@@ -52,11 +70,34 @@ class Fairteiler extends PureComponent<Props> {
 
     return (
       <SafeAreaView style={styles.container}>
-        <View>
-          <Text>
-            {data.name} - {wall ? wall.results.length + ' comments' : '0 comments'}
-          </Text>
+        <View style={{flexDirection: 'row'}}>
+          <View style={styles.box}>
+            <Text style={styles.headline}>{data.name}</Text>
+            <Text style={styles.text}>
+              {data.address}{'\n'}
+              {data.postcode} {data.city}
+            </Text>
+          </View>
+          <TouchableOpacity style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+            <Text>mini map placeholder</Text>
+          </TouchableOpacity>
         </View>
+        <View style={styles.seperator} />
+        {!!data.picture &&
+          <Image
+            source={{uri: config.host + '/images/' + data.picture}}
+            style={{height: 200}}
+            resizeMode="cover"
+          />
+        }
+        <View style={styles.box}>
+          <Hyperlink linkDefault linkStyle={{color: colors.green}}>
+            <Text style={styles.text}>
+              {data.description}
+            </Text>
+          </Hyperlink>
+        </View>
+        <Text>{JSON.stringify(data)}</Text>
       </SafeAreaView>
     )
   }

@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import { StyleSheet, View, Dimensions, Text, TouchableOpacity } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import moment from 'moment'
+import Hyperlink from 'react-native-hyperlink'
 
 import colors from '../common/colors'
 import { translate } from '../common/translation'
 
 import { Message } from '../common/typings'
-import Linkify from './Linkify'
 import RoundedImage from './RoundedImage'
 
 const { width } = Dimensions.get('window')
@@ -91,20 +91,21 @@ export default ({type, message, rawTime}: Props) => {
         </TouchableOpacity>
       }
       <View style={[styles.bubble, styles[type+'Bubble']]}>
-        <Text>
-          <Linkify
-            style={[styles.message, styles[type+'Message']]}
-            text={text}
-          />
-          {shortened && <Text style={styles[type+'Message']}>...{' '}
-            <Text onPress={() => setExpanded(true)} style={{fontWeight: 'bold'}}>
-              {translate('conversations.read_more')}
+        <Hyperlink linkDefault linkStyle={{color: colors.green}}>
+          <Text>
+            <Text style={[styles.message, styles[type+'Message']]}>
+              {text}
             </Text>
-          </Text>}
-        </Text>
+            {shortened && <Text style={styles[type+'Message']}>...{' '}
+              <Text onPress={() => setExpanded(true)} style={{fontWeight: 'bold'}}>
+                {translate('conversations.read_more')}
+              </Text>
+            </Text>}
+          </Text>
           <Text style={[styles.time, styles[type+'Time']]}>
             {rawTime ? message.time : moment(message.time).format('HH:mm')}
           </Text>
+        </Hyperlink>
       </View>
     </View>
   )
