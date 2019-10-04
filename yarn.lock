@@ -3119,6 +3119,13 @@ gauge@~2.7.3:
     strip-ansi "^3.0.1"
     wide-align "^1.1.0"
 
+geokdbush@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/geokdbush/-/geokdbush-1.1.0.tgz#aa5e8e7953a6594b40a85fbdb61059af0f51468f"
+  integrity sha1-ql6OeVOmWUtAqF+9thBZrw9RRo8=
+  dependencies:
+    tinyqueue "^1.2.2"
+
 get-caller-file@^1.0.1:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/get-caller-file/-/get-caller-file-1.0.3.tgz#f978fa4c90d1dfe7ff2d6beda2a515e713bdcf4a"
@@ -5952,12 +5959,6 @@ react-native-stream@^0.1.0:
     base64-js "^1.2.0"
     ieee754 "^1.1.8"
 
-"react-native-swiper@git+https://github.com/rastapasta/react-native-swiper#master":
-  version "1.5.14"
-  resolved "git+https://github.com/rastapasta/react-native-swiper#62086fddb47f7c3c30f89e3ebf198380d5516588"
-  dependencies:
-    prop-types "^15.5.10"
-
 react-native-tab-view@^0.0.77:
   version "0.0.77"
   resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-0.0.77.tgz#11ceb8e7c23100d07e628dc151b57797524d00d4"
@@ -7099,6 +7100,11 @@ time-stamp@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/time-stamp/-/time-stamp-1.1.0.tgz#764a5a11af50561921b133f3b44e618687e0f5c3"
   integrity sha1-dkpaEa9QVhkhsTPztE5hhofg9cM=
+
+tinyqueue@^1.2.2:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/tinyqueue/-/tinyqueue-1.2.3.tgz#b6a61de23060584da29f82362e45df1ec7353f3d"
+  integrity sha512-Qz9RgWuO9l8lT+Y9xvbzhPT2efIUIFd69N7eF7tJ9lnQl0iLj1M7peK7IoUGZL9DJHw9XftqLreccfxcQgYLxA==
 
 tmp@^0.0.33:
   version "0.0.33"

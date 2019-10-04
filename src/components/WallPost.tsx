@@ -6,6 +6,7 @@ import { formatDate } from '../common/utils'
 
 import colors from '../common/colors'
 import RoundedImage from './RoundedImage'
+import FastImage from 'react-native-fast-image'
 
 const styles = StyleSheet.create({
   container: {
@@ -31,24 +32,35 @@ const styles = StyleSheet.create({
   }
 })
 
-export default ({item}) =>
-  <View style={styles.container}>
-    <TouchableOpacity
-      style={styles.image}
-      onPress={() => Actions.push('profile', {id: item.author.id})}
-    >
-      <RoundedImage
-        photo={item.author.avatar}
-      />
-    </TouchableOpacity>
+export default ({item}) => {
+  const text = item.body.trim()
+  return (
+    <View style={styles.container}>
+      <TouchableOpacity
+        style={styles.image}
+        onPress={() => Actions.push('profile', {id: item.author.id})}
+      >
+        <RoundedImage
+          photo={item.author.avatar}
+        />
+      </TouchableOpacity>
 
-    <View style={styles.content}>
-      <Text style={styles.body}>
-        {item.body.trim()}
-      </Text>
-
-      <Text style={styles.time}>
-        {formatDate(item.createdAt)}
-      </Text>
+      <View style={styles.content}>
+        {!!text && <Text style={styles.body}>
+          {text}
+        </Text>}
+        {item.pictures && item.pictures.map(picture =>
+            <FastImage
+              key={picture.image}
+              style={{height: 200, marginTop: 5}}
+              resizeMode="contain"
+              source={{uri: 'https://foodsharing.de/' + picture.image}}
+            />
+        )}
+        <Text style={styles.time}>
+          {formatDate(item.createdAt)}
+        </Text>
+      </View>
     </View>
-  </View>
+  )
+}

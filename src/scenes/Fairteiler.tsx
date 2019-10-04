@@ -103,7 +103,7 @@ class Fairteiler extends PureComponent<Props> {
 
         <Swiper tabs={[
           'Informationen',
-          `Nachrichten${wall && wall.results ? ` (${wall.results.length})` : ''}`
+          `Nachrichten${wall && wall.results && wall.results.length ? ` (${wall.results.length})` : ''}`
         ]}>
           <ScrollView style={{width}}>
             <View style={styles.box}>
@@ -118,9 +118,16 @@ class Fairteiler extends PureComponent<Props> {
           <FlatList
             data={wall && wall.results || []}
             style={{width}}
-            ListHeaderComponent={() => <View style={{height: 5}} />}
+            ListHeaderComponent={() => wall && !!wall.results && !!wall.results.length && <View style={{height: 5}} />}
             keyExtractor={(item: any)=> item.id.toString()}
             renderItem={WallPost}
+            ListEmptyComponent={() =>
+              <View style={styles.box}>
+                <Text style={styles.text}>
+                  No comments yet.
+                </Text>
+              </View>
+            }
           />
         </Swiper>
       </SafeAreaView>

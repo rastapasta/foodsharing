@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   },
   tabLabel: {
     fontFamily: 'Alfa Slab One',
-    fontSize: 14,
+    fontSize: 13,
     color: colors.background
   },
   barBackground: {
