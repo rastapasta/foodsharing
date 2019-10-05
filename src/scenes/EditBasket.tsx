@@ -19,6 +19,8 @@ import { translate } from '../common/translation'
 import colors from '../common/colors'
 import { Profile } from '../common/typings'
 
+import ContactInput from '../components/ContactInput'
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -61,8 +63,8 @@ type Props = {
 class EditBasket extends PureComponent<Props> {
   state = {
     description: '',
-    by_phone: false,
     by_message: false,
+    by_phone: true,
 
     landline: '',
     mobile: ''
@@ -94,6 +96,8 @@ class EditBasket extends PureComponent<Props> {
         textStyle={{fontSize: 12}}
         containerStyle={styles.checkbox}
       />
+
+
 
     return (
       <KeyboardAwareScrollView style={styles.container}>
@@ -160,27 +164,17 @@ class EditBasket extends PureComponent<Props> {
 
           {by_phone &&
             <Fragment>
-              <TextField
-                value={landline}
-                placeholder={translate('baskets.landline_number')}
-                onChangeText={landline => this.setState({landline})}
-                labelHeight={4}
-                tintColor={colors.background}
-                baseColor={colors.background}
-                containerStyle={{marginTop: 10}}
-                inputContainerStyle={{paddingLeft: 5}}
-                label=""
-              />
-              <TextField
+              <ContactInput
                 value={mobile}
                 placeholder={translate('baskets.mobile_number')}
-                onChangeText={mobile => this.setState({mobile})}
-                labelHeight={4}
-                tintColor={colors.background}
-                baseColor={colors.background}
-                inputContainerStyle={{paddingLeft: 5}}
-                containerStyle={{marginTop: 10}}
-                label=""
+                onChange={mobile => this.setState({mobile})}
+                icon="cellphone-iphone"
+              />
+              <ContactInput
+                value={landline}
+                placeholder={translate('baskets.landline_number')}
+                onChange={landline => this.setState({landline})}
+                icon="phone-classic"
               />
             </Fragment>
           }
