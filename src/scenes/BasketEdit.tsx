@@ -3,7 +3,7 @@ import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { withNavigationFocus } from 'react-navigation'
 import LinearGradient from 'react-native-linear-gradient'
-import MapView from 'react-native-maps'
+import MapView, { Marker } from 'react-native-maps'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import * as reduxActions from '../common/actions'
@@ -133,7 +133,7 @@ class EditBasket extends PureComponent<Props> {
       camera.center = {latitude, longitude}
       map.animateCamera(camera, {duration: 300})
 
-      actions.navigation('editBasket', id)
+      actions.navigation(id ? 'editBasket' : 'offerBasket', id)
     }
   }
 
@@ -144,6 +144,7 @@ class EditBasket extends PureComponent<Props> {
 
   render() {
     const { picture, description, by_message, by_phone, landline, mobile, days, latitude, longitude } = this.state
+        , { isFocused } = this.props
         , canPublish = description.length && (by_message || (by_phone && (landline || mobile))) && days
         , initialRegion = {
           longitude,
@@ -278,9 +279,7 @@ class EditBasket extends PureComponent<Props> {
               pitchEnabled={false}
               style={{flex: 1}}
             >
-              <MapMarker
-                marker={{type: 'basket', location: {latitude, longitude}}}
-              />
+              {isFocused && <Marker coordinate={{longitude, latitude}} />}
             </MapView>
           </TouchableOpacity>
 

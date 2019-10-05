@@ -62,7 +62,7 @@ export default function* notificationSaga() {
         continue
       }
 
-      const inBackground = (yield select(state => state.app.state)) === true
+      const inBackground = (yield select(state => state.app.background)) === true
 
       // Only send a notification if either in background or user configured foreground notifications
       if (!inBackground && config.notificationsOnlyInBackground)

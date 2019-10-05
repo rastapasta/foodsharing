@@ -112,6 +112,7 @@ export default () =>
         renderTitle={({conversationId}) => <ConversationTitle conversationId={conversationId} />}
         component={Conversation}
         hideNavBar={false}
+        backTitle=" "
       />
       <Scene
         key="fairteiler"

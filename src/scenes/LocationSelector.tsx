@@ -5,14 +5,14 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as reduxActions from '../common/actions'
 
-import MapView from 'react-native-maps'
+import MapView, { Marker } from 'react-native-maps'
 
 const styles = StyleSheet.create({
   container: {
     flex: 1
   },
   map: {
-    flex: 1
+    ...StyleSheet.absoluteFillObject,
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
@@ -49,6 +49,19 @@ class LocationSelector extends PureComponent<Props> {
     map: MapView
   }
 
+  state: {
+    region: any
+  }
+
+  constructor(props: Props) {
+    super(props)
+
+    const { location } = props
+    this.state = {
+      region: location
+    }
+  }
+
   componentDidMount() {
     const { actions } = this.props
     actions.navigation('locationSelector')
@@ -61,22 +74,28 @@ class LocationSelector extends PureComponent<Props> {
   }
 
   render() {
-    const { callback, location: { longitude, latitude }} = this.props
+    const { callback } = this.props
+        , { region: { longitude, latitude } } = this.state
 
     return (
       <View style={styles.container}>
         <MapView
           ref="map"
           style={styles.map}
-          onRegionChange={callback}
+          onRegionChange={region => {
+            this.setState({region})
+            callback(region)
+          }}
           initialRegion={{
-            longitude: longitude,
+            longitude,
             latitude,
             latitudeDelta: 0.008,
             longitudeDelta: 0.008
           }}
-        />
-
+        >
+          <Marker pointerEvents="none" coordinate={{longitude, latitude}} />
+        </MapView>
+{/*
         <View
           style={styles.overlay}
           pointerEvents="none"
@@ -86,7 +105,7 @@ class LocationSelector extends PureComponent<Props> {
             style={styles.staticMarker}
             resizeMode="contain"
           />
-        </View>
+        </View> */}
       </View>
     )
   }
