@@ -6,7 +6,7 @@ This is a full Proof of Concept to show how [React Native](https://github.com/fa
 
 The app is optimized for iOS and Android - one code, one love!
 
-Timeframe: 2 weeks project from scratch to production 😎
+Timeframe: 2 weeks from scratch to production 😎
 
 ## 🎉 What's implemented?
 
@@ -79,9 +79,17 @@ Timeframe: 2 weeks project from scratch to production 😎
 
 * Baskets
   * Scene to create new basket
-  * Camera scene to take picture
-  * Camera permission management, button leading to system settings if permissions were revoked/declined
-  * Location picker scene
+  * Dynamic form to enter details, time frame and desired way of contact
+  * Camera button -> Camera scene to take picture
+  * Display of taken picture
+  * Mini map with marker at currently choosen location
+  * Tap on mini map -> Location picker scene with current location preselected
+
+* Camera
+  * Permission management - prompting on first use
+  * If permission denied, info and button leading to system settings
+  * If permission granted, take picture button
+  * Automatic rescale to backends 'normal' 800x before upload
 
 * Map
   * Embedded map based on system (iOS: Apple Maps, Android: Google Maps)
