@@ -5778,6 +5778,13 @@ react-native-background-fetch@^2.7.0:
     plist "^3.0.1"
     xcode "^2.0.0"
 
+react-native-camera@^3.6.0:
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/react-native-camera/-/react-native-camera-3.6.0.tgz#91f97bbe97345281efb6398bb97d3628bb903a22"
+  integrity sha512-hIcMruSNBw6BA1BJ42nzzxXrydHUuJxwqh6WkZK37P2klxraeC9SkqULAYiq+bsQa0lycA03g/4JSMUZw5wbIg==
+  dependencies:
+    prop-types "^15.6.2"
+
 react-native-cheerio@^1.0.0-rc.4:
   version "1.0.0-rc.4"
   resolved "https://registry.yarnpkg.com/react-native-cheerio/-/react-native-cheerio-1.0.0-rc.4.tgz#bab0c1fe5888bbd69481d9b928d58b525f18f3b1"

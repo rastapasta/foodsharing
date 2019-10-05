@@ -90,7 +90,7 @@ export default () =>
             title={translate('scenes.baskets')}
             component={Baskets}
             icon={icon('basket')}
-            renderRightButton={({id}) =>
+            renderRightButton={() =>
               <SceneButton
                 icon="plus"
                 onPress={() => Actions.push('offerBasket')}
