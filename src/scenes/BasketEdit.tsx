@@ -1,7 +1,7 @@
 import { withNavigationFocus } from 'react-navigation'
 
 import React, { PureComponent, Fragment } from 'react'
-import { View, StyleSheet, Text, Image, TouchableOpacity, SafeAreaView } from 'react-native'
+import { View, StyleSheet, Text, Image, TouchableOpacity, SafeAreaView, LayoutAnimation } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import LinearGradient from 'react-native-linear-gradient'
 import MapView from 'react-native-maps'
@@ -21,6 +21,16 @@ import { Profile } from '../common/typings'
 
 import ContactInput from '../components/ContactInput'
 import { Actions } from 'react-native-router-flux'
+import { isIphoneX } from 'react-native-iphone-x-helper'
+
+const validityOptions = [
+  {value: 1, label: translate('baskets.only_today')},
+  {value: 2, label: translate('baskets.until_tomorrow')},
+  {value: 3, label: translate('baskets.three_days')},
+  {value: 7, label: translate('baskets.one_week')},
+  {value: 14, label: translate('baskets.two_weeks')},
+  {value: 21, label: translate('baskets.three_weeks')},
+]
 
 const styles = StyleSheet.create({
   container: {
@@ -66,10 +76,12 @@ class EditBasket extends PureComponent<Props> {
     picture: null,
     description: '',
     by_message: false,
-    by_phone: true,
+    by_phone: false,
 
     landline: '',
-    mobile: ''
+    mobile: '',
+
+    days: null
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -86,7 +98,8 @@ class EditBasket extends PureComponent<Props> {
   }
 
   render() {
-    const { picture, description, by_message, by_phone, landline, mobile } = this.state
+    const { picture, description, by_message, by_phone, landline, mobile, days } = this.state
+        , canPublish = description.length && (by_message || (by_phone && (landline || mobile))) && days
 
     const Box = ({title, checked, onPress}) =>
       <CheckBox
@@ -100,7 +113,6 @@ class EditBasket extends PureComponent<Props> {
       />
 
     return (
-      <SafeAreaView style={{flex: 1}}>
         <KeyboardAwareScrollView style={styles.container}>
           <View style={{height: 240}}>
             <Image
@@ -149,6 +161,7 @@ class EditBasket extends PureComponent<Props> {
               baseColor={colors.background}
               label=""
               inputContainerStyle={{paddingLeft: 5, paddingRight: 5}}
+              fontSize={14}
             />
 
             <Text style={[styles.category, {marginTop: 18, marginBottom: 5}]}>
@@ -189,21 +202,16 @@ class EditBasket extends PureComponent<Props> {
             </Text>
 
             <Dropdown
-              // onChange={() => null}
+              onChangeText={days => this.setState({days})}
               labelHeight={8}
+              value={(validityOptions.find(option => option.value === days) || {}).value || ''}
               tintColor={colors.background}
               baseColor={colors.background}
               dropdownOffset={{top: -120, left: 0}}
               itemCount={6}
-              data={[
-                {value: 1, label: translate('baskets.only_today')},
-                {value: 2, label: translate('baskets.until_tomorrow')},
-                {value: 3, label: translate('baskets.three_days')},
-                {value: 7, label: translate('baskets.one_week')},
-                {value: 14, label: translate('baskets.two_weeks')},
-                {value: 21, label: translate('baskets.three_weeks')},
-              ]}
+              data={validityOptions}
               inputContainerStyle={{paddingLeft: 5}}
+              fontSize={14}
             />
 
             <Text style={[styles.category, {marginTop: 20}]}>
@@ -231,10 +239,12 @@ class EditBasket extends PureComponent<Props> {
               titleStyle={{fontSize: 14}}
               onPress={() => false}
               containerStyle={{marginTop: 15}}
+              disabled={!canPublish}
             />
           </View>
+
+          {isIphoneX() && <View style={{height: 32}} />}
         </KeyboardAwareScrollView>
-      </SafeAreaView>
     )
   }
 }

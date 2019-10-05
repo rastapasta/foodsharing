@@ -34,6 +34,7 @@ export default class ContactInput extends PureComponent<Props> {
           baseColor={colors.background}
           containerStyle={{marginTop: 10}}
           inputContainerStyle={{paddingLeft: 33}}
+          fontSize={14}
           label=""
           keyboardType="number-pad"
         />
