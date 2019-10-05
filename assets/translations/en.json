@@ -6,7 +6,8 @@
     "fairteiler": "Fairteiler",
     "profile": "Profile",
     "bananas": "Honory Bananas",
-    "report_violation": "Report"
+    "report_violation": "Report",
+    "offer_basket": "Offer basket"
   },
 
   "drawer": {
@@ -68,6 +69,20 @@
   },
 
   "baskets": {
-    "non_found": "You have no published food baskets and there are no baskets nearby."
+    "non_found": "You have no published food baskets and there are no baskets nearby.",
+    "description": "Description",
+    "how_contact": "How would you like to be contacted?",
+    "by_message": "By message",
+    "by_phone": "By phone",
+    "landline_number": "Landline number",
+    "phone_number": "Phone number",
+    "how_long": "How long should your basked be valid?",
+    "only_today": "only today",
+    "until_tomorrow": "until tomorrow",
+    "three_days": "three days",
+    "one_week": "one week",
+    "two_weeks": "two weeks",
+    "three_weeks": "three weeks",
+    "where_is": "Where is your basket?"
   }
 }

@@ -79,7 +79,7 @@ function* reauthenticateFlow() {
     setTimeout(() => {
       // Actions.reset('fairteiler', {id: 666})
 
-      Actions.reset('drawer')
+      Actions.reset('offerBasket')
       SplashScreen.hide()
     }, 100)
 

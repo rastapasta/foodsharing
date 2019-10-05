@@ -13,6 +13,8 @@ import Profile from './Profile'
 import Report from './Report'
 import Bananas from './Bananas'
 import Baskets from './Baskets'
+import EditBasket from './EditBasket'
+
 import Conversations from './Conversations'
 import Conversation from './Conversation'
 import ConversationMembers from './ConversationMembers'
@@ -55,7 +57,13 @@ export default () =>
       hideNavBar
     >
       <Scene
+        key="offerBasket"
+        title={translate('scenes.offer_basket')}
+        component={EditBasket}
+        hideNavBar={false}
         initial
+      />
+      <Scene
         key="loading"
         component={Loading}
       />
@@ -148,6 +156,13 @@ export default () =>
         key="report"
         title={translate('scenes.report_violation')}
         component={Report}
+        hideNavBar={false}
+      />
+
+      <Scene
+        key="editBasket"
+        title={translate('scenes.edit_basket')}
+        component={EditBasket}
         hideNavBar={false}
       />
     </Stack>
