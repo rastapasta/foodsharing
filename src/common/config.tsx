@@ -33,5 +33,12 @@ export default {
     shops: {uri: '/xhr.php?f=loadMarker&types[]=betriebe&options[]=needhelp&options[]=needhelpinstant', method: 'GET'}
   },
 
-  notificationsOnlyInBackground: true
+  notificationsOnlyInBackground: true,
+
+  initialMapRegion: {
+    longitude: 10.60117067,
+    latitude: 50.34470266,
+    longitudeDelta: 13.894483079,
+    latitudeDelta: 12.61906546
+  }
 }

@@ -82,7 +82,7 @@ class Camera extends PureComponent<Props> {
         captureAudio={false}
         style={{flex: 1}}
       >
-        {({camera, status}) =>
+        {({status}) =>
           <Fragment>
             {status === 'NOT_AUTHORIZED' &&
               <View style={{flex: 1, padding: 30, alignItems: 'center', justifyContent: 'center'}}>
@@ -113,7 +113,7 @@ class Camera extends PureComponent<Props> {
   }
 }
 
-const mapStateToProps = state => ({})
+const mapStateToProps = () => ({})
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(reduxActions, dispatch)

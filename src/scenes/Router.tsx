@@ -172,6 +172,7 @@ export default () =>
         title={translate('scenes.location_selection')}
         component={LocationSelector}
         hideNavBar={false}
+        backTitle=" "
       />
 
       <Scene

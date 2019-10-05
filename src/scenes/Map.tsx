@@ -13,14 +13,9 @@ import MapCluster from '../components/MapCluster'
 
 import ClusteredMapView from 'react-native-maps-super-cluster'
 import MapMarker from '../components/MapMarker'
+import config from '../common/config'
 
-const MAIN_REGION = {
-        longitude: 10.60117067,
-        latitude: 50.34470266,
-        longitudeDelta: 13.894483079,
-        latitudeDelta: 12.61906546
-      },
-      defaultZoom = {
+const defaultZoom = {
         longitudeDelta: 1.1,
         latitudeDelta: 1.1
       }
@@ -92,7 +87,7 @@ class Map extends PureComponent<Props> {
             longitude: parseFloat(profile.lon),
             latitude: parseFloat(profile.lat),
             ...defaultZoom
-          } : MAIN_REGION
+          } : config.initialMapRegion
 
     return (
       <View style={styles.container}>
@@ -134,7 +129,7 @@ class Map extends PureComponent<Props> {
           color={colors[trackPosition ? 'green' : 'black']}
         />
         <MapButton
-          onPress={() => this.refs.map.mapview.animateToRegion(MAIN_REGION)}
+          onPress={() => this.refs.map.mapview.animateToRegion(config.initialMapRegion)}
           style={styles.zoomOut}
           icon="arrow-decision-outline"
         />

@@ -1,10 +1,10 @@
 import { withNavigationFocus } from 'react-navigation'
 
 import React, { PureComponent, Fragment } from 'react'
-import { View, StyleSheet, Text, Image, TouchableOpacity, SafeAreaView, LayoutAnimation } from 'react-native'
+import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import LinearGradient from 'react-native-linear-gradient'
-import MapView from 'react-native-maps'
+import MapView, { Marker } from 'react-native-maps'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import * as reduxActions from '../common/actions'
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
   cameraButton: {
     position: 'absolute',
     right: 10,
-    bottom: 10,
+    bottom: 15,
     width: 50,
     height: 50,
     borderRadius: 25,
@@ -94,7 +94,14 @@ class EditBasket extends PureComponent<Props> {
     landline: '',
     mobile: '',
 
-    days: null
+    days: null,
+
+    longitude: 0,
+    latitude: 0
+  }
+
+  refs: {
+    map: MapView
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -104,14 +111,30 @@ class EditBasket extends PureComponent<Props> {
   }
 
   async componentDidMount() {
-    const { actions, id, profile: { landline, mobile } } = this.props
+    const { actions, id, profile: { landline, mobile, lat, lon } } = this.props
     actions.navigation('editBasket', id)
 
-    this.setState({landline, mobile})
+    this.setState({
+      landline,
+      mobile,
+      longitude: parseFloat(lon),
+      latitude: parseFloat(lat)
+    })
+
+    this.recenterMap()
+  }
+
+  async recenterMap() {
+    const { latitude, longitude } = this.state
+        , map = this.refs.map
+        , camera = await map.getCamera()
+
+    camera.center = { latitude, longitude }
+    map.animateCamera(camera, {duration: 300})
   }
 
   render() {
-    const { picture, description, by_message, by_phone, landline, mobile, days } = this.state
+    const { picture, description, by_message, by_phone, landline, mobile, days, latitude, longitude } = this.state
         , canPublish = description.length && (by_message || (by_phone && (landline || mobile))) && days
 
     const Box = ({title, checked, onPress}) =>
@@ -219,8 +242,12 @@ class EditBasket extends PureComponent<Props> {
             {translate('baskets.where_is')}
           </Text>
 
-          <TouchableOpacity style={{height: 100, marginTop: 10}}>
+          <TouchableOpacity
+            style={{height: 100, marginTop: 10}}
+            onPress={() => Actions.push('locationSelector', {callback: location => this.setState({location})})}
+          >
             <MapView
+              ref="map"
               showsPointsOfInterest={false}
               showsCompass={false}
               showsScale={false}
@@ -229,9 +256,12 @@ class EditBasket extends PureComponent<Props> {
               showsIndoors={false}
               zoomEnabled={false}
               scrollEnabled={false}
+              initialRegion={{latitude, longitude, latitudeDelta: 0.1, longitudeDelta: 0.1}}
               pitchEnabled={false}
               style={{flex: 1}}
-            />
+            >
+              <Marker coordinate={{latitude, longitude}} />
+            </MapView>
           </TouchableOpacity>
 
           <Button
