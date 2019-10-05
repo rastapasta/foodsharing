@@ -1,10 +1,9 @@
-import { withNavigationFocus } from 'react-navigation'
-
 import React, { PureComponent, Fragment } from 'react'
 import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { withNavigationFocus } from 'react-navigation'
 import LinearGradient from 'react-native-linear-gradient'
-import MapView, { Marker } from 'react-native-maps'
+import MapView from 'react-native-maps'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import * as reduxActions from '../common/actions'
@@ -15,13 +14,15 @@ import { CheckBox, Button } from 'react-native-elements'
 import { Dropdown } from 'react-native-material-dropdown'
 import { TextField } from 'react-native-material-textfield'
 
+import { Actions } from 'react-native-router-flux'
+import { isIphoneX } from 'react-native-iphone-x-helper'
+
 import { translate } from '../common/translation'
 import colors from '../common/colors'
 import { Profile } from '../common/typings'
 
 import ContactInput from '../components/ContactInput'
-import { Actions } from 'react-native-router-flux'
-import { isIphoneX } from 'react-native-iphone-x-helper'
+import MapMarker from '../components/MapMarker'
 
 const validityOptions = [
   {value: 1, label: translate('baskets.only_today')},
@@ -85,23 +86,41 @@ type Props = {
 }
 
 class EditBasket extends PureComponent<Props> {
-  state = {
-    picture: null,
-    description: '',
-    by_message: false,
-    by_phone: false,
+  state: {
+    picture: any
+    description: string
+    by_message: boolean
+    by_phone: boolean
 
-    landline: '',
-    mobile: '',
+    landline: string
+    mobile: string
 
-    days: null,
+    days: number
 
-    longitude: 0,
-    latitude: 0
+    longitude: number
+    latitude: number
   }
 
   refs: {
     map: MapView
+  }
+
+  constructor(props: Props) {
+    super(props)
+    const { profile: { landline, mobile, lat, lon } } = this.props
+
+    this.state = {
+      picture: null,
+      description: '',
+      by_message: false,
+      by_phone: false,
+      days: null,
+
+      landline,
+      mobile,
+      longitude: parseFloat(lon),
+      latitude: parseFloat(lat)
+    }
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -111,17 +130,8 @@ class EditBasket extends PureComponent<Props> {
   }
 
   async componentDidMount() {
-    const { actions, id, profile: { landline, mobile, lat, lon } } = this.props
-    actions.navigation('editBasket', id)
-
-    this.setState({
-      landline,
-      mobile,
-      longitude: parseFloat(lon),
-      latitude: parseFloat(lat)
-    })
-
-    this.recenterMap()
+    const { actions, id } = this.props
+    actions.navigation(id ? 'editBasket' : 'offerBasket', id)
   }
 
   async recenterMap() {
@@ -129,13 +139,20 @@ class EditBasket extends PureComponent<Props> {
         , map = this.refs.map
         , camera = await map.getCamera()
 
-    camera.center = { latitude, longitude }
-    map.animateCamera(camera, {duration: 300})
+    camera.center = {latitude, longitude}
+    camera.zoom = 0
+    // map.animateCamera(camera, {duration: 10000})
   }
 
   render() {
     const { picture, description, by_message, by_phone, landline, mobile, days, latitude, longitude } = this.state
         , canPublish = description.length && (by_message || (by_phone && (landline || mobile))) && days
+        , initialRegion = {
+          longitude,
+          latitude,
+          longitudeDelta: 0.002,
+          latitudeDelta: 0.002
+        }
 
     const Box = ({title, checked, onPress}) =>
       <CheckBox
@@ -244,7 +261,10 @@ class EditBasket extends PureComponent<Props> {
 
           <TouchableOpacity
             style={{height: 100, marginTop: 10}}
-            onPress={() => Actions.push('locationSelector', {callback: location => this.setState({location})})}
+            onPress={() => Actions.push('locationSelector', {
+              callback: location => this.setState({location}),
+              location: {latitude, longitude}
+            })}
           >
             <MapView
               ref="map"
@@ -256,11 +276,13 @@ class EditBasket extends PureComponent<Props> {
               showsIndoors={false}
               zoomEnabled={false}
               scrollEnabled={false}
-              initialRegion={{latitude, longitude, latitudeDelta: 0.1, longitudeDelta: 0.1}}
+              initialRegion={initialRegion}
               pitchEnabled={false}
               style={{flex: 1}}
             >
-              <Marker coordinate={{latitude, longitude}} />
+              <MapMarker
+                marker={{type: 'basket', location: {latitude, longitude}}}
+              />
             </MapView>
           </TouchableOpacity>
 
