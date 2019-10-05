@@ -63,6 +63,7 @@ type Props = {
 
 class EditBasket extends PureComponent<Props> {
   state = {
+    picture: null,
     description: '',
     by_message: false,
     by_phone: true,
@@ -85,7 +86,7 @@ class EditBasket extends PureComponent<Props> {
   }
 
   render() {
-    const { description, by_message, by_phone, landline, mobile } = this.state
+    const { picture, description, by_message, by_phone, landline, mobile } = this.state
 
     const Box = ({title, checked, onPress}) =>
       <CheckBox
@@ -98,32 +99,32 @@ class EditBasket extends PureComponent<Props> {
         containerStyle={styles.checkbox}
       />
 
-
-
     return (
-      <SafeAreaView>
+      <SafeAreaView style={{flex: 1}}>
         <KeyboardAwareScrollView style={styles.container}>
-          <View style={{height: 200}}>
+          <View style={{height: 240}}>
             <Image
-              source={require('../../assets/basket.png')}
+              source={picture ? {uri: picture.uri} : require('../../assets/basket.png')}
               style={{flex: 1}}
               resizeMode="cover"
             />
 
             <TouchableOpacity
-              onPress={() => Actions.push('camera')}
-            style={{
-              position: 'absolute',
-              right: 10,
-              bottom: 10,
-              width: 50,
-              height: 50,
-              borderRadius: 25,
-              backgroundColor: colors.green,
-              alignItems: 'center',
-              justifyContent: 'center',
-              paddingTop: 3,
-              paddingLeft: 2
+              onPress={() => Actions.push('camera', {
+                callback: picture => this.setState({picture})
+              })}
+              style={{
+                position: 'absolute',
+                right: 10,
+                bottom: 10,
+                width: 50,
+                height: 50,
+                borderRadius: 25,
+                backgroundColor: colors.green,
+                alignItems: 'center',
+                justifyContent: 'center',
+                paddingTop: 3,
+                paddingLeft: 2
             }}>
               <Icon name="camera" size={24} color={colors.white} />
             </TouchableOpacity>

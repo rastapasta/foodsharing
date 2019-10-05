@@ -1,7 +1,7 @@
 import { withNavigationFocus } from 'react-navigation'
 
 import React, { PureComponent } from 'react'
-import { SafeAreaView, StyleSheet, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, TouchableOpacity } from 'react-native'
 import { RNCamera } from 'react-native-camera';
 
 import { bindActionCreators } from 'redux'
@@ -12,6 +12,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import BackButton from '../components/BackButton';
 import colors from '../common/colors';
+import { Actions } from 'react-native-router-flux';
 
 const styles = StyleSheet.create({
   container: {
@@ -39,6 +40,8 @@ const styles = StyleSheet.create({
 })
 
 type Props = {
+  callback: (any) => void
+
   actions: any
   isFocused: boolean
 }
@@ -61,16 +64,15 @@ class Camera extends PureComponent<Props> {
 
   takePicture = async () => {
     const { camera } = this.refs
+        , { callback } = this.props
 
     const picture = await camera.takePictureAsync({
-      width: 480,
-      base64: true,
-      quality: 0.7,
-      // pauseAfterCapture: true
+      width: 800,
+      quality: 0.7
     })
 
-    console.log(picture)
-    console.log(picture.base64.length)
+    Actions.pop()
+    callback(picture)
   }
 
   render() {
