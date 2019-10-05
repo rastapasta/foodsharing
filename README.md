@@ -1,11 +1,10 @@
 # 🍴foodsharing app
 
-
 <img src="gifs/login.gif" width="19%"/> <img src="gifs/profile.gif" width="19%"/> <img src="gifs/fairteiler.gif" width="19%" /> <img src="gifs/report.gif" width="19%" /> <img src="gifs/redux.gif" width="19%" />
 
 This is a full Proof of Concept to show how [React Native](https://github.com/facebook/react-native) could rock the [foodsharing](https://foodsharing.network) world :smile:
 
-This thingy is optimized for iOS and Android - one code, one love!
+The app is optimized for iOS and Android - one code, one love!
 
 Timeframe: 2 weeks project from scratch to production 😎
 
@@ -69,7 +68,7 @@ Timeframe: 2 weeks project from scratch to production 😎
 * Bananas
   * List of all received bananas and corresponding banana texts
 
-* Incident Report
+* Violation Report
   * Wait, what? There's an API for it? Yep, at least to [send them in](https://gitlab.com/foodsharing-dev/foodsharing/blob/master/src/Modules/Report/ReportXhr.php#L189-209) :)
   * Fully translated German <> English reporting system
   * Picker(s) for report reason(s)
@@ -77,6 +76,12 @@ Timeframe: 2 weeks project from scratch to production 😎
   * Text entry for report text, autoscaling to fullscreen on text focus
   * Hooking into Android's back button & blur event to leave fullscreen
   * Sending/Success indicator on Profile scene
+
+* Baskets
+  * Scene to create new basket
+  * Camera scene to take picture
+  * Camera permission management, button leading to system settings if permissions were revoked/declined
+  * Location picker scene
 
 * Map
   * Embedded map based on system (iOS: Apple Maps, Android: Google Maps)
@@ -114,6 +119,20 @@ Timeframe: 2 weeks project from scratch to production 😎
   * React Native
   * redux / [redux-saga](https://github.com/rastapasta/foodsharing/tree/master/src/sagas) for js generator magic :heart:
   * see [package.json](https://github.com/rastapasta/foodsharing/blob/master/package.json) for complete package list
+
+## 👩‍💻👨‍💻‍ Run / Compile it locally
+
+Setup your React Native environment following the [Getting started guide](https://facebook.github.io/react-native/docs/getting-started) (React Native CLI Quickstart).
+
+After cloning the project, initialize its node environment, compile the TypeScript and finally the native version:
+```bash
+$> yarn
+$> tsc
+$> react-native run-ios (or run-android)
+```
+
+To get an insight into the redux action flow, state and log, use [react-native-debugger
+](https://github.com/jhen0409/react-native-debugger) and the ```Debug``` mode via React Native's shaking menu.
 
 ## 🤔 Personal ToDos
 

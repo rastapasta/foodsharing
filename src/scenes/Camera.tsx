@@ -1,9 +1,9 @@
 import { withNavigationFocus } from 'react-navigation'
 
-import React, { PureComponent } from 'react'
-import { StyleSheet, View, TouchableOpacity } from 'react-native'
-import { RNCamera } from 'react-native-camera';
-
+import React, { PureComponent, Fragment } from 'react'
+import { StyleSheet, View, TouchableOpacity, Text } from 'react-native'
+import { RNCamera } from 'react-native-camera'
+import { openSettings } from 'react-native-permissions'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as reduxActions from '../common/actions'
@@ -81,16 +81,33 @@ class Camera extends PureComponent<Props> {
         ref="camera"
         captureAudio={false}
         style={{flex: 1}}
-      />
-      <View style={styles.footer}>
-        <TouchableOpacity
-          style={styles.button}
-          hitSlop={{top: 50, left: 50, right: 50, bottom: 50}}
-          onPress={this.takePicture}
-        >
-          <Icon name="camera" size={32} color={colors.white} />
-        </TouchableOpacity>
-      </View>
+      >
+        {({camera, status}) =>
+          <Fragment>
+            {status === 'NOT_AUTHORIZED' &&
+              <View style={{flex: 1, padding: 30, alignItems: 'center', justifyContent: 'center'}}>
+                <Text style={{color: colors.white, textAlign: 'center'}}>
+                  <Text>Camera usage not authorized.{'\n\n'}</Text>
+                  <Text>To allow it, open your settings with the button below give the permission.</Text>
+                </Text>
+              </View>
+            }
+            <View style={styles.footer}>
+              <TouchableOpacity
+                style={styles.button}
+                hitSlop={{top: 50, left: 50, right: 50, bottom: 50}}
+                onPress={async () => status === 'NOT_AUTHORIZED' ? await openSettings() : this.takePicture()}
+              >
+                <Icon
+                  name={status === 'NOT_AUTHORIZED' ? 'settings' : 'camera'}
+                  size={32}
+                  color={colors.white}
+                />
+              </TouchableOpacity>
+            </View>
+          </Fragment>
+        }
+      </RNCamera>
       <BackButton />
     </View>
   }

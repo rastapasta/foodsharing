@@ -15,6 +15,7 @@ import Bananas from './Bananas'
 import Baskets from './Baskets'
 import BasketEdit from './BasketEdit'
 import Camera from './Camera'
+import LocationSelector from './LocationSelector'
 
 import Conversations from './Conversations'
 import Conversation from './Conversation'
@@ -169,7 +170,7 @@ export default () =>
       <Scene
         key="locationSelector"
         title={translate('scenes.location_selection')}
-        component={Report}
+        component={LocationSelector}
         hideNavBar={false}
       />
 

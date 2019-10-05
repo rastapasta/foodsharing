@@ -45,7 +45,9 @@ class LocationSelector extends PureComponent<Props> {
   render() {
     return (
       <View style={styles.container}>
-        <MapView />
+        <MapView
+          style={{flex: 1}}
+        />
       </View>
     )
   }

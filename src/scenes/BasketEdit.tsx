@@ -60,6 +60,19 @@ const styles = StyleSheet.create({
     paddingTop: 0,
     borderWidth: 0,
     backgroundColor: colors.white
+  },
+  cameraButton: {
+    position: 'absolute',
+    right: 10,
+    bottom: 10,
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: colors.green,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: 3,
+    paddingLeft: 2
   }
 })
 
@@ -113,138 +126,126 @@ class EditBasket extends PureComponent<Props> {
       />
 
     return (
-        <KeyboardAwareScrollView style={styles.container}>
-          <View style={{height: 240}}>
-            <Image
-              source={picture ? {uri: picture.uri} : require('../../assets/basket.png')}
-              style={{flex: 1}}
-              resizeMode="cover"
-            />
+      <KeyboardAwareScrollView style={styles.container}>
+        <View style={{height: 240}}>
+          <Image
+            source={picture ? {uri: picture.uri} : require('../../assets/basket.png')}
+            style={{flex: 1}}
+            resizeMode="cover"
+          />
 
-            <TouchableOpacity
-              onPress={() => Actions.push('camera', {
-                callback: picture => this.setState({picture})
-              })}
-              style={{
-                position: 'absolute',
-                right: 10,
-                bottom: 10,
-                width: 50,
-                height: 50,
-                borderRadius: 25,
-                backgroundColor: colors.green,
-                alignItems: 'center',
-                justifyContent: 'center',
-                paddingTop: 3,
-                paddingLeft: 2
-            }}>
-              <Icon name="camera" size={24} color={colors.white} />
-            </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => Actions.push('camera', {
+              callback: picture => this.setState({picture})
+            })}
+            style={styles.cameraButton}>
+            <Icon name="camera" size={24} color={colors.white} />
+          </TouchableOpacity>
 
-            <LinearGradient
-              style={styles.gradient}
-              colors={[colors.transparent, colors.white]}
-            />
-          </View>
-          <View style={styles.content}>
-            <Text style={styles.category}>
-              {translate('baskets.description')}
-            </Text>
+          <LinearGradient
+            style={styles.gradient}
+            colors={[colors.transparent, colors.white]}
+          />
+        </View>
+        <View style={styles.content}>
+          <Text style={styles.category}>
+            {translate('baskets.description')}
+          </Text>
 
-            <TextField
-              value={description}
-              onChangeText={description => this.setState({description})}
-              multiline
-              onBlur={() => this.setState({description: description.trim()})}
-              labelHeight={4}
-              tintColor={colors.background}
-              baseColor={colors.background}
-              label=""
-              inputContainerStyle={{paddingLeft: 5, paddingRight: 5}}
-              fontSize={14}
-            />
+          <TextField
+            value={description}
+            onChangeText={description => this.setState({description})}
+            multiline
+            onBlur={() => this.setState({description: description.trim()})}
+            labelHeight={4}
+            tintColor={colors.background}
+            baseColor={colors.background}
+            label=""
+            inputContainerStyle={{paddingLeft: 5, paddingRight: 5}}
+            fontSize={14}
+          />
 
-            <Text style={[styles.category, {marginTop: 18, marginBottom: 5}]}>
-              {translate('baskets.how_contact')}
-            </Text>
+          <Text style={[styles.category, {marginTop: 18, marginBottom: 5}]}>
+            {translate('baskets.how_contact')}
+          </Text>
 
-            <Box
-              title={translate('baskets.by_message')}
-              checked={by_message}
-              onPress={() => this.setState({by_message: !by_message})}
-            />
+          <Box
+            title={translate('baskets.by_message')}
+            checked={by_message}
+            onPress={() => this.setState({by_message: !by_message})}
+          />
 
-            <Box
-              title={translate('baskets.by_phone')}
-              checked={by_phone}
-              onPress={() => this.setState({by_phone: !by_phone})}
-            />
+          <Box
+            title={translate('baskets.by_phone')}
+            checked={by_phone}
+            onPress={() => this.setState({by_phone: !by_phone})}
+          />
 
-            {by_phone &&
-              <Fragment>
-                <ContactInput
-                  value={mobile}
-                  placeholder={translate('baskets.mobile_number')}
-                  onChange={mobile => this.setState({mobile})}
-                  icon="cellphone-iphone"
-                />
-                <ContactInput
-                  value={landline}
-                  placeholder={translate('baskets.landline_number')}
-                  onChange={landline => this.setState({landline})}
-                  icon="phone-classic"
-                />
-              </Fragment>
-            }
-
-            <Text style={[styles.category, {marginTop: 15}]}>
-              {translate('baskets.how_long')}
-            </Text>
-
-            <Dropdown
-              onChangeText={days => this.setState({days})}
-              labelHeight={8}
-              value={(validityOptions.find(option => option.value === days) || {}).value || ''}
-              tintColor={colors.background}
-              baseColor={colors.background}
-              dropdownOffset={{top: -120, left: 0}}
-              itemCount={6}
-              data={validityOptions}
-              inputContainerStyle={{paddingLeft: 5}}
-              fontSize={14}
-            />
-
-            <Text style={[styles.category, {marginTop: 20}]}>
-              {translate('baskets.where_is')}
-            </Text>
-
-            <TouchableOpacity style={{height: 100, marginTop: 10}}>
-              <MapView
-                showsPointsOfInterest={false}
-                showsCompass={false}
-                showsScale={false}
-                showsMyLocationButton={false}
-                showsTraffic={false}
-                showsIndoors={false}
-                zoomEnabled={false}
-                scrollEnabled={false}
-                pitchEnabled={false}
-                style={{flex: 1}}
+          {by_phone &&
+            <Fragment>
+              <ContactInput
+                value={mobile}
+                placeholder={translate('baskets.mobile_number')}
+                onChange={mobile => this.setState({mobile})}
+                icon="cellphone-iphone"
               />
-            </TouchableOpacity>
+              <ContactInput
+                value={landline}
+                placeholder={translate('baskets.landline_number')}
+                onChange={landline => this.setState({landline})}
+                icon="phone-classic"
+              />
+            </Fragment>
+          }
 
-            <Button
-              title={translate('baskets.publish')}
-              buttonStyle={{backgroundColor: colors.green}}
-              titleStyle={{fontSize: 14}}
-              onPress={() => false}
-              containerStyle={{marginTop: 15}}
-              disabled={!canPublish}
+          <Text style={[styles.category, {marginTop: 15}]}>
+            {translate('baskets.how_long')}
+          </Text>
+
+          <Dropdown
+            onChangeText={days => this.setState({days})}
+            labelHeight={8}
+            value={(validityOptions.find(option => option.value === days) || {}).value || ''}
+            tintColor={colors.background}
+            baseColor={colors.background}
+            dropdownOffset={{top: -120, left: 0}}
+            itemCount={6}
+            data={validityOptions}
+            inputContainerStyle={{paddingLeft: 5}}
+            fontSize={14}
+          />
+
+          <Text style={[styles.category, {marginTop: 20}]}>
+            {translate('baskets.where_is')}
+          </Text>
+
+          <TouchableOpacity style={{height: 100, marginTop: 10}}>
+            <MapView
+              showsPointsOfInterest={false}
+              showsCompass={false}
+              showsScale={false}
+              showsMyLocationButton={false}
+              showsTraffic={false}
+              showsIndoors={false}
+              zoomEnabled={false}
+              scrollEnabled={false}
+              pitchEnabled={false}
+              style={{flex: 1}}
             />
-          </View>
+          </TouchableOpacity>
 
-          {isIphoneX() && <View style={{height: 32}} />}
-        </KeyboardAwareScrollView>
+          <Button
+            title={translate('baskets.publish')}
+            buttonStyle={{backgroundColor: colors.green}}
+            titleStyle={{fontSize: 14}}
+            onPress={() => false}
+            containerStyle={{marginTop: 15}}
+            disabled={!canPublish}
+          />
+        </View>
+
+        {isIphoneX() && <View style={{height: 32}} />}
+      </KeyboardAwareScrollView>
     )
   }
 }
