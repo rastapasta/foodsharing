@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet } from 'react-native'
-import { Scene, Router, Stack, Tabs, Drawer as RouterDrawer } from 'react-native-router-flux'
+import { Scene, Router, Stack, Tabs, Drawer as RouterDrawer, Actions } from 'react-native-router-flux'
 import colors from '../common/colors'
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -57,13 +57,7 @@ export default () =>
       hideNavBar
     >
       <Scene
-        key="offerBasket"
-        title={translate('scenes.offer_basket')}
-        component={EditBasket}
-        hideNavBar={false}
         initial
-      />
-      <Scene
         key="loading"
         component={Loading}
       />
@@ -99,7 +93,7 @@ export default () =>
             renderRightButton={({id}) =>
               <SceneButton
                 icon="plus"
-                onPress={() => false}
+                onPress={() => Actions.push('offerBasket')}
               />
             }
           />
@@ -128,9 +122,6 @@ export default () =>
             url={`https://foodsharing.de/?page=fairteiler&sub=ft&id=${id}`}
           />
         }
-
-        // renderTitle={({id}) => <FairteilerTitle id={id} />}
-        // path="/?page=fairteiler&sub=ft&id=:id"
       />
       <Scene
         key="profile"
@@ -152,6 +143,7 @@ export default () =>
         component={Bananas}
         hideNavBar={false}
       />
+
       <Scene
         key="report"
         title={translate('scenes.report_violation')}
@@ -163,6 +155,20 @@ export default () =>
         key="editBasket"
         title={translate('scenes.edit_basket')}
         component={EditBasket}
+        hideNavBar={false}
+      />
+
+      <Scene
+        key="offerBasket"
+        title={translate('scenes.offer_basket')}
+        component={EditBasket}
+        hideNavBar={false}
+      />
+
+      <Scene
+        key="locationSelector"
+        title={translate('scenes.location_selection')}
+        component={Report}
         hideNavBar={false}
       />
     </Stack>

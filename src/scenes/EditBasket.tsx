@@ -5,12 +5,13 @@ import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import LinearGradient from 'react-native-linear-gradient'
 import MapView from 'react-native-maps'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import * as reduxActions from '../common/actions'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { CheckBox } from 'react-native-elements'
+import { CheckBox, Button } from 'react-native-elements'
 import { Dropdown } from 'react-native-material-dropdown'
 import { TextField } from 'react-native-material-textfield'
 
@@ -95,17 +96,21 @@ class EditBasket extends PureComponent<Props> {
             resizeMode="cover"
           />
 
-          <View style={{
+          <TouchableOpacity style={{
             position: 'absolute',
             right: 10,
             bottom: 10,
             width: 50,
             height: 50,
             borderRadius: 25,
-            backgroundColor: colors.green
+            backgroundColor: colors.green,
+            alignItems: 'center',
+            justifyContent: 'center',
+            paddingTop: 3,
+            paddingLeft: 2
           }}>
-
-          </View>
+            <Icon name="camera" size={24} color={colors.white} />
+          </TouchableOpacity>
 
           <LinearGradient
             style={styles.gradient}
@@ -184,22 +189,14 @@ class EditBasket extends PureComponent<Props> {
               style={{flex: 1}}
             />
           </TouchableOpacity>
-          {/* "baskets": {
-    "non_found": "You have no published food baskets and there are no baskets nearby.",
-    "description": "Description",
-    "how_contact": "How would you like to be contacted?",
-    "by_message": "By message",
-    "by_phone": "By phone",
-    "landline_number": "Landline number",
-    "phone_number": "Phone number",
-    "how_long": "How long should your basked be valid?",
-    "only_today": "only today",
-    "until_tomorrow": "until tomorrow",
-    "three_days": "three days",
-    "one_week": "one week",
-    "two_weeks": "two weeks",
-    "three_weeks": "three weeks"
-  } */}
+
+          <Button
+            title={translate('baskets.publish')}
+            buttonStyle={{backgroundColor: colors.green}}
+            titleStyle={{fontSize: 14}}
+            onPress={() => false}
+            containerStyle={{marginTop: 15}}
+          />
         </View>
       </KeyboardAwareScrollView>
     )

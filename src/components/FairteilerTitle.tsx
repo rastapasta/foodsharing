@@ -1,3 +1,6 @@
+// TODO: Currently not used anymore (after a few iterations)
+// using static title instead. Keeping for a while, then good bye :)
+
 import React, { PureComponent } from 'react'
 import { Text, StyleSheet, Platform, View } from 'react-native'
 

@@ -7,7 +7,8 @@
     "profile": "Profile",
     "bananas": "Honory Bananas",
     "report_violation": "Report",
-    "offer_basket": "Offer basket"
+    "offer_basket": "Offer basket",
+    "location_selection": "Location selection"
   },
 
   "drawer": {
@@ -76,13 +77,14 @@
     "by_phone": "By phone",
     "landline_number": "Landline number",
     "phone_number": "Phone number",
-    "how_long": "How long should your basked be valid?",
+    "how_long": "How long should your basket be valid?",
     "only_today": "only today",
     "until_tomorrow": "until tomorrow",
     "three_days": "three days",
     "one_week": "one week",
     "two_weeks": "two weeks",
     "three_weeks": "three weeks",
-    "where_is": "Where is your basket?"
+    "where_is": "Where is your basket?",
+    "publish": "Publish basket"
   }
 }
