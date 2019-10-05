@@ -13,7 +13,8 @@ import Profile from './Profile'
 import Report from './Report'
 import Bananas from './Bananas'
 import Baskets from './Baskets'
-import EditBasket from './EditBasket'
+import BasketEdit from './BasketEdit'
+import Camera from './Camera'
 
 import Conversations from './Conversations'
 import Conversation from './Conversation'
@@ -154,14 +155,14 @@ export default () =>
       <Scene
         key="editBasket"
         title={translate('scenes.edit_basket')}
-        component={EditBasket}
+        component={BasketEdit}
         hideNavBar={false}
       />
 
       <Scene
         key="offerBasket"
         title={translate('scenes.offer_basket')}
-        component={EditBasket}
+        component={BasketEdit}
         hideNavBar={false}
       />
 
@@ -170,6 +171,11 @@ export default () =>
         title={translate('scenes.location_selection')}
         component={Report}
         hideNavBar={false}
+      />
+
+      <Scene
+        key="camera"
+        component={Camera}
       />
     </Stack>
   </Router>
