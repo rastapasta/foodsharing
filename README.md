@@ -2,7 +2,7 @@
 
 <img src="gifs/login.gif" width="19%"/> <img src="gifs/profile.gif" width="19%"/> <img src="gifs/fairteiler.gif" width="19%" /> <img src="gifs/report.gif" width="19%" /> <img src="gifs/redux.gif" width="19%" />
 
-This is a full Proof of Concept to show how [React Native](https://github.com/facebook/react-native) could rock the [foodsharing](https://foodsharing.network) world :smile:
+This is a full Proof of Concept to show how [React Native](https://github.com/facebook/react-native) could rock the [foodsharing](https://foodsharing.network) world - 'hire' me, i would love to lead your mobile team. 😄
 
 The app is optimized for iOS and Android - one code, one love!
 
@@ -11,10 +11,10 @@ Timeframe: 2 weeks from scratch to production 😎
 ## 🎉 What's implemented?
 
 * Login
-  * Full async login / reauthentication / logout flows
+  * Full login / reauthentication / logout flows from cold and warm start
   * Restores session if previously logged in - even if device offline
   * Using device's keychain to store credentials in a secure location
-  * Auth via email and password
+  * Auth form for email and password
   * Buttons -> navigate to web based register & password restore
   * Loading indication inside login button
   * Notification of failed login
@@ -142,12 +142,16 @@ $> react-native run-ios (or run-android)
 To get an insight into the redux action flow, state and log, use [react-native-debugger
 ](https://github.com/jhen0409/react-native-debugger) and the ```Debug``` mode via React Native's shaking menu.
 
+To let it use your local [docker development environment](https://devdocs.foodsharing.network/getting-the-code.html) instead of production endpoints, set ```PRODUCTION``` to ```false``` in the [configuration file](https://github.com/rastapasta/foodsharing/blob/master/src/common/config.tsx#L1).
+
 ## 🤔 Personal ToDos
 
 * Show blockers
   * No baskets - yet
 
 * Should have
+  * Android
+    * Camera, when first blocking permissions, going to settings, granting them, return -> overlay stays visible.
   * Reflect REQUEST_ERROR errors in the seperate UIs
   * Pull conversation again when open and coming from background to make sure its marked as read
   * Notifications after background pull / detect new conversations - even pull pull conversations? Delta algo!

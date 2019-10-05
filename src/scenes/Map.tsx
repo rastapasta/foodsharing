@@ -108,6 +108,7 @@ class Map extends PureComponent<Props> {
 
           renderMarker={marker =>
             <MapMarker
+              fullscreen
               key={'marker.'+marker.id}
               marker={marker}
               onPress={() => Actions.fairteiler({id: marker.id})}

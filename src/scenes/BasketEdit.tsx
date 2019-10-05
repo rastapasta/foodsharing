@@ -123,25 +123,23 @@ class EditBasket extends PureComponent<Props> {
     }
   }
 
-  componentDidUpdate(prevProps: Props) {
-    const { actions, id } = this.props
-    if (prevProps.isFocused === false && this.props.isFocused === true)
+  async componentDidUpdate(prevProps: Props) {
+    if (prevProps.isFocused === false && this.props.isFocused === true) {
+      const { latitude, longitude } = this.state
+        , map = this.refs.map
+        , camera = await map.getCamera()
+        , { actions, id } = this.props
+
+      camera.center = {latitude, longitude}
+      map.animateCamera(camera, {duration: 300})
+
       actions.navigation('editBasket', id)
+    }
   }
 
   async componentDidMount() {
     const { actions, id } = this.props
     actions.navigation(id ? 'editBasket' : 'offerBasket', id)
-  }
-
-  async recenterMap() {
-    const { latitude, longitude } = this.state
-        , map = this.refs.map
-        , camera = await map.getCamera()
-
-    camera.center = {latitude, longitude}
-    camera.zoom = 0
-    // map.animateCamera(camera, {duration: 10000})
   }
 
   render() {
@@ -262,7 +260,7 @@ class EditBasket extends PureComponent<Props> {
           <TouchableOpacity
             style={{height: 100, marginTop: 10}}
             onPress={() => Actions.push('locationSelector', {
-              callback: location => this.setState({location}),
+              callback: ({latitude, longitude}) => this.setState({latitude, longitude}),
               location: {latitude, longitude}
             })}
           >

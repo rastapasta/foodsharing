@@ -19,9 +19,12 @@ type Props = {
     }
   }
   onPress?: () => void
+
+  // Odd bug, marker needs offset (iOS) only when map is in fullscreen
+  fullscreen?: boolean
 }
 
-export default ({marker, onPress}: Props) => {
+export default ({marker, onPress, fullscreen}: Props) => {
   // TODO: this logic so def. doesn't belong here O:)
   if (marker.type === 'fairteiler' && !seen[marker.id]) {
     store.dispatch({type: FAIRTEILER_PREFETCH, payload: marker.id})
@@ -32,7 +35,7 @@ export default ({marker, onPress}: Props) => {
     image={icons[marker.type]}
     coordinate={marker.location}
     anchor={{x: 0.5, y: 1}}
-    centerOffset={{x: 1, y: -12}}
     onPress={onPress}
+    {...(fullscreen ? {} : {centerOffset: {x: 1, y: -12}})}
   />
 }

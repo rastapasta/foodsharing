@@ -29,19 +29,22 @@ const styles = StyleSheet.create({
   }
 })
 
-type Props = {
-  onSuccess: () => void
+type Point = {
+  longitude: number,
+  latitude: number
+}
 
+type Props = {
+  location: {
+    longitude: number,
+    latitude: number
+  }
+  callback: (Point) => void
   actions: any,
   isFocused: boolean
 }
 
 class LocationSelector extends PureComponent<Props> {
-  state = {
-    longitude: 10.60117067,
-    latitude: 50.34470266
-  }
-
   refs: {
     map: MapView
   }
@@ -58,14 +61,20 @@ class LocationSelector extends PureComponent<Props> {
   }
 
   render() {
-    // const { longitude, latitude } = this.state
+    const { callback, location: { longitude, latitude }} = this.props
 
     return (
       <View style={styles.container}>
         <MapView
           ref="map"
           style={styles.map}
-          onRegionChange={({longitude, latitude}) => this.setState({longitude, latitude})}
+          onRegionChange={callback}
+          initialRegion={{
+            longitude: longitude,
+            latitude,
+            latitudeDelta: 0.008,
+            longitudeDelta: 0.008
+          }}
         />
 
         <View
