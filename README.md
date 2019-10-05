@@ -3,7 +3,7 @@
 
 <img src="gifs/login.gif" width="19%"/> <img src="gifs/profile.gif" width="19%"/> <img src="gifs/fairteiler.gif" width="19%" /> <img src="gifs/report.gif" width="19%" /> <img src="gifs/redux.gif" width="19%" />
 
-This is a Proof of Concept to show how [React Native](https://github.com/facebook/react-native) could rock the [foodsharing](https://foodsharing.network) world :smile:
+This is a full Proof of Concept to show how [React Native](https://github.com/facebook/react-native) could rock the [foodsharing](https://foodsharing.network) world :smile:
 
 This thingy is optimized for iOS and Android - one code, one love!
 

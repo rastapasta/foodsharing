@@ -1,6 +1,6 @@
 import { withNavigationFocus } from 'react-navigation'
 
-import React, { PureComponent } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import LinearGradient from 'react-native-linear-gradient'
@@ -17,6 +17,7 @@ import { TextField } from 'react-native-material-textfield'
 
 import { translate } from '../common/translation'
 import colors from '../common/colors'
+import { Profile } from '../common/typings'
 
 const styles = StyleSheet.create({
   container: {
@@ -53,6 +54,8 @@ type Props = {
   id: number
   actions: any
   isFocused: boolean
+
+  profile: Profile
 }
 
 class EditBasket extends PureComponent<Props> {
@@ -60,6 +63,9 @@ class EditBasket extends PureComponent<Props> {
     description: '',
     by_phone: false,
     by_message: false,
+
+    landline: '',
+    mobile: ''
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -69,12 +75,14 @@ class EditBasket extends PureComponent<Props> {
   }
 
   async componentDidMount() {
-    const { actions, id } = this.props
+    const { actions, id, profile: { landline, mobile } } = this.props
     actions.navigation('editBasket', id)
+
+    this.setState({landline, mobile})
   }
 
   render() {
-    const { description, by_message, by_phone } = this.state
+    const { description, by_message, by_phone, landline, mobile } = this.state
 
     const Box = ({title, checked, onPress}) =>
       <CheckBox
@@ -131,6 +139,7 @@ class EditBasket extends PureComponent<Props> {
             tintColor={colors.background}
             baseColor={colors.background}
             label=""
+            inputContainerStyle={{paddingLeft: 5, paddingRight: 5}}
           />
 
           <Text style={[styles.category, {marginTop: 18, marginBottom: 5}]}>
@@ -149,6 +158,32 @@ class EditBasket extends PureComponent<Props> {
             onPress={() => this.setState({by_phone: !by_phone})}
           />
 
+          {by_phone &&
+            <Fragment>
+              <TextField
+                value={landline}
+                placeholder={translate('baskets.landline_number')}
+                onChangeText={landline => this.setState({landline})}
+                labelHeight={4}
+                tintColor={colors.background}
+                baseColor={colors.background}
+                containerStyle={{marginTop: 10}}
+                inputContainerStyle={{paddingLeft: 5}}
+                label=""
+              />
+              <TextField
+                value={mobile}
+                placeholder={translate('baskets.mobile_number')}
+                onChangeText={mobile => this.setState({mobile})}
+                labelHeight={4}
+                tintColor={colors.background}
+                baseColor={colors.background}
+                inputContainerStyle={{paddingLeft: 5}}
+                containerStyle={{marginTop: 10}}
+                label=""
+              />
+            </Fragment>
+          }
 
           <Text style={[styles.category, {marginTop: 15}]}>
             {translate('baskets.how_long')}
@@ -169,6 +204,7 @@ class EditBasket extends PureComponent<Props> {
               {value: 14, label: translate('baskets.two_weeks')},
               {value: 21, label: translate('baskets.three_weeks')},
             ]}
+            inputContainerStyle={{paddingLeft: 5}}
           />
 
           <Text style={[styles.category, {marginTop: 20}]}>
@@ -204,7 +240,8 @@ class EditBasket extends PureComponent<Props> {
 }
 
 const mapStateToProps = state => ({
-  conversations: state.conversations
+  conversations: state.conversations,
+  profile: state.profile
 })
 
 const mapDispatchToProps = dispatch => ({
