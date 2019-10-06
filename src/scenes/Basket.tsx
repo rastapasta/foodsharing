@@ -1,8 +1,10 @@
 import React, { PureComponent } from 'react'
-import { StyleSheet, SafeAreaView, View, Text, TouchableOpacity, ScrollView, Dimensions } from 'react-native'
+import { StyleSheet, SafeAreaView, View, Text, TouchableOpacity, ScrollView, Dimensions, Platform } from 'react-native'
 import { withNavigationFocus } from 'react-navigation'
 import Image from 'react-native-fast-image'
 import LinearGradient from 'react-native-linear-gradient'
+import MapView, { Marker } from 'react-native-maps'
+import openMap from 'react-native-open-maps'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -115,7 +117,7 @@ class Basket extends PureComponent<Props> {
             </View>
             <View style={styles.creator}>
               <Text style={styles.creatorText}>
-                {creator.name} {basket.picture}
+                {creator.name}
               </Text>
             </View>
           </TouchableOpacity>
@@ -155,6 +157,42 @@ class Basket extends PureComponent<Props> {
             </Text>
           </View>
 
+          <View style={styles.seperator} />
+          {basket.lat && basket.lon &&
+            <TouchableOpacity
+              style={styles.content}
+              onPress={() =>
+                openMap({
+                  longitude: basket.lon,
+                  latitude: basket.lat,
+                  provider: Platform.OS === 'ios' ? 'apple' : 'google',
+                  query: translate('baskets.creators_basket', {name: creator.name, id: basket.id})
+                })
+              }
+            >
+              <MapView
+                ref="map"
+                showsPointsOfInterest={false}
+                showsCompass={false}
+                showsScale={false}
+                showsMyLocationButton={false}
+                showsTraffic={false}
+                showsIndoors={false}
+                zoomEnabled={false}
+                scrollEnabled={false}
+                initialRegion={{
+                  longitude: basket.lon,
+                  latitude: basket.lat,
+                  latitudeDelta: 0.02,
+                  longitudeDelta: 0.02,
+                }}
+                pitchEnabled={false}
+                style={{height: 120}}
+              >
+                <Marker coordinate={{longitude: basket.lon, latitude: basket.lat}} />
+              </MapView>
+            </TouchableOpacity>
+          }
         </ScrollView>
       </SafeAreaView>
     )

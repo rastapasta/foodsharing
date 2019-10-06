@@ -5960,6 +5960,13 @@ react-native-material-textfield@^0.12.0:
   dependencies:
     prop-types "^15.5.9"
 
+react-native-open-maps@^0.3.4:
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/react-native-open-maps/-/react-native-open-maps-0.3.4.tgz#c63fa82ca162b1584a6ce38b9a0e2421e5086074"
+  integrity sha512-zkr8hGVs0t38vHec+6Ehh8jcdItErdD9/jX7jLduNsbVNWhoVaTQX11vKtJb9WlPSO1VrKa4IauGBAvckUYR6g==
+  dependencies:
+    query-string "^6.1.0"
+
 react-native-parse-html@^2.2.6:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/react-native-parse-html/-/react-native-parse-html-2.2.6.tgz#21f28f97b38407784759bc59e244b51109d9cc87"
