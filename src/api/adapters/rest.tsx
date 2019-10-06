@@ -43,6 +43,9 @@ export const getCurrentProfile = (): Promise<Profile> =>
 export const addBasket = async (fields: BasketPost): Promise<Basket> =>
   (await agent('addBasket', fields)).basket
 
+export const getBasket = (id: number): Promise<Basket> =>
+  agent('basket', null, {id})
+
 export const uploadBasket = (id: number, file: string) =>
   uploader('uploadBasket', {id}, file)
 

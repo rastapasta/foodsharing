@@ -64,6 +64,7 @@ export default (
     'regionMembers' |
     'friendship' |
     'report' |
+    'basket' |
     'baskets',
   data?: any,
   options?: any
