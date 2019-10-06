@@ -89,6 +89,11 @@
     "where_is": "Where can your basket be collected?",
     "publish": "Publish basket",
     "publishing": "Publishing basket...",
-    "uploading": "Uploading picture..."
+    "uploading": "Uploading picture...",
+    "created_at": "Created at",
+    "valid_until": "Valid until",
+    "request_basket": "Request basket",
+    "write_message": "Write a message",
+    "call": "Give {{name}} a call"
   }
 }

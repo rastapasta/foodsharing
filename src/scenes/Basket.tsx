@@ -1,22 +1,62 @@
 import React, { PureComponent } from 'react'
-import { StyleSheet, SafeAreaView, View, Text, TouchableOpacity } from 'react-native'
+import { StyleSheet, SafeAreaView, View, Text, TouchableOpacity, ScrollView, Dimensions } from 'react-native'
 import { withNavigationFocus } from 'react-navigation'
+import Image from 'react-native-fast-image'
+import LinearGradient from 'react-native-linear-gradient'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as reduxActions from '../common/actions'
 
+import ActivityIndicator from '../components/ActivityIndicator'
 import RoundedImage from '../components/RoundedImage'
 import { foodsaver } from '../common/placeholder'
 
 import colors from '../common/colors'
 import { Actions } from 'react-native-router-flux'
+import { formatDate } from '../common/utils'
+import { translate } from '../common/translation'
+import config from '../common/config'
+
+const { width } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.white,
     padding: 10
+  },
+  label: {
+    color: colors.darkgray,
+    width: 120
+  },
+  creator: {
+    flex: 1,
+    justifyContent: 'center',
+    paddingLeft: 10
+  },
+  creatorText: {
+    color: colors.darkgray
+  },
+  seperator: {
+    height: 1,
+    backgroundColor: colors.gray,
+    marginLeft: 5,
+    marginRight: 5,
+    marginTop: 5,
+  },
+  content: {
+    padding: 10
+  },
+  description: {
+    padding: 10
+  },
+  gradient: {
+    position: 'absolute',
+    left: 0,
+    bottom: 0,
+    right: 0,
+    height: 10
   },
 })
 
@@ -47,19 +87,75 @@ class Basket extends PureComponent<Props> {
     , basket = baskets.baskets[id] || {}
     , creator = foodsaver(foodsavers[`${basket.creator}`])
 
+    if (!basket.creator)
+      return <ActivityIndicator backgroundColor={colors.white} color={colors.background} />
+
     return (
       <SafeAreaView style={styles.container}>
-        <TouchableOpacity
-          onPress={() => Actions.push('profile', {id: creator.id})}
-          style={{flexDirection: 'row'}}
-        >
-          <View style={{width: '20%', padding: 5}}>
-            <RoundedImage photo={creator.photo} />
+        <ScrollView style={{flex: 1}}>
+          {basket.picture &&
+            <View style={{height: 200, aspectRatio: 1}}>
+              <Image
+                source={{uri: config.host + '/images/basket/' + basket.picture}}
+                style={{width, height: 200}}
+                resizeMode="cover"
+              />
+              <LinearGradient
+                style={styles.gradient}
+                colors={[colors.transparent, colors.white]}
+              />
+            </View>
+          }
+          <TouchableOpacity
+            onPress={() => Actions.push('profile', {id: creator.id})}
+            style={{flexDirection: 'row', padding: 10}}
+          >
+            <View style={{width: '17%'}}>
+              <RoundedImage photo={creator.photo} />
+            </View>
+            <View style={styles.creator}>
+              <Text style={styles.creatorText}>
+                {creator.name} {basket.picture}
+              </Text>
+            </View>
+          </TouchableOpacity>
+
+          <View style={styles.content}>
+            <View style={{flexDirection: 'row'}}>
+              <Text style={styles.label}>
+                {translate('baskets.created_at')}
+              </Text>
+              <Text>{formatDate(basket.createdAt * 1000)}</Text>
+            </View>
+            {!!basket.updatedAt && basket.updatedAt !== basket.createdAt &&
+              <View style={{flexDirection: 'row', marginTop: 10}}>
+                <Text style={styles.label}>
+                  {translate('baskets.updated_at')}
+                </Text>
+                <Text>{formatDate(basket.updatedAt * 1000)}</Text>
+              </View>
+            }
           </View>
-          <View style={{flex: 1, justifyContent: 'center', paddingLeft: 5}}>
-            <Text>{creator.name}</Text>
+
+          <View style={styles.seperator} />
+
+          <View style={styles.content}>
+            <Text style={styles.label}>
+              {translate('baskets.description')}
+            </Text>
+            <Text style={styles.description}>
+              {basket.description}
+            </Text>
           </View>
-        </TouchableOpacity>
+
+          <View style={styles.seperator} />
+          <View style={styles.content}>
+            <Text style={styles.label}>
+              {translate('baskets.request_basket')}
+            </Text>
+          </View>
+
+        </ScrollView>
       </SafeAreaView>
     )
   }
