@@ -5,6 +5,8 @@ import Image from 'react-native-fast-image'
 import LinearGradient from 'react-native-linear-gradient'
 import MapView, { Marker } from 'react-native-maps'
 import openMap from 'react-native-open-maps'
+import { Button } from 'react-native-elements'
+import call from 'react-native-phone-call'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -51,7 +53,10 @@ const styles = StyleSheet.create({
     padding: 10
   },
   description: {
-    padding: 10
+    paddingTop: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
+
   },
   gradient: {
     position: 'absolute',
@@ -146,7 +151,7 @@ class Basket extends PureComponent<Props> {
               {translate('baskets.description')}
             </Text>
             <Text style={styles.description}>
-              {basket.description}
+              {basket.description.trim()}
             </Text>
           </View>
 
@@ -155,7 +160,32 @@ class Basket extends PureComponent<Props> {
             <Text style={styles.label}>
               {translate('baskets.request_basket')}
             </Text>
+            <View style={{flexDirection: 'row'}}>
+              {basket.contactTypes.includes(1) &&
+                <Button
+                  title={translate('baskets.write_message')}
+                  containerStyle={{margin: 10, flex: 1}}
+                  buttonStyle={{backgroundColor: colors.green}}
+                  titleStyle={{fontSize: 14}}
+                  onPress={() => false}
+                />
+              }
+              {/* {basket.contactTypes.includes(2) && */}
+                <Button
+                  title={translate('baskets.call', {name: creator.name})}
+                  containerStyle={{margin: 10, flex: 1}}
+                  buttonStyle={{backgroundColor: colors.green}}
+                  titleStyle={{fontSize: 14}}
+                  onPress={async () => await call({
+                    prompt: true,
+                    number: basket.handy || basket.tel
+                  })}
+                />
+              {/* } */}
+            </View>
           </View>
+
+
 
           <View style={styles.seperator} />
           {basket.lat && basket.lon &&

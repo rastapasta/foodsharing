@@ -5979,6 +5979,11 @@ react-native-permissions@^2.0.1:
   resolved "https://registry.yarnpkg.com/react-native-permissions/-/react-native-permissions-2.0.1.tgz#43e9fb39e583ab5da4dc744d500fc09e8e0ecd12"
   integrity sha512-sXOsIdalQ5bwvXAAzItvt+/hN2RvujtBhtieHO9XW1iEeo0bSUVp6PBlY+A3qwyXclwprT6BPQXikyxA5IHHqA==
 
+react-native-phone-call@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/react-native-phone-call/-/react-native-phone-call-1.0.9.tgz#4468ec6f95856557fbff9bd69a0db04b54c35e1d"
+  integrity sha512-OPWYg8qeWNG/U4bWGMAKcQTH/ifqJnsvUPCH4lOkvWFHbQS3fbH5M8rFhXCzcfS0GVNzHhZX9ZByMM368TFAUQ==
+
 react-native-push-notification@^3.1.9:
   version "3.1.9"
   resolved "https://registry.yarnpkg.com/react-native-push-notification/-/react-native-push-notification-3.1.9.tgz#760ee06e743fef74fc9fcb672dac40794fdc4c47"

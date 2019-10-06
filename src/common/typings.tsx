@@ -145,6 +145,8 @@ export interface Basket {
   until: number,
   lat: number,
   lon: number,
+  tel: string,
+  handy: string,
   creator: User
 }
 
