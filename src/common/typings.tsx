@@ -1,5 +1,3 @@
-import { number } from "prop-types"
-
 export enum Results {
   MALFORMED,
   UNAUTHORIZED,

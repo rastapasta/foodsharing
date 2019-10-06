@@ -11,6 +11,7 @@ import Wall from './wall'
 import Background from './background'
 import Profile from './profile'
 import Report from './report'
+import Basket from './basket'
 
 // Start all our sagas in parallel
 export default function* rootSaga () {
@@ -25,6 +26,7 @@ export default function* rootSaga () {
     Wall(),
     Background(),
     Profile(),
-    Report()
+    Report(),
+    Basket()
   ])
 }

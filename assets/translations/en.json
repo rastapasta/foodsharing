@@ -85,6 +85,8 @@
     "two_weeks": "two weeks",
     "three_weeks": "three weeks",
     "where_is": "Where can your basket be collected?",
-    "publish": "Publish basket"
+    "publish": "Publish basket",
+    "publishing": "Publishing basket...",
+    "uploading": "Uploading picture..."
   }
 }

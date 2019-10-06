@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { StyleSheet, View, Image } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'

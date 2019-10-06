@@ -81,7 +81,8 @@ type Props = {
   actions: any
   isFocused: boolean
 
-  profile: Profile
+  profile: Profile,
+  baskets: any
 }
 
 class EditBasket extends PureComponent<Props> {
@@ -110,10 +111,10 @@ class EditBasket extends PureComponent<Props> {
 
     this.state = {
       picture: null,
-      description: '',
-      by_message: false,
+      description: 'Testeintrag',
+      by_message: true,
       by_phone: false,
-      lifetime: null,
+      lifetime: 7,
 
       landline,
       mobile,
@@ -143,7 +144,7 @@ class EditBasket extends PureComponent<Props> {
 
   render() {
     const { picture, description, by_message, by_phone, landline, mobile, lifetime, latitude, longitude } = this.state
-        , { isFocused, actions } = this.props
+        , { isFocused, actions, baskets } = this.props
         , canPublish = description.length && (by_message || (by_phone && (landline || mobile))) && lifetime
         , initialRegion = {
           longitude,
@@ -283,11 +284,15 @@ class EditBasket extends PureComponent<Props> {
           </TouchableOpacity>
 
           <Button
-            title={translate('baskets.publish')}
+            title={
+              baskets.posting ? translate('baskets.publishing') :
+              baskets.uploading ? translate('baskets.uploading') :
+              translate('baskets.publish')
+            }
             buttonStyle={{backgroundColor: colors.green}}
             titleStyle={{fontSize: 14}}
             containerStyle={{marginTop: 15}}
-            disabled={!canPublish}
+            disabled={!canPublish || baskets.posting || baskets.uploading}
             onPress={() => actions.addBasket({
               description,
               contactTypes: [
@@ -311,8 +316,8 @@ class EditBasket extends PureComponent<Props> {
 }
 
 const mapStateToProps = state => ({
-  conversations: state.conversations,
-  profile: state.profile
+  profile: state.profile,
+  baskets: state.baskets
 })
 
 const mapDispatchToProps = dispatch => ({

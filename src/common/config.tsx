@@ -1,4 +1,4 @@
-const PRODUCTION = true
+const PRODUCTION = false
 
 export default {
   host: PRODUCTION ? 'https://beta.foodsharing.de' : 'http://localhost:18080/',
@@ -17,6 +17,7 @@ export default {
     conversations: {uri: '/api/conversations?offset={offset}&limit={limit}', method: 'GET'},
     conversation: {uri: '/api/conversations/{conversationId}?messagesOffset={offset}&messagesLimit={limit}', method: 'GET'},
     addBasket: {uri: '/api/baskets', method: 'POST'},
+    uploadBasket: {uri: '/api/baskets/{id}/picture', method: 'PUT'},
     message: {uri: '/xhrapp.php?app=msg&m=sendmsg', method: 'POST'},
     friendship: {uri: '/xhrapp.php?app=buddy&m=request&app=buddy&id={userId}', method: 'GET'},
     user2conv: {uri: '/xhrapp.php?app=msg&m=user2conv&fsid={userId}', method: 'GET'},

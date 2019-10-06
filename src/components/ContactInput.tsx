@@ -26,7 +26,7 @@ export default class ContactInput extends PureComponent<Props> {
     return (
       <View style={{paddingLeft: 10}}>
         <TextField
-          value={value}
+          value={value || ''}
           placeholder={placeholder}
           onChangeText={onChange}
           labelHeight={4}

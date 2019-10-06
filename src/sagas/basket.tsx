@@ -1,28 +1,34 @@
-import { take, put, fork, select } from 'redux-saga/effects'
+import { take, put, fork } from 'redux-saga/effects'
 
-// import {
-//   BASKET_ADDREQUEST,
-//   BASKET_ADDSUCCESS
-// } from '../common/constants'
+import {
+  BASKET_ADD_REQUEST,
+  BASKET_ADD_SUCCESS,
+  BASKET_IMAGE_REQUEST
+  // BASKET_PICTURE_SUCCESS,
+} from '../common/constants'
+import { addBasket } from '../api/adapters/rest'
+import { Actions } from 'react-native-router-flux'
 
-function* fetch(id: number) {
-  try {
-    // Pull the markers from the API
-    // const fairteiler = yield getFairteiler(id)
+function* addWatcher() {
+  while (true) {
+    // Wait until we get a basket add request
+    const { payload } = yield take([BASKET_ADD_REQUEST])
 
-    // // ... and publish them on the bus
-    // yield put({type: FAIRTEILER_SUCCESS, payload: fairteiler})
+    try {
+      // Publish a fresh basket!
+      const basket = yield addBasket(payload)
+      yield put({type: BASKET_ADD_SUCCESS, payload: basket})
 
-  } catch(e) {/* Errors are handled via Redux reducers */}
+      // If the basket got created with an image, trigger its upload after creation
+      if (payload.picture)
+        yield put({type: BASKET_IMAGE_REQUEST, payload: {id: basket.id, picture: basket.picture}})
+      else
+        Actions.replace('basket', {id: basket.id})
+
+    } catch(e) {/* Errors are handled via Redux reducers */}
+  }
 }
 
-export default function* fairteilerSaga() {
-  while (true) {
-    // Wait until we get a basket request
-    // const { type, payload: id } = yield take([FAIRTEILER_REQUEST, FAIRTEILER_PREFETCH])
-
-    // Only request if its a usual request or if the fairtailer isn't prefetched yet
-    // if (type === FAIRTEILER_REQUEST || !(yield select(state => state.fairteiler[`${id}`])))
-    //   yield fork(fetch, id)
-  }
+export default function* basketSaga() {
+  yield fork(addWatcher)
 }

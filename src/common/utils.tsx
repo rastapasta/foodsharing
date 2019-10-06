@@ -6,7 +6,7 @@ export const mergeWithState = (state, id, options) => {
       , key = `${id}`
 
   newState[key] = {
-    ...state[key],
+    ...(state[key] || {}),
     ...options
   }
 

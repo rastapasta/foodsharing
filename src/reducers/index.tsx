@@ -11,6 +11,7 @@ import profile from './profile'
 import markers from './markers'
 import fairteiler from './fairteiler'
 import walls from './walls'
+import baskets from './baskets'
 
 export default combineReducers({
   app,
@@ -21,6 +22,7 @@ export default combineReducers({
   markers,
   fairteiler,
   walls,
+  baskets,
 
   ...createForms({
     login: config.credentials || {},

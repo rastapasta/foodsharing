@@ -4,6 +4,7 @@ import {
   BASKET_IMAGE_REQUEST,
   BASKET_IMAGE_SUCCESS,
 } from '../common/constants'
+import { mergeWithState } from '../common/utils'
 
 const initialState = {
   posting: false,
@@ -16,7 +17,8 @@ const initialState = {
 }
 
 export default function reducer(state = initialState, action: any = {}) {
-  switch (action.type) {
+  const { type, payload } = action
+  switch (type) {
     case BASKET_ADD_REQUEST:
       return {
         ...state,
@@ -26,6 +28,8 @@ export default function reducer(state = initialState, action: any = {}) {
     case BASKET_ADD_SUCCESS:
       return {
         ...state,
+        baskets: mergeWithState(state.baskets, payload.id, payload),
+        own: [...state.own, payload.id],
         posting: false
       }
 

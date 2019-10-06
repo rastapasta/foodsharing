@@ -37,5 +37,5 @@ export const getWall = (target: 'foodsaver' | 'fairteiler', targetId: number): P
 export const getCurrentProfile = (): Promise<Profile> =>
   agent('currentProfile')
 
-export const addBasket = (fields: BasketPost): Promise<Basket> =>
-  agent('addBasket', fields)
+export const addBasket = async (fields: BasketPost): Promise<Basket> =>
+  (await agent('addBasket', fields)).basket
