@@ -27,7 +27,7 @@ export default {
     report: {uri: '/xhrapp.php?app=report&m=betriebReport&fsid={userId}&bid=0&reason_id={reasonId}&reason={reason}&msg={message}', method: 'GET'},
 
     fairteiler: {uri: '/api/fairSharePoints/{id}', method: 'GET'},
-    fairteilerMarker: {uri: '/xhr.php?f=loadMarker&types[]=fairteiler', method: 'GET'},
+    marker: {uri: '/xhr.php?f=loadMarker&types[]=fairteiler&types[]=baskets', method: 'GET'},
 
     regionMembers: {uri: '/?page=bezirk&bid={id}&sub=members', method: 'GET'},
 

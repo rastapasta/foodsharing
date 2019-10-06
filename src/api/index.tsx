@@ -1,6 +1,6 @@
 import { getSession, setSession, syncCookies } from './agent'
 import { login, logout, getCurrentUser, getFairteiler, getConversation, getConversations, markAsRead, getWall, getCurrentProfile, addBasket, uploadBasket, getBasket } from './adapters/rest'
-import { getFairteilerMarker } from './adapters/xhr'
+import { getMarker } from './adapters/xhr'
 import { userToConversationId, sendMessage, requestFriendship, report } from './adapters/xhrapp'
 
 import getProfile from './adapters/scrapers/profile'
@@ -24,7 +24,7 @@ export {
   addBasket,
   uploadBasket,
 
-  getFairteilerMarker,
+  getMarker,
 
   userToConversationId,
   sendMessage,

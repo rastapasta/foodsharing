@@ -1,5 +1,5 @@
 import agent from '../agent'
 import { Marker } from '../../common/typings'
 
-export const getFairteilerMarker = async (): Promise<Marker[]> =>
-  (await agent('fairteilerMarker')).fairteiler
+export const getMarker = async (): Promise<{fairteiler: Marker[], baskets: Marker[]}> =>
+  agent('marker')

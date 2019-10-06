@@ -59,7 +59,7 @@ export default (
     'message' |
     'user2conv' |
     'fairteiler' |
-    'fairteilerMarker' |
+    'marker' |
     'addBasket' |
     'regionMembers' |
     'friendship' |

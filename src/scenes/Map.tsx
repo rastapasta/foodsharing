@@ -68,14 +68,18 @@ class Map extends PureComponent<Props> {
 
   transformMarkers() {
     const { markers } = this.props
-    return markers.map(marker => ({
-      type: 'fairteiler',
-      id: marker.id,
-      location: {
-        latitude: parseFloat(marker.lat),
-        longitude: parseFloat(marker.lon)
-      }
-    }))
+    return ['fairteiler', 'baskets'].reduce((all, type) =>
+      all.concat(
+        markers[type].map(marker => ({
+          type,
+          id: marker.id,
+          location: {
+            latitude: parseFloat(marker.lat),
+            longitude: parseFloat(marker.lon)
+          }
+        }))
+      ), []
+    )
   }
 
   render() {
@@ -108,9 +112,13 @@ class Map extends PureComponent<Props> {
 
           renderMarker={marker =>
             <MapMarker
-              key={'marker.'+marker.id}
+              key={'marker.'+marker.type+'.'+marker.id}
               marker={marker}
-              onPress={() => Actions.fairteiler({id: marker.id})}
+              onPress={() =>
+                marker.type === 'fairteiler' ?
+                Actions.fairteiler({id: marker.id}) :
+                Actions.basket({id: marker.id})
+              }
             />
           }
 

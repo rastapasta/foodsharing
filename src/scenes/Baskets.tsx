@@ -35,7 +35,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.myBasket,
     padding: 8,
     borderColor: colors.gray,
-    borderBottomWidth: 1
+    borderBottomWidth: 1,
+    minHeight: 70
   },
   title: {
     fontSize: 12,

@@ -90,7 +90,7 @@ class Basket extends PureComponent<Props> {
   }
 
   render() {
-    const { baskets, foodsavers, id } = this.props
+    const { baskets, foodsavers, id, actions } = this.props
     , basket = baskets.baskets[id] || {}
     , creator = foodsaver(foodsavers[`${basket.creator}`])
 
@@ -100,7 +100,7 @@ class Basket extends PureComponent<Props> {
     return (
       <SafeAreaView style={styles.container}>
         <ScrollView style={{flex: 1}}>
-          {basket.picture &&
+          {!!basket.picture &&
             <View style={{height: 200, aspectRatio: 1}}>
               <Image
                 source={{uri: config.host + '/images/basket/' + basket.picture}}
@@ -167,10 +167,10 @@ class Basket extends PureComponent<Props> {
                   containerStyle={{margin: 10, flex: 1}}
                   buttonStyle={{backgroundColor: colors.green}}
                   titleStyle={{fontSize: 14}}
-                  onPress={() => false}
+                  onPress={() => actions.fetchConversationId(creator.id)}
                 />
               }
-              {/* {basket.contactTypes.includes(2) && */}
+              {basket.contactTypes.includes(2) &&
                 <Button
                   title={translate('baskets.call', {name: creator.name})}
                   containerStyle={{margin: 10, flex: 1}}
@@ -181,7 +181,7 @@ class Basket extends PureComponent<Props> {
                     number: basket.handy || basket.tel
                   })}
                 />
-              {/* } */}
+              }
             </View>
           </View>
 

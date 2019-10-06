@@ -5,7 +5,7 @@ import { FAIRTEILER_PREFETCH } from '../common/constants'
 
 const icons = {
         fairteiler: require('../../assets/marker/marker_fairteiler.png'),
-        basket: require('../../assets/marker/marker_basket.png')
+        baskets: require('../../assets/marker/marker_basket.png')
       }
     , seen = {}
 

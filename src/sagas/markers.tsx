@@ -1,6 +1,6 @@
 import { take, put } from 'redux-saga/effects'
 
-import { getFairteilerMarker } from '../api'
+import { getMarker } from '../api'
 
 import { MARKERS_REQUEST, MARKERS_SUCCESS } from '../common/constants'
 
@@ -11,7 +11,7 @@ export default function* markersSaga() {
 
     try {
       // Pull the markers from the API
-      const markers = yield getFairteilerMarker()
+      const markers = yield getMarker()
 
       // ... and publish them on the bus
       yield put({type: MARKERS_SUCCESS, payload: markers})
