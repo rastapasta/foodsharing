@@ -2,6 +2,7 @@
   "scenes": {
     "conversations": "Conversations",
     "baskets": "Baskets",
+    "basket": "Basket #{{id}}",
     "map": "Map",
     "fairteiler": "Fairteiler",
     "profile": "Profile",
@@ -70,6 +71,7 @@
   },
 
   "baskets": {
+    "my_basket": "My basket",
     "non_found": "You have no published food baskets and there are no baskets nearby.",
     "description": "Description",
     "how_contact": "How would you like to be contacted?",

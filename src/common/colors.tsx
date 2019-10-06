@@ -24,6 +24,8 @@ export default {
 
   badge: '#64AE24',
 
+  myBasket: '#FFEAD3',
+
   version: '#aaa',
 
   drawerBackground: '#5C4038',

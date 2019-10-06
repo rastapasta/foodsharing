@@ -25,6 +25,7 @@ import Fairteiler from './Fairteiler'
 import Loading from './Loading'
 
 import ConversationTitle from '../components/ConversationTitle'
+import BasketTitle from '../components/BasketTitle'
 // import FairteilerTitle from '../components/FairteilerTitle'
 import ShareButton from '../components/ShareButton'
 import SceneButton from '../components/SceneButton'
@@ -160,6 +161,13 @@ export default () =>
         title={translate('scenes.basket')}
         component={Basket}
         hideNavBar={false}
+        renderTitle={({id}) => <BasketTitle id={id} />}
+        renderRightButton={({id}) =>
+          <ShareButton
+            title={translate('fairteiler.share')}
+            url={`https://foodsharing.de/essenskoerbe/${id}`}
+          />
+        }
       />
 
       <Scene

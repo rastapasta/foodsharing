@@ -29,6 +29,28 @@ const styles = StyleSheet.create({
     width,
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  item: {
+    backgroundColor: colors.myBasket,
+    padding: 8,
+    borderColor: colors.gray,
+    borderBottomWidth: 1
+  },
+  title: {
+    fontSize: 12,
+    color: colors.darkgray
+  },
+  time: {
+    fontSize: 12,
+    color: colors.darkgray
+  },
+  description: {
+    marginTop: 5
+  },
+  header: {
+    width: '100%',
+    justifyContent: 'space-between',
+    flexDirection: 'row'
   }
 })
 
@@ -61,8 +83,24 @@ class Baskets extends PureComponent<Props> {
           data={baskets.own.map(id => baskets.baskets[id])}
           keyExtractor={(basket: Basket) => basket.id.toString()}
           renderItem={({item}) =>
-            <TouchableOpacity onPress={() => Actions.push('basket', {id: item.id})}>
-              <Text>{item.description}</Text>
+            <TouchableOpacity
+              onPress={() => Actions.push('basket', {id: item.id})}
+              style={styles.item}
+            >
+              <View style={styles.header}>
+                <Text style={styles.title}>
+                  {translate('baskets.my_basket')}
+                </Text>
+                <Text style={styles.time}>
+                  Time
+                </Text>
+              </View>
+              <Text
+                style={styles.description}
+                numberOfLines={3}
+              >
+                {item.description}
+              </Text>
             </TouchableOpacity>
           }
           ListEmptyComponent={() =>
