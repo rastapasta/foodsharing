@@ -9,7 +9,8 @@ import {
   WallPosts,
   Profile,
   BasketPost,
-  Basket
+  Basket,
+  BasketListing
 } from '../../common/typings'
 
 export const login = (email: string, password: string): Promise<User> =>
@@ -44,3 +45,6 @@ export const addBasket = async (fields: BasketPost): Promise<Basket> =>
 
 export const uploadBasket = (id: number, file: string) =>
   uploader('uploadBasket', {id}, file)
+
+export const getMyBaskets = async (): Promise<BasketListing[]> =>
+  (await agent('baskets', null, {type: 'mine'})).baskets

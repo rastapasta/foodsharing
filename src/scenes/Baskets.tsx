@@ -39,6 +39,7 @@ class Baskets extends PureComponent<Props> {
   async componentDidMount() {
     const { actions } = this.props
     actions.navigation('baskets')
+    actions.getBaskets()
   }
 
   render() {

@@ -3,8 +3,7 @@ import { getSession } from './agent'
 import config from '../common/config'
 
 export default (endpoint: 'uploadBasket', options: any, file: string) => {
-  const name = file.split(/\//).pop()
-      , {session, token} = getSession()
+  const {session, token} = getSession()
       , opts = options || {}
       , uri = config.endpoints[endpoint].uri
       , url = config.host +

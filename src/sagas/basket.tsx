@@ -4,10 +4,23 @@ import {
   BASKET_ADD_REQUEST,
   BASKET_ADD_SUCCESS,
   BASKET_UPLOAD_REQUEST,
-  BASKET_UPLOAD_SUCCESS
+  BASKET_UPLOAD_SUCCESS,
+  BASKETS_REQUEST,
+  BASKETS_SUCCESS
 } from '../common/constants'
-import { addBasket, uploadBasket } from '../api/adapters/rest'
+import { addBasket, uploadBasket, getMyBaskets } from '../api/adapters/rest'
 import { Actions } from 'react-native-router-flux'
+
+function* myBasketsWatcher() {
+  while (true) {
+    // Wait until we get a basket add request
+    yield take([BASKETS_REQUEST])
+    try {
+      // Fetch and return it
+      yield put({type: BASKETS_SUCCESS, payload: yield getMyBaskets()})
+    } catch(e) {/* Errors are handled via Redux reducers */}
+  }
+}
 
 function* addWatcher() {
   while (true) {
@@ -44,5 +57,6 @@ function* uploadWatcher() {
 
 export default function* basketSaga() {
   yield fork(addWatcher)
+  yield fork(myBasketsWatcher)
   yield fork(uploadWatcher)
 }

@@ -26,6 +26,8 @@ export const fetchWall = (target: 'foodsaver' | 'fairteiler', id: number) => ({t
 
 export const requestFriendship = (id: number) => ({type: types.FRIENDSHIP_REQUEST, payload: id})
 
+export const getBaskets = () => ({type: types.BASKETS_REQUEST})
+
 export const addBasket = (basket: BasketPost) => ({type: types.BASKET_ADD_REQUEST, payload: basket})
 
 export const makeReport =

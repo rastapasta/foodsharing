@@ -158,3 +158,12 @@ export interface BasketPost {
   lat: number,
   lon: number
 }
+
+export interface BasketListing {
+  id: number,
+  description: string,
+  picture: string,
+  createdAt: number,
+  updatedAt: number,
+  requests: any[]
+}

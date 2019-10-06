@@ -63,8 +63,8 @@ export default (
     'addBasket' |
     'regionMembers' |
     'friendship' |
-    'report',
-
+    'report' |
+    'baskets',
   data?: any,
   options?: any
 ): Promise<any> => {

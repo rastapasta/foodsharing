@@ -17,6 +17,7 @@ export default {
     store: {uri: '/api/stores/{storeId}', method: 'GET'},
     conversations: {uri: '/api/conversations?offset={offset}&limit={limit}', method: 'GET'},
     conversation: {uri: '/api/conversations/{conversationId}?messagesOffset={offset}&messagesLimit={limit}', method: 'GET'},
+    baskets: {uri: '/api/baskets?type={type}', method: 'GET'},
     addBasket: {uri: '/api/baskets', method: 'POST'},
     uploadBasket: {uri: '/api/baskets/{id}/picture', method: 'PUT'},
     message: {uri: '/xhrapp.php?app=msg&m=sendmsg', method: 'POST'},
@@ -30,7 +31,7 @@ export default {
     regionMembers: {uri: '/?page=bezirk&bid={id}&sub=members', method: 'GET'},
 
     // TODO:
-    baskets: {uri: '/xhr.php?f=loadMarker&types[]=baskets', method: 'GET'},
+    // baskets: {uri: '/xhr.php?f=loadMarker&types[]=baskets', method: 'GET'},
     shops: {uri: '/xhr.php?f=loadMarker&types[]=betriebe&options[]=needhelp&options[]=needhelpinstant', method: 'GET'}
   },
 
