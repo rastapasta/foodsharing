@@ -78,6 +78,7 @@ function* reauthenticateFlow() {
     // Let's always assume we got a working session - predictive ux for the win!
     setTimeout(() => {
       Actions.reset('drawer')
+      // Actions.reset('basket', {id: 111672})
       SplashScreen.hide()
     }, 100)
 

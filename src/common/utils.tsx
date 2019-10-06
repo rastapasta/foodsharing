@@ -19,8 +19,8 @@ export const formatDate = (str: any) => {
       , isYesterday = date.isSame(new Date(Date.now() - 24*60*60*1000), 'day')
       , thisYear = date.isSame(new Date(), 'year')
 
-      return isToday ? translate('conversations.today') + ', ' + date.format('HH:ii') :
-                isYesterday ? translate('conversations.yesterday') + ', ' + date.format('HH:ii') :
+      return isToday ? translate('conversations.today') + ', ' + date.format('HH:mm') :
+                isYesterday ? translate('conversations.yesterday') + ', ' + date.format('HH:mm') :
                 thisYear ? date.format('MMMM Do') :
                 date.format('MMMM Do YYYY')
 }

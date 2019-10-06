@@ -26,7 +26,10 @@ export default function reducer(state = initialState, action: any = {}) {
     case BASKET_SUCCESS:
       return {
         ...state,
-        baskets: mergeWithState(state.baskets, payload.id, payload)
+        baskets: mergeWithState(state.baskets, payload.id, {
+          ...payload,
+          creator: payload.creator.id
+        })
       }
 
     case BASKETS_REQUEST:

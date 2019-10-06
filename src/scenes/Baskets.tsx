@@ -10,6 +10,7 @@ import colors from '../common/colors'
 import { translate } from '../common/translation'
 import { Basket } from '../common/typings'
 import { Actions } from 'react-native-router-flux'
+import { formatDate } from '../common/utils'
 
 const { width, height } = Dimensions.get('window')
 
@@ -75,7 +76,9 @@ class Baskets extends PureComponent<Props> {
   }
 
   render() {
+
     const { baskets } = this.props
+
     return (
       <SafeAreaView style={styles.container}>
         <FlatList
@@ -92,7 +95,7 @@ class Baskets extends PureComponent<Props> {
                   {translate('baskets.my_basket')}
                 </Text>
                 <Text style={styles.time}>
-                  Time
+                  {formatDate(item.createdAt * 1000)}
                 </Text>
               </View>
               <Text
