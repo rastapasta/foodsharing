@@ -1,7 +1,7 @@
 import { withNavigationFocus } from 'react-navigation'
 
 import React, { PureComponent } from 'react'
-import { SafeAreaView, StyleSheet, Text, FlatList, View, ActivityIndicator, Dimensions, TouchableOpacity } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, FlatList, View, ActivityIndicator, Dimensions, TouchableOpacity, Platform } from 'react-native'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -64,6 +64,10 @@ type Props = {
 }
 
 class Baskets extends PureComponent<Props> {
+  state = {
+    refreshing: false
+  }
+
   componentDidUpdate(prevProps: Props) {
     const { actions } = this.props
     if (prevProps.isFocused === false && this.props.isFocused === true)
@@ -77,12 +81,18 @@ class Baskets extends PureComponent<Props> {
   }
 
   render() {
-
-    const { baskets } = this.props
+    const { baskets, actions } = this.props
+        , { refreshing } = this.state
 
     return (
       <SafeAreaView style={styles.container}>
         <FlatList
+          onRefresh={Platform.OS === 'ios' ? () => {
+            actions.getBaskets()
+            setTimeout(() => this.setState({refreshing: false}), 1000)
+          } : null}
+          refreshing={refreshing}
+
           style={{flex: 1}}
           data={baskets.own.map(id => baskets.baskets[id])}
           keyExtractor={(basket: Basket) => basket.id.toString()}
