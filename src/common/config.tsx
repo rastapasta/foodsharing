@@ -17,7 +17,7 @@ export default {
     store: {uri: '/api/stores/{storeId}', method: 'GET'},
     conversations: {uri: '/api/conversations?offset={offset}&limit={limit}', method: 'GET'},
     conversation: {uri: '/api/conversations/{conversationId}?messagesOffset={offset}&messagesLimit={limit}', method: 'GET'},
-    basket: {uri: '/api/basket/{id}', method: 'GET'},
+    basket: {uri: '/api/baskets/{id}', method: 'GET'},
     baskets: {uri: '/api/baskets?type={type}', method: 'GET'},
     addBasket: {uri: '/api/baskets', method: 'POST'},
     uploadBasket: {uri: '/api/baskets/{id}/picture', method: 'PUT'},

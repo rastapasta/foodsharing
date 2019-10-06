@@ -16,7 +16,8 @@ import {
 
   WALL_SUCCESS,
 
-  LOGOUT
+  LOGOUT,
+  BASKET_SUCCESS
 } from '../common/constants'
 
 import { mergeWithState } from '../common/utils'
@@ -80,6 +81,15 @@ export default function reducer(state = initialState, action: any = {}) {
       })
 
       return profileState
+
+    case BASKET_SUCCESS:
+      const { creator } = payload
+      return mergeWithState(state, creator.id, {
+        id: creator.id.toString(),
+        name: creator.name,
+        photo: creator.avatar,
+        sleepStatus: creator.sleepStatus !== 0,
+      })
 
     case FRIENDSHIP_REQUEST:
       return mergeWithState(state, payload, {

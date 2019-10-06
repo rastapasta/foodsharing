@@ -4,6 +4,8 @@ import {
   BASKET_UPLOAD_REQUEST,
   BASKET_UPLOAD_SUCCESS,
   BASKETS_SUCCESS,
+  BASKETS_REQUEST,
+  BASKET_SUCCESS,
 } from '../common/constants'
 import { mergeWithState } from '../common/utils'
 import { BasketListing } from '../common/typings'
@@ -21,9 +23,22 @@ const initialState = {
 export default function reducer(state = initialState, action: any = {}) {
   const { type, payload } = action
   switch (type) {
+    case BASKET_SUCCESS:
+      return {
+        ...state,
+        baskets: mergeWithState(state.baskets, payload.id, payload)
+      }
+
+    case BASKETS_REQUEST:
+      return {
+        ...state,
+        loading: true
+      }
+
     case BASKETS_SUCCESS:
       return {
         ...state,
+        loading: false,
         baskets:
           (payload as BasketListing[])
           .reduce((all, basket) => {

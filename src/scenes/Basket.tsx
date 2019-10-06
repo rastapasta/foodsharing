@@ -33,7 +33,7 @@ class Basket extends PureComponent<Props> {
   componentDidMount() {
     const { actions, id } = this.props
     actions.navigation('basket', id)
-    // actions.fetchBasket(id)
+    actions.fetchBasket(id)
   }
 
   render() {

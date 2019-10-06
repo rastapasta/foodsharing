@@ -111,10 +111,10 @@ class EditBasket extends PureComponent<Props> {
 
     this.state = {
       picture: null,
-      description: 'Testeintrag',
+      description: '',
       by_message: true,
       by_phone: false,
-      lifetime: 7,
+      lifetime: null,
 
       landline,
       mobile,
