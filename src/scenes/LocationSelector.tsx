@@ -6,6 +6,8 @@ import { connect } from 'react-redux'
 import * as reduxActions from '../common/actions'
 
 import MapView, { Marker } from 'react-native-maps'
+import MapButton from '../components/MapButton'
+import colors from '../common/colors'
 
 const styles = StyleSheet.create({
   container: {
@@ -26,6 +28,10 @@ const styles = StyleSheet.create({
       {translateX: 2},
       {translateY: -13}
     ]
+  },
+  gps: {
+    bottom: 10,
+    right: 10,
   }
 })
 
@@ -50,6 +56,7 @@ class LocationSelector extends PureComponent<Props> {
   }
 
   state: {
+    trackPosition: boolean,
     region: any
   }
 
@@ -58,7 +65,8 @@ class LocationSelector extends PureComponent<Props> {
 
     const { location } = props
     this.state = {
-      region: location
+      region: location,
+      trackPosition: false
     }
   }
 
@@ -75,7 +83,7 @@ class LocationSelector extends PureComponent<Props> {
 
   render() {
     const { callback } = this.props
-        , { region: { longitude, latitude } } = this.state
+        , { region: { longitude, latitude }, trackPosition } = this.state
 
     return (
       <View style={styles.container}>
@@ -92,20 +100,19 @@ class LocationSelector extends PureComponent<Props> {
             latitudeDelta: 0.008,
             longitudeDelta: 0.008
           }}
+
+          showsUserLocation={trackPosition}
+          followsUserLocation
         >
           <Marker pointerEvents="none" coordinate={{longitude, latitude}} />
         </MapView>
-{/*
-        <View
-          style={styles.overlay}
-          pointerEvents="none"
-        >
-          <Image
-            source={require('../../assets/marker/marker_basket.png')}
-            style={styles.staticMarker}
-            resizeMode="contain"
-          />
-        </View> */}
+
+        <MapButton
+          onPress={() => this.setState({trackPosition: !trackPosition})}
+          style={styles.gps}
+          icon="crosshairs-gps"
+          color={colors[trackPosition ? 'green' : 'black']}
+        />
       </View>
     )
   }

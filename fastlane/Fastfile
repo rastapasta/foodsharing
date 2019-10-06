@@ -89,7 +89,7 @@ platform :ios do
   lane :beta do
     # bump
     icon
-    beta_badge
+    # beta_badge
     build
 
     pilot(skip_waiting_for_build_processing: true)

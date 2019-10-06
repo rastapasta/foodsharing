@@ -21,6 +21,7 @@ import { Actions } from 'react-native-router-flux'
 import { formatDate } from '../common/utils'
 import { translate } from '../common/translation'
 import config from '../common/config'
+import { getBasketCoordinates } from '../api/adapters/rest'
 
 const { width } = Dimensions.get('window')
 
@@ -83,7 +84,7 @@ class Basket extends PureComponent<Props> {
       actions.navigation('basket', id)
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const { actions, id } = this.props
     actions.navigation('basket', id)
     actions.fetchBasket(id)

@@ -78,12 +78,17 @@ Timeframe: 2 weeks from scratch to production 😎
   * Sending/Success indicator on Profile scene
 
 * Baskets
-  * Scene to create new basket
+  * List of your (currently only) own baskets
+  * Scene to view basket with creator, info, map
+  * Buttons to either message user or directly call phone
+  * Image of basket
+  * Scene to create new basket with all information
   * Dynamic form to enter details, time frame and desired way of contact
   * Camera button -> Camera scene to take picture
-  * Display of taken picture
+  * Display of taken picture (currently *not* uploaded)
   * Mini map with marker at currently choosen location
   * Tap on mini map -> Location picker scene with current location preselected
+  * Possibility to set marker on current location
 
 * Camera
   * Permission management - prompting on first use
@@ -94,6 +99,7 @@ Timeframe: 2 weeks from scratch to production 😎
 * Map
   * Embedded map based on system (iOS: Apple Maps, Android: Google Maps)
   * Clustering of markers
+  * Showing fairteiler and baskets
   * Tracking/centering of the user's current location on demand
   * Button to zoom back to initial region
   * Prompt for location permission on demand

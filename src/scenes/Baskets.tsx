@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   item: {
-    backgroundColor: colors.myBasket,
+    backgroundColor: colors.white,
     padding: 8,
     borderColor: colors.gray,
     borderBottomWidth: 1,

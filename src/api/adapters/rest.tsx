@@ -51,3 +51,6 @@ export const uploadBasket = (id: number, file: string) =>
 
 export const getMyBaskets = async (): Promise<BasketListing[]> =>
   (await agent('baskets', null, {type: 'mine'})).baskets
+
+export const getBasketCoordinates = async (): Promise<any> =>
+  (await agent('baskets', null, {type: 'coordinates'}))

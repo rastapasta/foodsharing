@@ -23,7 +23,7 @@ const persistConfig = {
     'drafts',
     'foodsavers',
     'profile',
-    // 'markers',
+    'markers',
     'fairteiler',
     'walls'
   ]
