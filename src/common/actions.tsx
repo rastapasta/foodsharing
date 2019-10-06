@@ -1,4 +1,5 @@
 import * as types from './constants'
+import { BasketPost } from './typings'
 
 export const init = (isSimulator: boolean) => ({type: types.INIT, isSimulator})
 
@@ -24,6 +25,8 @@ export const fetchProfile = (id: number) => ({type: types.PROFILE_REQUEST, paylo
 export const fetchWall = (target: 'foodsaver' | 'fairteiler', id: number) => ({type: types.WALL_REQUEST, payload: {target, id}})
 
 export const requestFriendship = (id: number) => ({type: types.FRIENDSHIP_REQUEST, payload: id})
+
+export const addBasket = (basket: BasketPost) => ({type: types.BASKET_ADD_REQUEST, payload: basket})
 
 export const makeReport =
   (userId: number, reasonId: number, reason: string, message: string) => ({type: types.REPORT_REQUEST, payload: {userId, reasonId, reason, message}})

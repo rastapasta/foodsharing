@@ -19,10 +19,9 @@ import { isIphoneX } from 'react-native-iphone-x-helper'
 
 import { translate } from '../common/translation'
 import colors from '../common/colors'
-import { Profile } from '../common/typings'
+import { Profile, BasketPost } from '../common/typings'
 
 import ContactInput from '../components/ContactInput'
-import MapMarker from '../components/MapMarker'
 
 const validityOptions = [
   {value: 1, label: translate('baskets.only_today')},
@@ -95,7 +94,7 @@ class EditBasket extends PureComponent<Props> {
     landline: string
     mobile: string
 
-    days: number
+    lifetime: number
 
     longitude: number
     latitude: number
@@ -114,7 +113,7 @@ class EditBasket extends PureComponent<Props> {
       description: '',
       by_message: false,
       by_phone: false,
-      days: null,
+      lifetime: null,
 
       landline,
       mobile,
@@ -143,9 +142,9 @@ class EditBasket extends PureComponent<Props> {
   }
 
   render() {
-    const { picture, description, by_message, by_phone, landline, mobile, days, latitude, longitude } = this.state
-        , { isFocused } = this.props
-        , canPublish = description.length && (by_message || (by_phone && (landline || mobile))) && days
+    const { picture, description, by_message, by_phone, landline, mobile, lifetime, latitude, longitude } = this.state
+        , { isFocused, actions } = this.props
+        , canPublish = description.length && (by_message || (by_phone && (landline || mobile))) && lifetime
         , initialRegion = {
           longitude,
           latitude,
@@ -242,9 +241,9 @@ class EditBasket extends PureComponent<Props> {
           </Text>
 
           <Dropdown
-            onChangeText={days => this.setState({days})}
+            onChangeText={lifetime => this.setState({lifetime})}
             labelHeight={8}
-            value={(validityOptions.find(option => option.value === days) || {}).value || ''}
+            value={(validityOptions.find(option => option.value === lifetime) || {}).value || ''}
             tintColor={colors.background}
             baseColor={colors.background}
             dropdownOffset={{top: -120, left: 0}}
@@ -287,9 +286,21 @@ class EditBasket extends PureComponent<Props> {
             title={translate('baskets.publish')}
             buttonStyle={{backgroundColor: colors.green}}
             titleStyle={{fontSize: 14}}
-            onPress={() => false}
             containerStyle={{marginTop: 15}}
             disabled={!canPublish}
+            onPress={() => actions.addBasket({
+              description,
+              contactTypes: [
+                ...(by_message ? [1] : []),
+                ...(by_phone ? [2] : [])
+              ],
+              tel: landline,
+              handy: mobile,
+              lifetime,
+              lat: latitude,
+              lon: longitude,
+              picture
+            } as BasketPost)}
           />
         </View>
 

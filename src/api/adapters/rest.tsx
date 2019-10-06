@@ -5,7 +5,9 @@ import {
   ConversationListEntry,
   ConversationDetail,
   WallPosts,
-  Profile
+  Profile,
+  BasketPost,
+  Basket
 } from '../../common/typings'
 
 export const login = (email: string, password: string): Promise<User> =>
@@ -23,14 +25,17 @@ export const getFairteiler = (id: number): Promise<Fairteiler> =>
 export const getConversations = (offset: number = 0, limit: number = 50): Promise<ConversationListEntry[]> =>
   agent('conversations', null, {offset, limit})
 
-export const getConversation = async (conversationId: number, offset: number = 0, limit: number = 30): Promise<ConversationDetail> =>
-  await agent('conversation', null, {conversationId, offset, limit})
+export const getConversation = (conversationId: number, offset: number = 0, limit: number = 30): Promise<ConversationDetail> =>
+  agent('conversation', null, {conversationId, offset, limit})
 
-export const markAsRead = (conversationId: number): Promise<void> =>
-  agent('markAsRead', null, {conversationId})
+export const markAsRead = (conversationId: number): Promise<ConversationDetail> =>
+  getConversation(conversationId, 0, 0)
 
 export const getWall = (target: 'foodsaver' | 'fairteiler', targetId: number): Promise<WallPosts> =>
   agent('wall', null, {target, targetId})
 
 export const getCurrentProfile = (): Promise<Profile> =>
   agent('currentProfile')
+
+export const addBasket = (fields: BasketPost): Promise<Basket> =>
+  agent('addBasket', fields)

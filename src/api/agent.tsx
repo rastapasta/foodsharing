@@ -60,7 +60,7 @@ export default (
     'user2conv' |
     'fairteiler' |
     'fairteilerMarker' |
-    'markAsRead' |
+    'addBasket' |
     'regionMembers' |
     'friendship' |
     'report',

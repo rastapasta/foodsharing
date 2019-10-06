@@ -1,3 +1,5 @@
+import { number } from "prop-types"
+
 export enum Results {
   MALFORMED,
   UNAUTHORIZED,
@@ -130,4 +132,31 @@ export interface Region {
     imageUrl: string
   }[],
   isWorkGroup: boolean
+}
+
+// Normalizer @backend:
+// https://gitlab.com/foodsharing-dev/foodsharing/blob/master/src/Controller/BasketRestController.php#L228-238
+export interface Basket {
+  id: number,
+  status: number,
+  description: string,
+  picture: string,
+  contactTypes: any,
+  createdAt: number,
+  updatedAt: number,
+  until: number,
+  lat: number,
+  lon: number,
+  creator: User
+}
+
+export interface BasketPost {
+  description: string,
+  contactTypes: number[],
+  tel: string,
+  handy: string,
+  weight?: string,
+  lifetime: number,
+  lat: number,
+  lon: number
 }

@@ -147,11 +147,12 @@ To let it use your local [docker development environment](https://devdocs.foodsh
 ## 🤔 Personal ToDos
 
 * Show blockers
-  * No baskets - yet
+  * No baskets - nearly (regional request, listing and view needed, create form needs put and image upload)
 
 * Should have
   * Android
     * Camera, when first blocking permissions, going to settings, granting them, return -> overlay stays visible.
+    * Map markers on (baske) location selector scene a lagging behind movement
   * Reflect REQUEST_ERROR errors in the seperate UIs
   * Pull conversation again when open and coming from background to make sure its marked as read
   * Notifications after background pull / detect new conversations - even pull pull conversations? Delta algo!
