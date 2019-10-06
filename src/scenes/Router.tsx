@@ -12,6 +12,7 @@ import Map from './Map'
 import Profile from './Profile'
 import Report from './Report'
 import Bananas from './Bananas'
+import Basket from './Basket'
 import Baskets from './Baskets'
 import BasketEdit from './BasketEdit'
 import Camera from './Camera'
@@ -151,6 +152,13 @@ export default () =>
         key="report"
         title={translate('scenes.report_violation')}
         component={Report}
+        hideNavBar={false}
+      />
+
+      <Scene
+        key="basket"
+        title={translate('scenes.basket')}
+        component={Basket}
         hideNavBar={false}
       />
 

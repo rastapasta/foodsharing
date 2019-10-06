@@ -244,6 +244,8 @@ PODS:
     - React-cxxreact (= 0.61.1)
     - React-jsi (= 0.61.1)
     - ReactCommon/jscallinvoker (= 0.61.1)
+  - rn-fetch-blob (0.11.2):
+    - React-Core
   - RNBackgroundFetch (2.7.0):
     - React
   - RNCAsyncStorage (1.6.2):
@@ -256,8 +258,6 @@ PODS:
     - React
     - SDWebImage (~> 5.0)
     - SDWebImageWebPCoder (~> 0.2.3)
-  - RNFS (2.14.1):
-    - React
   - RNKeychain (4.0.1):
     - React
   - RNLocalize (1.2.1):
@@ -308,12 +308,12 @@ DEPENDENCIES:
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - ReactCommon/jscallinvoker (from `../node_modules/react-native/ReactCommon`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - rn-fetch-blob (from `../node_modules/rn-fetch-blob`)
   - RNBackgroundFetch (from `../node_modules/react-native-background-fetch`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
   - "RNCPushNotificationIOS (from `../node_modules/@react-native-community/push-notification-ios`)"
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RNFastImage (from `../node_modules/react-native-fast-image`)
-  - RNFS (from `../node_modules/react-native-fs`)
   - RNKeychain (from `../node_modules/react-native-keychain`)
   - RNLocalize (from `../node_modules/react-native-localize`)
   - RNPermissions (from `../node_modules/react-native-permissions`)
@@ -388,6 +388,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/Libraries/Vibration"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  rn-fetch-blob:
+    :path: "../node_modules/rn-fetch-blob"
   RNBackgroundFetch:
     :path: "../node_modules/react-native-background-fetch"
   RNCAsyncStorage:
@@ -398,8 +400,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-device-info"
   RNFastImage:
     :path: "../node_modules/react-native-fast-image"
-  RNFS:
-    :path: "../node_modules/react-native-fs"
   RNKeychain:
     :path: "../node_modules/react-native-keychain"
   RNLocalize:
@@ -444,12 +444,12 @@ SPEC CHECKSUMS:
   React-RCTText: 81b62b4e7f11531a5154e4daa5617670d5a2d5de
   React-RCTVibration: 8be61459e3749d1fb02cf414edd05b3007622882
   ReactCommon: 4fba5be89efdf0b5720e0adb3d8d7edf6e532db0
+  rn-fetch-blob: f525a73a78df9ed5d35e67ea65e79d53c15255bc
   RNBackgroundFetch: c6dd741d7f86ad981f1f03279415c5151397559a
   RNCAsyncStorage: 60a80e72d95bf02a01cace55d3697d9724f0d77f
   RNCPushNotificationIOS: 0b8d06ff190d84627dd17501bfb96652375970e4
   RNDeviceInfo: 88099e84466f053bae3f34c307b506738b2b6946
   RNFastImage: 9b0c22643872bb7494c8d87bbbb66cc4c0d9e7a2
-  RNFS: a8fbe7060fa49157d819466404794ad9c58e58cf
   RNKeychain: 45dbd50d1ac4bd42c3740f76ffb135abf05746d0
   RNLocalize: f42aea3133d91d7fa3ec01284a6895019af1a83f
   RNPermissions: daa03e029c245fa185728e34bf1e763bf7722d05

@@ -1,8 +1,8 @@
 import {
   BASKET_ADD_REQUEST,
   BASKET_ADD_SUCCESS,
-  BASKET_IMAGE_REQUEST,
-  BASKET_IMAGE_SUCCESS,
+  BASKET_UPLOAD_REQUEST,
+  BASKET_UPLOAD_SUCCESS,
 } from '../common/constants'
 import { mergeWithState } from '../common/utils'
 
@@ -33,13 +33,13 @@ export default function reducer(state = initialState, action: any = {}) {
         posting: false
       }
 
-    case BASKET_IMAGE_REQUEST:
+    case BASKET_UPLOAD_REQUEST:
       return {
         ...state,
         uploading: true
       }
 
-    case BASKET_IMAGE_SUCCESS:
+    case BASKET_UPLOAD_SUCCESS:
       return {
         ...state,
         uploading: false

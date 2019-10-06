@@ -1,4 +1,6 @@
 import agent from '../agent'
+import uploader from '../uploader'
+
 import {
   User,
   Fairteiler,
@@ -39,3 +41,6 @@ export const getCurrentProfile = (): Promise<Profile> =>
 
 export const addBasket = async (fields: BasketPost): Promise<Basket> =>
   (await agent('addBasket', fields)).basket
+
+export const uploadBasket = (id: number, file: string) =>
+  uploader('uploadBasket', {id}, file)

@@ -164,6 +164,7 @@ To let it use your local [docker development environment](https://devdocs.foodsh
   * Deep linking via apple-app-site-association, needs to be merged to fs master & production
   * Settings screen to setup background pull / notifications?
   * Use ```CONVERSATIONS_SUCCESS``` to warm up conversation's message (at least one)
+  * State for loading conversations overview for loading indicator
 
 * Feature creep
   * Edit profile information / Mütze :)

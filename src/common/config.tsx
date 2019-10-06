@@ -1,8 +1,9 @@
-const PRODUCTION = false
+const PRODUCTION = true
+    , DOCKER_HOST = 'localhost'
 
 export default {
-  host: PRODUCTION ? 'https://beta.foodsharing.de' : 'http://localhost:18080/',
-  websocketHost: PRODUCTION ? 'https://foodsharing.de' : 'http://localhost:18080/',
+  host: PRODUCTION ? 'https://beta.foodsharing.de' : `http://${DOCKER_HOST}:18080/`,
+  websocketHost: PRODUCTION ? 'https://foodsharing.de' : `http://${DOCKER_HOST}:18080/`,
 
   credentials: PRODUCTION ? {} : {email: 'userbot@example.com', password: 'user'},
 
