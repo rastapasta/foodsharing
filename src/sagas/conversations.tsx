@@ -58,6 +58,9 @@ export default function* conversationsSaga() {
   // Wait for actions altering the conversations undread counter
   yield fork(unreadWatcher)
 
+  // Wait for an incoming WebSocket message to a unknown conversation
+  yield fork(unknownWatcher)
+
   while (true) {
     // Wait until we get a conversation request
     yield take(CONVERSATIONS_REQUEST)
@@ -113,5 +116,19 @@ function* unreadWatcher() {
         AndroidBadge.setBadge,
       count
     )
+  }
+}
+
+
+// Wait for an incoming WebSocket message to a unknown conversation
+function* unknownWatcher() {
+  while (true) {
+    const { payload: { cid } } = yield take(WEBSOCKET_MESSAGE)
+        , conversations = yield select(state => state.conversations)
+        , conversation = conversations.find(conversation => conversation.id == cid)
+
+    // In case we don't know the conversation yet, pull it, to make sure to get all members
+    if (!conversation)
+      yield put({type: CONVERSATIONS_REQUEST})
   }
 }

@@ -14,7 +14,7 @@ function* fetchProfile(id: number) {
       type: PROFILE_SUCCESS,
       payload: yield getProfile(id)
     })
-  } catch(e) {console.log(e)/* Errors are handled via Redux reducers */}
+  } catch(e) {/* Errors are handled via Redux reducers */}
 }
 
 function* fetchFriendship(userId: number) {

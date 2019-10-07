@@ -57,6 +57,7 @@ class Conversations extends PureComponent<Props> {
         <StatusBar backgroundColor={colors.background} barStyle="light-content" />
         {data.length ?
           <FlatList
+            keyExtractor={item => item.id.toString()}
             onRefresh={() => {
               actions.fetchConversations()
               setTimeout(() => this.setState({refreshing: false}), 1000)

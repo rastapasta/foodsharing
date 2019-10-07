@@ -70,6 +70,13 @@
     "no_posts": "No messages yet."
   },
 
+  "legal": {
+    "title": "Updated Terms of Use",
+    "text": "Please log-in to the foodsharing.de website and confirm our updated policy to gain full access again.",
+    "later": "Later..",
+    "ok": "OK"
+  },
+
   "baskets": {
     "my_basket": "My basket",
     "non_found": "You have no published food baskets and there are no baskets nearby.",

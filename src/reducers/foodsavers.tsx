@@ -17,7 +17,8 @@ import {
   WALL_SUCCESS,
 
   LOGOUT,
-  BASKET_SUCCESS
+  BASKET_SUCCESS,
+  WEBSOCKET_MESSAGE
 } from '../common/constants'
 
 import { mergeWithState } from '../common/utils'
@@ -53,6 +54,10 @@ export default function reducer(state = initialState, action: any = {}) {
         }
       })
       return convState
+
+    case WEBSOCKET_MESSAGE:
+      const { fs_id, fs_name, fs_photo } = payload
+      return mergeWithState(state, fs_id, {id: fs_id.toString(), name: fs_name, photo: fs_photo})
 
     case PROFILE_REQUEST:
       return mergeWithState(state, payload, {

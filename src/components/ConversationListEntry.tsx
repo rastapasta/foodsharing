@@ -76,7 +76,7 @@ class ConversationsItem extends PureComponent<Props> {
     const { conversation, isLast, foodsavers, profile } = this.props
         , { id, member, name, last_ts, last_message, last_foodsaver_id } = conversation
 
-        , isSelfMessage = member.length === 1
+        , isSelfMessage = member.length === 1 && member[0] == profile.id.toString()
         , party = member.length === 1 ? member : member.filter(member => member !== (profile.id || '').toString())
         , date = moment(parseInt(last_ts) * 1000)
         , isToday = date.isSame(new Date(), 'day')
