@@ -66,7 +66,7 @@ platform :ios do
   private_lane :bump do
     latest = latest_testflight_build_number
     if latest >= get_build_number(xcodeproj: project).to_i
-      increment_build_number(xcodeproj: project, build_number: latest)
+      increment_build_number(xcodeproj: project, build_number: latest + 1)
       commit_version_bump(message: ':construction_worker: iOS build version bump', xcodeproj: project)
     end
   end
@@ -88,7 +88,7 @@ platform :ios do
 
   lane :beta do
     # bump
-    icon
+    # icon
     # beta_badge
     build
 
