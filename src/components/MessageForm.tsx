@@ -9,6 +9,7 @@ import { translate } from '../common/translation'
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: colors.white,
     minHeight: 50,
     maxHeight: 100,
     paddingLeft: 15,

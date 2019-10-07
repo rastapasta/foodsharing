@@ -19,6 +19,7 @@ export default {
     conversation: {uri: '/api/conversations/{conversationId}?messagesOffset={offset}&messagesLimit={limit}', method: 'GET'},
     basket: {uri: '/api/baskets/{id}', method: 'GET'},
     baskets: {uri: '/api/baskets?type={type}', method: 'GET'},
+    nearbyBaskets: {uri: '/abi/baskets/nearby', method: 'GET'},
     addBasket: {uri: '/api/baskets', method: 'POST'},
     uploadBasket: {uri: '/api/baskets/{id}/picture', method: 'PUT'},
     message: {uri: '/xhrapp.php?app=msg&m=sendmsg', method: 'POST'},

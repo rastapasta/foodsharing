@@ -1,5 +1,5 @@
 import { getSession, setSession, syncCookies } from './agent'
-import { login, logout, getCurrentUser, getFairteiler, getConversation, getConversations, markAsRead, getWall, getCurrentProfile, addBasket, uploadBasket, getBasket } from './adapters/rest'
+import { login, logout, getCurrentUser, getFairteiler, getConversation, getConversations, markAsRead, getWall, getCurrentProfile, addBasket, uploadBasket, getBasket, getNearbyBaskets } from './adapters/rest'
 import { getMarker } from './adapters/xhr'
 import { userToConversationId, sendMessage, requestFriendship, report } from './adapters/xhrapp'
 
@@ -20,6 +20,7 @@ export {
   markAsRead,
   getWall,
   getCurrentProfile,
+  getNearbyBaskets,
   getBasket,
   addBasket,
   uploadBasket,

@@ -65,7 +65,8 @@ export default (
     'friendship' |
     'report' |
     'basket' |
-    'baskets',
+    'baskets' |
+    'nearbyBaskets',
   data?: any,
   options?: any
 ): Promise<any> => {

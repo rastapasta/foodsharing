@@ -77,7 +77,7 @@ class Baskets extends PureComponent<Props> {
   async componentDidMount() {
     const { actions } = this.props
     actions.navigation('baskets')
-    actions.getBaskets()
+    actions.fetchBaskets()
   }
 
   render() {
@@ -88,7 +88,7 @@ class Baskets extends PureComponent<Props> {
       <SafeAreaView style={styles.container}>
         <FlatList
           onRefresh={Platform.OS === 'ios' ? () => {
-            actions.getBaskets()
+            actions.fetchBaskets()
             setTimeout(() => this.setState({refreshing: false}), 1000)
           } : null}
           refreshing={refreshing}
