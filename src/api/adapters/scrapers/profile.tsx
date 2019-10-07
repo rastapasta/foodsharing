@@ -1,13 +1,16 @@
 import agent from '../../agent'
+import { Alert, Linking } from 'react-native'
+import { translate } from '../../../common/translation'
+import { Actions } from 'react-native-router-flux'
 
 export default async (id: number): Promise<{
   id: number,
-  isOnline: boolean,
-  isFriend: boolean,
-  stats: any,
-  bananas: {body: string, time: string, fs_photo: string, fs_id: string, fs_name: string}[],
-  infos: {title: string, body: string}[],
-  sleepStatus: boolean
+  isOnline?: boolean,
+  isFriend?: boolean,
+  stats?: any,
+  bananas?: {body: string, time: string, fs_photo: string, fs_id: string, fs_name: string}[],
+  infos?: {title: string, body: string}[],
+  sleepStatus?: boolean
 }> => {
   const $ = await agent('profile', null, {id})
       , stats = [
@@ -26,6 +29,29 @@ export default async (id: number): Promise<{
           infoData[index]
           .substr(title.length, infoData[index].length - title.length)
       }), [])
+
+  if ($('form[name=legal_form]').length === 1) {
+    Alert.alert(
+      translate('legal.title'),
+      translate('legal.text'),
+      [
+        {
+          text: translate('legal.ok'),
+          onPress: () => Linking.openURL('https://foodsharing.de'),
+          style: 'default'
+        },
+        {
+          text: translate('legal.later'),
+          onPress: () => false
+        },
+      ]
+    )
+    Actions.pop()
+
+    return {
+      id
+    }
+  }
 
   return {
     id,
