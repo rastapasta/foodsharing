@@ -1,7 +1,7 @@
 import { withNavigationFocus } from 'react-navigation'
 
 import React, { PureComponent } from 'react'
-import { SafeAreaView, StyleSheet, Text, FlatList, View, ActivityIndicator, Dimensions, TouchableOpacity, Platform } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, FlatList, View, ActivityIndicator, Dimensions, TouchableOpacity } from 'react-native'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -60,6 +60,7 @@ type Props = {
   actions: any
 
   baskets: any
+  profile: any
   isFocused: boolean
 }
 
@@ -78,23 +79,25 @@ class Baskets extends PureComponent<Props> {
     const { actions } = this.props
     actions.navigation('baskets')
     actions.fetchBaskets()
+    actions.fetchNearbyBaskets()
   }
 
   render() {
-    const { baskets, actions } = this.props
+    const { baskets, actions, profile } = this.props
         , { refreshing } = this.state
 
     return (
       <SafeAreaView style={styles.container}>
         <FlatList
-          onRefresh={Platform.OS === 'ios' ? () => {
+          onRefresh={() => {
             actions.fetchBaskets()
+            actions.fetchNearbyBaskets()
             setTimeout(() => this.setState({refreshing: false}), 1000)
-          } : null}
+          }}
           refreshing={refreshing}
 
           style={{flex: 1}}
-          data={baskets.own.map(id => baskets.baskets[id])}
+          data={baskets.own.concat(baskets.nearby).map(id => baskets.baskets[id])}
           keyExtractor={(basket: Basket) => basket.id.toString()}
           renderItem={({item}) =>
             <TouchableOpacity
@@ -102,9 +105,11 @@ class Baskets extends PureComponent<Props> {
               style={styles.item}
             >
               <View style={styles.header}>
-                <Text style={styles.title}>
-                  {translate('baskets.my_basket')}
-                </Text>
+                {item.creator === profile.id &&
+                  <Text style={styles.title}>
+                    {translate('baskets.my_basket')}
+                  </Text>
+                }
                 <Text style={styles.time}>
                   {formatDate(item.createdAt * 1000)}
                 </Text>
@@ -133,7 +138,8 @@ class Baskets extends PureComponent<Props> {
 }
 
 const mapStateToProps = state => ({
-  baskets: state.baskets
+  baskets: state.baskets,
+  profile: state.profile
 })
 
 const mapDispatchToProps = dispatch => ({

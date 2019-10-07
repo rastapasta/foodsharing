@@ -90,16 +90,27 @@ class LocationSelector extends PureComponent<Props> {
         <MapView
           ref="map"
           style={styles.map}
+
           onRegionChange={region => {
             this.setState({region})
             callback(region)
           }}
+
           initialRegion={{
             longitude,
             latitude,
             latitudeDelta: 0.008,
             longitudeDelta: 0.008
           }}
+
+          showsPointsOfInterest={false}
+          showsCompass={false}
+          showsScale={false}
+          showsMyLocationButton={false}
+          showsTraffic={false}
+          showsIndoors={false}
+          pitchEnabled={false}
+          rotateEnabled={false}
 
           showsUserLocation={trackPosition}
           followsUserLocation

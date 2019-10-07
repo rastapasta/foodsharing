@@ -12,6 +12,7 @@ import {
   LOGOUT,
   BASKET_DELETE_REQUEST,
   BASKET_DELETE_SUCCESS,
+  BASKETS_NEARBY_SUCCESS,
 } from '../common/constants'
 import { mergeWithState, stateWithoutId } from '../common/utils'
 import { BasketListing } from '../common/typings'
@@ -59,6 +60,7 @@ export default function reducer(state = initialState, action: any = {}) {
         loading: true
       }
 
+    case BASKETS_NEARBY_SUCCESS:
     case BASKETS_SUCCESS:
       return {
         ...state,
@@ -69,7 +71,10 @@ export default function reducer(state = initialState, action: any = {}) {
             all[basket.id] = {...(all[basket.id] || {}), ...basket}
             return all
           }, {...state.baskets}),
-        own: payload.map((basket: BasketListing) => basket.id),
+        ...(type === BASKETS_NEARBY_SUCCESS ?
+          {nearby: payload.map((basket: BasketListing) => basket.id)} :
+          {own: payload.map((basket: BasketListing) => basket.id)}
+        )
       }
 
     case BASKET_UPDATE_REQUEST:
@@ -83,7 +88,7 @@ export default function reducer(state = initialState, action: any = {}) {
     case BASKET_ADD_SUCCESS:
       return {
         ...state,
-        own: type === 'BASKET_ADD_SUCCESS' ? [...state.own, payload.id] : state.own,
+        own: type === BASKET_ADD_SUCCESS ? [...state.own, payload.id] : state.own,
         baskets: mergeWithState(state.baskets, payload.id, {
           ...payload,
           creator: payload.creator.id
