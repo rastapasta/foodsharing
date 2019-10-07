@@ -8,6 +8,16 @@ The app is optimized for iOS and Android - one code, one love!
 
 Timeframe: 2 weeks from scratch to production 😎
 
+## 🎁 Try it out!
+
+* iOS
+  * Install [TestFlight](https://apps.apple.com/de/app/testflight/id899247664)
+  * Tap on [this invitation link](https://testflight.apple.com/join/WL977HAG)
+
+* Android
+  * [Choose a minimized version](https://intern.regensburg.re/foodsharing/) for your platform
+  * or just install [the universal APK](https://intern.regensburg.re/foodsharing/app-release.apk)
+
 ## 🎉 What's implemented?
 
 * Login
@@ -22,8 +32,9 @@ Timeframe: 2 weeks from scratch to production 😎
 
 * Drawer
   * Display of logo and name of user
-  * Button for navigation to own profile
-  * Button for Logout
+  * Button -> navigation to own profile
+  * Button -> send lovely feedback during beta
+  * Button -> Logout
   * Display of the current build version
 
 * Conversations
@@ -143,7 +154,15 @@ After cloning the project, initialize its node environment, compile the TypeScri
 ```bash
 $> yarn
 $> tsc
-$> react-native run-ios (or run-android)
+
+# then for iOS
+$> cd ios
+$> pod install
+$> cd ..
+$> react-native run-ios
+
+# or for Android - make sure to have your emulator running or phone connected in developer mode
+$> react-native run-android
 ```
 
 To get an insight into the redux action flow, state and log, use [react-native-debugger
@@ -153,13 +172,10 @@ To let it use your local [docker development environment](https://devdocs.foodsh
 
 ## 🤔 Personal ToDos
 
-* Show blockers
-  * baskets: nearby
-
 * Should have
   * Android
-    * Camera, when first blocking permissions, going to settings, granting them, return -> overlay stays visible.
-    * Map markers on (baske) location selector scene a lagging behind movement
+    * Camera, when first blocking permissions, going to settings, granting them, return -> overlay stays visible
+    * Map markers on location selector scene is lagging behind movement
   * Reflect REQUEST_ERROR errors in the seperate UIs instead of silently canceling the loading/sending
   * Pull conversation again when open and coming from background to make sure its marked as read
   * Notifications after background pull / detect new conversations - even pull pull conversations? Delta algo!
