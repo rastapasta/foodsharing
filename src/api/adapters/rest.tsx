@@ -43,6 +43,9 @@ export const getCurrentProfile = (): Promise<Profile> =>
 export const addBasket = async (fields: BasketPost): Promise<Basket> =>
   (await agent('addBasket', fields)).basket
 
+export const updateBasket = async (fields: BasketPost & {id: number}): Promise<Basket> =>
+  (await agent('updateBasket', fields, {id: fields.id})).basket
+
 export const getBasket = async (id: number): Promise<Basket> =>
   (await agent('basket', null, {id})).basket
 

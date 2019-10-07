@@ -301,19 +301,27 @@ class EditBasket extends PureComponent<Props> {
             titleStyle={{fontSize: 14}}
             containerStyle={{marginTop: 15}}
             disabled={!canPublish || baskets.posting || baskets.uploading}
-            onPress={() => actions.addBasket({
-              description,
-              contactTypes: [
-                ...(by_message ? [1] : []),
-                ...(by_phone ? [2] : [])
-              ],
-              tel: landline,
-              handy: mobile,
-              lifetime,
-              lat: latitude,
-              lon: longitude,
-              picture
-            } as BasketPost)}
+            onPress={() => id ?
+              actions.updateBasket({
+                id,
+                description,
+                lat: latitude,
+                lon: longitude
+              })
+            :
+              actions.addBasket({
+                description,
+                contactTypes: [
+                  ...(by_message ? [1] : []),
+                  ...(by_phone ? [2] : [])
+                ],
+                tel: landline,
+                handy: mobile,
+                lifetime,
+                lat: latitude,
+                lon: longitude,
+                picture
+              } as BasketPost)}
           />
         </View>
 

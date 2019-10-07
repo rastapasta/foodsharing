@@ -7,6 +7,9 @@ import {
   BASKETS_REQUEST,
   BASKET_SUCCESS,
   REQUEST_ERROR,
+  BASKET_UPDATE_REQUEST,
+  BASKET_UPDATE_SUCCESS,
+  LOGOUT,
 } from '../common/constants'
 import { mergeWithState } from '../common/utils'
 import { BasketListing } from '../common/typings'
@@ -52,10 +55,21 @@ export default function reducer(state = initialState, action: any = {}) {
         own: payload.map((basket: BasketListing) => basket.id),
       }
 
+    case BASKET_UPDATE_REQUEST:
     case BASKET_ADD_REQUEST:
       return {
         ...state,
         posting: true
+      }
+
+    case BASKET_UPDATE_SUCCESS:
+      return {
+        ...state,
+        baskets: mergeWithState(state.baskets, payload.id, {
+          ...payload,
+          creator: payload.creator.id
+        }),
+        posting: false
       }
 
     case BASKET_ADD_SUCCESS:
@@ -79,12 +93,15 @@ export default function reducer(state = initialState, action: any = {}) {
       }
 
     case REQUEST_ERROR:
-        return {
-          ...state,
-          posting: false,
-          uploading: false,
-          loading: false
-        }
+      return {
+        ...state,
+        posting: false,
+        uploading: false,
+        loading: false
+      }
+
+    case LOGOUT:
+      return {...initialState}
 
     default:
       return state

@@ -22,6 +22,7 @@ export default {
     nearbyBaskets: {uri: '/abi/baskets/nearby', method: 'GET'},
     addBasket: {uri: '/api/baskets', method: 'POST'},
     uploadBasket: {uri: '/api/baskets/{id}/picture', method: 'PUT'},
+    updateBasket: {uri: '/api/baskets/{id}', method: 'PUT'},
     message: {uri: '/xhrapp.php?app=msg&m=sendmsg', method: 'POST'},
     friendship: {uri: '/xhrapp.php?app=buddy&m=request&app=buddy&id={userId}', method: 'GET'},
     user2conv: {uri: '/xhrapp.php?app=msg&m=user2conv&fsid={userId}', method: 'GET'},

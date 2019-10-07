@@ -1,5 +1,5 @@
-import React, { PureComponent, Fragment } from 'react'
-import { StyleSheet, SafeAreaView, View, Text, TouchableOpacity, ScrollView, Dimensions, Platform } from 'react-native'
+import React, { PureComponent } from 'react'
+import { StyleSheet, View, Text, TouchableOpacity, ScrollView, Dimensions, Platform } from 'react-native'
 import { withNavigationFocus } from 'react-navigation'
 import Image from 'react-native-fast-image'
 import LinearGradient from 'react-native-linear-gradient'
@@ -79,10 +79,21 @@ type Props = {
 }
 
 class Basket extends PureComponent<Props> {
-  componentDidUpdate(prevProps: Props) {
-    const { actions, id } = this.props
-    if (prevProps.isFocused === false && this.props.isFocused === true)
+  refs: {
+    map: MapView
+  }
+
+  async componentDidUpdate(prevProps: Props) {
+    const { actions, id, baskets } = this.props
+        , { map } = this.refs
+    if (prevProps.isFocused === false && this.props.isFocused === true) {
       actions.navigation('basket', id)
+
+      const basket = baskets.baskets[id] || {}
+      const camera = await map.getCamera()
+      camera.center = {latitude: basket.lat, longitude: basket.lon}
+      map.animateCamera(camera, {duration: 300})
+    }
   }
 
   async componentDidMount() {

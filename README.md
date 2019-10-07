@@ -2,7 +2,7 @@
 
 <img src="gifs/login.gif" width="19%"/> <img src="gifs/profile.gif" width="19%"/> <img src="gifs/fairteiler.gif" width="19%" /> <img src="gifs/report.gif" width="19%" /> <img src="gifs/redux.gif" width="19%" />
 
-This is a full Proof of Concept to show how [React Native](https://github.com/facebook/react-native) could rock the [foodsharing](https://foodsharing.network) world - 'hire' me, i would love to lead your mobile team. 😄
+This is a full Proof of Concept to show how [React Native](https://github.com/facebook/react-native) could rock the [foodsharing](https://foodsharing.network) world.
 
 The app is optimized for iOS and Android - one code, one love!
 
@@ -78,11 +78,12 @@ Timeframe: 2 weeks from scratch to production 😎
   * Sending/Success indicator on Profile scene
 
 * Baskets
-  * List of your (currently only) own baskets
+  * List of your own and nearby baskets
   * Scene to view basket with creator, info, map
   * Buttons to either message user or directly call phone
+  * Buttons to either edit or delete as the creator of the basket
   * Image of basket
-  * Scene to create new basket with all information
+  * Create Basket scene
   * Dynamic form to enter details, time frame and desired way of contact
   * Camera button -> Camera scene to take picture
   * Display of taken picture (currently *not* uploaded)
@@ -153,17 +154,16 @@ To let it use your local [docker development environment](https://devdocs.foodsh
 ## 🤔 Personal ToDos
 
 * Show blockers
-  * No baskets - nearly (regional request, listing and view needed, create form needs put and image upload)
+  * baskets: nearby
 
 * Should have
   * Android
     * Camera, when first blocking permissions, going to settings, granting them, return -> overlay stays visible.
     * Map markers on (baske) location selector scene a lagging behind movement
-  * Reflect REQUEST_ERROR errors in the seperate UIs
+  * Reflect REQUEST_ERROR errors in the seperate UIs instead of silently canceling the loading/sending
   * Pull conversation again when open and coming from background to make sure its marked as read
   * Notifications after background pull / detect new conversations - even pull pull conversations? Delta algo!
   * Handle WebSocket reconnect after long inactivity
-  * fastlane screenshot generation
 
 * Nice to have
   * Make sure there is no gap between old store and long-time-no-see message list request -> hotfix: logout-in

@@ -66,7 +66,8 @@ export default (
     'report' |
     'basket' |
     'baskets' |
-    'nearbyBaskets',
+    'nearbyBaskets' |
+    'updateBasket',
   data?: any,
   options?: any
 ): Promise<any> => {

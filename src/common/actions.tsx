@@ -1,5 +1,5 @@
 import * as types from './constants'
-import { BasketPost } from './typings'
+import { BasketPost, Basket } from './typings'
 
 export const init = (isSimulator: boolean) => ({type: types.INIT, isSimulator})
 
@@ -31,6 +31,7 @@ export const fetchBaskets = () => ({type: types.BASKETS_REQUEST})
 export const fetchNearbyBaskets = () => ({type: types.BASKETS_NEARBY_REQUEST})
 
 export const addBasket = (basket: BasketPost) => ({type: types.BASKET_ADD_REQUEST, payload: basket})
+export const updateBasket = (basket: Basket) => ({type: types.BASKET_UPDATE_REQUEST, payload: basket})
 
 export const makeReport =
   (userId: number, reasonId: number, reason: string, message: string) => ({type: types.REPORT_REQUEST, payload: {userId, reasonId, reason, message}})
