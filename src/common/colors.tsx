@@ -18,6 +18,8 @@ export default {
   lightgray: '#eee',
   transparent: 'rgba(255, 255, 255, 0)',
 
+  deleteButton: '#795548',
+
   profileButton: '#000',
   profileButtonFriend: '#080',
 

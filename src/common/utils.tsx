@@ -1,6 +1,14 @@
 import moment from 'moment'
 import { translate } from "./translation"
 
+
+export const stateWithoutId = (state, id) => {
+  const newState = {...state}
+      , key = `${id}`
+  delete newState[key]
+  return newState
+}
+
 export const mergeWithState = (state, id, options) => {
   const newState = {...state}
       , key = `${id}`

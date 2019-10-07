@@ -30,6 +30,7 @@ export const fetchBasket = (id: number) => ({type: types.BASKET_REQUEST, payload
 export const fetchBaskets = () => ({type: types.BASKETS_REQUEST})
 export const fetchNearbyBaskets = () => ({type: types.BASKETS_NEARBY_REQUEST})
 
+export const deleteBasket = (id: number) => ({type: types.BASKET_DELETE_REQUEST, payload: id})
 export const addBasket = (basket: BasketPost) => ({type: types.BASKET_ADD_REQUEST, payload: basket})
 export const updateBasket = (basket: Basket) => ({type: types.BASKET_UPDATE_REQUEST, payload: basket})
 

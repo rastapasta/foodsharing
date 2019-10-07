@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   },
   nonFound: {
     textAlign: 'center',
-    color: colors.lightgray,
+    color: colors.gray,
     fontSize: 12,
     padding: 30
   },

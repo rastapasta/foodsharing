@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { StyleSheet, View, Text, TouchableOpacity, ScrollView, Dimensions, Platform } from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity, ScrollView, Dimensions, Platform, ActivityIndicator as Indicator } from 'react-native'
 import { withNavigationFocus } from 'react-navigation'
 import Image from 'react-native-fast-image'
 import LinearGradient from 'react-native-linear-gradient'
@@ -12,9 +12,9 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as reduxActions from '../common/actions'
 
-import ActivityIndicator from '../components/ActivityIndicator'
 import RoundedImage from '../components/RoundedImage'
 import { foodsaver } from '../common/placeholder'
+import ActivityIndicator from '../components/ActivityIndicator'
 
 import colors from '../common/colors'
 import { Actions } from 'react-native-router-flux'
@@ -66,6 +66,12 @@ const styles = StyleSheet.create({
     right: 0,
     height: 10
   },
+  button: {
+    marginLeft: 10,
+    marginTop: 10,
+    marginRight: 10,
+    flex: 1
+  }
 })
 
 type Props = {
@@ -108,13 +114,14 @@ class Basket extends PureComponent<Props> {
         , creator = foodsaver(foodsavers[`${basket.creator}`])
         , ownBasket = basket.creator == profile.id
 
-        , ManageButton = ({title, onPress}) =>
+        , ManageButton = ({title, onPress, color, loading}: {title: string, onPress: () => void, color?: string, loading?: boolean}) =>
             <Button
               title={title}
-              containerStyle={{marginLeft: 10, marginTop: 10, marginRight: 10, flex: 1}}
-              buttonStyle={{backgroundColor: colors.green}}
+              containerStyle={styles.button}
+              buttonStyle={{backgroundColor: color || colors.green}}
               titleStyle={{fontSize: 14}}
               onPress={onPress}
+              loading={loading}
             />
 
     if (!basket.creator)
@@ -184,10 +191,24 @@ class Basket extends PureComponent<Props> {
               {translate(ownBasket ? 'baskets.manage_basket' : 'baskets.request_basket')}
             </Text>
             {ownBasket ?
-              <ManageButton
-                title={translate('baskets.edit_basket')}
-                onPress={() => Actions.push('editBasket', {id: basket.id})}
-              />
+              <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+                <ManageButton
+                  title={translate('baskets.edit_basket')}
+                  onPress={() => Actions.push('editBasket', {id: basket.id})}
+                />
+                {baskets.deleting ?
+                  <View style={{...styles.button, alignItems: 'center', justifyContent: 'center'}}>
+                    <Indicator color={colors.background} size="small" />
+                  </View>
+                :
+                  <ManageButton
+                    title={translate('baskets.delete_basket')}
+                    onPress={() => actions.deleteBasket(basket.id)}
+                    color={colors.deleteButton}
+                    loading={baskets.deleting}
+                  />
+                }
+              </View>
             :
               <View style={{flexDirection: 'row'}}>
                 {basket.contactTypes.includes(1) &&

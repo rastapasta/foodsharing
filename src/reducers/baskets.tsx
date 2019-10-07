@@ -10,14 +10,17 @@ import {
   BASKET_UPDATE_REQUEST,
   BASKET_UPDATE_SUCCESS,
   LOGOUT,
+  BASKET_DELETE_REQUEST,
+  BASKET_DELETE_SUCCESS,
 } from '../common/constants'
-import { mergeWithState } from '../common/utils'
+import { mergeWithState, stateWithoutId } from '../common/utils'
 import { BasketListing } from '../common/typings'
 
 const initialState = {
   posting: false,
   uploading: false,
   loading: false,
+  deleting: false,
 
   baskets: {},
   own: [],
@@ -27,6 +30,20 @@ const initialState = {
 export default function reducer(state = initialState, action: any = {}) {
   const { type, payload } = action
   switch (type) {
+    case BASKET_DELETE_REQUEST:
+      return {
+        ...state,
+        deleting: true
+      }
+
+    case BASKET_DELETE_SUCCESS:
+      return {
+        ...state,
+        deleting: false,
+        baskets: stateWithoutId(state.baskets, payload),
+        own: state.own.filter(own => own !== payload)
+      }
+
     case BASKET_SUCCESS:
       return {
         ...state,
@@ -63,20 +80,14 @@ export default function reducer(state = initialState, action: any = {}) {
       }
 
     case BASKET_UPDATE_SUCCESS:
+    case BASKET_ADD_SUCCESS:
       return {
         ...state,
+        own: type === 'BASKET_ADD_SUCCESS' ? [...state.own, payload.id] : state.own,
         baskets: mergeWithState(state.baskets, payload.id, {
           ...payload,
           creator: payload.creator.id
         }),
-        posting: false
-      }
-
-    case BASKET_ADD_SUCCESS:
-      return {
-        ...state,
-        baskets: mergeWithState(state.baskets, payload.id, payload),
-        own: [...state.own, payload.id],
         posting: false
       }
 
@@ -97,7 +108,8 @@ export default function reducer(state = initialState, action: any = {}) {
         ...state,
         posting: false,
         uploading: false,
-        loading: false
+        loading: false,
+        deleting: false
       }
 
     case LOGOUT:

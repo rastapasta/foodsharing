@@ -11,9 +11,11 @@ import {
   BASKET_SUCCESS,
   BASKETS_NEARBY_REQUEST,
   BASKET_UPDATE_REQUEST,
-  BASKET_UPDATE_SUCCESS
+  BASKET_UPDATE_SUCCESS,
+  BASKET_DELETE_REQUEST,
+  BASKET_DELETE_SUCCESS
 } from '../common/constants'
-import { addBasket, uploadBasket, getMyBaskets, getBasket, updateBasket } from '../api/adapters/rest'
+import { addBasket, uploadBasket, getMyBaskets, getBasket, updateBasket, deleteBasket } from '../api/adapters/rest'
 import { Actions } from 'react-native-router-flux'
 
 function* basketWatcher() {
@@ -38,14 +40,30 @@ function* nearbyBasketWatcher() {
   }
 }
 
+function* deleteBasketWatcher() {
+  while (true) {
+    // Wait until we get a delete request
+    const { payload: id } = yield take([BASKET_DELETE_REQUEST])
+    try {
+      // Fetch and return it
+      yield deleteBasket(id)
+      yield put({type: BASKET_DELETE_SUCCESS, payload: id})
+
+      // And leave the scene of action
+      Actions.pop()
+    } catch(e) {/* Errors are handled via Redux reducers */}
+  }
+}
+
 function* updateBasketWatcher() {
   while (true) {
-    // Wait until we get a nearby basket request
+    // Wait until we get a update request
     const { payload } = yield take([BASKET_UPDATE_REQUEST])
     try {
       // Fetch and return it
       yield put({type: BASKET_UPDATE_SUCCESS, payload: yield updateBasket(payload)})
 
+      // Leave the edit scene
       Actions.pop()
     } catch(e) {/* Errors are handled via Redux reducers */}
   }
@@ -62,7 +80,7 @@ function* myBasketsWatcher() {
   }
 }
 
-function* addWatcher() {
+function* addBasketWatcher() {
   while (true) {
     // Wait until we get a basket add request
     const { payload } = yield take([BASKET_ADD_REQUEST])
@@ -83,7 +101,7 @@ function* addWatcher() {
   }
 }
 
-function* uploadWatcher() {
+function* uploadBasketWatcher() {
   while (true) {
     // Wait until we get a basket image upload request
     const { payload: {id, picture} } = yield take([BASKET_UPLOAD_REQUEST])
@@ -96,10 +114,11 @@ function* uploadWatcher() {
 }
 
 export default function* basketSaga() {
-  yield fork(addWatcher)
   yield fork(basketWatcher)
+  yield fork(uploadBasketWatcher)
+  yield fork(addBasketWatcher)
   yield fork(myBasketsWatcher)
-  yield fork(uploadWatcher)
   yield fork(updateBasketWatcher)
   yield fork(nearbyBasketWatcher)
+  yield fork(deleteBasketWatcher)
 }

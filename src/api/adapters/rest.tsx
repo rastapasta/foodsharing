@@ -49,6 +49,9 @@ export const updateBasket = async (fields: BasketPost & {id: number}): Promise<B
 export const getBasket = async (id: number): Promise<Basket> =>
   (await agent('basket', null, {id})).basket
 
+export const deleteBasket = async (id: number): Promise<Basket> =>
+  agent('deleteBasket', null, {id})
+
 export const uploadBasket = (id: number, file: string) =>
   uploader('uploadBasket', {id}, file)
 

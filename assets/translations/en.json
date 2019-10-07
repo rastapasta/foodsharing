@@ -106,6 +106,7 @@
     "creators_basket": "{{name}}'s basket (#{{id}})",
     "edit_basket": "Edit basket",
     "manage_basket": "Manage basket",
-    "save_changes": "Save changes"
+    "save_changes": "Save changes",
+    "delete_basket": "Delete basket"
   }
 }
