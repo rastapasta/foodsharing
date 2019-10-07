@@ -107,19 +107,20 @@ class EditBasket extends PureComponent<Props> {
 
   constructor(props: Props) {
     super(props)
-    const { profile: { landline, mobile, lat, lon } } = this.props
+    const { profile: { landline, mobile, lat, lon }, baskets, id } = this.props
+        , basket = id ? baskets.baskets[`${id}`] : null
 
     this.state = {
       picture: null,
-      description: '',
+      description: basket ? basket.description : '',
       by_message: false,
       by_phone: false,
       lifetime: null,
 
       landline,
       mobile,
-      longitude: parseFloat(lon),
-      latitude: parseFloat(lat)
+      longitude: basket ? basket.lon : parseFloat(lon),
+      latitude: basket ? basket.lat : parseFloat(lat)
     }
   }
 
@@ -144,8 +145,8 @@ class EditBasket extends PureComponent<Props> {
 
   render() {
     const { picture, description, by_message, by_phone, landline, mobile, lifetime, latitude, longitude } = this.state
-        , { isFocused, actions, baskets } = this.props
-        , canPublish = description.length && (by_message || (by_phone && (landline || mobile))) && lifetime
+        , { isFocused, actions, baskets, id } = this.props
+        , canPublish = description.length && (id || (by_message || (by_phone && (landline || mobile))) && lifetime)
         , initialRegion = {
           longitude,
           latitude,
@@ -166,26 +167,28 @@ class EditBasket extends PureComponent<Props> {
 
     return (
       <KeyboardAwareScrollView style={styles.container}>
-        <View style={{height: 240}}>
-          <Image
-            source={picture ? {uri: picture.uri} : require('../../assets/basket.png')}
-            style={{flex: 1}}
-            resizeMode="cover"
-          />
+        {!id &&
+          <View style={{height: 240}}>
+            <Image
+              source={picture ? {uri: picture.uri} : require('../../assets/basket.png')}
+              style={{flex: 1}}
+              resizeMode="cover"
+            />
 
-          <TouchableOpacity
-            onPress={() => Actions.push('camera', {
-              callback: picture => this.setState({picture})
-            })}
-            style={styles.cameraButton}>
-            <Icon name="camera" size={24} color={colors.white} />
-          </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => Actions.push('camera', {
+                callback: picture => this.setState({picture})
+              })}
+              style={styles.cameraButton}>
+              <Icon name="camera" size={24} color={colors.white} />
+            </TouchableOpacity>
 
-          <LinearGradient
-            style={styles.gradient}
-            colors={[colors.transparent, colors.white]}
-          />
-        </View>
+            <LinearGradient
+              style={styles.gradient}
+              colors={[colors.transparent, colors.white]}
+            />
+          </View>
+        }
         <View style={styles.content}>
           <Text style={styles.category}>
             {translate('baskets.description')}
@@ -204,55 +207,59 @@ class EditBasket extends PureComponent<Props> {
             fontSize={14}
           />
 
-          <Text style={[styles.category, {marginTop: 18, marginBottom: 5}]}>
-            {translate('baskets.how_contact')}
-          </Text>
-
-          <Box
-            title={translate('baskets.by_message')}
-            checked={by_message}
-            onPress={() => this.setState({by_message: !by_message})}
-          />
-
-          <Box
-            title={translate('baskets.by_phone')}
-            checked={by_phone}
-            onPress={() => this.setState({by_phone: !by_phone})}
-          />
-
-          {by_phone &&
+          {!id &&
             <Fragment>
-              <ContactInput
-                value={mobile}
-                placeholder={translate('baskets.mobile_number')}
-                onChange={mobile => this.setState({mobile})}
-                icon="cellphone-iphone"
+              <Text style={[styles.category, {marginTop: 18, marginBottom: 5}]}>
+                {translate('baskets.how_contact')}
+              </Text>
+
+              <Box
+                title={translate('baskets.by_message')}
+                checked={by_message}
+                onPress={() => this.setState({by_message: !by_message})}
               />
-              <ContactInput
-                value={landline}
-                placeholder={translate('baskets.landline_number')}
-                onChange={landline => this.setState({landline})}
-                icon="phone-classic"
+
+              <Box
+                title={translate('baskets.by_phone')}
+                checked={by_phone}
+                onPress={() => this.setState({by_phone: !by_phone})}
+              />
+
+              {by_phone &&
+                <Fragment>
+                  <ContactInput
+                    value={mobile}
+                    placeholder={translate('baskets.mobile_number')}
+                    onChange={mobile => this.setState({mobile})}
+                    icon="cellphone-iphone"
+                  />
+                  <ContactInput
+                    value={landline}
+                    placeholder={translate('baskets.landline_number')}
+                    onChange={landline => this.setState({landline})}
+                    icon="phone-classic"
+                  />
+                </Fragment>
+              }
+
+              <Text style={[styles.category, {marginTop: 15}]}>
+                {translate('baskets.how_long')}
+              </Text>
+
+              <Dropdown
+                onChangeText={lifetime => this.setState({lifetime})}
+                labelHeight={8}
+                value={(validityOptions.find(option => option.value === lifetime) || {}).value || ''}
+                tintColor={colors.background}
+                baseColor={colors.background}
+                dropdownOffset={{top: -120, left: 0}}
+                itemCount={6}
+                data={validityOptions}
+                inputContainerStyle={{paddingLeft: 5}}
+                fontSize={14}
               />
             </Fragment>
           }
-
-          <Text style={[styles.category, {marginTop: 15}]}>
-            {translate('baskets.how_long')}
-          </Text>
-
-          <Dropdown
-            onChangeText={lifetime => this.setState({lifetime})}
-            labelHeight={8}
-            value={(validityOptions.find(option => option.value === lifetime) || {}).value || ''}
-            tintColor={colors.background}
-            baseColor={colors.background}
-            dropdownOffset={{top: -120, left: 0}}
-            itemCount={6}
-            data={validityOptions}
-            inputContainerStyle={{paddingLeft: 5}}
-            fontSize={14}
-          />
 
           <Text style={[styles.category, {marginTop: 20}]}>
             {translate('baskets.where_is')}
@@ -287,6 +294,7 @@ class EditBasket extends PureComponent<Props> {
             title={
               baskets.posting ? translate('baskets.publishing') :
               baskets.uploading ? translate('baskets.uploading') :
+              id ? translate('baskets.save_changes') :
               translate('baskets.publish')
             }
             buttonStyle={{backgroundColor: colors.green}}

@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   },
   nonFound: {
     textAlign: 'center',
-    color: colors.gray,
+    color: colors.lightgray,
     fontSize: 12,
     padding: 30
   },
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     color: colors.darkgray
   },
   description: {
-    marginTop: 5
+    marginTop: 10
   },
   header: {
     width: '100%',
@@ -109,6 +109,7 @@ class Baskets extends PureComponent<Props> {
                   {formatDate(item.createdAt * 1000)}
                 </Text>
               </View>
+
               <Text
                 style={styles.description}
                 numberOfLines={3}

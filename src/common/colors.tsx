@@ -15,6 +15,7 @@ export default {
   white: '#fff',
   gray: '#aaa',
   darkgray: '#737373',
+  lightgray: '#eee',
   transparent: 'rgba(255, 255, 255, 0)',
 
   profileButton: '#000',

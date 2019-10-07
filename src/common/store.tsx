@@ -25,7 +25,8 @@ const persistConfig = {
     'profile',
     'markers',
     'fairteiler',
-    'walls'
+    'walls',
+    'baskets'
   ]
 }
 

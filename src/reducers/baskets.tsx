@@ -6,6 +6,7 @@ import {
   BASKETS_SUCCESS,
   BASKETS_REQUEST,
   BASKET_SUCCESS,
+  REQUEST_ERROR,
 } from '../common/constants'
 import { mergeWithState } from '../common/utils'
 import { BasketListing } from '../common/typings'
@@ -76,6 +77,14 @@ export default function reducer(state = initialState, action: any = {}) {
         ...state,
         uploading: false
       }
+
+    case REQUEST_ERROR:
+        return {
+          ...state,
+          posting: false,
+          uploading: false,
+          loading: false
+        }
 
     default:
       return state

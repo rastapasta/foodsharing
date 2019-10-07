@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import { StyleSheet, SafeAreaView, View, Text, TouchableOpacity, ScrollView, Dimensions, Platform } from 'react-native'
 import { withNavigationFocus } from 'react-navigation'
 import Image from 'react-native-fast-image'
@@ -21,19 +21,19 @@ import { Actions } from 'react-native-router-flux'
 import { formatDate } from '../common/utils'
 import { translate } from '../common/translation'
 import config from '../common/config'
-import { getBasketCoordinates } from '../api/adapters/rest'
+import { isIphoneX } from 'react-native-iphone-x-helper'
 
-const { width } = Dimensions.get('window')
+const { width, height } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.white,
-    padding: 10
   },
   label: {
     color: colors.darkgray,
-    width: 120
+    width: 120,
+    fontSize: 13
   },
   creator: {
     flex: 1,
@@ -74,6 +74,7 @@ type Props = {
   baskets: any
   foodsavers: any
   actions: any
+  profile: any
   isFocused: boolean
 }
 
@@ -91,16 +92,26 @@ class Basket extends PureComponent<Props> {
   }
 
   render() {
-    const { baskets, foodsavers, id, actions } = this.props
-    , basket = baskets.baskets[id] || {}
-    , creator = foodsaver(foodsavers[`${basket.creator}`])
+    const { baskets, foodsavers, id, actions, profile } = this.props
+        , basket = baskets.baskets[id] || {}
+        , creator = foodsaver(foodsavers[`${basket.creator}`])
+        , ownBasket = basket.creator == profile.id
+
+        , ManageButton = ({title, onPress}) =>
+            <Button
+              title={title}
+              containerStyle={{marginLeft: 10, marginTop: 10, marginRight: 10, flex: 1}}
+              buttonStyle={{backgroundColor: colors.green}}
+              titleStyle={{fontSize: 14}}
+              onPress={onPress}
+            />
 
     if (!basket.creator)
       return <ActivityIndicator backgroundColor={colors.white} color={colors.background} />
 
     return (
-      <SafeAreaView style={styles.container}>
-        <ScrollView style={{flex: 1}}>
+      <ScrollView style={styles.container}>
+        <View style={{minHeight: height - 64 - (Platform.OS === 'android' ? 32 : isIphoneX() ? 22 : 0)}}>
           {!!basket.picture &&
             <View style={{height: 200, aspectRatio: 1}}>
               <Image
@@ -159,39 +170,38 @@ class Basket extends PureComponent<Props> {
           <View style={styles.seperator} />
           <View style={styles.content}>
             <Text style={styles.label}>
-              {translate('baskets.request_basket')}
+              {translate(ownBasket ? 'baskets.manage_basket' : 'baskets.request_basket')}
             </Text>
-            <View style={{flexDirection: 'row'}}>
-              {basket.contactTypes.includes(1) &&
-                <Button
-                  title={translate('baskets.write_message')}
-                  containerStyle={{margin: 10, flex: 1}}
-                  buttonStyle={{backgroundColor: colors.green}}
-                  titleStyle={{fontSize: 14}}
-                  onPress={() => actions.fetchConversationId(creator.id)}
-                />
-              }
-              {basket.contactTypes.includes(2) &&
-                <Button
-                  title={translate('baskets.call', {name: creator.name})}
-                  containerStyle={{margin: 10, flex: 1}}
-                  buttonStyle={{backgroundColor: colors.green}}
-                  titleStyle={{fontSize: 14}}
-                  onPress={async () => await call({
-                    prompt: true,
-                    number: basket.handy || basket.tel
-                  })}
-                />
-              }
-            </View>
+            {ownBasket ?
+              <ManageButton
+                title={translate('baskets.edit_basket')}
+                onPress={() => Actions.push('editBasket', {id: basket.id})}
+              />
+            :
+              <View style={{flexDirection: 'row'}}>
+                {basket.contactTypes.includes(1) &&
+                  <ManageButton
+                    title={translate('baskets.write_message')}
+                    onPress={() => actions.fetchConversationId(creator.id)}
+                  />
+                }
+                {basket.contactTypes.includes(2) &&
+                  <ManageButton
+                    title={translate('baskets.call', {name: creator.name})}
+                    onPress={async () => await call({
+                      prompt: true,
+                      number: basket.handy || basket.tel
+                    })}
+                  />
+                }
+              </View>
+            }
           </View>
-
-
 
           <View style={styles.seperator} />
           {basket.lat && basket.lon &&
             <TouchableOpacity
-              style={styles.content}
+              style={[styles.content, {flex: 1, minHeight: 120}]}
               onPress={() =>
                 openMap({
                   longitude: basket.lon,
@@ -218,21 +228,22 @@ class Basket extends PureComponent<Props> {
                   longitudeDelta: 0.02,
                 }}
                 pitchEnabled={false}
-                style={{height: 120}}
+                style={{...StyleSheet.absoluteFillObject}}
               >
                 <Marker coordinate={{longitude: basket.lon, latitude: basket.lat}} />
               </MapView>
             </TouchableOpacity>
           }
-        </ScrollView>
-      </SafeAreaView>
+        </View>
+      </ScrollView>
     )
   }
 }
 
 const mapStateToProps = state => ({
   foodsavers: state.foodsavers,
-  baskets: state.baskets
+  baskets: state.baskets,
+  profile: state.profile
 })
 
 const mapDispatchToProps = dispatch => ({

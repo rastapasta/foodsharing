@@ -9,6 +9,7 @@
     "bananas": "Honory Bananas",
     "report_violation": "Report",
     "offer_basket": "Offer basket",
+    "edit_basket": "Edit basket",
     "location_selection": "Basket location"
   },
 
@@ -102,6 +103,9 @@
     "request_basket": "Request basket",
     "write_message": "Write a message",
     "call": "Call {{name}}",
-    "creators_basket": "{{name}}'s basket (#{{id}})"
+    "creators_basket": "{{name}}'s basket (#{{id}})",
+    "edit_basket": "Edit basket",
+    "manage_basket": "Manage basket",
+    "save_changes": "Save changes"
   }
 }
