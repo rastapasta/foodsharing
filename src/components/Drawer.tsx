@@ -50,10 +50,10 @@ class Drawer extends PureComponent<Props> {
     const {profile: {name, id}, actions: { logout, fetchConversationId }} = this.props
 
     return (
-      <View style={styles.container}>
+      <View style={styles.container} testID="drawer">
         <View style={styles.header}>
           <Logo size={28} />
-          <Text style={styles.username}>
+          <Text style={styles.username} testID="drawer.user">
             {name}
           </Text>
         </View>

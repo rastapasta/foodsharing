@@ -9,7 +9,7 @@ describe('Basket edit scene', () => {
     await expect(element(by.id('profile.scene'))).toBeVisible()
   })
 
-  if('should navigate back to basket when tapping back', async () => {
+  it('should navigate back to basket when tapping back', async () => {
     await element(by.id('navigation.back')).tap()
     await expect(element(by.id('basket.scene'))).toBeVisible()
   })

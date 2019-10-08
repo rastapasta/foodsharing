@@ -116,6 +116,7 @@ class Conversation extends PureComponent<Props> {
         {...(Platform.OS === 'ios' ? {behavior: 'padding'} : {})}
         enabled
         style={styles.form}
+        testID="conversation.scene"
       >
         <SafeAreaView style={styles.container}>
           <FlatList
@@ -138,11 +139,11 @@ class Conversation extends PureComponent<Props> {
               {conversation.loading && <ActivityIndicator />}
             </View>}
 
-            renderItem={({item: {type, label, message}}) => {
+            renderItem={({item: {type, label, message}, index}) => {
               switch(type) {
                 case 'sent':
                 case 'received':
-                  return <MessageBubble type={type} message={message} />
+                  return <MessageBubble type={type} message={message} mostRecent={index === 0} />
 
                 case 'seperator':
                   return (

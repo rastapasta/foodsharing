@@ -123,6 +123,7 @@ class LocationSelector extends PureComponent<Props> {
           style={styles.gps}
           icon="crosshairs-gps"
           color={colors[trackPosition ? 'green' : 'black']}
+          testID="locationSelector.gps"
         />
       </View>
     )

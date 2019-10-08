@@ -143,7 +143,7 @@ class Profile extends PureComponent<Props> {
           headerComponent={
             <View style={[styles.header, {height: headerHeight}]} pointerEvents='box-none'>
               <View style={styles.nameContainer} pointerEvents='none'>
-                <Text style={styles.name}>
+                <Text style={styles.name} testID="profile.name">
                   {!!profile.sleepStatus &&
                     <View style={styles.hat}>
                       <Image source={{uri: hat}} style={{flex: 1}} resizeMode="contain" />

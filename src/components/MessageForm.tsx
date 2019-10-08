@@ -62,6 +62,7 @@ export default class MessageForm extends PureComponent<Props> {
           style={{flex: 1}}
           placeholder={translate('conversations.write_message')}
           placeholderTextColor={colors.messagePlaceholder}
+          testID="conversation.form"
           multiline
         />
         <TouchableOpacity
@@ -69,6 +70,7 @@ export default class MessageForm extends PureComponent<Props> {
           style={[styles.button, !!active && {backgroundColor: colors.messageSendButtonActive}]}
           onPress={this.sendMessage}
           disabled={!active}
+          testID="conversation.send"
         >
           {sending ?
             <View style={{padding: 2}}>

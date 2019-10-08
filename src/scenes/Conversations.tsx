@@ -53,7 +53,7 @@ class Conversations extends PureComponent<Props> {
         , data = conversations.sort((a, b) => parseInt(b.last_ts) - parseInt(a.last_ts)).filter(conversation => conversation.last_ts)
         , { refreshing } = this.state
     return (
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={styles.container} testID="conversations.scene">
         <StatusBar backgroundColor={colors.background} barStyle="light-content" />
         {data.length ?
           <FlatList
@@ -68,6 +68,7 @@ class Conversations extends PureComponent<Props> {
             renderItem={({item, index}) =>
               <ConversationListEntry
                 conversation={item}
+                testID={'conversations.'+index}
                 isLast={index === data.length - 1}
               />
             }
