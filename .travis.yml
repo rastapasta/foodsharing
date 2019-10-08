@@ -1,34 +1,43 @@
-matrix:
-  include:
-  - language: objective-c
-    os: osx
-    osx_image: xcode10.3
-    env:
-    - NODE_VERSION="12.8.0"
-    branches:
-      only:
-      - master
-    podfile: ios/Podfile
-    install:
-    - bundle install
-    - bundle update
-    - nvm install $NODE_VERSION
-    - node --version
-    - curl -o- -L https://yarnpkg.com/install.sh | bash
-    - export PATH=$HOME/.yarn/bin:$PATH
-    - yarn
-    - cd ios
-    - bundle exec pod install
-    - cd ..
-    cache:
-      yarn: true
-      bundler: true
-      cocoapods: true
-      directories:
-      - "$TRAVIS_BUILD_DIR/app/node_modules"
-      - "$HOME/Library/Developer/CoreSimulator"
-      - "$HOME/Library/Developer/Xcode"
-      - "$TRAVIS_BUILD_DIR/ios/build"
+language: objective-c
+os: osx
+osx_image: xcode10.3
 
-    script:
-    - "./node_modules/.bin/tsc"
+env:
+  global:
+    - NODE_VERSION="12.8.0"
+
+branches:
+  only:
+  - master
+
+podfile: ios/Podfile
+
+install:
+- brew tap wix/brew
+- brew install applesimutils
+- bundle install
+- bundle update
+- nvm install $NODE_VERSION
+- node --version
+- curl -o- -L https://yarnpkg.com/install.sh | bash
+- export PATH=$HOME/.yarn/bin:$PATH
+- yarn
+- cd ios
+- bundle exec pod install
+- cd ..
+
+cache:
+  yarn: true
+  bundler: true
+  cocoapods: true
+  directories:
+  - "$TRAVIS_BUILD_DIR/app/node_modules"
+  - "$HOME/Library/Developer/CoreSimulator"
+  - "$HOME/Library/Developer/Xcode"
+  - "$TRAVIS_BUILD_DIR/ios/Pods"
+  - "$TRAVIS_BUILD_DIR/ios/build"
+
+script:
+- "./node_modules/.bin/tsc"
+- detox build --configuration ios.sim.release
+- detox test --configuration ios.sim.release

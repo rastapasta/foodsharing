@@ -154,19 +154,24 @@ class EditBasket extends PureComponent<Props> {
           latitudeDelta: 0.002
         }
 
-    const Box = ({title, checked, onPress}) =>
-      <CheckBox
-        title={title}
-        checkedColor={colors.background}
-        checked={checked}
-        onPress={onPress}
-        wrapperStyle={{margin: 0, padding: 0}}
-        textStyle={{fontSize: 12}}
-        containerStyle={styles.checkbox}
-      />
+    const Box = ({title, checked, onPress, testID}) =>
+      <View testID={testID}>
+        <CheckBox
+          title={title}
+          checkedColor={colors.background}
+          checked={checked}
+          onPress={onPress}
+          wrapperStyle={{margin: 0, padding: 0}}
+          textStyle={{fontSize: 12}}
+          containerStyle={styles.checkbox}
+        />
+      </View>
 
     return (
-      <KeyboardAwareScrollView style={styles.container}>
+      <KeyboardAwareScrollView
+        style={styles.container}
+        testID="basketEdit.scene"
+      >
         {!id &&
           <View style={{height: 240}}>
             <Image
@@ -179,7 +184,9 @@ class EditBasket extends PureComponent<Props> {
               onPress={() => Actions.push('camera', {
                 callback: picture => this.setState({picture})
               })}
-              style={styles.cameraButton}>
+              style={styles.cameraButton}
+              testID="basketEdit.camera"
+            >
               <Icon name="camera" size={24} color={colors.white} />
             </TouchableOpacity>
 
@@ -205,6 +212,7 @@ class EditBasket extends PureComponent<Props> {
             label=""
             inputContainerStyle={{paddingLeft: 5, paddingRight: 5}}
             fontSize={14}
+            testID="basketEdit.description"
           />
 
           {!id &&
@@ -217,12 +225,14 @@ class EditBasket extends PureComponent<Props> {
                 title={translate('baskets.by_message')}
                 checked={by_message}
                 onPress={() => this.setState({by_message: !by_message})}
+                testID="basketEdit.by_message"
               />
 
               <Box
                 title={translate('baskets.by_phone')}
                 checked={by_phone}
                 onPress={() => this.setState({by_phone: !by_phone})}
+                testID="basketEdit.by_phone"
               />
 
               {by_phone &&
@@ -232,12 +242,14 @@ class EditBasket extends PureComponent<Props> {
                     placeholder={translate('baskets.mobile_number')}
                     onChange={mobile => this.setState({mobile})}
                     icon="cellphone-iphone"
+                    testID="basketEdit.mobile"
                   />
                   <ContactInput
                     value={landline}
                     placeholder={translate('baskets.landline_number')}
                     onChange={landline => this.setState({landline})}
                     icon="phone-classic"
+                    testID="basketEdit.landline"
                   />
                 </Fragment>
               }
@@ -246,18 +258,20 @@ class EditBasket extends PureComponent<Props> {
                 {translate('baskets.how_long')}
               </Text>
 
-              <Dropdown
-                onChangeText={lifetime => this.setState({lifetime})}
-                labelHeight={8}
-                value={(validityOptions.find(option => option.value === lifetime) || {}).value || ''}
-                tintColor={colors.background}
-                baseColor={colors.background}
-                dropdownOffset={{top: -120, left: 0}}
-                itemCount={6}
-                data={validityOptions}
-                inputContainerStyle={{paddingLeft: 5}}
-                fontSize={14}
-              />
+              <View testID="basketEdit.dropdown">
+                <Dropdown
+                  onChangeText={lifetime => this.setState({lifetime})}
+                  labelHeight={8}
+                  value={(validityOptions.find(option => option.value === lifetime) || {}).value || ''}
+                  tintColor={colors.background}
+                  baseColor={colors.background}
+                  dropdownOffset={{top: -120, left: 0}}
+                  itemCount={6}
+                  data={validityOptions}
+                  inputContainerStyle={{paddingLeft: 5}}
+                  fontSize={14}
+                />
+              </View>
             </Fragment>
           }
 
@@ -271,6 +285,7 @@ class EditBasket extends PureComponent<Props> {
               callback: ({latitude, longitude}) => this.setState({latitude, longitude}),
               location: {latitude, longitude}
             })}
+            testID="basketEdit.map"
           >
             <MapView
               ref="map"
@@ -297,6 +312,7 @@ class EditBasket extends PureComponent<Props> {
               id ? translate('baskets.save_changes') :
               translate('baskets.publish')
             }
+            testID="basketEdit.submit"
             buttonStyle={{backgroundColor: colors.green}}
             titleStyle={{fontSize: 14}}
             containerStyle={{marginTop: 15}}

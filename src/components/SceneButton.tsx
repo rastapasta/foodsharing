@@ -11,6 +11,7 @@ type Props = {
 export default ({icon, onPress}: Props) =>
   <TouchableOpacity
     onPress={onPress}
+    testID={`navigation.${icon}`}
   >
     <Icon
       name={icon}

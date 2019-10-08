@@ -87,7 +87,10 @@ class Baskets extends PureComponent<Props> {
         , { refreshing } = this.state
 
     return (
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView
+        style={styles.container}
+        testID="baskets.scene"
+      >
         <FlatList
           onRefresh={() => {
             actions.fetchBaskets()

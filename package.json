@@ -86,6 +86,12 @@
         "build": "xcodebuild -workspace ios/foodsharing.xcworkspace -scheme foodsharing -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build",
         "type": "ios.simulator",
         "name": "iPhone SE"
+      },
+      "ios.sim.release": {
+        "binaryPath": "ios/build/Build/Products/Release-iphonesimulator/foodsharing.app",
+        "build": "xcodebuild -workspace ios/foodsharing.xcworkspace -scheme foodsharing -configuration Release -sdk iphonesimulator -derivedDataPath ios/build",
+        "type": "ios.simulator",
+        "name": "iPhone SE"
       }
     }
   }

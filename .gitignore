@@ -1,6 +1,8 @@
 .env
 # OSX
+
 #
+artifacts/
 .DS_Store
 foodsharing.app.dSYM.zip
 foodsharing.ipa

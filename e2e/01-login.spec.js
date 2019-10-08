@@ -7,7 +7,8 @@ describe('Login scene', () => {
 
   it('should have login screen', async () => {
     await expect(element(by.id('login.scene'))).toBeVisible()
-  });
+    await device.takeScreenshot('01 - login')
+  })
 
   it('should allow input when tapping email field', async () => {
     await element(by.id('login.email')).tap()

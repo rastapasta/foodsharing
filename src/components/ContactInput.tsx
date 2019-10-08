@@ -17,12 +17,13 @@ type Props = {
   onChange: (text) => void
   value: string
   icon: string
+  testID: string
   placeholder: string
 }
 
 export default class ContactInput extends PureComponent<Props> {
   render() {
-    const { value, onChange, icon, placeholder } = this.props
+    const { value, onChange, icon, placeholder, testID } = this.props
     return (
       <View style={{paddingLeft: 10}}>
         <TextField
@@ -37,6 +38,7 @@ export default class ContactInput extends PureComponent<Props> {
           fontSize={14}
           label=""
           keyboardType="number-pad"
+          testID={testID}
         />
 
         <Icon

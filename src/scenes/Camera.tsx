@@ -76,7 +76,7 @@ class Camera extends PureComponent<Props> {
   }
 
   render() {
-    return <View style={styles.container}>
+    return <View style={styles.container} testID="camera.scene">
       <RNCamera
         ref="camera"
         captureAudio={false}
@@ -97,6 +97,7 @@ class Camera extends PureComponent<Props> {
                 style={styles.button}
                 hitSlop={{top: 50, left: 50, right: 50, bottom: 50}}
                 onPress={async () => status === 'NOT_AUTHORIZED' ? await openSettings() : this.takePicture()}
+                testID="camera.action"
               >
                 <Icon
                   name={status === 'NOT_AUTHORIZED' ? 'settings' : 'camera'}
