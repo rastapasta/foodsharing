@@ -1,4 +1,4 @@
-# 🍴foodsharing app
+# 🍴foodsharing app &middot;  [![Build Status](https://travis-ci.org/rastapasta/foodsharing.svg?branch=master)](https://travis-ci.org/rastapasta/foodsharing)
 
 <img src="gifs/login.gif" width="19%"/> <img src="gifs/profile.gif" width="19%"/> <img src="gifs/fairteiler.gif" width="19%" /> <img src="gifs/report.gif" width="19%" /> <img src="gifs/redux.gif" width="19%" />
 
