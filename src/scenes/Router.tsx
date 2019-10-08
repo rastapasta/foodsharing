@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
 
 const icon = (name: string, size: number = 32, color?: string) => ({focused}) =>
     <Icon
+      testID={`navigation.${name}`}
       name={name}
       size={size}
       style={{marginTop: 3, color:

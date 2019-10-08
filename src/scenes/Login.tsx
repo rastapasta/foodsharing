@@ -94,7 +94,7 @@ class Login extends PureComponent<Props> {
   render() {
     const { actions, app: { authenticating } } = this.props
     return (
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={styles.container} testID="login.scene">
         <StatusBar backgroundColor={colors.background} barStyle="light-content" />
         <KeyboardAvoidingView
           enabled

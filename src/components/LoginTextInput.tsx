@@ -53,6 +53,7 @@ export default class LoginTextInput extends PureComponent<Props> {
           placeholder={translate(placeholder)}
           autoCapitalize="none"
           placeholderTextColor={colors.inputPlaceholder}
+          testID={`login${model}`}
         />
         {icon &&
           <Icon

@@ -43,6 +43,7 @@ export default (props: Props) =>
     style={[styles.container, !!props.raised && styles.raised]}
     hitSlop={{top: 10, left: 20, bottom: 20, right: 20}}
     onPress={props.onPress}
+    testID={props.label}
   >
     <Text style={[styles.text, !!props.raised && styles.raisedText, !!props.loading && {opacity: 0}]}>
       {translate(props.label)}

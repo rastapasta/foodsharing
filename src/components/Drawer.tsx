@@ -10,7 +10,6 @@ import Logo from './Logo'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as reduxActions from '../common/actions'
-import { translate } from '../common/translation'
 import { Actions } from 'react-native-router-flux'
 
 const styles = StyleSheet.create({
@@ -62,19 +61,19 @@ class Drawer extends PureComponent<Props> {
           <DrawerButton
             onPress={() => Actions.jump('profile', {id})}
             icon="account"
-            label={translate('drawer.profile')}
+            label="drawer.profile"
           />
 
           <DrawerButton
             onPress={() => fetchConversationId(338241)}
             icon="heart-outline"
-            label={translate('drawer.feedback')}
+            label="drawer.feedback"
           />
 
           <DrawerButton
             onPress={logout}
             icon="exit-to-app"
-            label={translate('drawer.logout')}
+            label="drawer.logout"
           />
         </View>
         <View style={styles.footer}>

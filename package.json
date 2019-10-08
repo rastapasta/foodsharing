@@ -14,11 +14,13 @@
     "@react-native-community/netinfo": "^4.3.0",
     "@react-native-community/push-notification-ios": "^1.0.2",
     "@types/react-native": "^0.60.17",
+    "detox": "^14.4.1",
     "geokdbush": "^1.1.0",
     "html-entities": "^1.2.1",
     "i18n-js": "^3.3.0",
     "kdbush": "^3.0.0",
     "lodash.memoize": "^4.1.2",
+    "mocha": "^6.2.1",
     "moment": "^2.24.0",
     "react": "16.9.0",
     "react-dom": "^16.10.1",
@@ -73,5 +75,16 @@
   },
   "jest": {
     "preset": "react-native"
+  },
+  "detox": {
+    "test-runner": "mocha",
+    "configurations": {
+      "ios.sim.debug": {
+        "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/foodsharing.app",
+        "build": "xcodebuild -workspace ios/foodsharing.xcworkspace -scheme foodsharing -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build",
+        "type": "ios.simulator",
+        "name": "iPhone SE"
+      }
+    }
   }
 }

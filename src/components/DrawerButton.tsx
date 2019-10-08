@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import colors from '../common/colors'
+import { translate } from '../common/translation'
 
 const styles = StyleSheet.create({
   container: {
@@ -32,6 +33,7 @@ export default (props: Props) =>
   <TouchableOpacity
     onPress={props.onPress}
     style={styles.container}
+    testID={props.label}
   >
     <View>
       <Icon
@@ -42,7 +44,7 @@ export default (props: Props) =>
     </View>
     <View style={styles.label}>
       <Text style={styles.text}>
-        {props.label}
+        {translate(props.label)}
       </Text>
     </View>
   </TouchableOpacity>
