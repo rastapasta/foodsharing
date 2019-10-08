@@ -17,7 +17,7 @@ describe('Login scene', () => {
 
   it('should allow input when tapping password field', async () => {
     await element(by.id('login.password')).tap()
-    await element(by.id('login.password')).typeText(process.env.PASSWORD || 'user')
+    await element(by.id('login.password')).replaceText(process.env.PASSWORD || 'user')
   })
 
   it('should act when pressing login', async () => {

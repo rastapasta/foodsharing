@@ -1,7 +1,10 @@
 const translation = require('../assets/translations/en.json')
 require('custom-env').env()
 
-describe('Basket scene', () => {
+const description = 'This is a test basket created by the CI'
+
+describe('Baskets list and creation', () => {
+
   it('switch to baskets list by tapping bottom navigation', async () => {
     await element(by.id('navigation.basket')).atIndex(0).tap()
     await expect(element(by.id('baskets.scene'))).toBeVisible()
@@ -24,7 +27,7 @@ describe('Basket scene', () => {
 
   it('description field is changeable', async () => {
     await element(by.id('basketEdit.description')).tap()
-    await element(by.id('basketEdit.description')).typeText('This is a test basket created by the CI')
+    await element(by.id('basketEdit.description')).typeText(description)
   })
 
   it('leaving the description field by tapping ouside of field', async () => {
@@ -71,7 +74,20 @@ describe('Basket scene', () => {
     await element(by.id('basketEdit.submit')).tap()
   })
 
-  it('should get redirected to basket page', async () => {
+  it('should get redirected to basket page for fresh basket', async () => {
     await expect(element(by.id('basket.scene'))).toBeVisible()
+    await expect(element(by.id('basket.description'))).toHaveText(description)
+  })
+
+  it('back button should lead to baskets overview, new basket visible there', async () => {
+    await element(by.id('header-back')).atIndex(0).tap()
+    await expect(element(by.id('baskets.scene'))).toBeVisible()
+    await expect(element(by.id('baskets.label.0'))).toHaveText(description)
+  })
+
+  it('tapping on basket should bring you back to basket', async () => {
+    await element(by.id('baskets.0')).tap()
+    await expect(element(by.id('basket.scene'))).toBeVisible()
+    await expect(element(by.id('basket.description'))).toHaveText(description)
   })
 })

@@ -114,9 +114,10 @@ class Basket extends PureComponent<Props> {
         , creator = foodsaver(foodsavers[`${basket.creator}`])
         , ownBasket = basket.creator == profile.id
 
-        , ManageButton = ({title, onPress, color, loading}: {title: string, onPress: () => void, color?: string, loading?: boolean}) =>
+        , ManageButton = ({title, onPress, color, loading, testID}: {title: string, onPress: () => void, color?: string, loading?: boolean, testID: string}) =>
             <Button
               title={title}
+              testID={testID}
               containerStyle={styles.button}
               buttonStyle={{backgroundColor: color || colors.green}}
               titleStyle={{fontSize: 14}}
@@ -144,6 +145,7 @@ class Basket extends PureComponent<Props> {
             </View>
           }
           <TouchableOpacity
+            testID="basket.creator"
             onPress={() => Actions.push('profile', {id: creator.id})}
             style={{flexDirection: 'row', padding: 10}}
           >
@@ -180,7 +182,7 @@ class Basket extends PureComponent<Props> {
             <Text style={styles.label}>
               {translate('baskets.description')}
             </Text>
-            <Text style={styles.description}>
+            <Text style={styles.description} testID="basket.description">
               {basket.description.trim()}
             </Text>
           </View>
@@ -193,6 +195,7 @@ class Basket extends PureComponent<Props> {
             {ownBasket ?
               <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
                 <ManageButton
+                  testID="basket.edit"
                   title={translate('baskets.edit_basket')}
                   onPress={() => Actions.push('editBasket', {id: basket.id})}
                 />
@@ -202,6 +205,7 @@ class Basket extends PureComponent<Props> {
                   </View>
                 :
                   <ManageButton
+                    testID="basket.delete"
                     title={translate('baskets.delete_basket')}
                     onPress={() => actions.deleteBasket(basket.id)}
                     color={colors.deleteButton}
@@ -213,12 +217,14 @@ class Basket extends PureComponent<Props> {
               <View style={{flexDirection: 'row'}}>
                 {basket.contactTypes.includes(1) &&
                   <ManageButton
+                    testID="basket.message"
                     title={translate('baskets.write_message')}
                     onPress={() => actions.fetchConversationId(creator.id)}
                   />
                 }
                 {basket.contactTypes.includes(2) &&
                   <ManageButton
+                    testID="basket.call"
                     title={translate('baskets.call', {name: creator.name})}
                     onPress={async () => await call({
                       prompt: true,

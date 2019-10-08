@@ -135,7 +135,7 @@ class Profile extends PureComponent<Props> {
       </TouchableOpacity>
 
     return (
-      <View style={styles.container}>
+      <View style={styles.container} testID='profile.scene'>
         <ParalxScrolView
           image={{uri: profile.photo ? 'https://foodsharing.de/images/' + profile.photo : avatar}}
           imageHeight={height * 0.5}

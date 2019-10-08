@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
 
 export default () =>
   <TouchableOpacity
+    testID="navigation.back"
     onPress={() => Actions.pop()}
     hitSlop={{left: 5, right: 40, bottom: 10, top: 40}}
     style={styles.container}
