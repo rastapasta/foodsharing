@@ -44,5 +44,5 @@ cache:
 
 script:
 - "./node_modules/.bin/tsc"
-- detox build --configuration ios.sim.release
-- detox test --configuration ios.sim.release --cleanup
+# - detox build --configuration ios.sim.release
+# - detox test --configuration ios.sim.release --cleanup
