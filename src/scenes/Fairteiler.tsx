@@ -85,9 +85,9 @@ class Fairteiler extends PureComponent<Props> {
       return <ActivityIndicator backgroundColor={colors.white} color={colors.background} />
 
     return (
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={styles.container} testID="fairteiler.scene">
         <View style={styles.box}>
-          <Text style={styles.headline}>{data.name}</Text>
+          <Text style={styles.headline} testID="fairteiler.name">{data.name}</Text>
           <Text style={styles.text}>
             {data.address}{'\n'}
             {data.postcode} {data.city}
@@ -106,7 +106,7 @@ class Fairteiler extends PureComponent<Props> {
           translate('fairteiler.information'),
           translate('fairteiler.messages') + (wall.results && wall.results.length ? ` (${wall.results.length})` : '')
         ]}>
-          <ScrollView style={{width}}>
+          <ScrollView style={{width}} testID="fairteiler.information">
             <View style={styles.box}>
               <Hyperlink linkDefault linkStyle={{color: colors.green}}>
                 <Text style={styles.text}>
@@ -117,6 +117,7 @@ class Fairteiler extends PureComponent<Props> {
           </ScrollView>
 
           <FlatList
+            testID="fairteiler.wall"
             data={wall.results || []}
             style={{width}}
             ListHeaderComponent={() => !!wall.results && !!wall.results.length && <View style={{height: 5}} />}

@@ -29,6 +29,7 @@ export default ({marker, onPress}: Props) => {
   }
 
   return <Marker
+    testID={`marker.${marker.type}.${marker.id}`}
     image={icons[marker.type]}
     coordinate={marker.location}
     anchor={{x: 0.5, y: 1}}

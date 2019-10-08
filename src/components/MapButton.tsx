@@ -22,11 +22,12 @@ const styles = StyleSheet.create({
   }
 })
 
-export default  ({style, onPress, icon, color = 'black'}) =>
+export default  ({style, onPress, icon, color = 'black', testID}) =>
   <TouchableOpacity
     style={[styles.container, style]}
     onPress={onPress}
     hitSlop={{left: 5, right: 5, top: 5, bottom: 5}}
+    testID={testID}
   >
     <Icon
       name={icon}

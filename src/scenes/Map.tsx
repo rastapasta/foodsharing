@@ -94,7 +94,7 @@ class Map extends PureComponent<Props> {
           } : config.initialMapRegion
 
     return (
-      <View style={styles.container}>
+      <View style={styles.container} testID="map.scene">
         <ClusteredMapView
           ref="map"
           data={data}
@@ -135,11 +135,13 @@ class Map extends PureComponent<Props> {
           style={styles.gps}
           icon="crosshairs-gps"
           color={colors[trackPosition ? 'green' : 'black']}
+          testID="map.position"
         />
         <MapButton
           onPress={() => this.refs.map.mapview.animateToRegion(config.initialMapRegion)}
           style={styles.zoomOut}
           icon="arrow-decision-outline"
+          testID="map.zoomout"
         />
       </View>
     )
