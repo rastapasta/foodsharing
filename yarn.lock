@@ -2213,6 +2213,14 @@ csstype@^2.2.0:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.6.tgz#c34f8226a94bbb10c32cc0d714afdf942291fc41"
   integrity sha512-RpFbQGUE74iyPgvr46U9t1xoQBM8T4BL8SxrN66Le2xYAPSaDJJKeztV3awugusb3g3G9iL8StmkBBXhcbbXhg==
 
+custom-env@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/custom-env/-/custom-env-1.0.2.tgz#27c4db6a0caf274b112a78a32d60f5b8674a2c0c"
+  integrity sha512-PvhrR0te1RtS74fLN+wF8Qr9uCem7FuErK+DSaocIt94/Ic25rqwUVB4sj86Burv4xM19LPBssaXkk6LLm3OEQ==
+  dependencies:
+    dotenv "*"
+    dotenv-expand "^5.0.0"
+
 dashdash@^1.12.0:
   version "1.14.1"
   resolved "https://registry.yarnpkg.com/dashdash/-/dashdash-1.14.1.tgz#853cfa0f7cbe2fed5de20326b8dd581035f6e2f0"
@@ -2470,6 +2478,16 @@ domutils@^1.5.1:
     dom-serializer "0"
     domelementtype "1"
 
+dotenv-expand@^5.0.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/dotenv-expand/-/dotenv-expand-5.1.0.tgz#3fbaf020bfd794884072ea26b1e9791d45a629f0"
+  integrity sha512-YXQl1DSa4/PQyRfgrv6aoNjhasp/p4qs9FjJ4q4cQk+8m4r6k4ZSiEyytKG8f8W9gi8WsQtIObNmKd+tMzNTmA==
+
+dotenv@*:
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.1.0.tgz#d811e178652bfb8a1e593c6dd704ec7e90d85ea2"
+  integrity sha512-GUE3gqcDCaMltj2++g6bRQ5rBJWtkWTmqmD0fo1RnnMuUqHNCt2oTPeDnS9n6fKYvlhn7AeBkb38lymBtWBQdA==
+
 dtrace-provider@~0.8:
   version "0.8.8"
   resolved "https://registry.yarnpkg.com/dtrace-provider/-/dtrace-provider-0.8.8.tgz#2996d5490c37e1347be263b423ed7b297fb0d97e"
@@ -2643,6 +2661,13 @@ eslint-plugin-jest@22.4.1:
   version "22.4.1"
   resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-22.4.1.tgz#a5fd6f7a2a41388d16f527073b778013c5189a9c"
   integrity sha512-gcLfn6P2PrFAVx3AobaOzlIEevpAEf9chTpFZz7bYfc7pz8XRv7vuKTIE4hxPKZSha6XWKKplDQ0x9Pq8xX2mg==
+
+eslint-plugin-mocha@^6.1.1:
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-mocha/-/eslint-plugin-mocha-6.1.1.tgz#5a036f2f806e1a5fb7d19f7538ebeff3afb15377"
+  integrity sha512-p/otruG425jRYDa28HjbBYYXoFNzq3Qp++gn5dbE44Kz4NvmIsSUKSV1T+RLYUcZOcdJKKAftXbaqkHFqReKoA==
+  dependencies:
+    ramda "^0.26.1"
 
 eslint-plugin-prettier@2.6.2:
   version "2.6.2"
@@ -5975,6 +6000,11 @@ query-string@^6.1.0:
     decode-uri-component "^0.2.0"
     split-on-first "^1.0.0"
     strict-uri-encode "^2.0.0"
+
+ramda@^0.26.1:
+  version "0.26.1"
+  resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.26.1.tgz#8d41351eb8111c55353617fc3bbffad8e4d35d06"
+  integrity sha512-hLWjpy7EnsDBb0p+Z3B7rPi3GDeRG5ZtiI33kJhTt+ORCd38AbAIjB/9zRIUoeTbE/AVX5ZkU7m6bznsvrf8eQ==
 
 range-parser@~1.2.1:
   version "1.2.1"

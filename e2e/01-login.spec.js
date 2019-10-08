@@ -1,3 +1,5 @@
+require('custom-env').env()
+
 describe('Login scene', () => {
   // beforeEach(async () => {
   //   await device.reloadReactNative()
@@ -9,12 +11,12 @@ describe('Login scene', () => {
 
   it('should allow input when tapping email field', async () => {
     await element(by.id('login.email')).tap()
-    await element(by.id('login.email')).typeText('m.strassburger@gmail.com')
+    await element(by.id('login.email')).typeText(process.env.EMAIL || 'userbot@example.com')
   })
 
   it('should allow input when tapping password field', async () => {
     await element(by.id('login.password')).tap()
-    await element(by.id('login.password')).typeText('testtest')
+    await element(by.id('login.password')).typeText(process.env.PASSWORD || 'user')
   })
 
   it('should act when pressing login', async () => {
