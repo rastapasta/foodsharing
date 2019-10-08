@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
 
 type Props = {
   conversation: {member: string[]} & ConversationListEntry,
+  testID: string,
   isLast: boolean,
   foodsavers: {string: User},
   profile: Profile
@@ -73,7 +74,7 @@ type Props = {
 
 class ConversationsItem extends PureComponent<Props> {
   render() {
-    const { conversation, isLast, foodsavers, profile } = this.props
+    const { conversation, testID, isLast, foodsavers, profile } = this.props
         , { id, member, name, last_ts, last_message, last_foodsaver_id } = conversation
 
         , isSelfMessage = member.length === 1 && member[0] == profile.id.toString()
@@ -87,6 +88,7 @@ class ConversationsItem extends PureComponent<Props> {
       <TouchableOpacity
         style={styles.container}
         onPress={() => Actions.jump('conversation', {conversationId: id})}
+        testID={testID}
       >
         <View style={styles.images}>
           {party.slice(0, Platform.OS === 'ios' ? 4 : 2).map(person =>
@@ -124,7 +126,12 @@ class ConversationsItem extends PureComponent<Props> {
                 <RoundedImage photo={foodsavers[lastMessenger].photo} />
               </View>
             }
-            <Text style={styles.lastMessageText} numberOfLines={1} ellipsizeMode="tail">
+            <Text
+              style={styles.lastMessageText}
+              numberOfLines={1}
+              ellipsizeMode="tail"
+              testID={testID + '.last'}
+            >
               {last_message}
             </Text>
           </View>

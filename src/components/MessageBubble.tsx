@@ -70,11 +70,12 @@ type Props = {
   type: string
   message: Message
   rawTime?: boolean
+  mostRecent?: boolean
 }
 
 const MAX_LENGTH = 600
 
-export default ({type, message, rawTime}: Props) => {
+export default ({type, message, rawTime, mostRecent}: Props) => {
   const [expanded, setExpanded] = useState(false)
       , { body } = message
       , shortened = !expanded && body.length > MAX_LENGTH
@@ -93,7 +94,7 @@ export default ({type, message, rawTime}: Props) => {
       <View style={[styles.bubble, styles[type+'Bubble']]}>
         <Hyperlink linkDefault linkStyle={{color: colors.green}}>
           <Text>
-            <Text style={[styles.message, styles[type+'Message']]}>
+            <Text style={[styles.message, styles[type+'Message']]} testID={mostRecent ? 'message.mostRecent' : 'message.' + message.id}>
               {text}
             </Text>
             {shortened && <Text style={styles[type+'Message']}>...{' '}

@@ -54,10 +54,11 @@ class ConversationTitle extends PureComponent<Props> {
           Actions.jump('profile', {id: otherMembers[0]}) :
           Actions.jump('groupchat', {conversationId})
         }
+        testID="conversation.title"
       >
         {otherMembers.length > 1 ?
           <Fragment>
-            <Text style={styles.title} numberOfLines={1} adjustsFontSizeToFit>
+            <Text style={styles.title} numberOfLines={1} adjustsFontSizeToFit testID="conversation.title.label">
               {conversation.name || translate('conversations.groupchat')}
             </Text>
             <Text style={styles.subtitle} numberOfLines={1} adjustsFontSizeToFit>
@@ -72,7 +73,7 @@ class ConversationTitle extends PureComponent<Props> {
             </Text>
           </Fragment>
         :
-          <Text style={styles.title}>
+          <Text style={styles.title} testID="conversation.title.label">
             {!conversation.member.length ? '' :
               isNoteToSelf ? translate('conversations.note_to_self') :
               foodsaver(foodsavers[otherMembers[0]]).name

@@ -1,6 +1,6 @@
 describe('Logout', () => {
   it('should be able to open drawer', async () => {
-    await element(by.id('navigation.menu')).tap()
+    await element(by.id('navigation.menu')).atIndex(0).tap()
   })
 
   it('should be able to log user out', async () => {

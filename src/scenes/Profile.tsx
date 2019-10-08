@@ -135,7 +135,7 @@ class Profile extends PureComponent<Props> {
       </TouchableOpacity>
 
     return (
-      <View style={styles.container}>
+      <View style={styles.container} testID='profile.scene'>
         <ParalxScrolView
           image={{uri: profile.photo ? 'https://foodsharing.de/images/' + profile.photo : avatar}}
           imageHeight={height * 0.5}
@@ -143,7 +143,7 @@ class Profile extends PureComponent<Props> {
           headerComponent={
             <View style={[styles.header, {height: headerHeight}]} pointerEvents='box-none'>
               <View style={styles.nameContainer} pointerEvents='none'>
-                <Text style={styles.name}>
+                <Text style={styles.name} testID="profile.name">
                   {!!profile.sleepStatus &&
                     <View style={styles.hat}>
                       <Image source={{uri: hat}} style={{flex: 1}} resizeMode="contain" />

@@ -62,6 +62,7 @@ export default class Swiper extends PureComponent<Props> {
               key={'swiper.'+i}
               style={styles.tab}
               onPress={() => this.refs.swiper._component.scrollTo({x: i * width})}
+              testID={'swiper.'+i}
             >
               <Text style={styles.tabLabel}>
                 {label}

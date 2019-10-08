@@ -102,10 +102,11 @@ class Baskets extends PureComponent<Props> {
           style={{flex: 1}}
           data={baskets.own.concat(baskets.nearby).map(id => baskets.baskets[id])}
           keyExtractor={(basket: Basket) => basket.id.toString()}
-          renderItem={({item}) =>
+          renderItem={({item, index}) =>
             <TouchableOpacity
               onPress={() => Actions.push('basket', {id: item.id})}
               style={styles.item}
+              testID={`baskets.${index}`}
             >
               <View style={styles.header}>
                 {item.creator === profile.id &&
@@ -121,6 +122,7 @@ class Baskets extends PureComponent<Props> {
               <Text
                 style={styles.description}
                 numberOfLines={3}
+                testID={`baskets.label.${index}`}
               >
                 {item.description}
               </Text>

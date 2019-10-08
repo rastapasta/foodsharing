@@ -4,6 +4,16 @@ const detox = require('detox')
 
 before(async () => {
   await detox.init(config)
+
+  try {
+    element(by.label('Allow')).tap()
+  } catch(e) {}
+
+  try {
+    await element(by.id('navigation.menu')).atIndex(0).tap()
+    await element(by.id('drawer.logout')).tap()
+  } catch(e) {}
+
   await device.launchApp({ permissions: { location: 'inuse', notifications: 'YES', camera: 'YES' }})
 })
 
