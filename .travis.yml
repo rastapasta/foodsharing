@@ -10,27 +10,27 @@ branches:
   only:
   - master
 
-podfile: ios/Podfile
+# podfile: ios/Podfile
 
-before_install:
-- openssl aes-256-cbc -K $encrypted_6b7d30847d45_key -iv $encrypted_6b7d30847d45_iv -in ./.travis/.env.enc -out ./.env -d
+# before_install:
+# - openssl aes-256-cbc -K $encrypted_6b7d30847d45_key -iv $encrypted_6b7d30847d45_iv -in ./.travis/.env.enc -out ./.env -d
 
 install:
 - brew tap wix/brew
 - brew install applesimutils
-- bundle install
-- bundle update
-- bundle exec pod repo update
+# - bundle install
+# - bundle update
+# - bundle exec pod repo update
 - nvm install $NODE_VERSION
 - node --version
-- npm install -g react-native-cli
-- npm install -g detox-cli
+# - npm install -g react-native-cli
+# - npm install -g detox-cli
 - curl -o- -L https://yarnpkg.com/install.sh | bash
 - export PATH=$HOME/.yarn/bin:$PATH
 - yarn
-- cd ios
-- bundle exec pod install
-- cd ..
+# - cd ios
+# - bundle exec pod install
+# - cd ..
 
 cache:
   yarn: true

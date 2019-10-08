@@ -135,6 +135,10 @@ Timeframe: 2 weeks from scratch to production 😎
   * All strings mapped to [i18n files](https://github.com/rastapasta/foodsharing/tree/master/assets/translations)
 
 * Deployment and CI
+  * Detox E2E/UI test framework setup
+  * Travis CI
+    * Linting and test compilation of TypeScript
+    * Native compile and E2E simulator tests
   * Fastlane iOS
     * app icon generation
     * app icon badge generation (version & build number)
@@ -148,7 +152,7 @@ Timeframe: 2 weeks from scratch to production 😎
 
 ## 👩‍💻👨‍💻‍ Run / Compile it locally
 
-Setup your React Native environment following the [Getting started guide](https://facebook.github.io/react-native/docs/getting-started) (React Native CLI Quickstart).
+Setup your React Native environment by following the [Getting started guide](https://facebook.github.io/react-native/docs/getting-started) (React Native CLI Quickstart).
 
 After cloning the project, initialize its node environment, compile the TypeScript and finally the native version:
 ```bash
@@ -169,6 +173,17 @@ To get an insight into the redux action flow, state and log, use [react-native-d
 ](https://github.com/jhen0409/react-native-debugger) and the ```Debug``` mode via React Native's shaking menu.
 
 To let it use your local [docker development environment](https://devdocs.foodsharing.network/getting-the-code.html) instead of production endpoints, set ```PRODUCTION``` to ```false``` in the [configuration file](https://github.com/rastapasta/foodsharing/blob/master/src/common/config.tsx#L1).
+
+## 👨‍💻‍👩‍💻 Run the E2E tests
+
+Setup your detox environment by following the [Step 1](https://github.com/wix/Detox/blob/master/docs/Introduction.GettingStarted.md#step-1-install-dependencies) of detox's documentation.
+
+Afterwards, first compile the test version (only needed once per native breaking change) and start the tests afterwards:
+
+```bash
+$> detox build --configuration ios.sim.debug
+$> detox test --configuration ios.sim.debug
+```
 
 ## 🤔 Personal ToDos
 

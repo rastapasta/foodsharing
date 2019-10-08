@@ -30,7 +30,7 @@ describe('Login scene', () => {
     await expect(element(by.id('basketEdit.mobile'))).toBeNotVisible()
     await expect(element(by.id('basketEdit.landline'))).toBeNotVisible()
 
-    await element(by.id('basketEdit.by_message')).tapAtPoint({x: 50, y: 15})
+    await element(by.id('basketEdit.by_message')).tapAtPoint({x: 50, y: 10})
     await element(by.id('basketEdit.by_phone')).tap()
 
     await element(by.id('basketEdit.mobile')).swipe('up')
@@ -39,9 +39,8 @@ describe('Login scene', () => {
     await expect(element(by.id('basketEdit.landline'))).toBeVisible()
   })
 
-  // it('description field is changeable', async () => {
-  //   await element(by.id('basketEdit.description')).tap()
-  //   await element(by.id('basketEdit.description')).typeText('This is a test basket created by the CI')
-  // })
-
+  it('can go back to baskets', async () => {
+    await element(by.traits(['button'])).atIndex(0).tap()
+    await expect(element(by.id('baskets.scene'))).toBeVisible()
+  })
 })
