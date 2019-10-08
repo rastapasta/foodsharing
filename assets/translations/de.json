@@ -1,0 +1,112 @@
+{
+  "scenes": {
+    "conversations": "Unterhaltungen",
+    "baskets": "Essenskörbe",
+    "basket": "Essenskorb #{{id}}",
+    "map": "Karte",
+    "fairteiler": "Fairteiler",
+    "profile": "Profil",
+    "bananas": "Vertrauensbananen",
+    "report_violation": "Report",
+    "offer_basket": "Essenskorb anbieten",
+    "edit_basket": "Essenskorb bearbeiten",
+    "location_selection": "Ort des Korbes"
+  },
+
+  "drawer": {
+    "profile": "Profil",
+    "logout": "Logout",
+    "feedback": "Feedback"
+  },
+
+  "login": {
+    "email": "E-Mail",
+    "password": "Passwort",
+    "forgot": "Passwort vergessen?",
+    "register": "Mach mit!",
+    "login": "Login",
+
+    "success": "Erfolgreich angemeldet!",
+    "failed": "Login fehlgeschlagen.."
+  },
+
+  "conversations": {
+    "no_conversations": "Du hast noch keine Unterhaltungen.",
+    "note_to_self": "Notiz an mich",
+    "write_message": "Schreibe eine Nachricht!",
+    "read_more": "weiter",
+    "today": "Heute",
+    "yesterday": "Gestern",
+    "groupchat": "Gruppenchat"
+  },
+
+  "profile": {
+    "bananacount": "Bananen",
+    "basketcount": "Körbe",
+    "postcount": "Beiträge",
+    "fetchcount": "abeholt",
+    "fetchweight": "gerettet",
+
+    "i_know_person": "Ich kennen\n{{name}}",
+    "you_know_person": "Du kennst\n{{name}}!",
+    "write_message": "Nachricht\nschreiben",
+    "report_violation": "Regelbruch\nmelden",
+    "reported": "Regelbruch\ngemeldet!"
+  },
+
+  "report": {
+    "why_do_you_want": "Warum möchtest du {{name}} melden?",
+    "send_report": "Meldung senden",
+    "describe_incident": "Beschreibe den Vorfall noch etwas genauer!",
+    "info": "Es ist wichtig alle Fälle, die gegen die Verhaltensregeln verstoßen, zu melden, damit erst gar keine schlechte Stimmung unter den Foodsavern bzw. Betrieben entsteht. So können sich die Verantwortlichen rechtzeitig um Problemfälle kümmern und bei mehrfachem nicht angebrachtem Verhalten die Personen von der Plattform ausschließen. Bitte schildere den Vorfall in mindestens 120 Zeichen, damit die Verantwortlichen bzw. das Mediationsteam sich angemessen um den Fall kümmern können. Nenne dabei Häufigkeit des Vorfalls, Ort, Zeitpunkt und ggf. andere anwesende Foodsaver!"
+  },
+
+  "fairteiler": {
+    "share": "Fairteiler teilen",
+    "messages": "Nachrichten",
+    "information": "Informationen"
+  },
+
+  "wall": {
+    "no_posts": "Bisher keine Nachrichten."
+  },
+
+  "legal": {
+    "title": "Aktualisierte Nutzungsbedingungen",
+    "text": "Bitte melde dich auf der foodsharing.de Website ein und bestätige unsere aktualisierten Nutzungsbedinungen, um wieder vollen Zugriff zu erhalten.",
+    "later": "Später..",
+    "ok": "OK"
+  },
+
+  "baskets": {
+    "my_basket": "Meine Essenskörbe",
+    "non_found": "Du hast keine Essenskörbe veröffentlicht oder in der Nähe.",
+    "description": "Beschreibung",
+    "how_contact": "Wie möchtest du kontaktiert werden?",
+    "by_message": "Per Nachricht",
+    "by_phone": "Per Telefonanruf",
+    "mobile_number": "Handynummer",
+    "landline_number": "Festnetztelefon",
+    "how_long": "Wie lange soll Dein Essenskorb gültig sein?",
+    "only_today": "einen Tag",
+    "until_tomorrow": "zwei Tage",
+    "three_days": "drei Tage",
+    "one_week": "eine Woche",
+    "two_weeks": "zwei Wochen",
+    "three_weeks": "drei Wochen",
+    "where_is": "Wo kann dein Essenskorb abgeholt werden?",
+    "publish": "Essenkorb veröffentlichen",
+    "publishing": "Veröffentliche Korb...",
+    "uploading": "Lade Foto hoch...",
+    "created_at": "Verfügbar seit",
+    "valid_until": "Verfügbar bis",
+    "request_basket": "Essenskorb anfragen",
+    "write_message": "Nachricht schreiben",
+    "call": "{{name}} anrufen",
+    "creators_basket": "{{name}}'s Essenskorb (#{{id}})",
+    "edit_basket": "Bearbeiten",
+    "manage_basket": "Essenskorb verwalten",
+    "save_changes": "Änderungen speichern",
+    "delete_basket": "Löschen"
+  }
+}
