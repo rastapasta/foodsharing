@@ -178,6 +178,7 @@ class EditBasket extends PureComponent<Props> {
               source={picture ? {uri: picture.uri} : require('../../assets/basket.png')}
               style={{flex: 1}}
               resizeMode="cover"
+              testID="basketEdit.picture"
             />
 
             <TouchableOpacity
@@ -258,20 +259,19 @@ class EditBasket extends PureComponent<Props> {
                 {translate('baskets.how_long')}
               </Text>
 
-              <View testID="basketEdit.dropdown">
-                <Dropdown
-                  onChangeText={lifetime => this.setState({lifetime})}
-                  labelHeight={8}
-                  value={(validityOptions.find(option => option.value === lifetime) || {}).value || ''}
-                  tintColor={colors.background}
-                  baseColor={colors.background}
-                  dropdownOffset={{top: -120, left: 0}}
-                  itemCount={6}
-                  data={validityOptions}
-                  inputContainerStyle={{paddingLeft: 5}}
-                  fontSize={14}
-                />
-              </View>
+              <Dropdown
+                testID="basketEdit.dropdown"
+                onChangeText={lifetime => this.setState({lifetime})}
+                labelHeight={8}
+                value={(validityOptions.find(option => option.value === lifetime) || {}).value || ''}
+                tintColor={colors.background}
+                baseColor={colors.background}
+                dropdownOffset={{top: -120, left: 0}}
+                itemCount={6}
+                data={validityOptions}
+                inputContainerStyle={{paddingLeft: 5}}
+                fontSize={14}
+              />
             </Fragment>
           }
 

@@ -86,11 +86,11 @@ class LocationSelector extends PureComponent<Props> {
         , { region: { longitude, latitude }, trackPosition } = this.state
 
     return (
-      <View style={styles.container}>
+      <View style={styles.container} testID="locationSelector.scene">
         <MapView
           ref="map"
           style={styles.map}
-
+          testID="locationSelector.map"
           onRegionChange={region => {
             this.setState({region})
             callback(region)

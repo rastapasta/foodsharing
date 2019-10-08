@@ -128,7 +128,7 @@ class Basket extends PureComponent<Props> {
       return <ActivityIndicator backgroundColor={colors.white} color={colors.background} />
 
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView style={styles.container} testID="basket.scene">
         <View style={{minHeight: height - 64 - (Platform.OS === 'android' ? 32 : isIphoneX() ? 22 : 0)}}>
           {!!basket.picture &&
             <View style={{height: 200, aspectRatio: 1}}>
