@@ -10,6 +10,7 @@ export default (endpoint: 'uploadBasket', options: any, file: string) => {
               Object.keys(opts).reduce((u, key) => u.replace('{' + key +'}', encodeURIComponent(opts[key])), uri)
       , header = {
         'Accept': 'application/json',
+        'User-Agent': config.userAgent,
         'Cookie': `PHPSESSID=${session}; CSRF_TOKEN=${token}`,
         'X-CSRF-Token': token
         // 'Content-Type': 'application/octet-stream'

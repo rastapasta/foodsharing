@@ -81,6 +81,7 @@ export default (
 
   return fetch(url, {
     headers: {
+      'User-Agent': config.userAgent,
       Accept: handleAsHTML ? 'text/html' : 'application/json',
       ...(cookies['CSRF_TOKEN'] ? {'X-CSRF-Token': cookies['CSRF_TOKEN']} : {}),
       ...(data ? {'Content-Type': sendAsJSON ? 'application/json' : 'application/x-www-form-urlencoded'} : {})

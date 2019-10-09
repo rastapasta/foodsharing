@@ -7,6 +7,8 @@ export default {
 
   credentials: PRODUCTION ? {} : {email: 'userbot@example.com', password: 'user'},
 
+  userAgent: 'Mozilla/5.0 (compatible; FoodsharingReactNative/1.0; +https://github.com/rastapasta/foodsharing)',
+
   endpoints: {
     login: {uri: '/api/user/login', method: 'POST'},
     logout: {uri: '/api/user/logout', method: 'POST'},
