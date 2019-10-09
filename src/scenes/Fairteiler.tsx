@@ -16,7 +16,6 @@ import { Fairteiler as FairteilerType } from '../common/typings'
 import colors from '../common/colors'
 import config from '../common/config'
 import { translate } from '../common/translation'
-import { newExpression } from '@babel/types'
 
 const placeholderImage = 'https://foodsharing.de/img/fairteiler_head.jpg'
     , { width, height } = Dimensions.get('window')

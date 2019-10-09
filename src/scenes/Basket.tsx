@@ -228,7 +228,7 @@ class Basket extends PureComponent<Props> {
           </View>
 
           <View style={styles.seperator} />
-          {basket.lat && basket.lon &&
+          {!!basket.lat && !!basket.lon &&
             <TouchableOpacity
               style={[styles.content, {flex: 1, minHeight: 120}]}
               onPress={() =>

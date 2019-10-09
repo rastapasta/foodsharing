@@ -98,6 +98,8 @@ type State = {
 
   longitude: number
   latitude: number
+
+  mounted: boolean
 }
 
 class EditBasket extends Component<Props> {
@@ -119,6 +121,7 @@ class EditBasket extends Component<Props> {
         , basket = id ? baskets.baskets[`${id}`] : null
 
     this.state = {
+      mounted: false,
       picture: null,
       description: basket ? basket.description : '',
       by_message: false,
@@ -149,10 +152,11 @@ class EditBasket extends Component<Props> {
   async componentDidMount() {
     const { actions, id } = this.props
     actions.navigation(id ? 'editBasket' : 'offerBasket', id)
+    setTimeout(() => this.setState({mounted: true}), 300)
   }
 
   render() {
-    const { picture, description, by_message, by_phone, landline, mobile, lifetime, latitude, longitude } = this.state
+    const { picture, description, by_message, by_phone, landline, mobile, lifetime, latitude, longitude, mounted } = this.state
         , { isFocused, actions, baskets, id } = this.props
         , canPublish = description.length && (id || (by_message || (by_phone && (landline || mobile))) && lifetime)
         , initialRegion = {
@@ -295,22 +299,24 @@ class EditBasket extends Component<Props> {
             })}
             testID="basketEdit.map"
           >
-            <MapView
-              ref="map"
-              showsPointsOfInterest={false}
-              showsCompass={false}
-              showsScale={false}
-              showsMyLocationButton={false}
-              showsTraffic={false}
-              showsIndoors={false}
-              zoomEnabled={false}
-              scrollEnabled={false}
-              initialRegion={initialRegion}
-              pitchEnabled={false}
-              style={{flex: 1}}
-            >
-              {isFocused && <Marker coordinate={{longitude, latitude}} />}
-            </MapView>
+            {mounted &&
+              <MapView
+                ref="map"
+                showsPointsOfInterest={false}
+                showsCompass={false}
+                showsScale={false}
+                showsMyLocationButton={false}
+                showsTraffic={false}
+                showsIndoors={false}
+                zoomEnabled={false}
+                scrollEnabled={false}
+                initialRegion={initialRegion}
+                pitchEnabled={false}
+                style={{flex: 1}}
+              >
+                {isFocused && <Marker coordinate={{longitude, latitude}} />}
+              </MapView>
+            }
           </TouchableOpacity>
 
           <Button
