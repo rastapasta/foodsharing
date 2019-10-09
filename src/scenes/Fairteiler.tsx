@@ -66,7 +66,7 @@ class Fairteiler extends Component<Props> {
     const { id, fairteiler, walls } = this.props
 
     return next.id !== id
-        || next.walls.fairteiler[`${id}`] !== walls.fairteiler[`${id}`]
+        || (next.walls.fairteiler[`${id}`] || []).length !== (walls.fairteiler[`${id}`] || []).length
         || next.fairteiler[id] !== fairteiler[id]
   }
 
