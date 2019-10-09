@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View, ActivityIndicator } from 'react-native'
 
 import colors from '../common/colors'
@@ -38,19 +38,26 @@ type Props = {
   onPress: () => void
 }
 
-export default (props: Props) =>
-  <TouchableOpacity
-    style={[styles.container, !!props.raised && styles.raised]}
-    hitSlop={{top: 10, left: 20, bottom: 20, right: 20}}
-    onPress={props.onPress}
-    testID={props.label}
-  >
-    <Text style={[styles.text, !!props.raised && styles.raisedText, !!props.loading && {opacity: 0}]}>
-      {translate(props.label)}
-    </Text>
-    {props.loading &&
-      <View style={styles.incicator}>
-        <ActivityIndicator size="small" color={colors.background} />
-      </View>
-    }
-  </TouchableOpacity>
+export default class LoginButton extends PureComponent<Props> {
+  render() {
+    const { raised, onPress, label, loading } = this.props
+
+    return (
+      <TouchableOpacity
+        style={[styles.container, !!raised && styles.raised]}
+        hitSlop={{top: 10, left: 20, bottom: 20, right: 20}}
+        onPress={onPress}
+        testID={label}
+      >
+        <Text style={[styles.text, !!raised && styles.raisedText, !!loading && {opacity: 0}]}>
+          {translate(label)}
+        </Text>
+        {loading &&
+          <View style={styles.incicator}>
+            <ActivityIndicator size="small" color={colors.background} />
+          </View>
+        }
+      </TouchableOpacity>
+    )
+  }
+}
