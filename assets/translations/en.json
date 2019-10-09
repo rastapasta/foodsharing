@@ -6,7 +6,7 @@
     "map": "Map",
     "fairteiler": "Fairteiler",
     "profile": "Profile",
-    "bananas": "Honory Bananas",
+    "bananas": "Trust Bananas",
     "report_violation": "Report",
     "offer_basket": "Offer basket",
     "edit_basket": "Edit basket",
@@ -108,5 +108,10 @@
     "manage_basket": "Manage basket",
     "save_changes": "Save changes",
     "delete_basket": "Delete basket"
+  },
+
+  "camera": {
+    "not_authorized": "Camera usage not authorized.",
+    "goto_settings": "To allow it, open your settings with the button below give the permission."
   }
 }

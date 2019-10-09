@@ -29,6 +29,6 @@ export const formatDate = (str: any) => {
 
       return isToday ? translate('conversations.today') + ', ' + date.format('HH:mm') :
                 isYesterday ? translate('conversations.yesterday') + ', ' + date.format('HH:mm') :
-                thisYear ? date.format('MMMM Do') :
-                date.format('MMMM Do YYYY')
+                thisYear ? date.format('LL').split(/,* \d{4}$/)[0] :
+                date.format('LL')
 }

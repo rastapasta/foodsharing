@@ -115,7 +115,11 @@ class ConversationsItem extends PureComponent<Props> {
             </View>
             <View>
               <Text style={styles.date}>
-                {isYesterday ? translate('conversations.yesterday') : date.format(isToday ? 'HH:mm' : 'MMMM D')}
+                {isYesterday ?
+                  translate('conversations.yesterday') :
+                  isToday ? date.format('HH:mm') :
+                  date.format('LL').split(/,* \d{4}$/)[0]
+                }
               </Text>
             </View>
           </View>

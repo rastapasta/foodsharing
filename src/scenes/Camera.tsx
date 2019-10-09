@@ -13,6 +13,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import BackButton from '../components/BackButton';
 import colors from '../common/colors';
 import { Actions } from 'react-native-router-flux';
+import { translate } from '../common/translation'
 
 const styles = StyleSheet.create({
   container: {
@@ -87,8 +88,8 @@ class Camera extends PureComponent<Props> {
             {status === 'NOT_AUTHORIZED' &&
               <View style={{flex: 1, padding: 30, alignItems: 'center', justifyContent: 'center'}}>
                 <Text style={{color: colors.white, textAlign: 'center'}}>
-                  <Text>Camera usage not authorized.{'\n\n'}</Text>
-                  <Text>To allow it, open your settings with the button below give the permission.</Text>
+                  <Text>{translate('camera.not_authorized')}{'\n\n'}</Text>
+                  <Text>{translate('camera.goto_settings')}</Text>
                 </Text>
               </View>
             }

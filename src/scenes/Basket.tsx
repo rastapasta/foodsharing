@@ -7,7 +7,7 @@ import MapView, { Marker } from 'react-native-maps'
 import openMap from 'react-native-open-maps'
 import { Button } from 'react-native-elements'
 import call from 'react-native-phone-call'
-
+import moment from 'moment'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as reduxActions from '../common/actions'
@@ -164,16 +164,8 @@ class Basket extends PureComponent<Props> {
               <Text style={styles.label}>
                 {translate('baskets.created_at')}
               </Text>
-              <Text>{formatDate(basket.createdAt * 1000)}</Text>
+              <Text>{moment(basket.createdAt * 1000).fromNow()}</Text>
             </View>
-            {!!basket.updatedAt && basket.updatedAt !== basket.createdAt &&
-              <View style={{flexDirection: 'row', marginTop: 10}}>
-                <Text style={styles.label}>
-                  {translate('baskets.updated_at')}
-                </Text>
-                <Text>{formatDate(basket.updatedAt * 1000)}</Text>
-              </View>
-            }
           </View>
 
           <View style={styles.seperator} />

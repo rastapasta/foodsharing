@@ -8,14 +8,14 @@
     "profile": "Profil",
     "bananas": "Vertrauensbananen",
     "report_violation": "Report",
-    "offer_basket": "Essenskorb anbieten",
-    "edit_basket": "Essenskorb bearbeiten",
+    "offer_basket": "Korb anbieten",
+    "edit_basket": "Korb bearbeiten",
     "location_selection": "Ort des Korbes"
   },
 
   "drawer": {
     "profile": "Profil",
-    "logout": "Logout",
+    "logout": "Abmelden",
     "feedback": "Feedback"
   },
 
@@ -23,7 +23,7 @@
     "email": "E-Mail",
     "password": "Passwort",
     "forgot": "Passwort vergessen?",
-    "register": "Mach mit!",
+    "register": "Mach mit",
     "login": "Login",
 
     "success": "Erfolgreich angemeldet!",
@@ -80,27 +80,27 @@
 
   "baskets": {
     "my_basket": "Meine Essenskörbe",
-    "non_found": "Du hast keine Essenskörbe veröffentlicht oder in der Nähe.",
+    "non_found": "Du hast keine Essenskörbe veröffentlicht. Leider befinden sich auch keine weiteren im Umkreis von 50km um deinen hinterlegten Wohnort.",
     "description": "Beschreibung",
     "how_contact": "Wie möchtest du kontaktiert werden?",
     "by_message": "Per Nachricht",
     "by_phone": "Per Telefonanruf",
     "mobile_number": "Handynummer",
     "landline_number": "Festnetztelefon",
-    "how_long": "Wie lange soll Dein Essenskorb gültig sein?",
+    "how_long": "Wie lange soll dein Korb gültig sein?",
     "only_today": "einen Tag",
     "until_tomorrow": "zwei Tage",
     "three_days": "drei Tage",
     "one_week": "eine Woche",
     "two_weeks": "zwei Wochen",
     "three_weeks": "drei Wochen",
-    "where_is": "Wo kann dein Essenskorb abgeholt werden?",
-    "publish": "Essenkorb veröffentlichen",
+    "where_is": "Wo kann dein Korb abgeholt werden?",
+    "publish": "Essenskorb veröffentlichen",
     "publishing": "Veröffentliche Korb...",
     "uploading": "Lade Foto hoch...",
-    "created_at": "Verfügbar seit",
+    "created_at": "Veröffentlicht",
     "valid_until": "Verfügbar bis",
-    "request_basket": "Essenskorb anfragen",
+    "request_basket": "Anfragen",
     "write_message": "Nachricht schreiben",
     "call": "{{name}} anrufen",
     "creators_basket": "{{name}}'s Essenskorb (#{{id}})",
@@ -108,5 +108,10 @@
     "manage_basket": "Essenskorb verwalten",
     "save_changes": "Änderungen speichern",
     "delete_basket": "Löschen"
+  },
+
+  "camera": {
+    "not_authorized": "Kamera-Berechtigung abgelehnt",
+    "goto_settings": "Um die Kamera zu nutzen, musst du ihre Nutzung über die Einstellungen erlauben."
   }
 }
