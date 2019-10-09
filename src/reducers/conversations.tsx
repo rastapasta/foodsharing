@@ -70,7 +70,7 @@ export default function reducer(state = initialState, action: any = {}) {
           member: payload.member.map(member => member.id)
         })
 
-      return freshState
+      return freshState.sort((a, b) => parseInt(b.last_ts) - parseInt(a.last_ts))
 
     // Set this conversations sending state
     case MESSAGE_REQUEST:
@@ -112,7 +112,7 @@ export default function reducer(state = initialState, action: any = {}) {
           ...messageToObj(payload)
         })
 
-      return newState
+      return newState.sort((a, b) => parseInt(b.last_ts) - parseInt(a.last_ts))
 
     case CONVERSATION_ID_SUCCESS:
       // Prepare for an soon to be navigated to conversation

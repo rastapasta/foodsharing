@@ -41,6 +41,7 @@ export default {
   seperatorText: '#aaa',
 
   messageUnread: '#64AE25',
+  messageUnreadBackground: '#f8f8f8',
   messagePreview: '#7F7F7F',
 
   messageSentBubble: '#795548',
