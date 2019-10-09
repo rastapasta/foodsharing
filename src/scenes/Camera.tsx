@@ -1,6 +1,6 @@
 import { withNavigationFocus } from 'react-navigation'
 
-import React, { PureComponent, Fragment } from 'react'
+import React, { Component, Fragment } from 'react'
 import { StyleSheet, View, TouchableOpacity, Text } from 'react-native'
 import { RNCamera } from 'react-native-camera'
 import { openSettings } from 'react-native-permissions'
@@ -47,9 +47,13 @@ type Props = {
   isFocused: boolean
 }
 
-class Camera extends PureComponent<Props> {
+class Camera extends Component<Props> {
   refs: {
     camera: RNCamera
+  }
+
+  shouldComponentUpdate() {
+    return false
   }
 
   componentDidUpdate(prevProps: Props) {

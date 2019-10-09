@@ -1,7 +1,6 @@
-import { withNavigationFocus } from 'react-navigation'
-
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import { SafeAreaView, StyleSheet, FlatList, View, Text, TouchableOpacity } from 'react-native'
+import { withNavigationFocus } from 'react-navigation'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -11,6 +10,7 @@ import { foodsaver } from '../common/placeholder'
 import { ConversationMember } from '../common/typings'
 import RoundedImage from '../components/RoundedImage'
 import { Actions } from 'react-native-router-flux'
+import { findConversation } from '../common/utils'
 
 const styles = StyleSheet.create({
   container: {
@@ -36,7 +36,12 @@ type Props = {
   isFocused: boolean
 }
 
-class ConversationMembers extends PureComponent<Props> {
+class ConversationMembers extends Component<Props> {
+  shouldComponentUpdate(next: Props) {
+    const { conversationId } = this.props
+    return next.conversationId !== conversationId
+  }
+
   componentDidUpdate(prevProps: Props) {
     const { actions } = this.props
     if (prevProps.isFocused === false && this.props.isFocused === true)
@@ -50,7 +55,7 @@ class ConversationMembers extends PureComponent<Props> {
 
   render() {
     const { conversationId, conversations, foodsavers } = this.props
-          , conversation = conversations.find(conversation => conversation.id == conversationId) || {member: []}
+          , conversation = findConversation(conversations, conversationId)
           , members = conversation.member
                       .map(member => foodsaver(foodsavers[member]))
                       .sort((a, b) => a.name.localeCompare(b.name))

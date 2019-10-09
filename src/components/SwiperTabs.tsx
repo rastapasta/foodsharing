@@ -48,7 +48,7 @@ export default class SwiperTabs extends Component<Props> {
 
   render() {
     const { tabs, swiper, scrollX } = this.props
-    console.log('[render] swiper tabs')
+
     return (
       <View style={styles.container}>
         {tabs.map((label: string, i: number) =>

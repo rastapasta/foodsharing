@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import * as reduxActions from '../common/actions'
 
 import { Control } from 'react-redux-form/native'
+import { findConversation } from '../common/utils'
 
 import colors from '../common/colors'
 import { translate } from '../common/translation'
@@ -23,7 +24,10 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    padding: 5,
+    paddingLeft: 5,
+    paddingRight: 5,
+    paddingTop: 5,
+    paddingBottom: 8,
     borderRadius: 12,
     backgroundColor: colors.messageSendButton,
     justifyContent: 'center',
@@ -48,8 +52,8 @@ type Props = {
 class MessageForm extends Component<Props> {
   shouldComponentUpdate(next: Props) {
     const { conversationId, drafts, conversations } = this.props
-        , conversation = conversations.find(conversation => conversation.id == conversationId)
-        , nextConvo = next.conversations.find(conversation => conversation.id == conversationId)
+        , conversation = findConversation(conversations, conversationId)
+        , nextConvo = findConversation(next.conversations, conversationId)
         , key = `${conversationId}`
 
     return next.drafts[key] !== drafts[key]
@@ -59,7 +63,7 @@ class MessageForm extends Component<Props> {
   render() {
     const { drafts, conversationId, actions, conversations } = this.props
         , value = drafts[conversationId]
-        , { sending } = conversations.find(conversation => conversation.id == conversationId)
+        , { sending } = findConversation(conversations, conversationId)
         , model = 'drafts.' + conversationId
         , active = value && value !== '0' && !sending
 

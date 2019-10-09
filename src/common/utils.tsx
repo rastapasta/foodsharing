@@ -32,3 +32,6 @@ export const formatDate = (str: any) => {
                 thisYear ? date.format('LL').split(/,* \d{4}$/)[0] :
                 date.format('LL')
 }
+
+export const findConversation = (conversations, id) =>
+  conversations.find(conversation => conversation.id == id) || {member: []}

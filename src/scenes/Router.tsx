@@ -148,6 +148,7 @@ export default () =>
         title={translate('scenes.bananas')}
         component={Bananas}
         hideNavBar={false}
+        backTitle=" "
       />
 
       <Scene
