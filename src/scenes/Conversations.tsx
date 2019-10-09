@@ -38,8 +38,7 @@ class Conversations extends Component<Props> {
 
   shouldComponentUpdate(next: Props) {
     const { conversations } = this.props
-    return next.isFocused === true
-        || next.conversations.length !== conversations.length
+    return next.conversations.length !== conversations.length
         || (next.conversations.length && (
             !conversations.length || next.conversations[0].last_ts !== conversations[0].last_ts
           ))

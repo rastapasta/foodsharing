@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Animated, Dimensions } from 'react-native'
 import colors from '../common/colors'
 
+import SwiperTabs from './SwiperTabs'
+
 const { width } = Dimensions.get('window')
 const styles = StyleSheet.create({
   container: {
@@ -53,34 +55,10 @@ export default class Swiper extends PureComponent<Props> {
   render() {
     const { tabs, children } = this.props
         , { scrollX } = this.state
-
+    console.log('[render] swiper')
     return (
       <View style={styles.container}>
-        <View style={styles.tabs}>
-          {tabs.map((label: string, i: number) =>
-            <TouchableOpacity
-              key={'swiper.'+i}
-              style={styles.tab}
-              onPress={() => this.refs.swiper._component.scrollTo({x: i * width})}
-              testID={'swiper.'+i}
-            >
-              <Text style={styles.tabLabel}>
-                {label}
-              </Text>
-            </TouchableOpacity>
-          )}
-
-          <View style={styles.barBackground}/>
-          <Animated.View style={[styles.barSlider, {
-            transform: [{
-              translateX: scrollX.interpolate({
-                inputRange: [0, width],
-                outputRange: [0, width/2]
-              })
-            }]
-          }]}/>
-        </View>
-
+        <SwiperTabs scrollX={scrollX} tabs={tabs} swiper={this.refs.swiper} />
         <Animated.ScrollView
           horizontal
           ref="swiper"
