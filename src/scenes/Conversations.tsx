@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { SafeAreaView, StyleSheet, FlatList, StatusBar, View, Text } from 'react-native'
-
+import _ from 'lodash'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as reduxActions from '../common/actions'
@@ -39,9 +39,12 @@ class Conversations extends Component<Props> {
   shouldComponentUpdate(next: Props) {
     const { conversations } = this.props
     return next.conversations.length !== conversations.length
-        || (next.conversations.length && (
-            !conversations.length || next.conversations[0].last_ts !== conversations[0].last_ts
+        || (next.conversations.length && !next.conversations.every(
+          (conversation, idx) => _.isEqual(
+            _.omit(conversations[idx], ['loading', 'fullyLoaded', 'sending']),
+            _.omit(conversation, ['loading', 'fullyLoaded', 'sending'])
           ))
+        )
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -58,7 +61,7 @@ class Conversations extends Component<Props> {
 
   render() {
     const { conversations, actions } = this.props
-        , data = conversations.sort((a, b) => parseInt(b.last_ts) - parseInt(a.last_ts)).filter(conversation => conversation.last_ts)
+        , data = conversations.filter(conversation => conversation.last_ts)
         , { refreshing } = this.state
 
     return (

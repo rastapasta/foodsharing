@@ -90,7 +90,12 @@ export default function* notificationSaga() {
 
       // Websocket Message received in background -> notify user
       if (type === WEBSOCKET_MESSAGE) {
-        const { body, fs_name, cid: conversationId } = payload
+        const { body, fs_name, fs_id, cid: conversationId } = payload
+            , ownId = yield select(state => state.profile.id)
+
+        // Continue if the user is the actual sender (ex on another device)
+        if (fs_id == ownId)
+          continue
 
         // When in foreground, only notificate if user isn't watching the conversation
         if (!inBackground) {

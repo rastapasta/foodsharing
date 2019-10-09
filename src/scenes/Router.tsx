@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet } from 'react-native'
 import { Scene, Router, Stack, Tabs, Drawer as RouterDrawer, Actions } from 'react-native-router-flux'
 import colors from '../common/colors'
+import { withBadge } from 'react-native-elements'
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
@@ -25,6 +26,7 @@ import Fairteiler from './Fairteiler'
 import Loading from './Loading'
 
 import ConversationTitle from '../components/ConversationTitle'
+import ConversationsTabIcon from '../components/ConversationsTabIcon'
 import BasketTitle from '../components/BasketTitle'
 // import FairteilerTitle from '../components/FairteilerTitle'
 import ShareButton from '../components/ShareButton'
@@ -40,18 +42,21 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   }
 })
-
-const icon = (name: string, size: number = 32, color?: string) => ({focused}) =>
-    <Icon
+const icon = (name: string, size: number = 32, color?: string, badge?: number) => ({focused}) => {
+  const Component = badge ? withBadge(badge)(Icon) : Icon
+  return (
+    <Component
       testID={`navigation.${name}`}
       name={name}
-      size={size}
+      size={size || 32}
       style={{marginTop: 3, color:
         color ? color :
         focused ? colors.navigationTabActive :
         colors.navigationTabInactive
       }}
     />
+  )
+}
 
 export default () =>
   <Router uriPrefix="foodsharing.de">
@@ -85,7 +90,7 @@ export default () =>
           inactiveTintColor="#9E837A"
         >
           <Scene
-            icon={icon('wechat')}
+            icon={ConversationsTabIcon}
             key="conversations"
             title={translate('scenes.conversations')}
             component={Conversations}

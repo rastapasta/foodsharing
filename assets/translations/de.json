@@ -47,7 +47,7 @@
     "fetchcount": "abeholt",
     "fetchweight": "gerettet",
 
-    "i_know_person": "Ich kennen\n{{name}}",
+    "i_know_person": "Ich kenne\n{{name}}",
     "you_know_person": "Du kennst\n{{name}}!",
     "write_message": "Nachricht\nschreiben",
     "report_violation": "Regelbruch\nmelden",

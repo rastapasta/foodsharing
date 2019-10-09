@@ -53,8 +53,8 @@ platform :ios do
     )
   end
 
-  private_lane :beta_badge do
-    buildNumber = get_build_number(xcodeproj: project)
+  lane :beta_badge do
+    buildNumber = 4 #get_build_number(xcodeproj: project)
     version = get_version_number(xcodeproj: project)
     add_badge(
       shield: "v#{version}-%23#{buildNumber}-orange",

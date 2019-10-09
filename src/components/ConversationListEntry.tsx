@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { StyleSheet, View, Text, Dimensions, TouchableOpacity, Platform } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import { User, ConversationListEntry, Profile } from '../common/typings'
@@ -20,17 +20,14 @@ const { width } = Dimensions.get('window')
 const styles = StyleSheet.create({
   container: {
     width,
-    height: width * 0.22 + 10,
+    height: width * 0.19 + 10,
     flexDirection: 'row'
   },
   lastMessage: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'flex-start',
-    borderBottomWidth: 1,
-    borderColor: '#ddd',
-    paddingBottom: 10
+    justifyContent: 'flex-start'
   },
   images: {
     width: width * 0.22,
@@ -61,6 +58,14 @@ const styles = StyleSheet.create({
     fontSize: 11,
     flex: 1,
     color: colors.messagePreview
+  },
+  seperator: {
+    height: 1,
+    width: width * 0.78 - 10,
+    backgroundColor: colors.lightgray,
+    position: 'absolute',
+    right: 0,
+    bottom: 1
   }
 })
 
@@ -86,70 +91,76 @@ class ConversationsItem extends Component<Props> {
     const { conversation, testID, isLast, foodsavers, profile } = this.props
         , { id, member, name, last_ts, last_message, last_foodsaver_id } = conversation
 
-        , isSelfMessage = member.length === 1 && member[0] == profile.id.toString()
+        , isSelfMessage = member.length === 1 && profile.id && member[0] == profile.id.toString()
         , party = member.length === 1 ? member : member.filter(member => member !== (profile.id || '').toString())
         , date = moment(parseInt(last_ts) * 1000)
         , isToday = date.isSame(new Date(), 'day')
         , isYesterday = date.isSame(new Date(Date.now() - 24*60*60*1000), 'day')
         , lastMessenger = member.find(member => member === last_foodsaver_id)
+        , isUnread = conversation.unread !== "0"
 
     return (
-      <TouchableOpacity
-        style={styles.container}
-        onPress={() => Actions.jump('conversation', {conversationId: id})}
-        testID={testID}
-      >
-        <View style={styles.images}>
-          {party.slice(0, Platform.OS === 'ios' ? 4 : 2).map(person =>
-            <RoundedImage
-              key={`${id}.${person}`}
-              style={party.length > 1 ? {width: '48%', margin: '1%'} : {width: '100%'}}
-              photo={foodsaver(foodsavers[person]).photo}
-            />
-          )}
-        </View>
-
-        <View style={{flex: 1, padding: 10}}>
-          <View style={styles.header}>
-            <View style={{flex: 1}}>
-              <Text
-                numberOfLines={1}
-                style={[styles.name, conversation.unread !== "0" && {color: colors.messageUnread}]}
-              >
-                {name ? name :
-                  isSelfMessage ? translate('conversations.note_to_self') :
-                  party.map(person => foodsaver(foodsavers[person]).name).join('|')
-                }
-              </Text>
-            </View>
-            <View>
-              <Text style={styles.date}>
-                {isYesterday ?
-                  translate('conversations.yesterday') :
-                  isToday ? date.format('HH:mm') :
-                  date.format('LL').split(/,* \d{4}$/)[0]
-                }
-              </Text>
-            </View>
+      <Fragment>
+        <TouchableOpacity
+          style={[styles.container, isUnread && {backgroundColor: colors.messageUnreadBackground}]}
+          onPress={() => Actions.jump('conversation', {conversationId: id})}
+          testID={testID}
+        >
+          <View style={styles.images}>
+            {party.slice(0, Platform.OS === 'ios' ? 4 : 2).map(person =>
+              <RoundedImage
+                key={`${id}.${person}`}
+                style={party.length > 1 ? {width: '48%', margin: '1%'} : {width: '100%'}}
+                photo={foodsaver(foodsavers[person]).photo}
+              />
+            )}
           </View>
 
-          <View style={[styles.lastMessage, !!isLast && {borderBottomWidth: 0}]}>
-            {!!foodsaver(foodsavers[lastMessenger]).photo &&
-              <View style={styles.lastMessageImage}>
-                <RoundedImage photo={foodsavers[lastMessenger].photo} />
+          <View style={{flex: 1, padding: 10}}>
+            <View style={styles.header}>
+              <View style={{flex: 1}}>
+                <Text
+                  numberOfLines={1}
+                  style={[styles.name, isUnread && {color: colors.messageUnread}]}
+                >
+                  {name ? name :
+                    isSelfMessage ? translate('conversations.note_to_self') :
+                    party.map(person => foodsaver(foodsavers[person]).name).join('|')
+                  }
+                </Text>
               </View>
-            }
-            <Text
-              style={styles.lastMessageText}
-              numberOfLines={1}
-              ellipsizeMode="tail"
-              testID={testID + '.last'}
-            >
-              {last_message}
-            </Text>
+              <View>
+                <Text style={[styles.date, isUnread && {color: colors.messageUnread}]}>
+                  {isYesterday ?
+                    translate('conversations.yesterday') :
+                    isToday ? date.format('HH:mm') :
+                    date.format('LL').split(/,* \d{4}$/)[0]
+                  }
+                </Text>
+              </View>
+            </View>
+
+            <View style={[styles.lastMessage]}>
+              {!!foodsaver(foodsavers[lastMessenger]).photo &&
+                <View style={styles.lastMessageImage}>
+                  <RoundedImage photo={foodsavers[lastMessenger].photo} />
+                </View>
+              }
+              <Text
+                style={[styles.lastMessageText, isUnread && {fontWeight: 'bold'}]}
+                numberOfLines={1}
+                ellipsizeMode="tail"
+                testID={testID + '.last'}
+              >
+                {last_message}
+              </Text>
+            </View>
           </View>
-        </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
+        {!isLast &&
+          <View style={styles.seperator} />
+        }
+      </Fragment>
     )
   }
 }
