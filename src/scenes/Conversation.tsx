@@ -85,8 +85,8 @@ class Conversation extends PureComponent<Props> {
         , thisYear = date.isSame(new Date(), 'year')
         , label = isToday ? translate('conversations.today') :
                   isYesterday ? translate('conversations.yesterday') :
-                  thisYear ? date.format('MMMM Do') :
-                  date.format('MMMM Do YYYY')
+                  thisYear ? date.format('LL').split(/,* \d{4}$/)[0] :
+                  date.format('LL')
 
       if (lastLabel !== label && lastLabel)
         data.push({type: 'seperator', label: lastLabel})
