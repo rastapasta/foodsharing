@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import { SafeAreaView, StyleSheet, Text, View, FlatList, KeyboardAvoidingView, Platform, ActivityIndicator } from 'react-native'
 
 import moment from 'moment'
@@ -52,11 +52,19 @@ interface Item {
   message: Message
 }
 
-class Conversation extends PureComponent<Props> {
+class Conversation extends Component<Props> {
   state = {
     data: {} as ConversationDetail,
     refreshing: false,
     loading: false
+  }
+
+  shouldComponentUpdate(next: Props) {
+    const { conversationId, messages } = this.props
+
+    return next.isFocused === true
+        || next.conversationId !== conversationId
+        || next.messages[conversationId].length !== messages[conversationId].length
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -105,7 +113,7 @@ class Conversation extends PureComponent<Props> {
   }
 
   render() {
-    const { conversationId, conversations, messages, actions, drafts } = this.props
+    const { conversationId, conversations, messages, actions } = this.props
         , { refreshing } = this.state
         , data = (messages[conversationId] || []) as Message[]
         , conversation = (conversations.find(c => c.id == conversationId) || {}) as ConversationListEntry
@@ -125,6 +133,7 @@ class Conversation extends PureComponent<Props> {
                 actions.fetchConversation(conversationId, data.length - 1)
             }}
             onEndReachedThreshold={5}
+            initialNumToRender={10}
             onRefresh={Platform.OS === 'ios' ? () => {
               actions.fetchConversation(conversationId)
               setTimeout(() => this.setState({refreshing: false}), 1000)
@@ -161,10 +170,7 @@ class Conversation extends PureComponent<Props> {
           />
 
           <MessageForm
-            onSend={() => actions.sendMessage(conversationId)}
-            model={`drafts.${conversationId}`}
-            active={!!drafts[conversationId] && drafts[conversationId] !== '0'}
-            sending={conversation.sending}
+            conversationId={conversationId}
           />
         </SafeAreaView>
       </KeyboardAvoidingView>
@@ -174,7 +180,6 @@ class Conversation extends PureComponent<Props> {
 
 const mapStateToProps = state => ({
   messages: state.messages,
-  drafts: state.drafts,
   conversations: state.conversations
 })
 

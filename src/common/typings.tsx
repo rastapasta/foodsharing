@@ -53,7 +53,8 @@ export interface Message {
   is_htmlentity_encoded: number,
   time: string,
 
-  type: MessageType
+  type: MessageType,
+  hours: string
 }
 
 export interface Profile {

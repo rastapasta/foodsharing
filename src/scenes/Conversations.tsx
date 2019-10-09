@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import { SafeAreaView, StyleSheet, FlatList, StatusBar, View, Text } from 'react-native'
 
 import { bindActionCreators } from 'redux'
@@ -31,9 +31,18 @@ type Props = {
   isFocused: boolean
 }
 
-class Conversations extends PureComponent<Props> {
+class Conversations extends Component<Props> {
   state = {
     refreshing: false
+  }
+
+  shouldComponentUpdate(next: Props) {
+    const { conversations } = this.props
+    return next.isFocused === true
+        || next.conversations.length !== conversations.length
+        || (next.conversations.length && (
+            !conversations.length || next.conversations[0].last_ts !== conversations[0].last_ts
+          ))
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -52,6 +61,7 @@ class Conversations extends PureComponent<Props> {
     const { conversations, actions } = this.props
         , data = conversations.sort((a, b) => parseInt(b.last_ts) - parseInt(a.last_ts)).filter(conversation => conversation.last_ts)
         , { refreshing } = this.state
+
     return (
       <SafeAreaView style={styles.container} testID="conversations.scene">
         <StatusBar backgroundColor={colors.background} barStyle="light-content" />
