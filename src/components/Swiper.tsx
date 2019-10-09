@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, Animated, Dimensions } from 'react-native'
+import { StyleSheet, View, Animated, Dimensions } from 'react-native'
 import colors from '../common/colors'
 
 import SwiperTabs from './SwiperTabs'

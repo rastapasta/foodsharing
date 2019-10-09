@@ -92,7 +92,7 @@ class ConversationsItem extends Component<Props> {
         , isToday = date.isSame(new Date(), 'day')
         , isYesterday = date.isSame(new Date(Date.now() - 24*60*60*1000), 'day')
         , lastMessenger = member.find(member => member === last_foodsaver_id)
-    console.log('[render] conv list item')
+
     return (
       <TouchableOpacity
         style={styles.container}

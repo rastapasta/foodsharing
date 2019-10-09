@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 
 import colors from '../common/colors'
@@ -40,30 +40,43 @@ const styles = StyleSheet.create({
   }
 })
 
-export default ({label, value, unit, onPress}) =>
-  <TouchableOpacity
-    style={styles.container}
-    onPress={onPress}
-    disabled={!onPress}
-  >
-    <View style={styles.circle}>
-      <Text
-        style={styles.value}
-        numberOfLines={1}
-        adjustsFontSizeToFit={true}
+type Props = {
+  label: string,
+  value: number,
+  unit?: string,
+  onPress?: () => void
+}
+
+export default class ProfileCircle extends PureComponent<Props> {
+  render() {
+    const { label, value, unit, onPress } = this.props
+    return (
+      <TouchableOpacity
+        style={styles.container}
+        onPress={onPress}
+        disabled={!onPress}
       >
-        {
-          unit === 'kg' && value > 1000 ? Math.round(value/100)/10 : value
-        }{
-          unit === 'kg' && value > 1000 ? 't' : unit
-        }
-      </Text>
-      <Text
-        style={styles.label}
-        numberOfLines={1}
-        adjustsFontSizeToFit={true}
-      >
-        {translate('profile.'+label)}
-      </Text>
-    </View>
-  </TouchableOpacity>
+        <View style={styles.circle}>
+          <Text
+            style={styles.value}
+            numberOfLines={1}
+            adjustsFontSizeToFit={true}
+          >
+            {
+              unit === 'kg' && value > 1000 ? Math.round(value/100)/10 : value
+            }{
+              unit === 'kg' && value > 1000 ? 't' : (unit || '')
+            }
+          </Text>
+          <Text
+            style={styles.label}
+            numberOfLines={1}
+            adjustsFontSizeToFit={true}
+          >
+            {translate('profile.'+label)}
+          </Text>
+        </View>
+      </TouchableOpacity>
+    )
+  }
+}

@@ -55,8 +55,6 @@ class ConversationTitle extends Component<Props> {
         , otherMembers = conversation.member.filter(member => member != profile.id)
         , isNoteToSelf = otherMembers.length === 0
 
-    console.log('[render] conversation title')
-
     return <TouchableOpacity
         style={styles.container}
         hitSlop={{top: 10, bottom: 10, left: 50, right: 50}}
