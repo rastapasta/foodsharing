@@ -17,8 +17,16 @@ describe('Feedback & Messages', () => {
     await expect(element(by.id('profile.name'))).toHaveText('Michael')
   })
 
-  it('should be possible to navigate nack to profile by tapping back', async () => {
+  it('should be possible to navigate back to profile by tapping back', async () => {
     await element(by.id('navigation.back')).tap()
+  })
+
+  it('should be able to swipe way up to trigger pagination', async () => {
+    for (let i=0; i<5; i++)
+      await element(by.id('conversation.scene')).swipe('down')
+
+    for (let i=0; i<5; i++)
+      await element(by.id('conversation.scene')).swipe('up')
   })
 
   it('should be possible to type a message', async () => {

@@ -14,7 +14,17 @@ before(async () => {
     await element(by.id('drawer.logout')).tap()
   } catch(e) {}
 
-  await device.launchApp({ permissions: { location: 'inuse', notifications: 'YES', camera: 'YES' }})
+  await device.launchApp({
+    languageAndLocale: {
+      language: 'en-US',
+      locale: 'en-US'
+    },
+    permissions: {
+      location: 'inuse',
+      notifications: 'YES',
+      camera: 'YES'
+    }
+  })
 })
 
 beforeEach(async function () {
@@ -27,4 +37,4 @@ afterEach(async function () {
 
 after(async () => {
   await detox.cleanup()
-});
+})

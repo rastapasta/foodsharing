@@ -134,8 +134,9 @@ Timeframe: 2 weeks from scratch to production 😎
   * Custom fonts / 'foodsharing identity'
   * All strings mapped to [i18n files](https://github.com/rastapasta/foodsharing/tree/master/assets/translations)
 
-* Deployment and CI
-  * Detox E2E/UI test framework setup
+* Deployment, testing and CI
+  * [Detox](https://github.com/wix/Detox) & [Mocha](https://github.com/mochajs/mocha) E2E UI test framework
+    * Over 60 test cases incl. auth, messaging, baskets, map, fairteiler, ...
   * Travis CI
     * Linting and test compilation of TypeScript
     * Native compile and E2E simulator tests
@@ -188,6 +189,7 @@ $> detox test --configuration ios.sim.debug
 ## 🤔 Personal ToDos
 
 * Should have
+  * Optimize and benchmark rendering
   * Android
     * Camera, when first blocking permissions, going to settings, granting them, return -> overlay stays visible
     * Map markers on location selector scene is lagging behind movement
