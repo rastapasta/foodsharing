@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import { StyleSheet, View, Text, Dimensions, ScrollView, FlatList, SafeAreaView } from 'react-native'
 import ActivityIndicator from '../components/ActivityIndicator'
 import { withNavigationFocus } from 'react-navigation'
@@ -16,6 +16,7 @@ import { Fairteiler as FairteilerType } from '../common/typings'
 import colors from '../common/colors'
 import config from '../common/config'
 import { translate } from '../common/translation'
+import { newExpression } from '@babel/types'
 
 const placeholderImage = 'https://foodsharing.de/img/fairteiler_head.jpg'
     , { width, height } = Dimensions.get('window')
@@ -57,9 +58,17 @@ type Props = {
   isFocused: boolean
 }
 
-class Fairteiler extends PureComponent<Props> {
+class Fairteiler extends Component<Props> {
   refs: {
     swiper: any
+  }
+
+  shouldComponentUpdate(next: Props) {
+    const { id, fairteiler, walls } = this.props
+
+    return next.id !== id
+        || next.walls.fairteiler[`${id}`] !== walls.fairteiler[`${id}`]
+        || next.fairteiler[id] !== fairteiler[id]
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -122,7 +131,7 @@ class Fairteiler extends PureComponent<Props> {
             style={{width}}
             ListHeaderComponent={() => !!wall.results && !!wall.results.length && <View style={{height: 5}} />}
             keyExtractor={(item: any)=> item.id.toString()}
-            renderItem={WallPost}
+            renderItem={({item}) => <WallPost item={item} />}
             ListEmptyComponent={() =>
               <View style={styles.box}>
                 <Text style={styles.text}>

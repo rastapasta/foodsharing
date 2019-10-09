@@ -1,7 +1,7 @@
-import { withNavigationFocus } from 'react-navigation'
-
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import { SafeAreaView, StyleSheet, Text, FlatList, View, ActivityIndicator, Dimensions, TouchableOpacity } from 'react-native'
+
+import { withNavigationFocus } from 'react-navigation'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -64,9 +64,13 @@ type Props = {
   isFocused: boolean
 }
 
-class Baskets extends PureComponent<Props> {
+class Baskets extends Component<Props> {
   state = {
     refreshing: false
+  }
+
+  shouldComponentUpdate(next: Props) {
+    return next.baskets !== this.props.baskets
   }
 
   componentDidUpdate(prevProps: Props) {
