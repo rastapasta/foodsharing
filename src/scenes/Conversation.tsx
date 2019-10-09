@@ -115,7 +115,6 @@ class Conversation extends Component<Props> {
         , conversation = (conversations.find(c => c.id == conversationId) || {}) as ConversationListEntry
         , items = this.prepareItems(data)
 
-    console.log('[render] conversation')
     return (
       <KeyboardAvoidingView
         {...(Platform.OS === 'ios' ? {behavior: 'padding'} : {})}

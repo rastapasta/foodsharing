@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react'
+import React, { Component } from 'react'
 import {
   SafeAreaView,
   KeyboardAvoidingView,
@@ -65,14 +65,13 @@ type Props = {
   app: any
 }
 
-class Login extends PureComponent<Props> {
+class Login extends Component<Props> {
   refs: {
     toast: Toast
   }
 
-  state = {
-    email: null,
-    password: null
+  shouldComponentUpdate(next: Props) {
+    return next.app.authenticating !== this.props.app.authenticating
   }
 
   componentDidUpdate(prevProps: Props) {

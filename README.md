@@ -197,6 +197,7 @@ $> detox test --configuration ios.sim.debug
   * Pull conversation again when open and coming from background to make sure its marked as read
   * Notifications after background pull / detect new conversations - even pull pull conversations? Delta algo!
   * Handle WebSocket reconnect after long inactivity
+  * Clean up old navigation state system - only needed to track if and which conversation a user is watching atm
 
 * Nice to have
   * Make sure there is no gap between old store and long-time-no-see message list request -> hotfix: logout-in

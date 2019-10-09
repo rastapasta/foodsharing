@@ -55,7 +55,7 @@ export default class Swiper extends PureComponent<Props> {
   render() {
     const { tabs, children } = this.props
         , { scrollX } = this.state
-    console.log('[render] swiper')
+
     return (
       <View style={styles.container}>
         <SwiperTabs scrollX={scrollX} tabs={tabs} swiper={this.refs.swiper} />

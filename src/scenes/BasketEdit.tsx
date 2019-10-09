@@ -1,4 +1,4 @@
-import React, { PureComponent, Fragment } from 'react'
+import React, { Component, Fragment } from 'react'
 import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { withNavigationFocus } from 'react-navigation'
@@ -85,24 +85,32 @@ type Props = {
   baskets: any
 }
 
-class EditBasket extends PureComponent<Props> {
-  state: {
-    picture: any
-    description: string
-    by_message: boolean
-    by_phone: boolean
+type State = {
+  picture: any
+  description: string
+  by_message: boolean
+  by_phone: boolean
 
-    landline: string
-    mobile: string
+  landline: string
+  mobile: string
 
-    lifetime: number
+  lifetime: number
 
-    longitude: number
-    latitude: number
-  }
+  longitude: number
+  latitude: number
+}
+
+class EditBasket extends Component<Props> {
+  state: State
 
   refs: {
     map: MapView
+  }
+
+  shouldComponentUpdate(nextProps: Props, nextState: State) {
+    return nextProps.isFocused !== this.props.isFocused
+        || nextState !== this.state
+        || nextProps.id !== this.props.id
   }
 
   constructor(props: Props) {
