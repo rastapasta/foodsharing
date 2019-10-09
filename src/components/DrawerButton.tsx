@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
@@ -29,22 +29,29 @@ type Props = {
   onPress: () => void
 }
 
-export default (props: Props) =>
-  <TouchableOpacity
-    onPress={props.onPress}
-    style={styles.container}
-    testID={props.label}
-  >
-    <View>
-      <Icon
-        name={props.icon}
-        size={26}
-        color={colors.drawerIcon}
-      />
-    </View>
-    <View style={styles.label}>
-      <Text style={styles.text}>
-        {translate(props.label)}
-      </Text>
-    </View>
-  </TouchableOpacity>
+export default class DrawerButton extends PureComponent<Props> {
+  render() {
+    const { onPress, icon, label } = this.props
+
+    return (
+      <TouchableOpacity
+        onPress={onPress}
+        style={styles.container}
+        testID={label}
+      >
+        <View>
+          <Icon
+            name={icon}
+            size={26}
+            color={colors.drawerIcon}
+          />
+        </View>
+        <View style={styles.label}>
+          <Text style={styles.text}>
+            {translate(label)}
+          </Text>
+        </View>
+      </TouchableOpacity>
+    )
+  }
+}

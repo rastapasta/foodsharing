@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 
+import { WallPost as WallPostType } from '../common/typings'
 import { formatDate } from '../common/utils'
 
 import colors from '../common/colors'
@@ -32,35 +33,43 @@ const styles = StyleSheet.create({
   }
 })
 
-export default ({item}) => {
-  const text = item.body.trim()
-  return (
-    <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.image}
-        onPress={() => Actions.push('profile', {id: item.author.id})}
-      >
-        <RoundedImage
-          photo={item.author.avatar}
-        />
-      </TouchableOpacity>
+type Props = {
+  item: WallPostType
+}
 
-      <View style={styles.content}>
-        {!!text && <Text style={styles.body}>
-          {text}
-        </Text>}
-        {item.pictures && item.pictures.map(picture =>
+export default class WallPost extends PureComponent<Props> {
+  render() {
+    const { body, author, pictures, createdAt } = this.props.item
+        ,  text = body.trim()
+
+    return (
+      <View style={styles.container}>
+        <TouchableOpacity
+          style={styles.image}
+          onPress={() => Actions.push('profile', {id: author.id})}
+        >
+          <RoundedImage
+            photo={author.avatar}
+          />
+        </TouchableOpacity>
+
+        <View style={styles.content}>
+          {!!text && <Text style={styles.body}>
+            {text}
+          </Text>}
+          {pictures && pictures.map(picture =>
             <FastImage
               key={picture.image}
               style={{height: 200, marginTop: 5}}
               resizeMode="contain"
               source={{uri: 'https://foodsharing.de/' + picture.image}}
             />
-        )}
-        <Text style={styles.time}>
-          {formatDate(item.createdAt)}
-        </Text>
+          )}
+          <Text style={styles.time}>
+            {formatDate(createdAt)}
+          </Text>
+        </View>
       </View>
-    </View>
-  )
+    )
+  }
 }

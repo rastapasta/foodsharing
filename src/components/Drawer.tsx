@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import { View, StyleSheet, Text } from 'react-native'
 import colors from '../common/colors'
 
@@ -45,7 +45,12 @@ type Props = {
   actions: any
 }
 
-class Drawer extends PureComponent<Props> {
+class Drawer extends Component<Props> {
+  shouldComponentUpdate(next: Props) {
+    const { profile } = this.props
+    return next.profile.name !== profile.name
+  }
+
   render() {
     const {profile: {name, id}, actions: { logout, fetchConversationId }} = this.props
 
