@@ -198,6 +198,7 @@ $> detox test --configuration ios.sim.debug
   * Notifications after background pull / detect new conversations - even pull pull conversations? Delta algo!
   * Handle WebSocket reconnect after long inactivity
   * Clean up old navigation state system - only needed to track if and which conversation a user is watching atm
+  * If both mobile and landline numbers are defined for a basket to request, ask the user which to call
 
 * Nice to have
   * Make sure there is no gap between old store and long-time-no-see message list request -> hotfix: logout-in
