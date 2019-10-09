@@ -11,6 +11,7 @@ import {
   REQUEST_ERROR
 } from '../common/constants'
 import { MessageType } from '../common/typings'
+import moment from 'moment'
 
 const initialState = []
     , messageToObj = message => ({
@@ -18,7 +19,7 @@ const initialState = []
       last_foodsaver_id: `${message.fs_id}`,
       last_message: message.body,
       last: message.time,
-      last_ts: Math.floor(Date.parse(message.time)/1000).toString()
+      last_ts: moment(message.time).format('X')
     })
 
 export default function reducer(state = initialState, action: any = {}) {
@@ -29,7 +30,7 @@ export default function reducer(state = initialState, action: any = {}) {
       return payload.map(conversation => ({
         ...conversation,
         member: conversation.member.map(member => member.id)
-      }))
+      })).sort((a, b) => parseInt(b.last_ts) - parseInt(a.last_ts))
 
     case CONVERSATION_REQUEST:
       return state.map(conversation => {
