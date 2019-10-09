@@ -163,7 +163,7 @@ class Conversation extends PureComponent<Props> {
           <MessageForm
             onSend={() => actions.sendMessage(conversationId)}
             model={`drafts.${conversationId}`}
-            active={!!drafts[conversationId]}
+            active={!!drafts[conversationId] && drafts[conversationId] !== '0'}
             sending={conversation.sending}
           />
         </SafeAreaView>

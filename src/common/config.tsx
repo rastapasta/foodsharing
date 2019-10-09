@@ -33,10 +33,6 @@ export default {
     marker: {uri: '/xhr.php?f=loadMarker&types[]=fairteiler&types[]=baskets', method: 'GET'},
 
     regionMembers: {uri: '/?page=bezirk&bid={id}&sub=members', method: 'GET'},
-
-    // TODO:
-    // baskets: {uri: '/xhr.php?f=loadMarker&types[]=baskets', method: 'GET'},
-    shops: {uri: '/xhr.php?f=loadMarker&types[]=betriebe&options[]=needhelp&options[]=needhelpinstant', method: 'GET'}
   },
 
   notificationsOnlyInBackground: true,

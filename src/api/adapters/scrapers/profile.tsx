@@ -21,8 +21,9 @@ export default async (id: number): Promise<{
         'fetchweight'
       ]
 
-      , infoTitles = $('.pure-g .infos').find('p strong').map(({}, e) => $(e).text().trim()).get()
-      , infoData = $('.pure-g .infos').find('p').map(({}, e) => $(e).text().trim()).get()
+      , infoBoxes = $('.ui-widget-content .infos:has("p strong") p')
+      , infoTitles = infoBoxes.find('strong').map(({}, e) => $(e).text().trim()).get()
+      , infoData = infoBoxes.map(({}, e) => $(e).text().trim()).get()
       , infos = infoTitles.reduce((infos, title, index) => infos.concat({
         title,
         body:
