@@ -105,13 +105,13 @@
     "call": "{{name}} anrufen",
     "creators_basket": "{{name}}'s Essenskorb (#{{id}})",
     "edit_basket": "Bearbeiten",
-    "manage_basket": "Essenskorb verwalten",
+    "manage_basket": "Verwalten",
     "save_changes": "Änderungen speichern",
     "delete_basket": "Löschen"
   },
 
   "camera": {
     "not_authorized": "Kamera-Berechtigung abgelehnt",
-    "goto_settings": "Um die Kamera zu nutzen, musst du ihre Nutzung über die Einstellungen erlauben."
+    "goto_settings": "Um die Kamera zu nutzen, musst du dies in den Einstellungen erlauben."
   }
 }
