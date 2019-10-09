@@ -1,6 +1,10 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import { StyleSheet, View, TouchableOpacity, ActivityIndicator} from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import * as reduxActions from '../common/actions'
 
 import { Control } from 'react-redux-form/native'
 
@@ -34,26 +38,30 @@ const styles = StyleSheet.create({
 })
 
 type Props = {
-  onSend: (message) => Promise<boolean>
-  sending: boolean
-  model: string
-  active: boolean
+  conversationId: number
+
+  drafts: any
+  conversations: any
+  actions: any
 }
 
-export default class MessageForm extends PureComponent<Props> {
-  state = {
-    value: ''
-  }
+class MessageForm extends Component<Props> {
+  shouldComponentUpdate(next: Props) {
+    const { conversationId, drafts, conversations } = this.props
+        , conversation = conversations.find(conversation => conversation.id == conversationId)
+        , nextConvo = next.conversations.find(conversation => conversation.id == conversationId)
+        , key = `${conversationId}`
 
-  sendMessage = () => {
-    const { value } = this.state
-        , { onSend } = this.props
-
-    onSend(value)
+    return next.drafts[key] !== drafts[key]
+        || nextConvo.sending !== conversation.sending
   }
 
   render() {
-    const { model, active, sending } = this.props
+    const { drafts, conversationId, actions, conversations } = this.props
+        , value = drafts[conversationId]
+        , { sending } = conversations.find(conversation => conversation.id == conversationId)
+        , model = 'drafts.' + conversationId
+        , active = value && value !== '0' && !sending
 
     return (
       <View style={styles.container}>
@@ -68,7 +76,7 @@ export default class MessageForm extends PureComponent<Props> {
         <TouchableOpacity
           hitSlop={{top: 10, right: 10, left: 10, bottom: 10}}
           style={[styles.button, !!active && {backgroundColor: colors.messageSendButtonActive}]}
-          onPress={this.sendMessage}
+          onPress={() => actions.sendMessage(conversationId)}
           disabled={!active}
           testID="conversation.send"
         >
@@ -88,3 +96,17 @@ export default class MessageForm extends PureComponent<Props> {
     )
   }
 }
+
+const mapStateToProps = state => ({
+  drafts: state.drafts,
+  conversations: state.conversations
+})
+
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(reduxActions, dispatch)
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MessageForm)

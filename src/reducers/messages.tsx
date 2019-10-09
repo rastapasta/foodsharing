@@ -4,6 +4,7 @@ import {
   WEBSOCKET_MESSAGE,
   LOGOUT
 } from '../common/constants'
+import moment from 'moment'
 
 const initialState = {}
 
@@ -24,7 +25,11 @@ export default function reducer(state = initialState, action: any = {}) {
 
       // Merge in the new message to our existing store
       messages.forEach(message =>
-        id2msg[message.id] = {...(id2msg[message.id] || {}), ...message}
+        id2msg[message.id] = {
+          ...(id2msg[message.id] || {}),
+          ...message,
+          hours: moment(message.time).format('HH:mm')
+        }
       )
 
       convState[`${id}`] = Object.keys(id2msg).map(id => id2msg[id]).sort((a, b) => b.id - a.id)
@@ -36,7 +41,10 @@ export default function reducer(state = initialState, action: any = {}) {
           , conversationId = type === MESSAGE_SUCCESS ? action.conversationId : payload.cid
           , idx = `${conversationId}`
 
-      msgState[idx] = replaceOrUnshift(msgState[idx], payload)
+      msgState[idx] = replaceOrUnshift(msgState[idx], {
+        ...payload,
+        hours: moment(payload.time).format('HH:mm')
+      })
       return msgState
 
     case LOGOUT:

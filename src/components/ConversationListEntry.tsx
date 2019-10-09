@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import { StyleSheet, View, Text, Dimensions, TouchableOpacity, Platform } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import { User, ConversationListEntry, Profile } from '../common/typings'
@@ -72,7 +72,16 @@ type Props = {
   profile: Profile
 }
 
-class ConversationsItem extends PureComponent<Props> {
+class ConversationsItem extends Component<Props> {
+  shouldComponentUpdate(next: Props) {
+    const { testID, isLast, profile, conversation } = this.props
+
+    return next.testID !== testID
+        || next.isLast !== isLast
+        || next.profile.id !== profile.id
+        || next.conversation !== conversation
+  }
+
   render() {
     const { conversation, testID, isLast, foodsavers, profile } = this.props
         , { id, member, name, last_ts, last_message, last_foodsaver_id } = conversation
@@ -83,7 +92,7 @@ class ConversationsItem extends PureComponent<Props> {
         , isToday = date.isSame(new Date(), 'day')
         , isYesterday = date.isSame(new Date(Date.now() - 24*60*60*1000), 'day')
         , lastMessenger = member.find(member => member === last_foodsaver_id)
-
+    console.log('[render] conv list item')
     return (
       <TouchableOpacity
         style={styles.container}
