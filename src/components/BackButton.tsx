@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import { StyleSheet, TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { Actions } from 'react-native-router-flux'
@@ -21,12 +21,17 @@ const styles = StyleSheet.create({
   }
 })
 
-export default () =>
-  <TouchableOpacity
-    testID="navigation.back"
-    onPress={() => Actions.pop()}
-    hitSlop={{left: 5, right: 40, bottom: 10, top: 40}}
-    style={styles.container}
-  >
-    <Icon name="chevron-left" size={36} color="#fff" />
-  </TouchableOpacity>
+export default class BackButton extends PureComponent {
+  render() {
+    return (
+      <TouchableOpacity
+        testID="navigation.back"
+        onPress={() => Actions.pop()}
+        hitSlop={{left: 5, right: 40, bottom: 10, top: 40}}
+        style={styles.container}
+      >
+        <Icon name="chevron-left" size={36} color="#fff" />
+      </TouchableOpacity>
+    )
+  }
+}

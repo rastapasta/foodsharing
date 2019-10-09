@@ -1,4 +1,4 @@
-import React, { PureComponent, Fragment } from 'react'
+import React, { Component, Fragment } from 'react'
 import { Text, StyleSheet, Platform, TouchableOpacity } from 'react-native'
 
 import { bindActionCreators } from 'redux'
@@ -39,12 +39,23 @@ type Props = {
 
 const showMemberCount = 4
 
-class ConversationTitle extends PureComponent<Props> {
+class ConversationTitle extends Component<Props> {
+  shouldComponentUpdate(next: Props) {
+    const { conversationId, conversations, profile } = this.props
+        , conversation = conversations.find(conversation => conversation.id == conversationId) || {member: []}
+        , nextConversation = next.conversations.find(conversation => conversation.id == conversationId) || {member: []}
+
+    return nextConversation.member.length !== conversation.member.length
+        || nextConversation.name !== conversation.name
+        || next.profile.id !== profile.id
+  }
   render() {
     const { conversationId, conversations, profile, foodsavers, showCount } = this.props
         , conversation = conversations.find(conversation => conversation.id == conversationId) || {member: []}
         , otherMembers = conversation.member.filter(member => member != profile.id)
         , isNoteToSelf = otherMembers.length === 0
+
+    console.log('[render] conversation title')
 
     return <TouchableOpacity
         style={styles.container}

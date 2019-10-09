@@ -62,9 +62,8 @@ class Conversation extends Component<Props> {
   shouldComponentUpdate(next: Props) {
     const { conversationId, messages } = this.props
 
-    return next.isFocused === true
-        || next.conversationId !== conversationId
-        || next.messages[conversationId].length !== messages[conversationId].length
+    return next.conversationId !== conversationId
+        || (next.messages[conversationId] || []).length !== (messages[conversationId] || []).length
   }
 
   componentDidUpdate(prevProps: Props) {
