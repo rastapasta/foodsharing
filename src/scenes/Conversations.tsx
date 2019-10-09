@@ -63,7 +63,7 @@ class Conversations extends Component<Props> {
     const { conversations, actions } = this.props
         , data = conversations.filter(conversation => conversation.last_ts)
         , { refreshing } = this.state
-    console.log('[render] conversations')
+
     return (
       <SafeAreaView style={styles.container} testID="conversations.scene">
         <StatusBar backgroundColor={colors.background} barStyle="light-content" />

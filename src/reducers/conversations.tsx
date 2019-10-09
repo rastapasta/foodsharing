@@ -85,7 +85,7 @@ export default function reducer(state = initialState, action: any = {}) {
         }
       })
 
-    // Process incoming me\ssages by updating the last conversations last timestamp, user and
+    // Process incoming messages by updating the last conversations last timestamp, user and
     // create conversation in case it didnt exist yet
     case MESSAGE_SUCCESS:
     case WEBSOCKET_MESSAGE:
