@@ -9,6 +9,8 @@ import { foodsaver } from '../common/placeholder'
 import { translate } from '../common/translation'
 import { Actions } from 'react-native-router-flux'
 
+import { findConversation } from '../common/utils'
+
 const styles = StyleSheet.create({
   container: {
     justifyContent: 'center'
@@ -42,16 +44,17 @@ const showMemberCount = 4
 class ConversationTitle extends Component<Props> {
   shouldComponentUpdate(next: Props) {
     const { conversationId, conversations, profile } = this.props
-        , conversation = conversations.find(conversation => conversation.id == conversationId) || {member: []}
-        , nextConversation = next.conversations.find(conversation => conversation.id == conversationId) || {member: []}
+        , conversation = findConversation(conversations, conversationId)
+        , nextConversation = findConversation(next.conversations, conversationId)
 
     return nextConversation.member.length !== conversation.member.length
         || nextConversation.name !== conversation.name
         || next.profile.id !== profile.id
   }
+
   render() {
     const { conversationId, conversations, profile, foodsavers, showCount } = this.props
-        , conversation = conversations.find(conversation => conversation.id == conversationId) || {member: []}
+        , conversation = findConversation(conversations, conversationId)
         , otherMembers = conversation.member.filter(member => member != profile.id)
         , isNoteToSelf = otherMembers.length === 0
 

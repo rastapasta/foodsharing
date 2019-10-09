@@ -10,7 +10,7 @@ import { withNavigationFocus } from 'react-navigation'
 
 import MessageForm from '../components/MessageForm'
 import MessageBubble from '../components/MessageBubble'
-import { ConversationDetail, Message, MessageType, ConversationListEntry } from '../common/typings'
+import { Message, MessageType, ConversationListEntry } from '../common/typings'
 
 import colors from '../common/colors'
 import { translate } from '../common/translation'
@@ -54,22 +54,19 @@ interface Item {
 
 class Conversation extends Component<Props> {
   state = {
-    data: {} as ConversationDetail,
-    refreshing: false,
-    loading: false
+    refreshing: false
   }
 
   shouldComponentUpdate(next: Props) {
-    const { conversationId, messages } = this.props
+    const { conversationId, messages, isFocused, actions } = this.props
+
+    if (!next.isFocused && isFocused)
+      actions.navigation('conversation')
+    if (next.isFocused && !isFocused)
+      actions.navigation('conversation', conversationId)
 
     return next.conversationId !== conversationId
         || (next.messages[conversationId] || []).length !== (messages[conversationId] || []).length
-  }
-
-  componentDidUpdate(prevProps: Props) {
-    const { actions, conversationId } = this.props
-    if (prevProps.isFocused === false && this.props.isFocused === true)
-      actions.navigation('conversation', conversationId)
   }
 
   componentDidMount() {
@@ -118,6 +115,7 @@ class Conversation extends Component<Props> {
         , conversation = (conversations.find(c => c.id == conversationId) || {}) as ConversationListEntry
         , items = this.prepareItems(data)
 
+    console.log('[render] conversation')
     return (
       <KeyboardAvoidingView
         {...(Platform.OS === 'ios' ? {behavior: 'padding'} : {})}
