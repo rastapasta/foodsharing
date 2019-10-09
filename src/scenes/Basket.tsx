@@ -18,7 +18,6 @@ import ActivityIndicator from '../components/ActivityIndicator'
 
 import colors from '../common/colors'
 import { Actions } from 'react-native-router-flux'
-import { formatDate } from '../common/utils'
 import { translate } from '../common/translation'
 import config from '../common/config'
 import { isIphoneX } from 'react-native-iphone-x-helper'
