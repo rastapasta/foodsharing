@@ -31,6 +31,11 @@ fastlane ios certificates
 fastlane ios icon
 ```
 
+### ios beta_badge
+```
+fastlane ios beta_badge
+```
+
 ### ios test
 ```
 fastlane ios test

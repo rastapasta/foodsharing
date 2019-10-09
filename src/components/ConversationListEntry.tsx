@@ -64,7 +64,8 @@ const styles = StyleSheet.create({
     width: width * 0.78 - 10,
     backgroundColor: colors.lightgray,
     position: 'absolute',
-    right: 0
+    right: 0,
+    bottom: 1
   }
 })
 
