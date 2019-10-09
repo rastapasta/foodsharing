@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import { StyleSheet, Text, View, Picker, Dimensions, Platform } from 'react-native'
 import { pickTranslation } from '../common/translation'
 
@@ -27,27 +27,33 @@ type Props = {
   selected: any
 }
 
-export default ({label, onChange, reasons, selected}: Props) =>
-  <View>
-    {!!label &&
-      <Text style={styles.category}>
-        {label}
-      </Text>
-    }
-    <View style={styles.picker}>
-      <Picker
-        selectedValue={selected}
-        itemStyle={{fontSize: 14}}
-        style={[{width}, Platform.OS === 'ios' && {transform: [{translateY: -55}]}]}
-        onValueChange={onChange}
-      >
-        {reasons.map(reason =>
-          <Picker.Item
-            key={`reason${reason.id}`}
-            label={pickTranslation(reason)}
-            value={reason.id}
-          />
-        )}
-      </Picker>
-    </View>
-  </View>
+export default class ReportPicker extends PureComponent<Props> {
+  render() {
+    const {label, onChange, reasons, selected} = this.props
+    return (
+      <View>
+        {!!label &&
+          <Text style={styles.category}>
+            {label}
+          </Text>
+        }
+        <View style={styles.picker}>
+          <Picker
+            selectedValue={selected}
+            itemStyle={{fontSize: 14}}
+            style={[{width}, Platform.OS === 'ios' && {transform: [{translateY: -55}]}]}
+            onValueChange={onChange}
+          >
+            {reasons.map(reason =>
+              <Picker.Item
+                key={`reason${reason.id}`}
+                label={pickTranslation(reason)}
+                value={reason.id}
+              />
+            )}
+          </Picker>
+        </View>
+      </View>
+    )
+  }
+}

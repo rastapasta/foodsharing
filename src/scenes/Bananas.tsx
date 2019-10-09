@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import { SafeAreaView, StyleSheet, FlatList, View } from 'react-native'
 
 import { bindActionCreators } from 'redux'
@@ -26,7 +26,13 @@ type Props = {
   actions: any
 }
 
-class Bananas extends PureComponent<Props> {
+class Bananas extends Component<Props> {
+  shouldComponentUpdate(next: Props) {
+    const { id, foodsavers } = this.props
+    return next.id !== id
+        || foodsaver(next.foodsavers[`${id}`]).bananas.length !== foodsaver(foodsavers[`${id}`]).bananas.length
+  }
+
   componentDidUpdate(prevProps: Props) {
     const { actions, id } = this.props
     if (prevProps.isFocused === false && this.props.isFocused === true)
