@@ -100,7 +100,9 @@ export default class ConversationsItem extends PureComponent<Props> {
               />
             )}
             {!!icon &&
-              <Icon name={icon} size={32} />
+              <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                <Icon name={icon} size={36} color={colors.background} />
+              </View>
             }
           </View>
 

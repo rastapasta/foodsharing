@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { SafeAreaView, StyleSheet, FlatList, StatusBar, View, Text } from 'react-native'
+import { SafeAreaView, StyleSheet, FlatList, StatusBar, View, Text, Image } from 'react-native'
 import _ from 'lodash'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -11,6 +11,7 @@ import { withNavigationFocus } from 'react-navigation'
 
 import { translate } from '../common/translation'
 import moment from 'moment'
+import config from '../common/config'
 
 const styles = StyleSheet.create({
   container: {
@@ -56,7 +57,7 @@ class Notifications extends Component<Props> {
 
   render() {
     const { notifications, actions } = this.props
-        , data = [{"id":2662970,"key":"buddy_request","href":"\/profile\/341047","payload":{"name":"Paul"},"icon":null,"image":"\/img\/mini_q_avatar.png","createdAt":"2019-10-10T14:06:11","isRead":true,"isCloseable":true},{"id":2659662,"key":"store_request_accept","href":"\/?page=fsbetrieb&id=14997","payload":{"user":"Julian","name":"Z - BEtrieb doppelt angelegt"},"icon":"img img-store brown","image":null,"createdAt":"2019-10-09T20:18:39","isRead":true,"isCloseable":true},{"id":2618694,"key":"store_request_accept","href":"\/?page=fsbetrieb&id=17735","payload":{"user":"Margot","name":"Betrieb f\u00fcr alle NEULINGE"},"icon":"img img-store brown","image":null,"createdAt":"2019-10-01T12:51:36","isRead":true,"isCloseable":true}]
+        , data = [{"id":2662970,"key":"buddy_request","href":"\/profile\/341047","payload":{"name":"Paul"},"icon":null,"image":"\/img\/mini_q_avatar.png","createdAt":"2019-10-10T14:06:11","isRead":false,"isCloseable":true},{"id":2659662,"key":"store_request_accept","href":"\/?page=fsbetrieb&id=14997","payload":{"user":"Julian","name":"Z - BEtrieb doppelt angelegt"},"icon":"img img-store brown","image":null,"createdAt":"2019-10-09T20:18:39","isRead":true,"isCloseable":true},{"id":2618694,"key":"store_request_accept","href":"\/?page=fsbetrieb&id=17735","payload":{"user":"Margot","name":"Betrieb f\u00fcr alle NEULINGE"},"icon":"img img-store brown","image":null,"createdAt":"2019-10-01T12:51:36","isRead":true,"isCloseable":true}]
         , { refreshing } = this.state
 
     return (
@@ -80,6 +81,8 @@ class Notifications extends Component<Props> {
                 subtitle={translate(`notifications.${item.key}`, item.payload)}
                 onPress={() => false}
                 isUnread={!item.isRead}
+                pictures={item.image ? [item.image.match(/mini_q_avatar/) ? null : item.image] : null}
+                icon={config.notificationIcons[item.key]}
                 displayTimeAgo
                 timestamp={moment(item.createdAt)}
               />

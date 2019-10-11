@@ -42,6 +42,26 @@ export default {
     markBell: {uri: '/xhrapp.php?app=bell&m=markBellsAsRead&ids={ids}', method: 'GET'}
   },
 
+  notificationIcons: {
+    'forum_answer': 'question-answer',
+    'blog_new_check': 'newspaper',
+    'ft_update': 'alert-circle',
+    'store_new': 'store',
+    'store_new_request': 'account-question',
+    'store_request_accept': 'account-plus',
+    'store_request_accept_wait': 'account-multiple-check',
+    'store_request_deny': 'account-remove',
+    'store_wallpost': 'wall',
+    'store_cr_times': 'timetable',
+    'fs_sleepmode': 'sleep',
+    'new_quiz_comment': 'comment-question',
+    'new_foodsaver': 'account',
+    'new_foodsaver_verified': 'account-check',
+    'betrieb_fetch': 'timetable',
+    'sharepoint_activate': 'store',
+    'passgen_failed': 'passport',
+  },
+
   notificationsOnlyInBackground: true,
 
   initialMapRegion: {
