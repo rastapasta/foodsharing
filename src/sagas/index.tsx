@@ -12,6 +12,7 @@ import Background from './background'
 import Profile from './profile'
 import Report from './report'
 import Basket from './basket'
+import Sentry from './sentry'
 
 // Start all our sagas in parallel
 export default function* rootSaga () {
@@ -27,6 +28,7 @@ export default function* rootSaga () {
     Background(),
     Profile(),
     Report(),
-    Basket()
+    Basket(),
+    Sentry()
   ])
 }

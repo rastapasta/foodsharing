@@ -264,6 +264,9 @@ PODS:
     - React
   - RNPermissions (2.0.1):
     - React
+  - RNSentry (1.0.8):
+    - React
+    - Sentry (~> 4.4.0)
   - RNVectorIcons (6.6.0):
     - React
   - SDWebImage (5.1.0):
@@ -272,6 +275,9 @@ PODS:
   - SDWebImageWebPCoder (0.2.3):
     - libwebp (~> 1.0)
     - SDWebImage/Core (~> 5.0)
+  - Sentry (4.4.0):
+    - Sentry/Core (= 4.4.0)
+  - Sentry/Core (4.4.0)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -317,15 +323,18 @@ DEPENDENCIES:
   - RNKeychain (from `../node_modules/react-native-keychain`)
   - RNLocalize (from `../node_modules/react-native-localize`)
   - RNPermissions (from `../node_modules/react-native-permissions`)
+  - "RNSentry (from `../node_modules/@sentry/react-native`)"
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - boost-for-react-native
     - libwebp
     - SDWebImage
     - SDWebImageWebPCoder
+  trunk:
+    - Sentry
 
 EXTERNAL SOURCES:
   BVLinearGradient:
@@ -406,6 +415,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-localize"
   RNPermissions:
     :path: "../node_modules/react-native-permissions"
+  RNSentry:
+    :path: "../node_modules/@sentry/react-native"
   RNVectorIcons:
     :path: "../node_modules/react-native-vector-icons"
   Yoga:
@@ -453,11 +464,13 @@ SPEC CHECKSUMS:
   RNKeychain: 45dbd50d1ac4bd42c3740f76ffb135abf05746d0
   RNLocalize: f42aea3133d91d7fa3ec01284a6895019af1a83f
   RNPermissions: daa03e029c245fa185728e34bf1e763bf7722d05
+  RNSentry: a3fe9976dc07a58fe112ca0c1c0378a23868e145
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   SDWebImage: fb387001955223213dde14bc08c8b73f371f8d8f
   SDWebImageWebPCoder: 7568737603c50f6237850afedd7e9e28e5917e6b
+  Sentry: 26650184fe71eb7476dfd2737acb5ea6cc64b4b1
   Yoga: d8c572ddec8d05b7dba08e4e5f1924004a177078
 
 PODFILE CHECKSUM: cb82e96b271e56f7ea9c14a825267c67e6035b04
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.8.3

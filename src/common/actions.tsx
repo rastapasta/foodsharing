@@ -8,7 +8,7 @@ export const logout = () => ({type: types.LOGOUT})
 
 export const cookie = (name: string, value: string) => ({type: types.COOKIE, name, value})
 
-export const navigation = (scene: string, sceneId?: number) => ({type: types.NAVIGATION, payload: {scene, sceneId}})
+export const navigation = (scene: string, sceneId?: number) => ({type: types.NAVIGATION, payload: {scene, ...(sceneId ? {sceneId} : {})}})
 
 export const fetchConversations = () => ({type: types.CONVERSATIONS_REQUEST})
 export const gotConversations = () => ({type: types.CONVERSATIONS_SUCCESS})
