@@ -1,7 +1,7 @@
 import React, { PureComponent, Fragment } from 'react'
 import { StyleSheet, View, Text, Dimensions, TouchableOpacity, Platform } from 'react-native'
 
-import moment from 'moment'
+import moment, { Moment } from 'moment'
 
 import RoundedImage from './RoundedImage'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
 type Props = {
   onPress: () => void
   testID: string
-  timestamp: number,
+  timestamp: number | Moment,
   isUnread: boolean,
   pictures?: string[],
   icon?: string,
@@ -80,7 +80,7 @@ type Props = {
 export default class ConversationsItem extends PureComponent<Props> {
   render() {
     const { onPress, testID, timestamp, icon, isUnread, pictures, title, displayTimeAgo, subtitlePhoto, isLast, subtitle } = this.props
-        , date = moment(timestamp)
+        , date = (timestamp instanceof moment ? timestamp : moment(timestamp)) as Moment
         , isToday = date.isSame(new Date(), 'day')
         , isYesterday = date.isSame(new Date(Date.now() - 24*60*60*1000), 'day')
 

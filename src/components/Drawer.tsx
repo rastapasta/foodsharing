@@ -10,6 +10,7 @@ import Logo from './Logo'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as reduxActions from '../common/actions'
+import config from '../common/config'
 import { Actions } from 'react-native-router-flux'
 
 const styles = StyleSheet.create({
@@ -64,7 +65,7 @@ class Drawer extends Component<Props> {
         </View>
         <View style={styles.content}>
           <DrawerButton
-            onPress={() => Actions.jump('profile', {id})}
+            onPress={() => Actions.jump('notifications')}
             icon="bell"
             label="drawer.notifications"
           />
@@ -76,7 +77,7 @@ class Drawer extends Component<Props> {
           />
 
           <DrawerButton
-            onPress={() => fetchConversationId(338241)}
+            onPress={() => fetchConversationId(config.feedbackUser)}
             icon="heart-outline"
             label="drawer.feedback"
           />

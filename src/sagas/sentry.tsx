@@ -1,17 +1,27 @@
 import { take } from 'redux-saga/effects'
 import * as Sentry from '@sentry/react-native'
-import { LOGIN_REQUEST, KEYCHAIN, MESSAGE_REQUEST, MESSAGE_SUCCESS, LOGIN_SUCCESS, PROFILE, CONVERSATION_SUCCESS, WEBSOCKET_MESSAGE, CONVERSATIONS_SUCCESS } from '../common/constants'
+import {
+  LOGIN_REQUEST,
+  KEYCHAIN,
+  MESSAGE_REQUEST,
+  MESSAGE_SUCCESS,
+  LOGIN_SUCCESS,
+  PROFILE,
+  CONVERSATION_SUCCESS,
+  WEBSOCKET_MESSAGE,
+  CONVERSATIONS_SUCCESS
+} from '../common/constants'
 
 const filter = {}
 
 filter[LOGIN_REQUEST] = ['password']
+filter[LOGIN_SUCCESS] = ['session', 'token']
 filter[KEYCHAIN] = ['password']
 filter[MESSAGE_REQUEST] = ['body']
 filter[MESSAGE_SUCCESS] = ['body']
 filter[WEBSOCKET_MESSAGE] = ['body']
 filter[CONVERSATION_SUCCESS] = ['messages.*.body']
 filter[CONVERSATIONS_SUCCESS] = ['*.last_message']
-filter[LOGIN_SUCCESS] = ['session', 'token']
 filter[PROFILE] = ['mobile', 'landline', 'lat', 'lon', 'address', 'lastname']
 
 const recursiveReplacer = (path: string[], obj: any) => {
@@ -39,7 +49,7 @@ export default function* sentrSaga() {
     Sentry.addBreadcrumb({
       category: 'redux',
       message: type,
-      level: type.match(/ERROR/) ? Sentry.Severity.Error : Sentry.Severity.Info,
+      level: type.match(/ERROR/) ? Sentry.Severity.Warning : Sentry.Severity.Info,
       ...(payload ?
         {data: typeof payload === 'object' ? payload : {payload}} :
         {}

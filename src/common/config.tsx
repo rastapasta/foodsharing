@@ -2,10 +2,12 @@ const PRODUCTION = true
     , DOCKER_HOST = 'localhost'
 
 export default {
-  host: PRODUCTION ? 'https://beta.foodsharing.de' : `http://${DOCKER_HOST}:18080/`,
+  host: PRODUCTION ? 'https://foodsharing.de' : `http://${DOCKER_HOST}:18080/`,
   websocketHost: PRODUCTION ? 'https://foodsharing.de' : `http://${DOCKER_HOST}:18080/`,
 
   credentials: PRODUCTION ? {} : {email: 'userbot@example.com', password: 'user'},
+
+  feedbackUser: 338241,
 
   userAgent: 'Mozilla/5.0 (compatible; FoodsharingReactNative/1.0; +https://github.com/rastapasta/foodsharing)',
 

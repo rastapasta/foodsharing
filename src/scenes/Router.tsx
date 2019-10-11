@@ -24,6 +24,7 @@ import Conversation from './Conversation'
 import ConversationMembers from './ConversationMembers'
 import Fairteiler from './Fairteiler'
 import Loading from './Loading'
+import Notifications from './Notifications'
 
 import ConversationTitle from '../components/ConversationTitle'
 import ConversationsTabIcon from '../components/ConversationsTabIcon'
@@ -202,6 +203,13 @@ export default () =>
       <Scene
         key="camera"
         component={Camera}
+      />
+
+      <Scene
+        key="notifications"
+        title={translate('scenes.notifications')}
+        component={Notifications}
+        hideNavBar={false}
       />
     </Stack>
   </Router>

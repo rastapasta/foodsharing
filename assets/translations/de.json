@@ -10,7 +10,8 @@
     "report_violation": "Report",
     "offer_basket": "Korb anbieten",
     "edit_basket": "Korb bearbeiten",
-    "location_selection": "Ort des Korbes"
+    "location_selection": "Ort des Korbes",
+    "notifications": "Benachrichtigungen"
   },
 
   "drawer": {
@@ -114,5 +115,52 @@
   "camera": {
     "not_authorized": "Kamera-Berechtigung abgelehnt",
     "goto_settings": "Um die Kamera zu nutzen, musst du dies in den Einstellungen erlauben."
+  },
+
+  "notifications": {
+    "no_notifications": "Keine Benachrichtigungen",
+
+    "forum_answer_title": "{{forum}}",
+    "forum_answer": "{{user}} hat Dir geantwortet",
+    "blog_new_check_title": "Neuer Blogartikel",
+    "blog_new_check": "{{title}}",
+    "ft_update_title": "{{name}}",
+    "ft_update": "{{teaser}}",
+    "store_new_title": "Neuer Betrieb",
+    "store_new": "{{name}} wurde eingetragen",
+    "store_new_request_title": "Neue Teamanfrage",
+    "store_new_request": "Anfrage für {{name}}",
+    "store_request_accept_title": "{{name}}",
+    "store_request_accept": "Du wurdest in das Team aufgenommen.",
+    "store_request_accept_wait_title": "{{name}}",
+    "store_request_accept_wait": "Du bist nun auf der Springer-/Warteliste.",
+    "store_request_deny_title": "{{name}}",
+    "store_request_deny": "Deine Anfrage wurde abgelehnt.",
+
+    "store_wallpost_title": "{{name}}",
+    "store_wallpost": "Neuer Eintrag auf der Pinnwand.",
+
+    "store_cr_times_title": "{{name}}",
+    "store_cr_times": "Abholzeiten haben sich geändert",
+
+    "fs_sleepmode_title": "Neue Schlafmütze",
+    "fs_sleepmode": "{{name}} {{nachname}} ist jetzt inaktiv",
+    "new_quiz_comment_title": "Neuer Quizkommentar",
+    "new_quiz_comment": "{{comment}}",
+
+    "new_foodsaver_title": "{{name}} neu in {{bezirk}}",
+    "new_foodsaver": "Braucht EINABs",
+    "new_foodsaver_verified_title": "{{name}} neu in {{bezirk}}",
+    "new_foodsaver_verified": "Schon verifiziert - kann loslegen",
+    "betrieb_fetch_title": "{{betrieb}}",
+    "betrieb_fetch": "{{count}} unbestätigte Abholzeiten",
+
+    "buddy_request_title": "Kennst Du {{name}}?",
+    "buddy_request": "{{name}} kennt Dich.",
+    "sharepoint_activate_title": "Neuer Fair-Teiler in {{bezirk}}",
+    "sharepoint_activate": "{{name}} wurde eingetragen",
+
+    "passgen_failed": "Bitte lade ein Foto! Dann wird es klappen.",
+    "passgen_failed_title": "Dein Ausweis konnte nicht erstellt werden",
   }
 }
