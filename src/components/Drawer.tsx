@@ -65,6 +65,12 @@ class Drawer extends Component<Props> {
         <View style={styles.content}>
           <DrawerButton
             onPress={() => Actions.jump('profile', {id})}
+            icon="bell"
+            label="drawer.notifications"
+          />
+
+          <DrawerButton
+            onPress={() => Actions.jump('profile', {id})}
             icon="account"
             label="drawer.profile"
           />

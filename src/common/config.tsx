@@ -35,6 +35,9 @@ export default {
     marker: {uri: '/xhr.php?f=loadMarker&types[]=fairteiler&types[]=baskets', method: 'GET'},
 
     regionMembers: {uri: '/?page=bezirk&bid={id}&sub=members', method: 'GET'},
+    bells: {uri: '/xhrapp.php?app=bell&m=infobar', method: 'GET'},
+    deleteBell: {uri: '/xhrapp.php?app=bell&m=delbell&id={id}', method: 'GET'},
+    markBell: {uri: '/xhrapp.php?app=bell&m=markBellsAsRead&ids={ids}', method: 'GET'}
   },
 
   notificationsOnlyInBackground: true,

@@ -68,7 +68,8 @@ export default (
     'baskets' |
     'nearbyBaskets' |
     'updateBasket' |
-    'deleteBasket',
+    'deleteBasket' |
+    'bells',
   data?: any,
   options?: any
 ): Promise<any> => {

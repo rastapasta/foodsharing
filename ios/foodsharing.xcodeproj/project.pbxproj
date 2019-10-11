@@ -358,6 +358,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = network.foodsharing;
 				PRODUCT_NAME = foodsharing;
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -384,6 +385,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = network.foodsharing;
 				PRODUCT_NAME = foodsharing;
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
