@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import { SafeAreaView, StyleSheet, FlatList, StatusBar, View, Text, Image } from 'react-native'
+import { SafeAreaView, StyleSheet, StatusBar, View, Text, TouchableOpacity, Linking } from 'react-native'
 import _ from 'lodash'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import { SwipeListView } from 'react-native-swipe-list-view'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as reduxActions from '../common/actions'
@@ -23,6 +25,12 @@ const styles = StyleSheet.create({
   },
   list: {
     flex: 1
+  },
+  swipeContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+    paddingRight: (60-32)/2
   }
 })
 
@@ -64,7 +72,16 @@ class Notifications extends Component<Props> {
       <SafeAreaView style={styles.container} testID="conversations.scene">
         <StatusBar backgroundColor={colors.background} barStyle="light-content" />
         {data.length ?
-          <FlatList
+          <SwipeListView
+            rightOpenValue={-60}
+            renderHiddenItem={(data) =>
+              <TouchableOpacity
+                style={[styles.swipeContainer, !data.item.isRead && {backgroundColor: colors.messageUnreadBackground}]}
+                onPress={() => actions.deleteBell(data.item.id)}
+              >
+                <Icon name="trash-can-outline" size={32} color={colors.background} />
+              </TouchableOpacity>
+            }
             keyExtractor={item => item.id.toString()}
             onRefresh={() => {
               actions.fetchConversations()
@@ -74,18 +91,25 @@ class Notifications extends Component<Props> {
             style={styles.list}
             data={data}
             renderItem={({item, index}) =>
-              <CommonListEntry
-                testID={'notifications.'+item.id}
-                isLast={index === data.length - 1}
-                title={translate(`notifications.${item.key}_title`, item.payload)}
-                subtitle={translate(`notifications.${item.key}`, item.payload)}
-                onPress={() => false}
-                isUnread={!item.isRead}
-                pictures={item.image ? [item.image.match(/mini_q_avatar/) ? null : item.image] : null}
-                icon={config.notificationIcons[item.key]}
-                displayTimeAgo
-                timestamp={moment(item.createdAt)}
-              />
+              <View style={{backgroundColor: colors.white}}>
+                <CommonListEntry
+                  testID={'notifications.'+item.id}
+                  isLast={index === data.length - 1}
+                  title={translate(`notifications.${item.key}_title`, item.payload)}
+                  subtitle={translate(`notifications.${item.key}`, item.payload)}
+                  onPress={async () => {
+                    try {
+                      await Linking.openURL(config.host + item.href)
+                      actions.markBell(item.id)
+                    } catch(e) {}
+                  }}
+                  isUnread={!item.isRead}
+                  pictures={item.image ? [item.image.match(/mini_q_avatar/) ? null : item.image] : null}
+                  icon={config.notificationIcons[item.key]}
+                  displayTimeAgo
+                  timestamp={moment(item.createdAt)}
+                />
+              </View>
             }
           />
         : <View style={{padding: 10}}>

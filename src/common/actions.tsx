@@ -34,5 +34,8 @@ export const deleteBasket = (id: number) => ({type: types.BASKET_DELETE_REQUEST,
 export const addBasket = (basket: BasketPost) => ({type: types.BASKET_ADD_REQUEST, payload: basket})
 export const updateBasket = (basket: Basket) => ({type: types.BASKET_UPDATE_REQUEST, payload: basket})
 
+export const deleteBell = (id: number) => ({type: types.BELL_DELETE_REQUEST, payload: id})
+export const markBell = (id: number) => ({type: types.BELL_READ_REQUEST, payload: id})
+
 export const makeReport =
   (userId: number, reasonId: number, reason: string, message: string) => ({type: types.REPORT_REQUEST, payload: {userId, reasonId, reason, message}})
