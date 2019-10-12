@@ -9,8 +9,7 @@ const styles = StyleSheet.create({
   container: {
     position: 'absolute',
     backgroundColor: colors.white,
-    padding: 6,
-    borderRadius: 20,
+    borderRadius: 16,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -18,7 +17,13 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.5,
     shadowRadius: 3.84,
-    elevation: 5
+    elevation: 5,
+    width: 32,
+    height: 32,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingLeft: 1,
+    paddingTop: 3
   }
 })
 

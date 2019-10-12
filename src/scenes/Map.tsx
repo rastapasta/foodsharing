@@ -14,6 +14,8 @@ import MapCluster from '../components/MapCluster'
 import ClusteredMapView from 'react-native-maps-super-cluster'
 import MapMarker from '../components/MapMarker'
 import config from '../common/config'
+import { CheckBox } from 'react-native-elements'
+import { translate } from '../common/translation'
 
 const defaultZoom = {
         longitudeDelta: 1.1,
@@ -27,13 +29,36 @@ const styles = StyleSheet.create({
   map: {
     flex: 1
   },
+  layers: {
+    top: 10,
+    right: 10
+  },
   gps: {
     bottom: 10,
-    right: 10,
+    right: 10
   },
   zoomOut: {
     bottom: 10,
-    right: 50
+    right: 55
+  },
+  checkbox: {
+    height: 25,
+    margin: 0,
+    padding: 0,
+    borderWidth: 0,
+    backgroundColor: colors.white
+  },
+  layersBox: {
+    position: 'absolute',
+    right: 10,
+    top: 10,
+    backgroundColor: colors.white,
+    borderColor: colors.backgroundBright,
+    borderWidth: 1,
+    height: 74,
+    alignItems: 'flex-end',
+    justifyContent: 'space-evenly',
+    padding: 4
   }
 })
 
@@ -50,8 +75,10 @@ class Map extends PureComponent<Props> {
   }
 
   state = {
+    layersOpen: false,
     trackPosition: false,
-    fairteiler: []
+    showBaskets: true,
+    showFairteiler: true
   }
 
   componentDidMount() {
@@ -68,7 +95,16 @@ class Map extends PureComponent<Props> {
 
   transformMarkers() {
     const { markers } = this.props
-    return ['fairteiler', 'baskets'].reduce((all, type) =>
+        , { showBaskets, showFairteiler } = this.state
+        , types = []
+
+    if (showBaskets)
+      types.push('baskets')
+
+    if (showFairteiler)
+      types.push('fairteiler')
+
+    return types.reduce((all, type) =>
       all.concat(
         markers[type].map(marker => ({
           type,
@@ -83,7 +119,7 @@ class Map extends PureComponent<Props> {
   }
 
   render() {
-    const { trackPosition } = this.state
+    const { trackPosition, showFairteiler, showBaskets, layersOpen } = this.state
         , { profile } = this.props
         , data = this.transformMarkers()
         , INIT_REGION = profile.lat && profile.lon ?
@@ -109,6 +145,8 @@ class Map extends PureComponent<Props> {
           showsUserLocation={trackPosition}
           followsUserLocation
           animateClusters={false}
+
+          onPress={() => this.state.layersOpen && this.setState({layersOpen: false})}
 
           renderMarker={marker =>
             <MapMarker
@@ -143,6 +181,41 @@ class Map extends PureComponent<Props> {
           icon="arrow-decision-outline"
           testID="map.zoomout"
         />
+        <MapButton
+          onPress={() => this.setState({layersOpen: true})}
+          style={styles.layers}
+          icon="layers-outline"
+          testID="map.layers"
+          color={showBaskets && showFairteiler ? '#000' : colors.green}
+        />
+
+        {layersOpen &&
+          <View style={styles.layersBox}>
+            {[
+              {
+                key: 'filter.baskets',
+                title: translate('map.filter_baskets'),
+                onPress: () => this.setState({showBaskets: !showBaskets, layersOpen: false}),
+                checked: showBaskets
+              },
+              {
+                key: 'filter.fairteiler',
+                title: translate('map.filter_fairteiler'),
+                onPress: () => this.setState({showFairteiler: !showFairteiler, layersOpen: false}),
+                checked: showFairteiler
+              }
+            ].map(options =>
+              <CheckBox
+                {...options}
+                iconRight
+                checkedColor={colors.green}
+                wrapperStyle={{margin: 0, padding: 0}}
+                textStyle={{fontSize: 12}}
+                containerStyle={styles.checkbox}
+              />
+            )}
+          </View>
+        }
       </View>
     )
   }

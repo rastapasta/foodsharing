@@ -163,5 +163,10 @@
 
     "passgen_failed_title": "Dein Ausweis konnte nicht erstellt werden",
     "passgen_failed": "Bitte lade ein Foto! Dann wird es klappen."
+  },
+
+  "map": {
+    "filter_baskets": "Essenskörbe",
+    "filter_fairteiler": "Fairteiler"
   }
 }

@@ -164,5 +164,10 @@
 
     "passgen_failed_title": "Your passport could not be created",
     "passgen_failed": "Please upload a photo! It will work then."
+  },
+
+  "map": {
+    "filter_baskets": "Baskets",
+    "filter_fairteiler": "Fairteiler"
   }
 }
