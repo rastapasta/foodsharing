@@ -23,6 +23,6 @@ export default (props: Props) =>
     <Image
       style={{flex: 1}}
       resizeMode="contain"
-      source={{uri: props.photo ? url + '130_q_' + props.photo : avatar}}
+      source={{uri: !props.photo ? avatar : props.photo.match(/basket\//) ? url + props.photo : url + '130_q_' + props.photo}}
     />
   </View>

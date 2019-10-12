@@ -106,7 +106,7 @@ Timeframe: 2 weeks from scratch to production 😎
   * Scene to view basket with creator, info, map
   * Buttons to either message user or directly call phone
   * Buttons to either edit or delete as the creator of the basket
-  * Image of basket
+  * Image of basket - in list and detail view
   * Create Basket scene
   * Dynamic form to enter details, time frame and desired way of contact
   * Camera button -> Camera scene to take picture
@@ -125,6 +125,7 @@ Timeframe: 2 weeks from scratch to production 😎
   * Embedded map based on system (iOS: Apple Maps, Android: Google Maps)
   * Clustering of markers
   * Showing fairteiler and baskets
+  * Layer filter
   * Tracking/centering of the user's current location on demand
   * Button to zoom back to initial region
   * Prompt for location permission on demand

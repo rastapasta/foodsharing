@@ -11,6 +11,7 @@ import { translate } from '../common/translation'
 import { Basket } from '../common/typings'
 import { Actions } from 'react-native-router-flux'
 import { formatDate } from '../common/utils'
+import RoundedImage from '../components/RoundedImage'
 
 const { width, height } = Dimensions.get('window')
 
@@ -47,12 +48,20 @@ const styles = StyleSheet.create({
     color: colors.darkgray
   },
   description: {
-    marginTop: 10
+    flex: 1,
+    marginTop: 10,
+    paddingRight: 10,
   },
   header: {
     width: '100%',
     justifyContent: 'space-between',
     flexDirection: 'row'
+  },
+  picture: {
+    width: 60,
+    height: 60,
+    marginRight: 10,
+    marginTop: 5
   }
 })
 
@@ -122,14 +131,20 @@ class Baskets extends Component<Props> {
                   {formatDate(item.createdAt * 1000)}
                 </Text>
               </View>
-
-              <Text
-                style={styles.description}
-                numberOfLines={3}
-                testID={`baskets.label.${index}`}
-              >
-                {item.description}
-              </Text>
+              <View style={{flexDirection: 'row'}}>
+                {!!item.picture &&
+                  <View style={styles.picture}>
+                    <RoundedImage photo={'basket/thumb-' + item.picture} />
+                  </View>
+                }
+                <Text
+                  style={styles.description}
+                  numberOfLines={3}
+                  testID={`baskets.label.${index}`}
+                >
+                  {item.description}
+                </Text>
+              </View>
             </TouchableOpacity>
           }
           ListEmptyComponent={() =>
