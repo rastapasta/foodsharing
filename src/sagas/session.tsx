@@ -100,6 +100,9 @@ function* reauthenticateFlow() {
     // Pull our bells
     yield put({type: BELLS_REQUEST})
 
+    // Refresh and broadcast the profile information of our
+    yield put({type: PROFILE, payload: yield call(getCurrentProfile)})
+
   } catch(error) {
     if (error === Results.CONNECTION_ERROR) {
       console.log('continuing in offline mode and assume we got a valid session ;)')

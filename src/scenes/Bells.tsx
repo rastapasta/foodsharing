@@ -15,6 +15,7 @@ import { translate } from '../common/translation'
 import moment from 'moment'
 import config from '../common/config'
 import { Bell } from '../common/typings'
+import { Actions } from 'react-native-router-flux'
 
 const styles = StyleSheet.create({
   container: {
@@ -101,11 +102,16 @@ class Bells extends Component<Props> {
                   title={translate(`bells.${item.key}_title`, item.payload)}
                   subtitle={translate(`bells.${item.key}`, item.payload)}
                   onPress={async () => {
-                    try {
-                      await Linking.openURL(config.host + item.href)
-                      actions.markBell(item.id)
-                    } catch(e) {
-                      console.log(e)
+                    switch(item.key) {
+                      case 'buddy_request':
+                        Actions.push('profile', {id: item.href.split(/\//).pop()})
+                        actions.markBell(item.id)
+                        break
+                      default:
+                        try {
+                          await Linking.openURL(config.host + item.href)
+                          actions.markBell(item.id)
+                        } catch(e) {}
                     }
                   }}
                   isUnread={!item.isRead}

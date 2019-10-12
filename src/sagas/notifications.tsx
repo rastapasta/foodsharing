@@ -5,6 +5,7 @@ import PushNotificationIOS from '@react-native-community/push-notification-ios'
 import { Platform } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import { store } from '../common/store'
+import { translate } from '../common/translation'
 
 import config from '../common/config'
 
@@ -14,8 +15,10 @@ import {
   CONVERSATIONS_SUCCESS,
   BACKGROUND_DONE,
   LOGIN_SUCCESS,
-  NOTIFICATION_CLICKED
+  NOTIFICATION_CLICKED,
+  BELLS_SUCCESS
 } from '../common/constants'
+import { Bell } from '../common/typings'
 
 // Setup our nofitication flow
 export default function* notificationSaga() {
@@ -33,6 +36,8 @@ export default function* notificationSaga() {
       const { data } = notification
       if (data && data.conversationId)
         Actions.conversation({conversationId: data.conversationId})
+      else if (data && data.bellId)
+        Actions.bells()
       else
         Actions.conversations()
 
@@ -53,7 +58,7 @@ export default function* notificationSaga() {
 
     // Wait until the app either receives a message or wakes up
     while (true) {
-      const { type, payload } = yield take([BACKGROUND_STATE, WEBSOCKET_MESSAGE, CONVERSATIONS_SUCCESS])
+      const { type, payload } = yield take([BACKGROUND_STATE, WEBSOCKET_MESSAGE, CONVERSATIONS_SUCCESS, BELLS_SUCCESS])
 
       // Woke up and only enabled in background? Start over!
       if (type === BACKGROUND_STATE) {
@@ -86,6 +91,22 @@ export default function* notificationSaga() {
         // }
         if (inBackground)
           yield put({type: BACKGROUND_DONE})
+      }
+
+      // Bells update received in background -> notify user
+      if (type === BELLS_SUCCESS && inBackground) {
+        const bell = payload[0] as Bell
+            , title = translate(`bells.${bell.key}_title`, bell.payload)
+            , message = translate(`bells.${bell.key}`, bell.payload)
+
+        // Push a notification over the bridge!
+        PushNotification.localNotification({
+          title,
+          message: message,
+          userInfo: {
+            bellId: bell.id
+          }
+        })
       }
 
       // Websocket Message received in background -> notify user

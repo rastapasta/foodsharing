@@ -15,7 +15,9 @@ import {
 function* markBellWatcher() {
   while (true) {
     const { payload: id } = yield take(BELL_READ)
-    yield markBell(id)
+    try {
+      yield markBell(id)
+    } catch(e) {/* Errors are handled via Redux reducers */}
   }
 }
 
