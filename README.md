@@ -31,7 +31,10 @@ Timeframe: 2 weeks from scratch to production 😎
   * Display of the current build version
 
 * Drawer
+  * Icon badge of unread notification count
   * Display of logo and name of user
+  * Button -> navigation to notifications
+  * Badge next to button in case of unread notifications
   * Button -> navigation to own profile
   * Button -> send lovely feedback during beta
   * Button -> Logout
@@ -42,6 +45,7 @@ Timeframe: 2 weeks from scratch to production 😎
   * Highlight/unhighlight of unread messages (sending 'read' signal to backend)
   * Unlimitted scroll and pagination for conversation messages
   * Activity indicator for all interactions
+  * Badge in the tab bar signalizing the unread count
   * Conversation overview limited to the 50 latest conversations for now - because.. so much to do.. :)
   * Connect to and handle WebSocket chat interface
   * Local Notifications while app runs in the background
@@ -63,6 +67,15 @@ Timeframe: 2 weeks from scratch to production 😎
 * Group Conversation members
   * Photo and name of group members
   * Tap on list item -> navigate to profile of foodsaver
+
+* Notifications (bells)
+  * Handle/display all supported bell types in (bilingual)
+  * Pull to refresh
+  * Refreshed as well via Websocket signal
+  * Swipe right to display delete button
+  * Delete button -> triggers delete via API and removes bell
+  * Touch -> opens correlating URL in Browser (or in-app profile if friend request)
+  * As soon as item got touched, read notification is sent via API
 
 * Profile
   * Screen scrape (until rest interface exists) of stats/information
@@ -134,7 +147,8 @@ Timeframe: 2 weeks from scratch to production 😎
   * Custom fonts / 'foodsharing identity'
   * All strings mapped to [i18n files](https://github.com/rastapasta/foodsharing/tree/master/assets/translations)
 
-* Deployment, testing and CI
+* Deployment, reporting, testing and CI
+  * Full sentry.io ingetration with censored redux log (auth, session and personal information removed)
   * [Detox](https://github.com/wix/Detox) & [Mocha](https://github.com/mochajs/mocha) E2E UI test framework
     * Over 60 test cases incl. auth, messaging, baskets, map, fairteiler, ...
   * Travis CI
