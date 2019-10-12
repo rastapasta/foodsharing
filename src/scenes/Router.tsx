@@ -7,6 +7,7 @@ import { withBadge } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import Drawer from '../components/Drawer'
+import DrawerIcon from '../components/DrawerIcon'
 
 import Login from './Login'
 import Map from './Map'
@@ -80,7 +81,7 @@ export default () =>
         hideNavBar
         key="drawer"
         contentComponent={Drawer}
-        drawerIcon={icon('menu', 26, colors.drawerButton)}
+        drawerIcon={() => <DrawerIcon />}
         drawerWidth={240}
       >
         <Tabs

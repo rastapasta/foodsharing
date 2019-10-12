@@ -41,8 +41,9 @@ function* fetchBells() {
 
 
 export default function* bellSaga() {
-  fork(markBellWatcher)
-  fork(deleteBellWatcher)
+  yield fork(markBellWatcher)
+  yield fork(deleteBellWatcher)
+
   while (true) {
     // Wait until we get a conversation request
     yield take(BELLS_REQUEST)
