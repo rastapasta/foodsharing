@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
 type Props = {
   notifications: Notifications[],
   actions?: any
+  app: any
   isFocused: boolean
 }
 
@@ -60,11 +61,11 @@ class Notifications extends Component<Props> {
   componentDidMount() {
     const { actions } = this.props
     actions.navigation('notificiations')
-    // actions.fetchNotifications()
+    actions.fetchBells()
   }
 
   render() {
-    const { notifications, actions } = this.props
+    const { notifications, actions, app } = this.props
         , data = [{"id":2662970,"key":"buddy_request","href":"\/profile\/341047","payload":{"name":"Paul"},"icon":null,"image":"\/img\/mini_q_avatar.png","createdAt":"2019-10-10T14:06:11","isRead":false,"isCloseable":true},{"id":2659662,"key":"store_request_accept","href":"\/?page=fsbetrieb&id=14997","payload":{"user":"Julian","name":"Z - BEtrieb doppelt angelegt"},"icon":"img img-store brown","image":null,"createdAt":"2019-10-09T20:18:39","isRead":true,"isCloseable":true},{"id":2618694,"key":"store_request_accept","href":"\/?page=fsbetrieb&id=17735","payload":{"user":"Margot","name":"Betrieb f\u00fcr alle NEULINGE"},"icon":"img img-store brown","image":null,"createdAt":"2019-10-01T12:51:36","isRead":true,"isCloseable":true}]
         , { refreshing } = this.state
 
@@ -84,7 +85,7 @@ class Notifications extends Component<Props> {
             }
             keyExtractor={item => item.id.toString()}
             onRefresh={() => {
-              actions.fetchConversations()
+              actions.fetchBells()
               setTimeout(() => this.setState({refreshing: false}), 1000)
             }}
             refreshing={refreshing}
@@ -99,7 +100,7 @@ class Notifications extends Component<Props> {
                   subtitle={translate(`notifications.${item.key}`, item.payload)}
                   onPress={async () => {
                     try {
-                      await Linking.openURL(config.host + item.href)
+                      await Linking.openURL(config.host + item.href + '&PHPSESSID=' + app.session)
                       actions.markBell(item.id)
                     } catch(e) {}
                   }}
@@ -124,7 +125,8 @@ class Notifications extends Component<Props> {
 }
 
 const mapStateToProps = state => ({
-  conversations: state.conversations
+  conversations: state.conversations,
+  app: state.app
 })
 
 const mapDispatchToProps = dispatch => ({

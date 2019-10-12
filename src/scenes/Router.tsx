@@ -117,6 +117,7 @@ export default () =>
         </Tabs>
       </RouterDrawer>
       <Scene
+        path="/?page=msg&cid=:conversationId"
         key="conversation"
         renderTitle={({conversationId}) => <ConversationTitle conversationId={conversationId} />}
         component={Conversation}

@@ -15,3 +15,9 @@ export const report = async (userId: number, reasonId: number, reason: string, m
 
 export const getBells = async () =>
   (await agent('bells')).data.list
+
+export const deleteBell = async (id: number) =>
+  (await agent('deleteBell', null, {id})).status === 1
+
+export const markBell = async (id: number) =>
+  (await agent('markBell', null, {id})).status === 1

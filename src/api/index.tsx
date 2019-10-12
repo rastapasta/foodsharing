@@ -1,7 +1,7 @@
 import { getSession, setSession, syncCookies } from './agent'
 import { login, logout, getCurrentUser, getFairteiler, getConversation, getConversations, markAsRead, getWall, getCurrentProfile, addBasket, uploadBasket, getBasket, getNearbyBaskets, updateBasket, deleteBasket } from './adapters/rest'
 import { getMarker } from './adapters/xhr'
-import { userToConversationId, sendMessage, requestFriendship, report } from './adapters/xhrapp'
+import { userToConversationId, sendMessage, requestFriendship, report, getBells, markBell, deleteBell } from './adapters/xhrapp'
 
 import getProfile from './adapters/scrapers/profile'
 import getRegion from './adapters/scrapers/region'
@@ -28,6 +28,9 @@ export {
   uploadBasket,
 
   getMarker,
+  getBells,
+  markBell,
+  deleteBell,
 
   userToConversationId,
   sendMessage,

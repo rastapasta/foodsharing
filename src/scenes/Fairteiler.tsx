@@ -89,6 +89,7 @@ class Fairteiler extends Component<Props> {
         , wall = walls.fairteiler[`${id}`] || {}
         , data = fairteiler[id] || null
 
+    throw('hey sentry  - thworing an error from Fairteiler scene!')
     if (!data)
       return <ActivityIndicator backgroundColor={colors.white} color={colors.background} />
 
