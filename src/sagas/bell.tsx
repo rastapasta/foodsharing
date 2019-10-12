@@ -7,7 +7,8 @@ import {
   BELLS_SUCCESS,
   BELL_READ,
   BELL_DELETE_REQUEST,
-  BELL_DELETE_SUCCESS
+  BELL_DELETE_SUCCESS,
+  WEBSOCKET_BELLS
 } from '../common/constants'
 
 // Wait for bell read actions and mark bells as read
@@ -46,7 +47,7 @@ export default function* bellSaga() {
 
   while (true) {
     // Wait until we get a conversation request
-    yield take(BELLS_REQUEST)
+    yield take([BELLS_REQUEST, WEBSOCKET_BELLS])
     yield fork(fetchBells)
   }
 }
