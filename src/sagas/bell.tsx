@@ -1,18 +1,33 @@
-import { take, put, call, fork, select } from 'redux-saga/effects'
+import { take, put, fork } from 'redux-saga/effects'
 
 import { getBells, markBell, deleteBell } from '../api'
 
 import {
-  // BELL_DELETE_REQUEST,
-  // BELL_DELETE_SUCCESS,
-  // BELL_READ_REQUEST,
-  // BELL_READ_SUCCESS,
   BELLS_REQUEST,
-  BELLS_SUCCESS
+  BELLS_SUCCESS,
+  BELL_READ,
+  BELL_DELETE_REQUEST,
+  BELL_DELETE_SUCCESS
 } from '../common/constants'
 
-import { MessageType } from '../common/typings'
-import { Actions } from 'react-native-router-flux'
+// Wait for bell read actions and mark bells as read
+function* markBellWatcher() {
+  while (true) {
+    const { payload: id } = yield take(BELL_READ)
+    yield markBell(id)
+  }
+}
+
+// Wait for bell delete action
+function* deleteBellWatcher() {
+  while (true) {
+    const { payload: id } = yield take(BELL_DELETE_REQUEST)
+    try {
+      yield deleteBell(id)
+      yield put({type: BELL_DELETE_SUCCESS, payload: id})
+    } catch(e) {/* Errors are handled via Redux reducers */}
+  }
+}
 
 function* fetchBells() {
   try {
@@ -26,6 +41,8 @@ function* fetchBells() {
 
 
 export default function* bellSaga() {
+  fork(markBellWatcher)
+  fork(deleteBellWatcher)
   while (true) {
     // Wait until we get a conversation request
     yield take(BELLS_REQUEST)

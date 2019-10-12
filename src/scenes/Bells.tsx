@@ -14,6 +14,7 @@ import { withNavigationFocus } from 'react-navigation'
 import { translate } from '../common/translation'
 import moment from 'moment'
 import config from '../common/config'
+import { Bell } from '../common/typings'
 
 const styles = StyleSheet.create({
   container: {
@@ -35,44 +36,45 @@ const styles = StyleSheet.create({
 })
 
 type Props = {
-  notifications: Notifications[],
+  bells: Bell[]
   actions?: any
-  app: any
   isFocused: boolean
 }
 
-class Notifications extends Component<Props> {
+class Bells extends Component<Props> {
   state = {
     refreshing: false
   }
 
   shouldComponentUpdate(next: Props) {
-    const { notifications } = this.props
-    return (next.notifications || []).length !== (notifications || []).length
-        || true // for now
+    const { bells } = this.props
+    return (next.bells || []).length !== (bells || []).length
+          || (next.bells.length && !next.bells.every(
+              (bell, idx) => bells[idx].isRead !== bell.isRead
+              || bells[idx].deleting !== bell.deleting
+          ))
   }
 
   componentDidUpdate(prevProps: Props) {
     const { actions } = this.props
     if (prevProps.isFocused === false && this.props.isFocused === true)
-      actions.navigation('notifications')
+      actions.navigation('bells')
   }
 
   componentDidMount() {
     const { actions } = this.props
-    actions.navigation('notificiations')
+    actions.navigation('bells')
     actions.fetchBells()
   }
 
   render() {
-    const { notifications, actions, app } = this.props
-        , data = [{"id":2662970,"key":"buddy_request","href":"\/profile\/341047","payload":{"name":"Paul"},"icon":null,"image":"\/img\/mini_q_avatar.png","createdAt":"2019-10-10T14:06:11","isRead":false,"isCloseable":true},{"id":2659662,"key":"store_request_accept","href":"\/?page=fsbetrieb&id=14997","payload":{"user":"Julian","name":"Z - BEtrieb doppelt angelegt"},"icon":"img img-store brown","image":null,"createdAt":"2019-10-09T20:18:39","isRead":true,"isCloseable":true},{"id":2618694,"key":"store_request_accept","href":"\/?page=fsbetrieb&id=17735","payload":{"user":"Margot","name":"Betrieb f\u00fcr alle NEULINGE"},"icon":"img img-store brown","image":null,"createdAt":"2019-10-01T12:51:36","isRead":true,"isCloseable":true}]
+    const { bells, actions } = this.props
         , { refreshing } = this.state
 
     return (
-      <SafeAreaView style={styles.container} testID="conversations.scene">
+      <SafeAreaView style={styles.container} testID="bells.scene">
         <StatusBar backgroundColor={colors.background} barStyle="light-content" />
-        {data.length ?
+        {bells.length ?
           <SwipeListView
             rightOpenValue={-60}
             renderHiddenItem={(data) =>
@@ -90,19 +92,21 @@ class Notifications extends Component<Props> {
             }}
             refreshing={refreshing}
             style={styles.list}
-            data={data}
+            data={bells as Bell[]}
             renderItem={({item, index}) =>
               <View style={{backgroundColor: colors.white}}>
                 <CommonListEntry
-                  testID={'notifications.'+item.id}
-                  isLast={index === data.length - 1}
-                  title={translate(`notifications.${item.key}_title`, item.payload)}
-                  subtitle={translate(`notifications.${item.key}`, item.payload)}
+                  testID={'bells.'+item.id}
+                  isLast={index === bells.length - 1}
+                  title={translate(`bells.${item.key}_title`, item.payload)}
+                  subtitle={translate(`bells.${item.key}`, item.payload)}
                   onPress={async () => {
                     try {
-                      await Linking.openURL(config.host + item.href + '&PHPSESSID=' + app.session)
+                      await Linking.openURL(config.host + item.href)
                       actions.markBell(item.id)
-                    } catch(e) {}
+                    } catch(e) {
+                      console.log(e)
+                    }
                   }}
                   isUnread={!item.isRead}
                   pictures={item.image ? [item.image.match(/mini_q_avatar/) ? null : item.image] : null}
@@ -115,7 +119,7 @@ class Notifications extends Component<Props> {
           />
         : <View style={{padding: 10}}>
             <Text style={{textAlign: 'center'}}>
-              {translate('notifications.no_notifications')}
+              {translate('bells.no_bells')}
             </Text>
           </View>
       }
@@ -125,8 +129,7 @@ class Notifications extends Component<Props> {
 }
 
 const mapStateToProps = state => ({
-  conversations: state.conversations,
-  app: state.app
+  bells: state.bells
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -136,4 +139,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withNavigationFocus(Notifications))
+)(withNavigationFocus(Bells))

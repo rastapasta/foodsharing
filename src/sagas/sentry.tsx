@@ -27,7 +27,7 @@ filter[PROFILE] = ['mobile', 'landline', 'lat', 'lon', 'address', 'lastname']
 const recursiveReplacer = (path: string[], obj: any) => {
   if (path[0] === '*')
     obj.forEach(child => recursiveReplacer(path.slice(1), child))
-  else if (path.length === 1 && obj && obj[path[0]])
+  else if (path.length === 1 && obj && typeof obj[path[0]] === 'string')
     obj[path[0]] = obj[path[0]].replace(/./g, '*')
   else if (obj && obj[path[0]])
     recursiveReplacer(path.slice(1), obj[path[0]])

@@ -17,7 +17,6 @@ export const syncCookies = async () => {
   cookies = await CookieManager.get(config.host)
 
   // Sync session cookie between beta and production endpoints
-  if (config.host !== config.websocketHost)
     await (Platform.OS === 'android' ?
       CookieManager.setFromResponse(
         config.websocketHost,

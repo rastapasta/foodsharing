@@ -11,12 +11,13 @@
     "offer_basket": "Korb anbieten",
     "edit_basket": "Korb bearbeiten",
     "location_selection": "Ort des Korbes",
-    "notifications": "Benachrichtigungen"
+    "bells": "Ereignisse",
+    "webview": "foodsharing.de"
   },
 
   "drawer": {
-    "notifications": "Benachrichtigungen",
-    "profile": "Dein Profil",
+    "bells": "Ereignisse",
+    "profile": "Profil",
     "logout": "Abmelden",
     "feedback": "Feedback"
   },
@@ -117,8 +118,8 @@
     "goto_settings": "Um die Kamera zu nutzen, musst du dies in den Einstellungen erlauben."
   },
 
-  "notifications": {
-    "no_notifications": "Keine Benachrichtigungen",
+  "bells": {
+    "no_bells": "Keine Benachrichtigungen",
 
     "forum_answer_title": "{{forum}}",
     "forum_answer": "{{user}} hat Dir geantwortet",

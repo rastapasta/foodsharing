@@ -11,11 +11,12 @@
     "offer_basket": "Offer basket",
     "edit_basket": "Edit basket",
     "location_selection": "Basket location",
-    "notifications": "Notifications"
+    "bells": "Notifications",
+    "webview": "foodsharing.de"
   },
 
   "drawer": {
-    "notifications": "Notifications",
+    "bells": "Notifications",
     "profile": "Profile",
     "logout": "Logout",
     "feedback": "Feedback"
@@ -118,8 +119,8 @@
   },
 
 
-  "notifications": {
-    "no_notifications": "You don't have any notifications waiting for you.",
+  "bells": {
+    "no_bells": "You don't have any notifications waiting for you.",
 
     "forum_answer_title": "{{forum}}",
     "forum_answer": "{{user}} has repliet to you",

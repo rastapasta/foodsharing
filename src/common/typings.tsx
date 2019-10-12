@@ -170,3 +170,17 @@ export interface BasketListing {
   updatedAt: number,
   requests: any[]
 }
+
+export interface Bell {
+  id: number,
+  key: string,
+  href: string,
+  payload: any,
+  icon: string,
+  image: string,
+  createdAt: string,
+  isRead: boolean,
+  isCloseable: boolean,
+
+  deleting: boolean
+}

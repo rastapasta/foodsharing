@@ -36,7 +36,7 @@ export const updateBasket = (basket: Basket) => ({type: types.BASKET_UPDATE_REQU
 
 export const fetchBells = () => ({type: types.BELLS_REQUEST})
 export const deleteBell = (id: number) => ({type: types.BELL_DELETE_REQUEST, payload: id})
-export const markBell = (id: number) => ({type: types.BELL_READ_REQUEST, payload: id})
+export const markBell = (id: number) => ({type: types.BELL_READ, payload: id})
 
 export const makeReport =
   (userId: number, reasonId: number, reason: string, message: string) => ({type: types.REPORT_REQUEST, payload: {userId, reasonId, reason, message}})

@@ -24,7 +24,7 @@ import Conversation from './Conversation'
 import ConversationMembers from './ConversationMembers'
 import Fairteiler from './Fairteiler'
 import Loading from './Loading'
-import Notifications from './Notifications'
+import Bells from './Bells'
 
 import ConversationTitle from '../components/ConversationTitle'
 import ConversationsTabIcon from '../components/ConversationsTabIcon'
@@ -207,9 +207,9 @@ export default () =>
       />
 
       <Scene
-        key="notifications"
-        title={translate('scenes.notifications')}
-        component={Notifications}
+        key="bells"
+        title={translate('scenes.bells')}
+        component={Bells}
         hideNavBar={false}
       />
     </Stack>
