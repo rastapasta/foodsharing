@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { SafeAreaView, StyleSheet, Text, View, FlatList, KeyboardAvoidingView, Platform, ActivityIndicator } from 'react-native'
-
 import moment from 'moment'
 
 import { bindActionCreators } from 'redux'
@@ -164,7 +163,6 @@ class Conversation extends Component<Props> {
               }
             }}
           />
-
           <MessageForm
             conversationId={conversationId}
           />

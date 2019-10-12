@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as reduxActions from '../common/actions'
+import LinearGradient from 'react-native-linear-gradient'
 
 import { Control } from 'react-redux-form/native'
 import { findConversation } from '../common/utils'
@@ -38,6 +39,14 @@ const styles = StyleSheet.create({
   icon: {
     marginLeft: 5,
     transform: [{rotateZ: '-30deg'}]
+  },
+
+  gradient: {
+    position: 'absolute',
+    height: 5,
+    left: 0,
+    right: 0,
+    top: -5
   }
 })
 
@@ -69,6 +78,10 @@ class MessageForm extends Component<Props> {
 
     return (
       <View style={styles.container}>
+        <LinearGradient
+          style={styles.gradient}
+          colors={[colors.transparent, colors.white]}
+        />
         <Control.TextInput
           model={model}
           style={{flex: 1}}
