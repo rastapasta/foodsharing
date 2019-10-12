@@ -160,7 +160,7 @@
     "sharepoint_activate_title": "Neuer Fair-Teiler in {{bezirk}}",
     "sharepoint_activate": "{{name}} wurde eingetragen",
 
-    "passgen_failed": "Bitte lade ein Foto! Dann wird es klappen.",
-    "passgen_failed_title": "Dein Ausweis konnte nicht erstellt werden"
+    "passgen_failed_title": "Dein Ausweis konnte nicht erstellt werden",
+    "passgen_failed": "Bitte lade ein Foto! Dann wird es klappen."
   }
 }
