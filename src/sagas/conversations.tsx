@@ -17,10 +17,11 @@ import {
   MESSAGE_SUCCESS,
   MESSAGE_READ,
   WEBSOCKET_MESSAGE,
-  CONVERSATION_ID_SUCCESS
+  CONVERSATION_ID_SUCCESS,
+  BELLS_SUCCESS
 } from '../common/constants'
 
-import { MessageType } from '../common/typings'
+import { MessageType, Bell } from '../common/typings'
 import { Actions } from 'react-native-router-flux'
 
 const entities = new AllHtmlEntities()
@@ -96,7 +97,7 @@ function* markAsReadWatcher() {
 function* unreadWatcher() {
   while (true) {
     // Wait for all actions that could potentially alter the conversation
-    const action = yield take([CONVERSATIONS_SUCCESS, CONVERSATION_SUCCESS, MESSAGE_SUCCESS, WEBSOCKET_MESSAGE])
+    const action = yield take([CONVERSATIONS_SUCCESS, CONVERSATION_SUCCESS, MESSAGE_SUCCESS, WEBSOCKET_MESSAGE, BELLS_SUCCESS])
 
     // Mark message as read in case the conversation is currently open
     if (action.type === WEBSOCKET_MESSAGE) {
@@ -105,16 +106,20 @@ function* unreadWatcher() {
         yield put({type: MESSAGE_READ, payload: action.payload.cid})
     }
 
-    // Get and count the number of unread conversations
+    // Get and count the number of unread conversations and bells
     const conversations = yield select(state => state.conversations)
-        , count = countUnread(conversations)
+        , unreadConversations = countUnread(conversations)
+
+        , bells = yield select(state => state.bells)
+        , unreadBells = bells.reduce((sum, bell: Bell) => sum + (bell.isRead ? 0 : 1), 0)
+        , unread = unreadConversations + unreadBells
 
     // Set the badge count depending on the relevant bridge
     yield call(
       Platform.OS === 'ios' ?
         PushNotificationIOS.setApplicationIconBadgeNumber :
         AndroidBadge.setBadge,
-      count
+      unread
     )
   }
 }

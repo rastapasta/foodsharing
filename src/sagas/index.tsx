@@ -12,10 +12,13 @@ import Background from './background'
 import Profile from './profile'
 import Report from './report'
 import Basket from './basket'
+import Sentry from './sentry'
+import Bell from './bell'
 
 // Start all our sagas in parallel
 export default function* rootSaga () {
   yield all([
+    Sentry(),
     Session(),
     Websocket(),
     Conversations(),
@@ -27,6 +30,7 @@ export default function* rootSaga () {
     Background(),
     Profile(),
     Report(),
-    Basket()
+    Basket(),
+    Bell()
   ])
 }

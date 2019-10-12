@@ -7,6 +7,7 @@ import { withBadge } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import Drawer from '../components/Drawer'
+import DrawerIcon from '../components/DrawerIcon'
 
 import Login from './Login'
 import Map from './Map'
@@ -24,6 +25,7 @@ import Conversation from './Conversation'
 import ConversationMembers from './ConversationMembers'
 import Fairteiler from './Fairteiler'
 import Loading from './Loading'
+import Bells from './Bells'
 
 import ConversationTitle from '../components/ConversationTitle'
 import ConversationsTabIcon from '../components/ConversationsTabIcon'
@@ -79,7 +81,7 @@ export default () =>
         hideNavBar
         key="drawer"
         contentComponent={Drawer}
-        drawerIcon={icon('menu', 26, colors.drawerButton)}
+        drawerIcon={() => <DrawerIcon />}
         drawerWidth={240}
       >
         <Tabs
@@ -116,6 +118,7 @@ export default () =>
         </Tabs>
       </RouterDrawer>
       <Scene
+        path="/?page=msg&cid=:conversationId"
         key="conversation"
         renderTitle={({conversationId}) => <ConversationTitle conversationId={conversationId} />}
         component={Conversation}
@@ -202,6 +205,13 @@ export default () =>
       <Scene
         key="camera"
         component={Camera}
+      />
+
+      <Scene
+        key="bells"
+        title={translate('scenes.bells')}
+        component={Bells}
+        hideNavBar={false}
       />
     </Stack>
   </Router>

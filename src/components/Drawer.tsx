@@ -10,7 +10,9 @@ import Logo from './Logo'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as reduxActions from '../common/actions'
+import config from '../common/config'
 import { Actions } from 'react-native-router-flux'
+import { Bell } from '../common/typings'
 
 const styles = StyleSheet.create({
   container: {
@@ -42,17 +44,24 @@ const styles = StyleSheet.create({
 
 type Props = {
   profile: any
+  bells: Bell[]
   actions: any
 }
 
 class Drawer extends Component<Props> {
   shouldComponentUpdate(next: Props) {
-    const { profile } = this.props
+    const { profile, bells } = this.props
+
     return next.profile.name !== profile.name
+        || (next.bells || []).length !== (bells || []).length
+        || (next.bells.length && !next.bells.every(
+          (bell, idx) => bells[idx].isRead !== bell.isRead
+        ))
   }
 
   render() {
-    const {profile: {name, id}, actions: { logout, fetchConversationId }} = this.props
+    const {profile: {name, id}, actions: { logout, fetchConversationId }, bells} = this.props
+        , unreadBells = bells.reduce((sum, bell) => sum + (bell.isRead ? 0 : 1), 0)
 
     return (
       <View style={styles.container} testID="drawer">
@@ -64,13 +73,21 @@ class Drawer extends Component<Props> {
         </View>
         <View style={styles.content}>
           <DrawerButton
+            onPress={() => Actions.jump('bells')}
+            icon="bell"
+            label="drawer.bells"
+            highlight={unreadBells > 0}
+            badge={unreadBells}
+          />
+
+          <DrawerButton
             onPress={() => Actions.jump('profile', {id})}
             icon="account"
             label="drawer.profile"
           />
 
           <DrawerButton
-            onPress={() => fetchConversationId(338241)}
+            onPress={() => fetchConversationId(config.feedbackUser)}
             icon="heart-outline"
             label="drawer.feedback"
           />
@@ -90,7 +107,8 @@ class Drawer extends Component<Props> {
 }
 
 const mapStateToProps = state => ({
-  profile: state.profile
+  profile: state.profile,
+  bells: state.bells
 })
 
 const mapDispatchToProps = dispatch => ({

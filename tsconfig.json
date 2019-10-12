@@ -15,7 +15,8 @@
     "noUnusedLocals": true,
     "resolveJsonModule": true,
     "jsx": "react",
-    "lib": ["esnext"]
+    "lib": ["esnext"],
+    "skipLibCheck": true
   },
   "rules": {
     "react-native/no-unused-styles": 2,

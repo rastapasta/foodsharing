@@ -43,13 +43,14 @@ const showMemberCount = 4
 
 class ConversationTitle extends Component<Props> {
   shouldComponentUpdate(next: Props) {
-    const { conversationId, conversations, profile } = this.props
+    const { conversationId, conversations, profile, foodsavers } = this.props
         , conversation = findConversation(conversations, conversationId)
         , nextConversation = findConversation(next.conversations, conversationId)
 
     return nextConversation.member.length !== conversation.member.length
         || nextConversation.name !== conversation.name
         || next.profile.id !== profile.id
+        || next.foodsavers !== foodsavers
   }
 
   render() {

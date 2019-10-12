@@ -26,7 +26,8 @@ const persistConfig = {
     'markers',
     'fairteiler',
     'walls',
-    'baskets'
+    'baskets',
+    'bells'
   ]
 }
 

@@ -10,10 +10,13 @@
     "report_violation": "Report",
     "offer_basket": "Offer basket",
     "edit_basket": "Edit basket",
-    "location_selection": "Basket location"
+    "location_selection": "Basket location",
+    "bells": "Notifications",
+    "webview": "foodsharing.de"
   },
 
   "drawer": {
+    "bells": "Notifications",
     "profile": "Profile",
     "logout": "Logout",
     "feedback": "Feedback"
@@ -113,5 +116,53 @@
   "camera": {
     "not_authorized": "Camera usage not authorized.",
     "goto_settings": "To allow it, open your settings with the button below give the permission."
+  },
+
+
+  "bells": {
+    "no_bells": "You don't have any notifications waiting for you.",
+
+    "forum_answer_title": "{{forum}}",
+    "forum_answer": "{{user}} has repliet to you",
+    "blog_new_check_title": "New Blog Article",
+    "blog_new_check": "{{title}}",
+    "ft_update_title": "{{name}}",
+    "ft_update": "{{teaser}}",
+    "store_new_title": "New shopw",
+    "store_new": "{{name}} was registered",
+    "store_new_request_title": "New team request",
+    "store_new_request": "Request for {{name}}",
+    "store_request_accept_title": "{{name}}",
+    "store_request_accept": "You've been accepted into the team.",
+    "store_request_accept_wait_title": "{{name}}",
+    "store_request_accept_wait": "You're now on the jumper/waiting list.",
+    "store_request_deny_title": "{{name}}",
+    "store_request_deny": "Your request has been denied.",
+
+    "store_wallpost_title": "{{name}}",
+    "store_wallpost": "New entry on the store's wall.",
+
+    "store_cr_times_title": "{{name}}",
+    "store_cr_times": "Pick-up times have changed",
+
+    "fs_sleepmode_title": "New sleep cap",
+    "fs_sleepmode": "{{name}} {{nachname}} is now inactive",
+    "new_quiz_comment_title": "New quiz comment",
+    "new_quiz_comment": "{{comment}}",
+
+    "new_foodsaver_title": "{{name}} new in {{bezirk}}",
+    "new_foodsaver": "Needs EINABs",
+    "new_foodsaver_verified_title": "{{name}} new in {{bezirk}}",
+    "new_foodsaver_verified": "Already verified - ready to go",
+    "betrieb_fetch_title": "{{betrieb}}",
+    "betrieb_fetch": "{{count}} unconfirmed pick-up times",
+
+    "buddy_request_title": "Do you know {{name}}?",
+    "buddy_request": "{{name}} knows you.",
+    "sharepoint_activate_title": "New food share point in {{bezirk}}",
+    "sharepoint_activate": "{{name}} was registered",
+
+    "passgen_failed_title": "Your passport could not be created",
+    "passgen_failed": "Please upload a photo! It will work then."
   }
 }

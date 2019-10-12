@@ -11,7 +11,8 @@ import {
   LOGIN_ERROR,
   LOGOUT,
   KEYCHAIN,
-  PROFILE
+  PROFILE,
+  BELLS_REQUEST
 } from '../common/constants'
 
 import { login, logout, getCurrentUser, getSession, getCurrentProfile, setSession, syncCookies } from '../api'
@@ -36,6 +37,9 @@ function* loginFlow(email: string, password: string) {
 
     // Signal our succesful login and broadcast our fresh token and session
     yield put({type: LOGIN_SUCCESS, payload: {...getSession(), id}})
+
+    // Pull our bells
+    yield put({type: BELLS_REQUEST})
 
     // Request and broadcast the profile information of our fresh user
     yield put({type: PROFILE, payload: yield call(getCurrentProfile)})
@@ -92,6 +96,12 @@ function* reauthenticateFlow() {
 
     // Notificate all listeners that we got a valid session running
     yield put({type: LOGIN_SUCCESS, payload: {session, token, id}})
+
+    // Pull our bells
+    yield put({type: BELLS_REQUEST})
+
+    // Refresh and broadcast the profile information of our
+    yield put({type: PROFILE, payload: yield call(getCurrentProfile)})
 
   } catch(error) {
     if (error === Results.CONNECTION_ERROR) {

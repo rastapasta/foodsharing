@@ -2,10 +2,12 @@ const PRODUCTION = true
     , DOCKER_HOST = 'localhost'
 
 export default {
-  host: PRODUCTION ? 'https://beta.foodsharing.de' : `http://${DOCKER_HOST}:18080/`,
+  host: PRODUCTION ? 'https://foodsharing.de' : `http://${DOCKER_HOST}:18080/`,
   websocketHost: PRODUCTION ? 'https://foodsharing.de' : `http://${DOCKER_HOST}:18080/`,
 
   credentials: PRODUCTION ? {} : {email: 'userbot@example.com', password: 'user'},
+
+  feedbackUser: 338241,
 
   userAgent: 'Mozilla/5.0 (compatible; FoodsharingReactNative/1.0; +https://github.com/rastapasta/foodsharing)',
 
@@ -35,6 +37,29 @@ export default {
     marker: {uri: '/xhr.php?f=loadMarker&types[]=fairteiler&types[]=baskets', method: 'GET'},
 
     regionMembers: {uri: '/?page=bezirk&bid={id}&sub=members', method: 'GET'},
+    bells: {uri: '/xhrapp.php?app=bell&m=infobar', method: 'GET'},
+    deleteBell: {uri: '/xhrapp.php?app=bell&m=delbell&id={id}', method: 'GET'},
+    markBell: {uri: '/xhrapp.php?app=bell&m=markBellsAsRead&ids=[{id}]', method: 'GET'}
+  },
+
+  notificationIcons: {
+    'forum_answer': 'question-answer',
+    'blog_new_check': 'newspaper',
+    'ft_update': 'alert-circle',
+    'store_new': 'store',
+    'store_new_request': 'account-question',
+    'store_request_accept': 'account-plus',
+    'store_request_accept_wait': 'account-multiple-check',
+    'store_request_deny': 'account-remove',
+    'store_wallpost': 'wall',
+    'store_cr_times': 'timetable',
+    'fs_sleepmode': 'sleep',
+    'new_quiz_comment': 'comment-question',
+    'new_foodsaver': 'account',
+    'new_foodsaver_verified': 'account-check',
+    'betrieb_fetch': 'timetable',
+    'sharepoint_activate': 'store',
+    'passgen_failed': 'passport',
   },
 
   notificationsOnlyInBackground: true,

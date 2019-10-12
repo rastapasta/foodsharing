@@ -12,3 +12,12 @@ export const requestFriendship = async (userId: number): Promise<boolean> =>
 
 export const report = async (userId: number, reasonId: number, reason: string, message: string): Promise<boolean> =>
   (await agent('report', null, {userId, reasonId, reason, message})).status === 1
+
+export const getBells = async () =>
+  (await agent('bells')).data.list
+
+export const deleteBell = async (id: number) =>
+  (await agent('deleteBell', null, {id})).status === 1
+
+export const markBell = async (id: number) =>
+  (await agent('markBell', null, {id})).status === 1

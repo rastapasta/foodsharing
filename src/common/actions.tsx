@@ -8,7 +8,7 @@ export const logout = () => ({type: types.LOGOUT})
 
 export const cookie = (name: string, value: string) => ({type: types.COOKIE, name, value})
 
-export const navigation = (scene: string, sceneId?: number) => ({type: types.NAVIGATION, payload: {scene, sceneId}})
+export const navigation = (scene: string, sceneId?: number) => ({type: types.NAVIGATION, payload: {scene, ...(sceneId ? {sceneId} : {})}})
 
 export const fetchConversations = () => ({type: types.CONVERSATIONS_REQUEST})
 export const gotConversations = () => ({type: types.CONVERSATIONS_SUCCESS})
@@ -33,6 +33,10 @@ export const fetchNearbyBaskets = () => ({type: types.BASKETS_NEARBY_REQUEST})
 export const deleteBasket = (id: number) => ({type: types.BASKET_DELETE_REQUEST, payload: id})
 export const addBasket = (basket: BasketPost) => ({type: types.BASKET_ADD_REQUEST, payload: basket})
 export const updateBasket = (basket: Basket) => ({type: types.BASKET_UPDATE_REQUEST, payload: basket})
+
+export const fetchBells = () => ({type: types.BELLS_REQUEST})
+export const deleteBell = (id: number) => ({type: types.BELL_DELETE_REQUEST, payload: id})
+export const markBell = (id: number) => ({type: types.BELL_READ, payload: id})
 
 export const makeReport =
   (userId: number, reasonId: number, reason: string, message: string) => ({type: types.REPORT_REQUEST, payload: {userId, reasonId, reason, message}})

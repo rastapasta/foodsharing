@@ -11,7 +11,8 @@ import {
   WEBSOCKET_RECONNECT,
   WEBSOCKET_MESSAGE,
   LOGIN_SUCCESS,
-  LOGOUT
+  LOGOUT,
+  WEBSOCKET_BELLS
 } from '../common/constants'
 import { Message, MessageType } from '../common/typings'
 import config from '../common/config'
@@ -60,6 +61,11 @@ function initWebsocket(session: any) {
         return emitter({type: WEBSOCKET_MESSAGE, payload})
       }
     })
+
+    // Handle incoming bell refreshs
+    socket.on('bell', () =>
+      emitter({type: WEBSOCKET_BELLS})
+    )
 
     // Notify redux any time the connection drops
     socket.on('disconnect', () =>
