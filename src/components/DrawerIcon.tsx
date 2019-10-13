@@ -9,6 +9,7 @@ import { withBadge } from 'react-native-elements'
 import { Bell } from '../common/typings'
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import { Platform } from 'react-native'
 
 type Props = {
   bells: Bell[]
@@ -27,7 +28,7 @@ class DrawerIcon extends Component<Props> {
         testID={`navigation.drawer`}
         name="menu"
         size={26}
-        style={{color: colors.drawerButton, marginTop: 4}}
+        style={{color: colors.drawerButton, marginTop: Platform.OS === 'ios' ? 4 : 0}}
       />
     )
   }

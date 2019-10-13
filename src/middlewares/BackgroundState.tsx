@@ -6,7 +6,7 @@ let last
 
 export default createOneShotMiddleware((dispatch) => {
   AppState.addEventListener('change', state => {
-    const isBackground = state === 'inactive' || state === 'background' ? true : false
+    const isBackground = state === 'background' ? true : false
 
     if (last === isBackground)
       return

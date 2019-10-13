@@ -11,6 +11,7 @@ import {
   WEBSOCKET_MESSAGE,
   CONVERSATIONS_SUCCESS
 } from '../common/constants'
+import { Platform } from 'react-native'
 
 const filter = {}
 
@@ -34,6 +35,10 @@ const recursiveReplacer = (path: string[], obj: any) => {
 }
 
 export default function* sentrSaga() {
+  // Only enable sentry logging on ios for now
+  if (Platform.OS !== 'ios')
+    return
+
   while (true) {
     // Wait until we get ANY event
     const { type, payload } = yield take()

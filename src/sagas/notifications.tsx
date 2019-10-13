@@ -67,7 +67,7 @@ export default function* notificationSaga() {
         continue
       }
 
-      const inBackground = (yield select(state => state.app.background)) === true
+      const inBackground = (yield select(state => state.app.background)) !== false
 
       // Only send a notification if either in background or user configured foreground notifications
       if (!inBackground && config.notificationsOnlyInBackground)
@@ -93,7 +93,7 @@ export default function* notificationSaga() {
           yield put({type: BACKGROUND_DONE})
       }
 
-      // Bells update received in background -> notify user
+      // Bells update received in background must be via websocket -> notify user
       if (type === BELLS_SUCCESS && inBackground) {
         const bell = payload[0] as Bell
             , title = translate(`bells.${bell.key}_title`, bell.payload)

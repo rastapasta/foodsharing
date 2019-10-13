@@ -104,18 +104,23 @@ class Map extends PureComponent<Props> {
     if (showFairteiler)
       types.push('fairteiler')
 
-    return types.reduce((all, type) =>
-      all.concat(
-        markers[type].map(marker => ({
-          type,
-          id: marker.id,
-          location: {
-            latitude: parseFloat(marker.lat),
-            longitude: parseFloat(marker.lon)
-          }
-        }))
-      ), []
-    )
+    try {
+      return types.reduce((all, type) =>
+        all.concat(
+          markers[type].map(marker => ({
+            type,
+            id: marker.id,
+            location: {
+              latitude: parseFloat(marker.lat),
+              longitude: parseFloat(marker.lon)
+            }
+          }))
+        ), []
+      )
+    } catch(e) {
+      /* Worst case: gets automatically rerendered when marker data arrives */
+      return []
+    }
   }
 
   render() {
@@ -181,15 +186,14 @@ class Map extends PureComponent<Props> {
           icon="arrow-decision-outline"
           testID="map.zoomout"
         />
-        <MapButton
-          onPress={() => this.setState({layersOpen: true})}
-          style={styles.layers}
-          icon="layers-outline"
-          testID="map.layers"
-          color={showBaskets && showFairteiler ? '#000' : colors.green}
-        />
-
-        {layersOpen &&
+        {!layersOpen ?
+          <MapButton
+            onPress={() => this.setState({layersOpen: true})}
+            style={styles.layers}
+            icon="layers-outline"
+            testID="map.layers"
+            color={showBaskets && showFairteiler ? '#000' : colors.green}
+          /> :
           <View style={styles.layersBox}>
             {[
               {

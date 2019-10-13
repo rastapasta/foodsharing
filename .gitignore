@@ -1,6 +1,7 @@
 .env
 # OSX
-
+sentry.properties
+android/*.hprof
 #
 artifacts/
 .DS_Store

@@ -122,11 +122,11 @@ class Baskets extends Component<Props> {
               testID={`baskets.${index}`}
             >
               <View style={styles.header}>
-                {item.creator === profile.id &&
-                  <Text style={styles.title}>
-                    {translate('baskets.my_basket')}
-                  </Text>
-                }
+                <Text style={styles.title}>
+                  {item.creator == profile.id &&
+                    translate('baskets.my_basket')
+                  }
+                </Text>
                 <Text style={styles.time}>
                   {formatDate(item.createdAt * 1000)}
                 </Text>

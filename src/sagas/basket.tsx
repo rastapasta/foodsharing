@@ -1,4 +1,4 @@
-import { take, put, fork } from 'redux-saga/effects'
+import { take, put, fork, select } from 'redux-saga/effects'
 
 import {
   BASKET_ADD_REQUEST,
@@ -75,8 +75,13 @@ function* myBasketsWatcher() {
     // Wait until we get a basket add request
     yield take([BASKETS_REQUEST])
     try {
-      // Fetch and return it
-      yield put({type: BASKETS_SUCCESS, payload: yield getMyBaskets()})
+      const creator = yield select(state => state.profile.id)
+
+      // Fetch and return it - inject our current user as creator
+      yield put({type: BASKETS_SUCCESS, payload: (yield getMyBaskets()).map(basket => ({
+        ...basket,
+        creator: `${creator}`
+      }))})
     } catch(e) {/* Errors are handled via Redux reducers */}
   }
 }
