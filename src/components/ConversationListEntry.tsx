@@ -22,12 +22,13 @@ type Props = {
 
 class ConversationsItem extends Component<Props> {
   shouldComponentUpdate(next: Props) {
-    const { testID, isLast, profile, conversation } = this.props
+    const { testID, isLast, profile, conversation, foodsavers } = this.props
 
     return next.testID !== testID
         || next.isLast !== isLast
         || next.profile.id !== profile.id
         || next.conversation !== conversation
+        || next.foodsavers !== foodsavers
   }
 
   render() {
