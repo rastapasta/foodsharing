@@ -34,11 +34,9 @@ target 'foodsharing' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-  #target 'foodsharingTests' do
-  #  inherit! :search_paths
-  #  # Pods for testing
+  #target 'share' do
+  #  inherit! :complete
   #end
 
   use_native_modules!
 end
-

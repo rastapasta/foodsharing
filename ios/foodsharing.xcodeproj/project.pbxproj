@@ -11,15 +11,51 @@
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		3EA8F45094C01C0CE42B2D57 /* libPods-foodsharing.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DBEE918BD9D90A09241EAEB /* libPods-foodsharing.a */; };
+		954929FC23552ADF0076BC01 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954929FB23552ADF0076BC01 /* ShareViewController.swift */; };
+		954929FF23552ADF0076BC01 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 954929FD23552ADF0076BC01 /* MainInterface.storyboard */; };
+		95492A0323552ADF0076BC01 /* sharing.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 954929F923552ADF0076BC01 /* sharing.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		955C312A23416AA600D903F6 /* SFMono-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 955C312823416AA600D903F6 /* SFMono-Regular.otf */; };
 		955C312B23416AA600D903F6 /* AlfaSlabOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 955C312923416AA600D903F6 /* AlfaSlabOne-Regular.ttf */; };
 		955DCCB4234166C8004B259C /* RNBackgroundFetch+AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 955DCCB3234166C8004B259C /* RNBackgroundFetch+AppDelegate.m */; };
-		A0A5CE16351AE7780D5BD530 /* libPods-foodsharing.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E58B61EB65839D9CE329C734 /* libPods-foodsharing.a */; };
+		A0A5CE16351AE7780D5BD530 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		F29933E7630D4A17B2B03F0A /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E35A07B52A48178F6BA28E /* libz.tbd */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		95492A0123552ADF0076BC01 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 954929F823552ADF0076BC01;
+			remoteInfo = sharing;
+		};
+		95B583AC23551C24006B538B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 95B583A823551C24006B538B /* RNFileShareIntent.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNFileShareIntent;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		95B5837623550D62006B538B /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				95492A0323552ADF0076BC01 /* sharing.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
+		04E3495DD0EC900CFC76EC0A /* Pods-foodsharing-share.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-foodsharing-share.debug.xcconfig"; path = "Target Support Files/Pods-foodsharing-share/Pods-foodsharing-share.debug.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* foodsharing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = foodsharing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = foodsharing/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = foodsharing/AppDelegate.m; sourceTree = "<group>"; };
@@ -27,16 +63,49 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = foodsharing/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = foodsharing/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = foodsharing/main.m; sourceTree = "<group>"; };
+		1DBEE918BD9D90A09241EAEB /* libPods-foodsharing.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-foodsharing.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		37E35A07B52A48178F6BA28E /* libz.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		38733D864558EDF29D0C2D65 /* Pods-foodsharing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-foodsharing.release.xcconfig"; path = "Target Support Files/Pods-foodsharing/Pods-foodsharing.release.xcconfig"; sourceTree = "<group>"; };
+		393D65BD1EEED92BB5B6F522 /* Pods-foodsharing-share.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-foodsharing-share.release.xcconfig"; path = "Target Support Files/Pods-foodsharing-share/Pods-foodsharing-share.release.xcconfig"; sourceTree = "<group>"; };
+		51F1407864F3B84628C63AA5 /* libPods-foodsharing-share.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-foodsharing-share.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		954929F923552ADF0076BC01 /* sharing.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = sharing.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		954929FB23552ADF0076BC01 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		954929FE23552ADF0076BC01 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		95492A0023552ADF0076BC01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		95492A0823552B1B0076BC01 /* sharing.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = sharing.entitlements; sourceTree = "<group>"; };
 		955C312823416AA600D903F6 /* SFMono-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SFMono-Regular.otf"; path = "../../assets/fonts/SFMono-Regular.otf"; sourceTree = "<group>"; };
 		955C312923416AA600D903F6 /* AlfaSlabOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "AlfaSlabOne-Regular.ttf"; path = "../../assets/fonts/AlfaSlabOne-Regular.ttf"; sourceTree = "<group>"; };
 		955DCCB3234166C8004B259C /* RNBackgroundFetch+AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "RNBackgroundFetch+AppDelegate.m"; path = "../node_modules/react-native-background-fetch/ios/RNBackgroundFetch/RNBackgroundFetch+AppDelegate.m"; sourceTree = "<group>"; };
 		9590E8A42343A9D6008953D9 /* foodsharing.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = foodsharing.entitlements; path = foodsharing/foodsharing.entitlements; sourceTree = "<group>"; };
-		B65697C066A993E95179112B /* Pods-foodsharing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-foodsharing.debug.xcconfig"; path = "Target Support Files/Pods-foodsharing/Pods-foodsharing.debug.xcconfig"; sourceTree = "<group>"; };
-		E58B61EB65839D9CE329C734 /* libPods-foodsharing.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-foodsharing.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		95B5837A2355111A006B538B /* libReact-RCTText.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTText.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		95B5837C23551140006B538B /* libReact-Core.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-Core.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		95B5837E23551140006B538B /* libReact-CoreModules.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-CoreModules.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		95B5838023551140006B538B /* libReact-cxxreact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-cxxreact.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		95B5838223551140006B538B /* libReact-jsi.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-jsi.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		95B5838423551140006B538B /* libReact-jsiexecutor.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-jsiexecutor.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		95B5838623551140006B538B /* libReact-jsinspector.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-jsinspector.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		95B5838823551140006B538B /* libreact-native-camera.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-camera.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		95B5838A23551140006B538B /* libreact-native-cookies.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-cookies.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		95B5838C23551140006B538B /* libreact-native-maps.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-maps.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		95B5838E23551140006B538B /* libreact-native-netinfo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-netinfo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		95B5839023551140006B538B /* libreact-native-splash-screen.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-splash-screen.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		95B5839223551140006B538B /* libReact-RCTActionSheet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTActionSheet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		95B5839423551140006B538B /* libReact-RCTAnimation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTAnimation.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		95B5839623551140006B538B /* libReact-RCTBlob.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTBlob.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		95B5839823551140006B538B /* libReact-RCTImage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTImage.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		95B5839A23551140006B538B /* libReact-RCTLinking.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTLinking.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		95B5839C23551140006B538B /* libReact-RCTNetwork.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTNetwork.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		95B5839E23551140006B538B /* libReact-RCTSettings.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTSettings.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		95B583A023551140006B538B /* libReact-RCTText.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTText.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		95B583A223551140006B538B /* libReact-RCTVibration.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTVibration.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		95B583A423551140006B538B /* libReactCommon.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReactCommon.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		95B583A823551C24006B538B /* RNFileShareIntent.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNFileShareIntent.xcodeproj; path = "../node_modules/react-native-file-share-intent/ios/RNFileShareIntent.xcodeproj"; sourceTree = "<group>"; };
+		95B583AE23551C53006B538B /* RNFileShareIntent.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; name = RNFileShareIntent.xcworkspace; path = "../node_modules/react-native-file-share-intent/ios/RNFileShareIntent.xcworkspace"; sourceTree = "<group>"; };
+		9EA4CE45A04CA5C19CE977E9 /* Pods-foodsharing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-foodsharing.release.xcconfig"; path = "Target Support Files/Pods-foodsharing/Pods-foodsharing.release.xcconfig"; sourceTree = "<group>"; };
+		AEAA1F9A2B3A23F10DBF9181 /* Pods-share.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-share.release.xcconfig"; path = "Target Support Files/Pods-share/Pods-share.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		F870016D17F8F26896B276B7 /* Pods-share.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-share.debug.xcconfig"; path = "Target Support Files/Pods-share/Pods-share.debug.xcconfig"; sourceTree = "<group>"; };
+		F8B00C1A87657FD201C4EE77 /* Pods-foodsharing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-foodsharing.debug.xcconfig"; path = "Target Support Files/Pods-foodsharing/Pods-foodsharing.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,8 +113,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A0A5CE16351AE7780D5BD530 /* libPods-foodsharing.a in Frameworks */,
+				A0A5CE16351AE7780D5BD530 /* (null) in Frameworks */,
 				F29933E7630D4A17B2B03F0A /* libz.tbd in Frameworks */,
+				3EA8F45094C01C0CE42B2D57 /* libPods-foodsharing.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		954929F623552ADF0076BC01 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,10 +148,35 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				95B583AE23551C53006B538B /* RNFileShareIntent.xcworkspace */,
+				95B583A823551C24006B538B /* RNFileShareIntent.xcodeproj */,
+				95B5837C23551140006B538B /* libReact-Core.a */,
+				95B5837E23551140006B538B /* libReact-CoreModules.a */,
+				95B5838023551140006B538B /* libReact-cxxreact.a */,
+				95B5838223551140006B538B /* libReact-jsi.a */,
+				95B5838423551140006B538B /* libReact-jsiexecutor.a */,
+				95B5838623551140006B538B /* libReact-jsinspector.a */,
+				95B5838823551140006B538B /* libreact-native-camera.a */,
+				95B5838A23551140006B538B /* libreact-native-cookies.a */,
+				95B5838C23551140006B538B /* libreact-native-maps.a */,
+				95B5838E23551140006B538B /* libreact-native-netinfo.a */,
+				95B5839023551140006B538B /* libreact-native-splash-screen.a */,
+				95B5839223551140006B538B /* libReact-RCTActionSheet.a */,
+				95B5839423551140006B538B /* libReact-RCTAnimation.a */,
+				95B5839623551140006B538B /* libReact-RCTBlob.a */,
+				95B5839823551140006B538B /* libReact-RCTImage.a */,
+				95B5839A23551140006B538B /* libReact-RCTLinking.a */,
+				95B5839C23551140006B538B /* libReact-RCTNetwork.a */,
+				95B5839E23551140006B538B /* libReact-RCTSettings.a */,
+				95B583A023551140006B538B /* libReact-RCTText.a */,
+				95B583A223551140006B538B /* libReact-RCTVibration.a */,
+				95B583A423551140006B538B /* libReactCommon.a */,
+				95B5837A2355111A006B538B /* libReact-RCTText.a */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				E58B61EB65839D9CE329C734 /* libPods-foodsharing.a */,
 				37E35A07B52A48178F6BA28E /* libz.tbd */,
+				1DBEE918BD9D90A09241EAEB /* libPods-foodsharing.a */,
+				51F1407864F3B84628C63AA5 /* libPods-foodsharing-share.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -92,6 +194,7 @@
 				955C312723416A7F00D903F6 /* Fonts */,
 				13B07FAE1A68108700A75B9A /* foodsharing */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
+				954929FA23552ADF0076BC01 /* sharing */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				9FD85730A49958D86FF7AFD3 /* Pods */,
@@ -105,8 +208,20 @@
 			isa = PBXGroup;
 			children = (
 				13B07F961A680F5B00A75B9A /* foodsharing.app */,
+				954929F923552ADF0076BC01 /* sharing.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		954929FA23552ADF0076BC01 /* sharing */ = {
+			isa = PBXGroup;
+			children = (
+				95492A0823552B1B0076BC01 /* sharing.entitlements */,
+				954929FB23552ADF0076BC01 /* ShareViewController.swift */,
+				954929FD23552ADF0076BC01 /* MainInterface.storyboard */,
+				95492A0023552ADF0076BC01 /* Info.plist */,
+			);
+			path = sharing;
 			sourceTree = "<group>";
 		};
 		955C312723416A7F00D903F6 /* Fonts */ = {
@@ -118,11 +233,23 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		95B583A923551C24006B538B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				95B583AD23551C24006B538B /* libRNFileShareIntent.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		9FD85730A49958D86FF7AFD3 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				B65697C066A993E95179112B /* Pods-foodsharing.debug.xcconfig */,
-				38733D864558EDF29D0C2D65 /* Pods-foodsharing.release.xcconfig */,
+				F8B00C1A87657FD201C4EE77 /* Pods-foodsharing.debug.xcconfig */,
+				9EA4CE45A04CA5C19CE977E9 /* Pods-foodsharing.release.xcconfig */,
+				F870016D17F8F26896B276B7 /* Pods-share.debug.xcconfig */,
+				AEAA1F9A2B3A23F10DBF9181 /* Pods-share.release.xcconfig */,
+				04E3495DD0EC900CFC76EC0A /* Pods-foodsharing-share.debug.xcconfig */,
+				393D65BD1EEED92BB5B6F522 /* Pods-foodsharing-share.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -134,23 +261,42 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "foodsharing" */;
 			buildPhases = (
-				52D05C659F685D6C6798634B /* [CP] Check Pods Manifest.lock */,
+				38AC795CFAFA2DCBABB9A9A7 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				3E8B06973B58E75239FB7D8C /* [CP] Copy Pods Resources */,
 				F87DEFE53B854AED869F76FE /* Upload Debug Symbols to Sentry */,
+				95B5837623550D62006B538B /* Embed App Extensions */,
+				671E76916BAD944C404582EB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				95492A0223552ADF0076BC01 /* PBXTargetDependency */,
 			);
 			name = foodsharing;
 			productName = foodsharing;
 			productReference = 13B07F961A680F5B00A75B9A /* foodsharing.app */;
 			productType = "com.apple.product-type.application";
+		};
+		954929F823552ADF0076BC01 /* sharing */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 95492A0723552ADF0076BC01 /* Build configuration list for PBXNativeTarget "sharing" */;
+			buildPhases = (
+				954929F523552ADF0076BC01 /* Sources */,
+				954929F623552ADF0076BC01 /* Frameworks */,
+				954929F723552ADF0076BC01 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = sharing;
+			productName = sharing;
+			productReference = 954929F923552ADF0076BC01 /* sharing.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -158,6 +304,8 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				DefaultBuildSystemTypeForWorkspace = Original;
+				LastSwiftUpdateCheck = 1030;
 				LastUpgradeCheck = 940;
 				ORGANIZATIONNAME = "regensburg:re kollektiv";
 				TargetAttributes = {
@@ -165,10 +313,23 @@
 						DevelopmentTeam = PJ4FY326KF;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
 							com.apple.SafariKeychain = {
+								enabled = 1;
+							};
+						};
+					};
+					954929F823552ADF0076BC01 = {
+						CreatedOnToolsVersion = 10.3;
+						DevelopmentTeam = PJ4FY326KF;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
 							};
 						};
@@ -187,12 +348,29 @@
 			mainGroup = 83CBB9F61A601CBA00E9B192;
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 95B583A923551C24006B538B /* Products */;
+					ProjectRef = 95B583A823551C24006B538B /* RNFileShareIntent.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				13B07F861A680F5B00A75B9A /* foodsharing */,
+				954929F823552ADF0076BC01 /* sharing */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		95B583AD23551C24006B538B /* libRNFileShareIntent.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNFileShareIntent.a;
+			remoteRef = 95B583AC23551C24006B538B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		13B07F8E1A680F5B00A75B9A /* Resources */ = {
@@ -203,6 +381,14 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				955C312B23416AA600D903F6 /* AlfaSlabOne-Regular.ttf in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		954929F723552ADF0076BC01 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				954929FF23552ADF0076BC01 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,7 +409,29 @@
 			shellPath = /bin/sh;
 			shellScript = "export SENTRY_PROPERTIES=sentry.properties\nexport NODE_BINARY=node\n../node_modules/@sentry/cli/bin/sentry-cli react-native xcode ../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
-		3E8B06973B58E75239FB7D8C /* [CP] Copy Pods Resources */ = {
+		38AC795CFAFA2DCBABB9A9A7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-foodsharing-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		671E76916BAD944C404582EB /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -269,28 +477,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-foodsharing/Pods-foodsharing-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		52D05C659F685D6C6798634B /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-foodsharing-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F87DEFE53B854AED869F76FE /* Upload Debug Symbols to Sentry */ = {
@@ -339,7 +525,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		954929F523552ADF0076BC01 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				954929FC23552ADF0076BC01 /* ShareViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		95492A0223552ADF0076BC01 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 954929F823552ADF0076BC01 /* sharing */;
+			targetProxy = 95492A0123552ADF0076BC01 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		13B07FB11A68108700A75B9A /* LaunchScreen.xib */ = {
@@ -351,13 +553,22 @@
 			path = foodsharing;
 			sourceTree = "<group>";
 		};
+		954929FD23552ADF0076BC01 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				954929FE23552ADF0076BC01 /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B65697C066A993E95179112B /* Pods-foodsharing.debug.xcconfig */;
+			baseConfigurationReference = F8B00C1A87657FD201C4EE77 /* Pods-foodsharing.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = foodsharing/foodsharing.entitlements;
@@ -384,8 +595,9 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 38733D864558EDF29D0C2D65 /* Pods-foodsharing.release.xcconfig */;
+			baseConfigurationReference = 9EA4CE45A04CA5C19CE977E9 /* Pods-foodsharing.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = foodsharing/foodsharing.entitlements;
@@ -508,6 +720,65 @@
 			};
 			name = Release;
 		};
+		95492A0423552ADF0076BC01 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = sharing/sharing.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = PJ4FY326KF;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = sharing/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = network.foodsharing.sharing;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		95492A0523552ADF0076BC01 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = sharing/sharing.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = PJ4FY326KF;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = sharing/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = network.foodsharing.sharing;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -525,6 +796,15 @@
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
 				83CBBA211A601CBA00E9B192 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		95492A0723552ADF0076BC01 /* Build configuration list for PBXNativeTarget "sharing" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				95492A0423552ADF0076BC01 /* Debug */,
+				95492A0523552ADF0076BC01 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
