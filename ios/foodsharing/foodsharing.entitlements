@@ -6,6 +6,8 @@
 	<array>
 		<string>webcredentials:beta.foodsharing.de</string>
 		<string>webcredentials:foodsharing.de</string>
+		<string>applinks:foodsharing.de</string>
+		<string>applinks:beta.foodsharing.de</string>
 	</array>
 	<key>com.apple.security.application-groups</key>
 	<array>

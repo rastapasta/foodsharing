@@ -119,7 +119,6 @@ export default () =>
         </Tabs>
       </RouterDrawer>
       <Scene
-        path="/?page=msg&cid=:conversationId"
         key="conversation"
         renderTitle={({conversationId}) => <ConversationTitle conversationId={conversationId} />}
         component={Conversation}
@@ -190,7 +189,6 @@ export default () =>
 
       <Scene
         key="offerBasket"
-        path="/share?:image"
         title={translate('scenes.offer_basket')}
         component={BasketEdit}
         hideNavBar={false}

@@ -16,6 +16,9 @@ export default function* deeplinkSaga() {
 
     if (url.startsWith('share?'))
       Actions.push('offerBasket', {picture: {uri: url.split(/share\?/)[1]}})
+
+    if (url.startsWith('essenskoerbe'))
+      Actions.push('basket', {id: parseInt(url.split(/essenskoerbe\//)[1])})
   }
 }
 

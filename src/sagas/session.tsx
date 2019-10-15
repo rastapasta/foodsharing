@@ -88,6 +88,13 @@ function* getInitialScene() {
           picture: {uri: 'file://' + url.split(/share\?/)[1]}
         }
       }
+    if (url.match(/essenskoerbe\//))
+      return {
+        scene: 'basket',
+        props: {
+          id: parseInt(url.split(/essenskoerbe\//)[1])
+        }
+      }
   } catch(e) {}
   return null
 }
