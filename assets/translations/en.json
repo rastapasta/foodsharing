@@ -1,6 +1,7 @@
 {
   "scenes": {
     "conversations": "Conversations",
+    "cameraroll": "Your Gallery",
     "baskets": "Baskets",
     "basket": "Basket #{{id}}",
     "map": "Map",

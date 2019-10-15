@@ -14,6 +14,7 @@ import BackButton from '../components/BackButton';
 import colors from '../common/colors';
 import { Actions } from 'react-native-router-flux';
 import { translate } from '../common/translation'
+import { callbackify } from 'util'
 
 const styles = StyleSheet.create({
   container: {
@@ -28,7 +29,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
-  button: {
+  actionButton: {
     width: 60,
     height: 60,
     borderRadius: 30,
@@ -37,6 +38,20 @@ const styles = StyleSheet.create({
     paddingLeft: 1,
     paddingTop: 3,
     backgroundColor: colors.green
+  },
+  galleryButton: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingLeft: 1,
+    paddingTop: 3,
+    borderWidth: 0,
+    borderColor: colors.background,
+    backgroundColor: colors.transparent,
+    position: 'absolute',
+    left: 20
   }
 })
 
@@ -81,6 +96,8 @@ class Camera extends Component<Props> {
   }
 
   render() {
+    const { callback } = this.props
+
     return <View style={styles.container} testID="camera.scene">
       <RNCamera
         ref="camera"
@@ -99,8 +116,8 @@ class Camera extends Component<Props> {
             }
             <View style={styles.footer}>
               <TouchableOpacity
-                style={styles.button}
-                hitSlop={{top: 50, left: 50, right: 50, bottom: 50}}
+                style={styles.actionButton}
+                hitSlop={{top: 25, left: 25, right: 25, bottom: 25}}
                 onPress={async () => status === 'NOT_AUTHORIZED' ? await openSettings() : this.takePicture()}
                 testID="camera.action"
               >
@@ -110,6 +127,23 @@ class Camera extends Component<Props> {
                   color={colors.white}
                 />
               </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.galleryButton}
+                hitSlop={{top: 50, left: 50, right: 50, bottom: 50}}
+                onPress={() => Actions.push('cameraRoll', {callback: (images) => {
+                  Actions.popTo('offerBasket')
+                  callback({uri: images[0].uri})
+                }})}
+                testID="camera.gallery"
+              >
+                <Icon
+                  name="folder-image"
+                  size={32}
+                  color={colors.white}
+                />
+              </TouchableOpacity>
+
             </View>
           </Fragment>
         }

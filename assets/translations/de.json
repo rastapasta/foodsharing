@@ -1,6 +1,7 @@
 {
   "scenes": {
     "conversations": "Unterhaltungen",
+    "cameraroll": "Bildauswahl",
     "baskets": "Essenskörbe",
     "basket": "Essenskorb #{{id}}",
     "map": "Karte",

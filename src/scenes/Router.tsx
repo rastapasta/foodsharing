@@ -18,6 +18,7 @@ import Basket from './Basket'
 import Baskets from './Baskets'
 import BasketEdit from './BasketEdit'
 import Camera from './Camera'
+import CameraRoll from './CameraRoll'
 import LocationSelector from './LocationSelector'
 
 import Conversations from './Conversations'
@@ -206,6 +207,13 @@ export default () =>
       <Scene
         key="camera"
         component={Camera}
+      />
+
+      <Scene
+        title={translate('scenes.cameraroll')}
+        key="cameraRoll"
+        component={CameraRoll}
+        hideNavBar={false}
       />
 
       <Scene
