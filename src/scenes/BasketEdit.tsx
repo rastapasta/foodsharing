@@ -315,7 +315,7 @@ class EditBasket extends Component<Props> {
                 pitchEnabled={false}
                 style={{flex: 1}}
               >
-                {isFocused && <Marker coordinate={{longitude, latitude}} />}
+                {isFocused && typeof longitude === 'number' && typeof latitude === 'number' && <Marker coordinate={{longitude, latitude}} />}
               </MapView>
             }
           </TouchableOpacity>

@@ -33,7 +33,7 @@ function* loginFlow(email: string, password: string) {
     // .. or to another scene if we got a deep link incoming
     const initial = yield getInitialScene()
     if (initial)
-      Actions.push(initial.scene, initial.props)
+      Actions.jump(initial.scene, initial.props)
 
     // Save the validated email and password in the device's safe store
     yield Keychain.setGenericPassword(email, password)
@@ -105,7 +105,7 @@ function* reauthenticateFlow() {
     setTimeout(() => {
       Actions.reset('drawer')
       if (initial)
-        Actions.push(initial.scene, initial.props)
+        Actions.jump(initial.scene, initial.props)
 
       SplashScreen.hide()
     }, 100)

@@ -15,6 +15,7 @@ import Basket from './basket'
 import Sentry from './sentry'
 import Bell from './bell'
 import Refresher from './refresher'
+import Deeplink from './deeplink'
 
 // Start all our sagas in parallel
 export default function* rootSaga () {
@@ -33,6 +34,7 @@ export default function* rootSaga () {
     Report(),
     Basket(),
     Bell(),
-    Refresher()
+    Refresher(),
+    Deeplink()
   ])
 }
