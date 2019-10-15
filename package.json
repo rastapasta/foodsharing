@@ -29,6 +29,7 @@
     "react-native": "0.61.1",
     "react-native-android-badge": "git+https://github.com/rastapasta/react-native-android-badge",
     "react-native-background-fetch": "^2.7.0",
+    "react-native-background-upload": "^5.1.0",
     "react-native-camera": "^3.6.0",
     "react-native-camera-roll-picker": "git+https://github.com/rastapasta/react-native-camera-roll-picker",
     "react-native-cheerio": "^1.0.0-rc.4",
@@ -63,7 +64,6 @@
     "redux-persist": "^6.0.0",
     "redux-saga": "^1.1.1",
     "redux-thunk": "^2.3.0",
-    "rn-fetch-blob": "^0.11.2",
     "socket.io-client": "2.1.1",
     "typescript": "^3.6.3"
   },

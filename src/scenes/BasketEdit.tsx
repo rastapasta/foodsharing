@@ -5,6 +5,7 @@ import { withNavigationFocus } from 'react-navigation'
 import LinearGradient from 'react-native-linear-gradient'
 import MapView, { Marker } from 'react-native-maps'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import _ from 'lodash'
 
 import * as reduxActions from '../common/actions'
 import { bindActionCreators } from 'redux'
@@ -111,9 +112,14 @@ class EditBasket extends Component<Props> {
   }
 
   shouldComponentUpdate(nextProps: Props, nextState: State) {
-    return nextProps.isFocused !== this.props.isFocused
+    const { baskets, id, isFocused } = this.props
+    return nextProps.isFocused !== isFocused
         || nextState !== this.state
-        || nextProps.id !== this.props.id
+        || nextProps.id !== id
+        || !_.isEqual(
+          _.omit(nextProps.baskets, ['baskets', 'own', 'nearby']),
+          _.omit(baskets, ['baskets', 'own', 'nearby']),
+        )
   }
 
   constructor(props: Props) {

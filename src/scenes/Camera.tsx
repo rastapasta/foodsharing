@@ -10,11 +10,10 @@ import * as reduxActions from '../common/actions'
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
-import BackButton from '../components/BackButton';
-import colors from '../common/colors';
-import { Actions } from 'react-native-router-flux';
+import BackButton from '../components/BackButton'
+import colors from '../common/colors'
+import { Actions } from 'react-native-router-flux'
 import { translate } from '../common/translation'
-import { callbackify } from 'util'
 
 const styles = StyleSheet.create({
   container: {

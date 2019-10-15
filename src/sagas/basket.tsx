@@ -98,10 +98,10 @@ function* addBasketWatcher() {
 
       // If the basket got created with an image, trigger its upload after creation
       // Upload disabled for now until API struggle solved (always returning 400 because of 'empty body')
-      // if (payload.picture)
-      //   yield put({type: BASKET_UPLOAD_REQUEST, payload: {id: basket.id, picture: payload.picture.uri}})
-      // else
-      Actions.replace('basket', {id: basket.id})
+      if (payload.picture)
+        yield put({type: BASKET_UPLOAD_REQUEST, payload: {id: basket.id, picture: payload.picture.uri}})
+      else
+        Actions.replace('basket', {id: basket.id})
 
     } catch(e) {/* Errors are handled via Redux reducers */}
   }
@@ -115,6 +115,7 @@ function* uploadBasketWatcher() {
       const uploaded = yield uploadBasket(id, picture)
       yield put({type: BASKET_UPLOAD_SUCCESS, payload: uploaded})
 
+      Actions.replace('basket', {id})
     } catch(e) {/* Errors are handled via Redux reducers */}
   }
 }

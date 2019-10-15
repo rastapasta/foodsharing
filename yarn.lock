@@ -6809,6 +6809,11 @@ react-native-background-fetch@^2.7.0:
     plist "^3.0.1"
     xcode "^2.0.0"
 
+react-native-background-upload@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-background-upload/-/react-native-background-upload-5.1.0.tgz#68129cbd0d9f0ff33e4870866b81b6df5962b7d5"
+  integrity sha512-3HgWUO1V1vk1At+R6jUz7nxmRJMvpsRukimI1qG06aSIYpcS10dG3d/o/XVeyNS+k8OuHKIjzBXPw2ZrmCWkIA==
+
 "react-native-camera-roll-picker@git+https://github.com/rastapasta/react-native-camera-roll-picker":
   version "1.3.0"
   resolved "git+https://github.com/rastapasta/react-native-camera-roll-picker#9040363651d35ce9b08202c9baeedd7db85fb524"

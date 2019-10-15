@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, Platform } from 'react-native'
 import colors from '../common/colors'
 
 import { bindActionCreators } from 'redux'
@@ -145,10 +145,18 @@ class Map extends PureComponent<Props> {
 
           radius={40}
 
+          onUserLocationChange={async ({coordinate}) => {
+            if (Platform.OS === 'ios')
+              return
+
+            const camera = await this.refs.map.getCamera()
+            camera.center = {...coordinate}
+            this.refs.map.animateCamera(camera, {duration: 300})
+          }}
+
           edgePadding={{left: 40, top: 40, right: 40, bottom: 40}}
 
           showsUserLocation={trackPosition}
-          followsUserLocation
           animateClusters={false}
 
           onPress={() => this.state.layersOpen && this.setState({layersOpen: false})}

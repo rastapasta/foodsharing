@@ -55,7 +55,7 @@ export default class SwiperTabs extends Component<Props> {
           <TouchableOpacity
             key={'swiper.'+i}
             style={styles.tab}
-            onPress={() => swiper._component.scrollTo({x: i * width})}
+            onPress={() => swiper._component && swiper._component.scrollTo({x: i * width})}
             testID={'swiper.'+i}
           >
             <Text style={styles.tabLabel}>
