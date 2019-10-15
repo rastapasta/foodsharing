@@ -189,6 +189,7 @@ export default () =>
 
       <Scene
         key="offerBasket"
+        path="/share?:image"
         title={translate('scenes.offer_basket')}
         component={BasketEdit}
         hideNavBar={false}

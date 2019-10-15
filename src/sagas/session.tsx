@@ -17,6 +17,7 @@ import {
 
 import { login, logout, getCurrentUser, getSession, getCurrentProfile, setSession, syncCookies } from '../api'
 import { Results } from '../common/typings'
+import { Linking } from 'react-native'
 
 function* loginFlow(email: string, password: string) {
   try {
@@ -28,6 +29,11 @@ function* loginFlow(email: string, password: string) {
 
     // All good, let's proceed to main
     Actions.reset('drawer')
+
+    // .. or to another scene if we got a deep link incoming
+    const initial = yield getInitialScene()
+    if (initial)
+      Actions.push(initial.scene, initial.props)
 
     // Save the validated email and password in the device's safe store
     yield Keychain.setGenericPassword(email, password)
@@ -72,6 +78,21 @@ function* logoutFlow() {
   yield CookieManager.clearAll()
 }
 
+function* getInitialScene() {
+  try {
+    const url = yield Linking.getInitialURL()
+    if (url.match(/share\?/))
+      return {
+        scene: 'offerBasket',
+        props: {
+          picture: {uri: 'file://' + url.split(/share\?/)[1]}
+        }
+      }
+  } catch(e) {}
+  return null
+}
+
+
 function* reauthenticateFlow() {
   // Notificate all listeners that we got a valid session running
   const { session, token } = yield select(state => state.app)
@@ -80,8 +101,12 @@ function* reauthenticateFlow() {
       throw 'no stored session'
 
     // Let's always assume we got a working session - predictive ux for the win!
+    const initial = yield getInitialScene()
     setTimeout(() => {
       Actions.reset('drawer')
+      if (initial)
+        Actions.push(initial.scene, initial.props)
+
       SplashScreen.hide()
     }, 100)
 

@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
 
 type Props = {
   id: number
+  picture?: string
   actions: any
   isFocused: boolean
 
@@ -117,12 +118,12 @@ class EditBasket extends Component<Props> {
 
   constructor(props: Props) {
     super(props)
-    const { profile: { landline, mobile, lat, lon }, baskets, id } = this.props
+    const { profile: { landline, mobile, lat, lon }, baskets, id, picture } = this.props
         , basket = id ? baskets.baskets[`${id}`] : null
 
     this.state = {
       mounted: false,
-      picture: null,
+      picture,
       description: basket ? basket.description : '',
       by_message: false,
       by_phone: false,
