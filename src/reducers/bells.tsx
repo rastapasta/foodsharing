@@ -16,8 +16,7 @@ export default function reducer(state: Bell[] = initialState, action: any = {}):
     // Process a sucessful bells request
     case BELLS_SUCCESS:
       return payload.map(bell => ({
-        ...bell,
-        // isRead: false
+        ...bell
       }))
 
     // Remove a succesfull deleted bell

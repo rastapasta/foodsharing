@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
 
 type Props = {
   onPress: () => void
+  onLongPress?: () => void
   testID: string
   timestamp: number | Moment,
   isUnread: boolean,
@@ -79,7 +80,7 @@ type Props = {
 
 export default class ConversationsItem extends PureComponent<Props> {
   render() {
-    const { onPress, testID, timestamp, icon, isUnread, pictures, title, displayTimeAgo, subtitlePhoto, isLast, subtitle } = this.props
+    const { onPress, onLongPress, testID, timestamp, icon, isUnread, pictures, title, displayTimeAgo, subtitlePhoto, isLast, subtitle } = this.props
         , date = (timestamp instanceof moment ? timestamp : moment(timestamp)) as Moment
         , isToday = date.isSame(new Date(), 'day')
         , isYesterday = date.isSame(new Date(Date.now() - 24*60*60*1000), 'day')
@@ -89,6 +90,7 @@ export default class ConversationsItem extends PureComponent<Props> {
         <TouchableOpacity
           style={[styles.container, isUnread && {backgroundColor: colors.messageUnreadBackground}]}
           onPress={onPress}
+          onLongPress={onLongPress}
           testID={testID}
         >
           <View style={styles.images}>

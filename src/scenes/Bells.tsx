@@ -101,6 +101,7 @@ class Bells extends Component<Props> {
                   isLast={index === bells.length - 1}
                   title={translate(`bells.${item.key}_title`, item.payload)}
                   subtitle={translate(`bells.${item.key}`, item.payload)}
+                  onLongPress={() => actions.markBell(item.id)}
                   onPress={async () => {
                     switch(item.key) {
                       case 'buddy_request':
