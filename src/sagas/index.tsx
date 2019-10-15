@@ -14,6 +14,7 @@ import Report from './report'
 import Basket from './basket'
 import Sentry from './sentry'
 import Bell from './bell'
+import Refresher from './refresher'
 
 // Start all our sagas in parallel
 export default function* rootSaga () {
@@ -31,6 +32,7 @@ export default function* rootSaga () {
     Profile(),
     Report(),
     Basket(),
-    Bell()
+    Bell(),
+    Refresher()
   ])
 }

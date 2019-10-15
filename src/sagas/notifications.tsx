@@ -18,7 +18,6 @@ import {
   NOTIFICATION_CLICKED,
   BELLS_SUCCESS
 } from '../common/constants'
-import { Bell } from '../common/typings'
 
 // Setup our nofitication flow
 export default function* notificationSaga() {
@@ -93,9 +92,9 @@ export default function* notificationSaga() {
           yield put({type: BACKGROUND_DONE})
       }
 
-      // Bells update received in background must be via websocket -> notify user
+    // Bells update received in background must be via websocket -> notify user
       if (type === BELLS_SUCCESS && inBackground) {
-        const bell = payload[0] as Bell
+        const bell = [payload[0] || {}] as any
             , title = translate(`bells.${bell.key}_title`, bell.payload)
             , message = translate(`bells.${bell.key}`, bell.payload)
 

@@ -81,3 +81,5 @@ export const BELLS_SUCCESS = '✅ BELLS_SUCCESS'
 export const BELL_DELETE_REQUEST = '🗑 BELL_DELETE_REQUEST'
 export const BELL_DELETE_SUCCESS = '✅ BELL_DELETE_SUCCESS'
 export const BELL_READ = '📭️ BELL_READ'
+
+export const DEEPLINK = '🌐 DEEPLINK'
