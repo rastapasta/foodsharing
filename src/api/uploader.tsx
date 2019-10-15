@@ -23,7 +23,10 @@ export default (endpoint: 'uploadBasket', options: any, file: string) => new Pro
       , uri = config.endpoints[endpoint].uri
       , url = config.host +
               Object.keys(opts).reduce((u, key) => u.replace('{' + key +'}', encodeURIComponent(opts[key])), uri)
-      , path = file.startsWith('ph://') ? convertLocalIdentifierToAssetLibrary(file.substr(5), 'JPG') : file
+      , path =
+        file.startsWith('/') ? 'file://' + file :
+        file.startsWith('ph://') ? convertLocalIdentifierToAssetLibrary(file.substr(5), 'JPG') :
+        file
       , headers = {
         'Accept': 'application/json',
         'User-Agent': config.userAgent,
