@@ -18,7 +18,7 @@
 		955C312A23416AA600D903F6 /* SFMono-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 955C312823416AA600D903F6 /* SFMono-Regular.otf */; };
 		955C312B23416AA600D903F6 /* AlfaSlabOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 955C312923416AA600D903F6 /* AlfaSlabOne-Regular.ttf */; };
 		955DCCB4234166C8004B259C /* RNBackgroundFetch+AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 955DCCB3234166C8004B259C /* RNBackgroundFetch+AppDelegate.m */; };
-		A0A5CE16351AE7780D5BD530 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		A0A5CE16351AE7780D5BD530 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
 		F29933E7630D4A17B2B03F0A /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E35A07B52A48178F6BA28E /* libz.tbd */; };
 /* End PBXBuildFile section */
 
@@ -113,7 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A0A5CE16351AE7780D5BD530 /* (null) in Frameworks */,
+				A0A5CE16351AE7780D5BD530 /* BuildFile in Frameworks */,
 				F29933E7630D4A17B2B03F0A /* libz.tbd in Frameworks */,
 				3EA8F45094C01C0CE42B2D57 /* libPods-foodsharing.a in Frameworks */,
 			);
@@ -269,7 +269,7 @@
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				F87DEFE53B854AED869F76FE /* Upload Debug Symbols to Sentry */,
 				95B5837623550D62006B538B /* Embed App Extensions */,
-				671E76916BAD944C404582EB /* [CP] Copy Pods Resources */,
+				1C02CEEA9D32B29373463379 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -311,7 +311,7 @@
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = PJ4FY326KF;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -327,7 +327,7 @@
 					954929F823552ADF0076BC01 = {
 						CreatedOnToolsVersion = 10.3;
 						DevelopmentTeam = PJ4FY326KF;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -409,29 +409,7 @@
 			shellPath = /bin/sh;
 			shellScript = "export SENTRY_PROPERTIES=sentry.properties\nexport NODE_BINARY=node\n../node_modules/@sentry/cli/bin/sentry-cli react-native xcode ../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
-		38AC795CFAFA2DCBABB9A9A7 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-foodsharing-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		671E76916BAD944C404582EB /* [CP] Copy Pods Resources */ = {
+		1C02CEEA9D32B29373463379 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -477,6 +455,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-foodsharing/Pods-foodsharing-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		38AC795CFAFA2DCBABB9A9A7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-foodsharing-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F87DEFE53B854AED869F76FE /* Upload Debug Symbols to Sentry */ = {
@@ -572,8 +572,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = foodsharing/foodsharing.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = PJ4FY326KF;
@@ -587,7 +587,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = network.foodsharing;
 				PRODUCT_NAME = foodsharing;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "da71a66f-0e86-42b0-8a9d-8f5af2a356f7";
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -601,8 +601,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = foodsharing/foodsharing.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = PJ4FY326KF;
 				INFOPLIST_FILE = foodsharing/Info.plist;
@@ -615,7 +615,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = network.foodsharing;
 				PRODUCT_NAME = foodsharing;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "da71a66f-0e86-42b0-8a9d-8f5af2a356f7";
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -730,8 +730,8 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = sharing/sharing.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = PJ4FY326KF;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -742,6 +742,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = network.foodsharing.sharing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "8972be29-af3e-49dc-a8e0-505389976ea2";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -760,8 +761,8 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = sharing/sharing.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = PJ4FY326KF;
@@ -772,6 +773,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = network.foodsharing.sharing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "8972be29-af3e-49dc-a8e0-505389976ea2";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;

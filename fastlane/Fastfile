@@ -3,7 +3,7 @@ update_fastlane
 app = 'network.foodsharing'
 project = './ios/foodsharing.xcodeproj'
 workspace = './ios/foodsharing.xcworkspace'
-profile_uuid = '769976eb-c43e-4c30-9004-79fd6bc29874'
+profile_uuid = 'da71a66f-0e86-42b0-8a9d-8f5af2a356f7'
 scheme = 'foodsharing'
 
 default_platform(:ios)
@@ -17,8 +17,12 @@ platform :ios do
   end
 
   lane :certificates do
-    match(app_identifier: app, type: 'development', clone_branch_directly: true)
-    match(app_identifier: app, type: 'appstore', clone_branch_directly: true)
+    match(
+      app_identifier: [app, 'network.foodsharing.sharing'],
+      type: 'development',
+      clone_branch_directly: true
+    )
+    match(app_identifier: [app, 'network.foodsharing.sharing'], type: 'appstore', clone_branch_directly: true)
   end
 
   private_lane :build do
@@ -28,7 +32,13 @@ platform :ios do
       path: project,
       profile_uuid: profile_uuid,
       code_sign_identity: 'iPhone Distribution',
-      targets: [scheme]
+      targets: scheme
+    )
+    disable_automatic_code_signing(
+      path: project,
+      profile_uuid: '8972be29-af3e-49dc-a8e0-505389976ea2',
+      code_sign_identity: 'iPhone Distribution',
+      targets: 'sharing'
     )
 
     gym(
@@ -41,7 +51,7 @@ platform :ios do
       path: project,
       profile_uuid: '',
       code_sign_identity: 'iPhone Developer',
-      targets: [scheme]
+      targets: [scheme, 'sharing']
     )
   end
 
@@ -54,7 +64,7 @@ platform :ios do
   end
 
   lane :beta_badge do
-    buildNumber = 8 #get_build_number(xcodeproj: project)
+    buildNumber = 9 #get_build_number(xcodeproj: project)
     version = get_version_number(xcodeproj: project)
     add_badge(
       shield: "v#{version}-%23#{buildNumber}-orange",

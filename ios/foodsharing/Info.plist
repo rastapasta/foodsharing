@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Choose a previously taken picture to make your basket more colorful.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -36,7 +34,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>8</string>
+	<string>9</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationCategoryType</key>
@@ -64,6 +62,8 @@
 	<string>Use your camera to make pictures of baskets you would like to publish.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Find Basekts and Fairteilers around you - to make it easier, allow access to your current location.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Choose a previously taken picture to make your basket more colorful.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>FontAwesome.ttf</string>

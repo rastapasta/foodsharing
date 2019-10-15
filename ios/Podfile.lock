@@ -271,10 +271,10 @@ PODS:
     - Sentry (~> 4.4.0)
   - RNVectorIcons (6.6.0):
     - React
-  - SDWebImage (5.1.0):
-    - SDWebImage/Core (= 5.1.0)
-  - SDWebImage/Core (5.1.0)
-  - SDWebImageWebPCoder (0.2.3):
+  - SDWebImage (5.2.3):
+    - SDWebImage/Core (= 5.2.3)
+  - SDWebImage/Core (5.2.3)
+  - SDWebImageWebPCoder (0.2.5):
     - libwebp (~> 1.0)
     - SDWebImage/Core (~> 5.0)
   - Sentry (4.4.0):
@@ -333,10 +333,10 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - boost-for-react-native
+  trunk:
     - libwebp
     - SDWebImage
     - SDWebImageWebPCoder
-  trunk:
     - Sentry
 
 EXTERNAL SOURCES:
@@ -472,8 +472,8 @@ SPEC CHECKSUMS:
   RNPermissions: daa03e029c245fa185728e34bf1e763bf7722d05
   RNSentry: a3fe9976dc07a58fe112ca0c1c0378a23868e145
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
-  SDWebImage: fb387001955223213dde14bc08c8b73f371f8d8f
-  SDWebImageWebPCoder: 7568737603c50f6237850afedd7e9e28e5917e6b
+  SDWebImage: 46a7f73228f84ce80990c786e4372cf4db5875ce
+  SDWebImageWebPCoder: 947093edd1349d820c40afbd9f42acb6cdecd987
   Sentry: 26650184fe71eb7476dfd2737acb5ea6cc64b4b1
   Yoga: d8c572ddec8d05b7dba08e4e5f1924004a177078
 
