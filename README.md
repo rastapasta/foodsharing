@@ -1,4 +1,4 @@
-# 🍴foodsharing app &middot;  [![Build Status](https://travis-ci.org/rastapasta/foodsharing.svg?branch=master)](https://travis-ci.org/rastapasta/foodsharing)
+# 🍴foodsharing app &middot;  [![Build Status](https://travis-ci.org/rastapasta/foodsharing.svg?branch=master)](https://travis-ci.org/rastapasta/foodsharing) [![Greenkeeper badge](https://badges.greenkeeper.io/rastapasta/foodsharing.svg)](https://greenkeeper.io/)
 
 <img src="gifs/login.gif" width="19%"/> <img src="gifs/profile.gif" width="19%"/> <img src="gifs/fairteiler.gif" width="19%" /> <img src="gifs/report.gif" width="19%" /> <img src="gifs/redux.gif" width="19%" />
 
