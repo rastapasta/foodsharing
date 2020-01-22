@@ -39,7 +39,9 @@ export default {
     regionMembers: {uri: '/?page=bezirk&bid={id}&sub=members', method: 'GET'},
     bells: {uri: '/xhrapp.php?app=bell&m=infobar', method: 'GET'},
     deleteBell: {uri: '/xhrapp.php?app=bell&m=delbell&id={id}', method: 'GET'},
-    markBell: {uri: '/xhrapp.php?app=bell&m=markBellsAsRead&ids=[{id}]', method: 'GET'}
+    markBell: {uri: '/xhrapp.php?app=bell&m=markBellsAsRead&ids=[{id}]', method: 'GET'},
+
+    shopMarker: {uri: '/xhr.php?f=bBubble&id={id}', method: 'GET'}
   },
 
   notificationIcons: {

@@ -97,7 +97,7 @@ platform :ios do
   end
 
   lane :beta do
-    # bump
+    bump
     icon
     beta_badge
     build

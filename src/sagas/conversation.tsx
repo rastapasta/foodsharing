@@ -1,7 +1,7 @@
 import { take, put, select, call, fork } from 'redux-saga/effects'
 import { AllHtmlEntities } from 'html-entities'
 import { actions as formActions } from 'react-redux-form'
-
+import { attach } from 'invisible-attachment'
 import { getConversation, sendMessage } from '../api'
 
 import {
@@ -51,7 +51,7 @@ export default function* conversationSaga() {
         try {
           const { conversationId } = payload
               , body = yield select(state => state.drafts[conversationId])
-              , message = yield call(sendMessage, conversationId, body)
+              , message = yield call(sendMessage, conversationId, attach(body, 1337))
 
           // Reset the drafted message
           yield put(formActions.change(`drafts.${conversationId}`, ''))

@@ -101,9 +101,9 @@ function* getInitialScene() {
 
 
 function* reauthenticateFlow() {
-  // Notificate all listeners that we got a valid session running
   const { session, token } = yield select(state => state.app)
   try {
+    // No session, no fun.
     if (!session)
       throw 'no stored session'
 
@@ -136,11 +136,12 @@ function* reauthenticateFlow() {
     yield put({type: PROFILE, payload: yield call(getCurrentProfile)})
 
   } catch(error) {
+    // In case the login failed because the user is offline..
     if (error === Results.CONNECTION_ERROR) {
-      console.log('continuing in offline mode and assume we got a valid session ;)')
+      // .. continue from cache and assume we got a valid session
       yield put({type: LOGIN_SUCCESS, payload: {session, token}})
     } else {
-      // Report why we failed
+      // .. or report why we failed
       console.log('reauthentication failed', error)
 
       // Try to pull previously stored credentials from secure store
@@ -164,7 +165,6 @@ function* reauthenticateFlow() {
   }
 
   // Wait for our reauthentication either fail or succeed
-  // TODO: Handle NO_INTERNET reason
   const { type } = yield take([LOGIN_SUCCESS, LOGIN_ERROR])
   if (type === LOGIN_ERROR) {
     yield SplashScreen.hide()
@@ -189,14 +189,14 @@ export default function* loginSaga() {
       // Pull the login form from
       const { email, password } = yield select(state => state.login)
 
-        // Start the login flow
-        yield fork(loginFlow, email, password)
+      // Start the login flow
+      yield fork(loginFlow, email, password)
     }
 
     // Wait until we either logout or get logged out
     const { type: logoutReason } = yield take([LOGOUT, LOGIN_ERROR])
 
-    // Start the logout flow
+    // Start the logout flow if the user desires to do so
     if (logoutReason === LOGOUT)
       yield call(logoutFlow)
   }

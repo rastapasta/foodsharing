@@ -1,8 +1,12 @@
-import { take, put, select, call } from 'redux-saga/effects'
+import { take, put, select } from 'redux-saga/effects'
 
 import {
   BACKGROUND_STATE,
-  DEEPLINK
+  CONVERSATIONS_REQUEST,
+  BELLS_REQUEST,
+  CONVERSATION_REQUEST,
+  BASKETS_NEARBY_REQUEST,
+  BASKETS_REQUEST
 } from '../common/constants'
 
 export default function* refresherSaga() {
@@ -14,25 +18,22 @@ export default function* refresherSaga() {
     if (inBackground)
       continue
 
-    // -> Here we are, freshly back out of the background
+    // -> Here we are, freshly back out of the background, let's refresh!
 
-    // Check if the current opener URL changed (detect image share to app)
-    // yield checkDeeplink()
+    yield put({type: CONVERSATIONS_REQUEST})
+    yield put({type: BELLS_REQUEST})
 
+    const { scene, sceneId } = yield select(state => state.app)
+
+    switch (scene) {
+      case 'conversation':
+        yield put({type: CONVERSATION_REQUEST, payload: {id: sceneId, offset: 0}})
+        break
+
+      case 'baskets':
+        yield put({type: BASKETS_NEARBY_REQUEST})
+        yield put({type: BASKETS_REQUEST})
+        break
+    }
   }
 }
-
-// function* checkDeeplink() {
-//   // Get current state's deeplink
-//   const deeplink = yield select(state => state.app.deeplink)
-
-//   // .. and try to get the app's current one
-//   let currentDeeplink = null
-//   try {
-//     currentDeeplink = yield Linking.getInitialURL()
-//   } catch(e) {}
-
-//   // .. to update it if it differs
-//   if (deeplink !== currentDeeplink)
-//     yield put({type: DEEPLINK, payload: currentDeeplink})
-// }

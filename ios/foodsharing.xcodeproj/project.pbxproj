@@ -574,7 +574,7 @@
 				CODE_SIGN_ENTITLEMENTS = foodsharing/foodsharing.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 9;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = PJ4FY326KF;
 				INFOPLIST_FILE = foodsharing/Info.plist;
@@ -603,7 +603,7 @@
 				CODE_SIGN_ENTITLEMENTS = foodsharing/foodsharing.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = PJ4FY326KF;
 				INFOPLIST_FILE = foodsharing/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

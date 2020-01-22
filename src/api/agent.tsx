@@ -70,7 +70,8 @@ export default (
     'deleteBasket' |
     'bells' |
     'deleteBell' |
-    'markBell',
+    'markBell' |
+    'shopMarker',
   data?: any,
   options?: any
 ): Promise<any> => {

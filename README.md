@@ -16,7 +16,7 @@ Timeframe: 2 weeks from scratch to production 😎
 
 * Android
   * [Choose a minimized version](https://intern.regensburg.re/foodsharing/) for your platform
-  * or just install [the universal APK](https://intern.regensburg.re/foodsharing/app-release.apk)
+  * or just install [the universal APK](https://intern.regensburg.re/foodsharing/app-universal-release.apk)
 
 ## 🎉 What's implemented?
 
@@ -114,6 +114,8 @@ Timeframe: 2 weeks from scratch to production 😎
   * Mini map with marker at currently choosen location
   * Tap on mini map -> Location picker scene with current location preselected
   * Possibility to set marker on current location
+  * Universal Linking of basket URLs (iOS)
+  * Share extension - 'Share' any image system wide directly into a new basket (iOS)
 
 * Camera
   * Permission management - prompting on first use
@@ -217,7 +219,6 @@ $> detox test --configuration ios.sim.debug
 
 * Nice to have
   * Make sure there is no gap between old store and long-time-no-see message list request -> hotfix: logout-in
-  * Deep linking via apple-app-site-association, needs to be merged to fs master & production
   * Settings screen to setup background pull / notifications?
   * Use ```CONVERSATIONS_SUCCESS``` to warm up conversation's message (at least one)
   * State for loading conversations overview for loading indicator

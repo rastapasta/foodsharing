@@ -19,6 +19,7 @@
     "geokdbush": "^1.1.0",
     "html-entities": "^1.2.1",
     "i18n-js": "^3.3.0",
+    "invisible-attachment": "^1.0.2",
     "kdbush": "^3.0.0",
     "lodash": "^4.17.15",
     "lodash.memoize": "^4.1.2",
