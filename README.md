@@ -43,7 +43,7 @@ Timeframe: 2 weeks from scratch to production 😎
 * Conversations
   * Send and receive messages
   * Highlight/unhighlight of unread messages (sending 'read' signal to backend)
-  * Unlimitted scroll and pagination for conversation messages
+  * Unlimited scroll and pagination for conversation messages
   * Activity indicator for all interactions
   * Badge in the tab bar signalizing the unread count
   * Conversation overview limited to the 50 latest conversations for now - because.. so much to do.. :)
@@ -60,7 +60,7 @@ Timeframe: 2 weeks from scratch to production 😎
   * Tap on group conversation title -> navigate to list of members
   * Tap on personal conversation title -> navigate to profile page
   * Today -> Yesterday -> $Date labeling in conversation list
-  * Today -> Yesterday -> $Date seperators in conversation
+  * Today -> Yesterday -> $Date separators in conversation
   * Detect URLs to foodsharing* in messages and make them clickable
   * Pull to refresh
 
@@ -79,7 +79,7 @@ Timeframe: 2 weeks from scratch to production 😎
 
 * Profile
   * Screen scrape (until rest interface exists) of stats/information
-  * Image of foodsaver, paralax style
+  * Image of foodsaver, parallax style
   * Loading indicator
   * Statistic circles
   * Banana support! Button -> jump to Bananas scene
@@ -134,7 +134,7 @@ Timeframe: 2 weeks from scratch to production 😎
   * Reusing marker icons from Android version
 
 * Fairteiler
-  * Adress, picture and information
+  * Address, picture and information
   * Posts made to the Fairteilers wall (incl. images)
   * Share button to copy or forward public Fairteiler URL
   * Swipeable layout, number of comments in tab
@@ -151,7 +151,7 @@ Timeframe: 2 weeks from scratch to production 😎
   * All strings mapped to [i18n files](https://github.com/rastapasta/foodsharing/tree/master/assets/translations)
 
 * Deployment, reporting, testing and CI
-  * Full sentry.io ingetration with censored redux log (auth, session and personal information removed)
+  * Full sentry.io integration with censored redux log (auth, session and personal information removed)
   * [Detox](https://github.com/wix/Detox) & [Mocha](https://github.com/mochajs/mocha) E2E UI test framework
     * Over 60 test cases incl. auth, messaging, baskets, map, fairteiler, ...
   * Travis CI
