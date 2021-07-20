@@ -27,7 +27,7 @@
     "moment": "^2.24.0",
     "react": "16.9.0",
     "react-dom": "^16.10.1",
-    "react-native": "0.61.1",
+    "react-native": "0.62.3",
     "react-native-android-badge": "git+https://github.com/rastapasta/react-native-android-badge",
     "react-native-background-fetch": "^2.7.0",
     "react-native-background-upload": "^5.1.0",
